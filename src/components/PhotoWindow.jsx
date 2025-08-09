@@ -18,7 +18,7 @@
  *   alt="Group photo of Try/CATCH 2024 attendees"
  * />
  */
-function PhotoWindow({ img, imgWidth, imgHeight, imgPosition, alt }) {
+function PhotoWindow({ img, imgWidth="w-[100%]", imgHeight="h-auto", imgPosition="object-center", alt }) {
     return (
         <div>
             <img src={img} alt={alt} className={`${imgWidth} ${imgHeight} ${imgPosition} object-cover`} />
