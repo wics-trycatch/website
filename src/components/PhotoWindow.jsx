@@ -23,7 +23,8 @@ function PhotoWindow({
   imgWidth = "w-[100%]",
   imgHeight = "h-auto",
   imgPosition = "object-center",
-  windowBorder = "border-dark-blue border-[8px]",
+  windowBorderColor = "border-dark-blue",
+  windowBorder = "border-[8px]",
   alt,
 }) {
   return (
@@ -31,7 +32,7 @@ function PhotoWindow({
       <img
         src={img}
         alt={alt}
-        className={`${imgWidth} ${imgHeight} ${imgPosition} ${windowBorder} object-cover`}
+        className={`${imgWidth} ${imgHeight} ${imgPosition} ${windowBorderColor} ${windowBorder} object-cover`}
       />
     </div>
   );
