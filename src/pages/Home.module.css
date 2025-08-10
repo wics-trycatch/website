@@ -1,0 +1,7 @@
+.heroDesc {
+    font-family: "SpaceGrotesk-Medium", sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    color: var(--color-dark-blue);
+}
+
