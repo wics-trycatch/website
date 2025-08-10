@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Aeroblade';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Aeroblade DEMO.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk-Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/SpaceGrotesk-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+}

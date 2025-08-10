@@ -1,0 +1,13 @@
+.heroDesc {
+    font-family: "SpaceGrotesk-Medium", sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    color: var(--color-dark-blue);
+}
+
+@media (min-width: 96rem){
+    .heroDesc{
+        font-size: 2rem;
+        line-height:2rem;
+    }
+}
