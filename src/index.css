@@ -5,4 +5,8 @@
   --color-sky-blue: #9DD9FE;
   --color-powder-blue: #CBF3FB;
   --color-light-cyan: #E2F4FF;
+
+  --font-display: 'Aeroblade', sans-serif;
+  --font-body: 'SpaceGrotesk-Regular', sans-serif;
+  --font-body-bold: 'SpaceGrotesk-Bold', sans-serif;
 }
