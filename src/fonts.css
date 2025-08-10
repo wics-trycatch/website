@@ -18,3 +18,10 @@
   font-weight: normal;
   src: url('./assets/fonts/SpaceGrotesk-Bold.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'SpaceGrotesk-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+}
