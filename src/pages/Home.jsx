@@ -10,9 +10,9 @@ function Home(){
         <div>
             {/* Hero section */}
             <div className={`relative`}>
-                <div className={`absolute z-100 top-[13rem] left-[3rem]`}>
-                    <img src={logo} alt="Try/CATCH Logo" className={`w-[90%] ml-[-0.5rem]`} />
-                    <p className={`${styles.heroDesc} max-w-[18rem] mt-[1rem] ml-[1.75rem]`}>
+                <div className={`absolute z-100 top-[13rem] pl-[2.25rem] pr-[2.5rem]`}>
+                    <img src={logo} alt="Try/CATCH Logo" className={`w-[100%]`} />
+                    <p className={`${styles.heroDesc} max-w-[18rem] mt-[1rem] ml-[2rem] mr-[1rem]`}>
                         A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
                     </p>
                 </div>
