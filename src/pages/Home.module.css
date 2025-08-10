@@ -5,3 +5,9 @@
     color: var(--color-dark-blue);
 }
 
+@media (min-width: 96rem){
+    .heroDesc{
+        font-size: 2rem;
+        line-height:2rem;
+    }
+}

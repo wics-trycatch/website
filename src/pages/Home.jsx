@@ -7,12 +7,12 @@ import logo from "../assets/images/shared/logo_full.png";
 
 function Home(){
     return(
-        <div>
+        <div className={`max-w-[128rem] mx-[auto]`}>
             {/* Hero section */}
             <div className={`relative`}>
-                <div className={`absolute z-100 top-[13rem] pl-[2.25rem] pr-[2.5rem]`}>
-                    <img src={logo} alt="Try/CATCH Logo" className={`w-[100%]`} />
-                    <p className={`${styles.heroDesc} max-w-[18rem] mt-[1rem] ml-[2rem] mr-[1rem]`}>
+                <div className={`absolute z-100 top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}>
+                    <img src={logo} alt="Try/CATCH Logo" className={`w-[20rem] md:w-[30rem] 2xl:w-[50rem]`} />
+                    <p className={`${styles.heroDesc} max-w-[18rem] 2xl:max-w-[40rem] mt-[1rem] ml-[2rem] mr-[1rem]`}>
                         A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
                     </p>
                 </div>
