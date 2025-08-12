@@ -31,6 +31,7 @@ function Home() {
                 text="REGISTER"
                 size="small"
                 fontSize="text-[1.25rem]"
+                type="hero"
               />
             </div>
           </div>
