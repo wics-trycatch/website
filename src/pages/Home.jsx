@@ -3,7 +3,8 @@ import styles from "./Home.module.css";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 
-import banner from "../assets/images/home/banner.png";
+import banner_base from "../assets/images/home/banner_base.png";
+import banner_texture from "../assets/images/home/banner_texture.png";
 import logo from "../assets/images/shared/logo_full.png";
 
 function Home() {
@@ -34,15 +35,25 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className={`scale-90`}>
+        <div className={`scale-90 ${styles.heroBanner} border-[8px] border-dark-blue`}>
           <PhotoWindow
-            img={banner}
+            img={banner_base}
             imgWidth="w-[100%]"
             imgHeight="h-[92vh]"
             imgPosition="object-[55%_15%]"
-            windowBorder="border-[8px]"
+            windowBorder="border-[0px]"
             alt="Group photo of Try/CATCH 2024 attendees at the SFU ASB Atrium"
           />
+          <div className={`absolute inset-0`}>
+            <PhotoWindow
+                img={banner_texture}
+                imgWidth="w-[100%]"
+                imgHeight="h-[92vh]"
+                imgPosition="object-[55%_15%]"
+                windowBorder="border-[0px]"
+                alt=" "
+            />
+          </div>
         </div>
       </div>
     </div>
