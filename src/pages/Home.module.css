@@ -5,6 +5,19 @@
     color: var(--color-dark-blue);
 }
 
+.heroBanner::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(40deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 80%)
+}
+
+@media (min-width: 48rem){
+    .heroBanner::after{
+        background:linear-gradient(20deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 80%)
+    }
+}
+
 @media (min-width: 96rem){
     .heroDesc{
         font-size: 2rem;
