@@ -17,7 +17,7 @@ function Home(){
                         <p className={`${styles.heroDesc} max-w-[18rem] 2xl:max-w-[40rem]`}>
                             A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
                         </p> 
-                        <div className={`mt-[2rem]`}>
+                        <div className={`mt-[2rem] 2xl:mt-[4rem]`}>
                             <Button link="/" text="REGISTER" size="small" fontSize="text-[1.25rem]" />
                         </div>
                     </div>
