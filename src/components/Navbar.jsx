@@ -5,19 +5,19 @@ import logo from "../assets/images/shared/logo_simple_white.png"
 
 function Navbar(){
     return(
-        <nav className={`mx-[5%] px-[2rem] py-[1.5rem] flex justify-between bg-dark-blue`}>
-            <img src={logo} alt="Logo" className="h-[3rem] w-[auto]" />
-            <ul className={`flex gap-[3rem]`}>
-                <li>EVENT DETAILS
-                    <ul>
-                        <li className={`hidden`}>SCHEDULE</li>
-                        <li className={`hidden`}>WORKSHOPS</li>
+        <nav className={`mx-[5%] px-[2.5rem] pt-[2rem] pb-[0.5rem] flex justify-between bg-dark-blue`}>
+            <img src={logo} alt="Homepage" className="h-[3rem] w-[auto] -translate-y-2" />
+            <ul role="menu" aria-label="Main menu" className={`${styles.navList} flex gap-[3rem]`}>
+                <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-100`}>EVENT DETAILS
+                    <ul role="menu" className={`${styles.dropdownContent}`}>
+                        <li role="menuitem" tabIndex="0">SCHEDULE</li>
+                        <li role="menuitem" tabIndex="0">WORKSHOPS</li>
                     </ul>
                 </li>
-                <li>SPONSORS</li>
-                <li>FAQ</li>
-                <li>SFU WICS</li>
-                <li><Button text="REGISTER" type="navbar" /></li>
+                <li role="menuitem" tabIndex="0">SPONSORS</li>
+                <li role="menuitem" tabIndex="0">FAQ</li>
+                <li role="menuitem" tabIndex="0">SFU WICS</li>
+                <li role="menuitem" tabIndex="0"><Button text="REGISTER" type="navbar" /></li>
             </ul>
         </nav>
     );
