@@ -3,3 +3,16 @@ li {
     font-family: "SpaceGrotesk-Medium", monospace;
     font-size: 1.5rem;
 }
+
+.navList{
+
+}
+
+.dropdownContent{
+    display:none;
+    position:absolute;
+}
+
+.dropdown:hover .dropdownContent, .dropdown:focus .dropdownContent{
+    display:block;
+}
