@@ -1,5 +1,6 @@
 import styles from "./Home.module.css";
 
+import Navbar from "../components/Navbar";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 
@@ -9,7 +10,8 @@ import logo from "../assets/images/shared/logo_full.png";
 
 function Home() {
   return (
-    <div className={`max-w-[128rem] mx-[auto]`}>
+    <div className={`max-w-[128rem] mx-[auto] pt-[2rem]`}>
+      <Navbar/>
       {/* Hero section */}
       <div className={`relative`}>
         <div
@@ -31,11 +33,12 @@ function Home() {
                 text="REGISTER"
                 size="small"
                 fontSize="text-[1.25rem]"
+                type="hero"
               />
             </div>
           </div>
         </div>
-        <div className={`scale-90 ${styles.heroBanner} border-[8px] border-dark-blue`}>
+        <div className={`scale-90 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}>
           <PhotoWindow
             img={banner_base}
             imgWidth="w-[100%]"

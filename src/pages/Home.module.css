@@ -14,7 +14,7 @@
 
 @media (min-width: 48rem){
     .heroBanner::after{
-        background:linear-gradient(20deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 80%)
+        background:linear-gradient(5deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 60%)
     }
 }
 

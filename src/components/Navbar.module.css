@@ -1,0 +1,31 @@
+li {
+    color: #FFF;
+    font-family: "SpaceGrotesk-Medium", monospace;
+    font-size: 1.5rem;
+}
+
+.navList li{
+    transition: transform 0.3s ease-out;
+}
+
+.navList li:hover{
+    color: var(--color-sky-blue);
+    transform: translate(0, -5px);
+    transition: transform 0.3s ease-out;
+}
+
+.dropdownContent{
+    display:none;
+    position:absolute;
+
+    background-color:#FFF;
+    padding: 0.5rem;
+}
+
+.dropdownContent li{
+    color: var(--color-dark-blue);
+}
+
+.dropdown:hover .dropdownContent, .dropdown:focus .dropdownContent{
+    display:block;
+}
