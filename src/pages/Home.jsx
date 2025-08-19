@@ -10,7 +10,7 @@ import logo from "../assets/images/shared/logo_full.png";
 
 function Home() {
   return (
-    <div className={`max-w-[128rem] mx-[auto]`}>
+    <div className={`max-w-[128rem] mx-[auto] pt-[2rem]`}>
       <Navbar/>
       {/* Hero section */}
       <div className={`relative`}>
