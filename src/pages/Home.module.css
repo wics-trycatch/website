@@ -12,6 +12,22 @@
     background:linear-gradient(40deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 80%)
 }
 
+.highlights p{
+    font-family: "SpaceGrotesk-Regular", sans-serif;
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+
+.highlights p ~ p{
+    margin-bottom: 2rem;
+}
+
+.highlights .highlightsTitle{
+    font-family: "SpaceGrotesk-Bold", sans-serif;
+    font-size: 1.25rem;
+    margin-bottom:0.5rem;
+}
+
 @media (min-width: 48rem){
     .heroBanner::after{
         background:linear-gradient(5deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 60%)
