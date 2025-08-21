@@ -1,7 +1,7 @@
 li {
     color: #FFF;
     font-family: "SpaceGrotesk-Medium", monospace;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .navList li{
@@ -9,7 +9,7 @@ li {
 }
 
 .navList li:hover{
-    color: var(--color-sky-blue);
+    color: var(--color-powder-blue);
     transform: translate(0, -5px);
     transition: transform 0.3s ease-out;
 }
@@ -28,4 +28,16 @@ li {
 
 .dropdown:hover .dropdownContent, .dropdown:focus .dropdownContent{
     display:block;
+}
+
+@media (min-width: 80rem){
+    li {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 96rem){
+    li {
+        font-size: 1.5rem;
+    }
 }
