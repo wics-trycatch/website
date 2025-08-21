@@ -67,10 +67,13 @@ function Home() {
         </div>
       </div>
 
+      {/* Try/CATCH location and date box */}
       <div className={`absolute z-10 right-[-1rem] bottom-[4rem]`}>
         <HeroInfoBox />
       </div>
+      {/* END Try/CATCH location and date box */}
 
+      {/* Scroll to learn more */}
       <motion.div
         className={`absolute z-1000 bottom-[1rem] left-[4rem]`}
         animate={{
@@ -85,11 +88,16 @@ function Home() {
         }}>
         <img src={scroll_more} alt=" "/>
       </motion.div>
+      {/* END Scroll to learn more */}
+      {/* END Hero section */}
 
+      {/* What is Try/CATCH? */}
       <section className={`mt-[3rem] mx-[5%]`}>
         <img src={paint_window} alt=" " />
       </section>
+      {/* END What is Try/CATCH? */}
 
+      {/* Highlights */}
       <section className={`relative mt-[3rem] mx-[5%] overflow-hidden`}>
         <GridBox width="w-full" height="h-[40rem]" />
         <div className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}>
@@ -127,19 +135,22 @@ function Home() {
           {/* END Be Inspired */}
         </div>
 
+        {/* Bunny GIF */}
         <div>
           <img src={bunny} alt=" " className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`} />
           {/* Blue saturation overlay */}
           <div
             className="absolute inset-0"
             style={{
-              backgroundColor: "rgba(164, 235, 255, 1)", // semi-transparent blue
+              backgroundColor: "rgba(164, 235, 255, 1)",
               mixBlendMode: "saturation",
             }}
           />
         </div>
+        {/* END Bunny GIF */}
       </section>
-      
+      {/* END Highlights */}
+
     </div>
   );
 }
