@@ -6,10 +6,11 @@ import Button from "./Button";
 
 import logo from "../assets/images/shared/logo_simple_white.png";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 function Navbar() {
   const [iconSize, setIconSize] = useState(36);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,6 +20,10 @@ function Navbar() {
         setIconSize(32); // 2xl = 96rem = 1536px
       } else {
         setIconSize(36); // Larger than 2xl
+      }
+
+      if (window.innerWidth >= 1280) {
+        setHamburgerOpen(false);
       }
     };
 
@@ -36,13 +41,15 @@ function Navbar() {
         <img
           src={logo}
           alt="Homepage"
-          className="h-[3rem] w-[auto] -translate-y-2"
+          className="h-[2.5rem] xl:h-[2.75rem] 2xl:h-[3rem] w-[auto] -translate-y-2"
         />
       </Link>
+
+      {/* Desktop Full Navbar */}
       <ul
         role="menu"
         aria-label="Main menu"
-        className={`${styles.navList} flex gap-[3rem] xl:gap-[2rem]`}
+        className={`${styles.navList} hidden xl:flex gap-[3rem] xl:gap-[2rem]`}
       >
         <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-100`}>
           <div className={`flex`}>
@@ -81,6 +88,52 @@ function Navbar() {
           <Button text="REGISTER" type="navbar" />
         </li>
       </ul>
+      {/* END Desktop Full Navbar */}
+
+      {/* Hamburger menu button for mobile */}
+      <button
+        className="xl:hidden text-white -translate-y-2"
+        onClick={() => setHamburgerOpen(!hamburgerOpen)}
+        aria-label="Toggle menu"
+      >
+        {hamburgerOpen ? <X size={36} /> : <Menu size={36} />}
+      </button>
+
+      {/* Mobile Hamburger menu */}
+      {hamburgerOpen && (
+        <div className="z-10000 absolute top-[7.95rem] w-[90%] left-[5%] bg-dark-blue px-6 py-4 xl:hidden">
+          <ul role="menu" className="flex flex-col gap-4 text-white">
+            <li>
+              <div className="flex items-center justify-between">
+                <span>EVENT DETAILS</span>
+                <ChevronDown size={24} />
+              </div>
+              <ul className="ml-4 mt-2 flex flex-col gap-2">
+                <li>
+                  <Link to="/">SCHEDULE</Link>
+                </li>
+                <li>
+                  <Link to="/">WORKSHOPS</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link to="/">SPONSORS</Link>
+            </li>
+            <li>
+              <Link to="/">FAQ</Link>
+            </li>
+            <li>
+              <Link to="/">SFU WICS</Link>
+            </li>
+            <li>
+              <Button text="REGISTER" type="navbar" />
+            </li>
+          </ul>
+        </div>
+      )}
+      {/* END Mobile Hamburger Menu */}
+
     </nav>
   );
 }
