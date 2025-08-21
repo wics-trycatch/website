@@ -14,6 +14,7 @@ import logo from "../assets/images/shared/logo_full.png";
 import scroll_more from "../assets/images/home/scroll_more.svg";
 import paint_window from "../assets/images/home/paint_app_window.svg";
 import bunny from "../assets/images/home/bunny.gif";
+import scribble from "../assets/images/home/pixel_scribble.svg"
 
 function Home() {
   return (
@@ -92,20 +93,39 @@ function Home() {
       {/* END Hero section */}
 
       {/* What is Try/CATCH? */}
-      <section className={`mt-[3rem] mx-[5%]`}>
+      <section className={`relative mt-[3rem] mx-[5%]`}>
         <img src={paint_window} alt=" " />
+        <div className={`${styles.about} absolute top-[5.75rem] left-[4.5rem]`}>
+            <h2 className={`${styles.outsideStroke}`}><span className={`block`}>What is</span><span className={`block`}>Try/CATCH?</span></h2>
+
+            <img src={scribble} alt=" " className={`pl-[4.5rem] mt-[-0.1rem] h-[1.5rem]`}/>
+
+            <p className={`${styles.aboutDesc} pl-[0.25rem] pr-[1.5rem]`}>
+              <span className={`block mt-[1rem] mb-[1rem]`}>
+                Try/CATCH (Computing and Technology Conference for Her) is a one-day event designed to spark curiosity and confidence in female and non-binary high school students in grades 8-12. 
+              </span>
+
+              <span className={`block mb-[1rem]`}>
+                The event offers interactive workshops in programming, robotics, and design, as well as a keynote, a Women in Tech panel, and opportunities to network with university students, alumnae, and industry professionals. 
+              </span>
+
+              <span className={`block`}>
+                With over 1,400 participants since 2009, Try/CATCH is more than just a conference—it's a space to explore technology in a supportive, inclusive, and empowering environment.
+              </span>
+            </p>
+        </div>
       </section>
       {/* END What is Try/CATCH? */}
 
       {/* Highlights */}
-      <section className={`relative mt-[3rem] mx-[5%] overflow-hidden`}>
+      <section className={`relative mt-[1.5rem] mx-[5%] overflow-hidden`}>
         <GridBox width="w-full" height="h-[40rem]" />
         <div className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}>
           {/* Discover Tech */}
           <div>
-            <p className={`${styles.highlightsTitle}`}>
+            <h2 className={`${styles.highlightsTitle}`}>
               DISCOVER TECH
-            </p>
+            </h2>
             <p>
               Explore coding, robotics, and design through hands-on workshops built for all ages and experience levels!
             </p>
@@ -114,9 +134,9 @@ function Home() {
 
           {/* Meet Role Models */}
           <div>
-            <p className={`${styles.highlightsTitle}`}>
+            <h2 className={`${styles.highlightsTitle}`}>
               MEET ROLE MODELS
-            </p>
+            </h2>
             <p>
               Connect with women in tech—from students to seasoned professionals—and hear what it’s really like in computing and engineering fields.
             </p>
@@ -125,9 +145,9 @@ function Home() {
 
           {/* Be Inspired */}
           <div>
-            <p className={`${styles.highlightsTitle}`}>
+            <h2 className={`${styles.highlightsTitle}`}>
               BE INSPIRED
-            </p>
+            </h2>
             <p>
               Fuel your curiosity with keynotes, panels, and prizes. Walk away with new skills, new friends, and a glimpse into your future.
             </p>
