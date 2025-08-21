@@ -8,6 +8,7 @@ import HeroInfoBox from "../components/HeroInfoBox";
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
 import logo from "../assets/images/shared/logo_full.png";
+import scroll_more from "../assets/images/home/scroll_more.svg";
 
 function Home() {
   return (
@@ -43,7 +44,7 @@ function Home() {
           <PhotoWindow
             img={banner_base}
             imgWidth="w-[100%]"
-            imgHeight="h-[92vh]"
+            imgHeight="h-[80vh] sm:h-[92vh]"
             imgPosition="object-[55%_15%]"
             windowBorder="border-[0px]"
             alt="Group photo of Try/CATCH 2024 attendees at the SFU ASB Atrium"
@@ -52,7 +53,7 @@ function Home() {
             <PhotoWindow
                 img={banner_texture}
                 imgWidth="w-[100%]"
-                imgHeight="h-[92vh]"
+                imgHeight="h-[80vh] sm:h-[92vh]"
                 imgPosition="object-[55%_15%]"
                 windowBorder="border-[0px]"
                 alt=" "
@@ -61,9 +62,11 @@ function Home() {
         </div>
       </div>
 
-      <div className={`absolute z-10 right-[0rem] bottom-[3rem]`}>
+      <div className={`absolute z-10 right-[-1rem] bottom-[4rem]`}>
         <HeroInfoBox />
       </div>
+
+      <img src={scroll_more} alt=" " className={`absolute z-1000 bottom-[1rem] left-[4rem]`} />
 
     </div>
   );
