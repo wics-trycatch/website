@@ -9,7 +9,7 @@ li {
 }
 
 .navList li:hover{
-    color: var(--color-sky-blue);
+    color: var(--color-powder-blue);
     transform: translate(0, -5px);
     transition: transform 0.3s ease-out;
 }
