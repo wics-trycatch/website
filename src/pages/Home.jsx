@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import styles from "./Home.module.css";
 
 import Navbar from "../components/Navbar";
@@ -66,7 +68,20 @@ function Home() {
         <HeroInfoBox />
       </div>
 
-      <img src={scroll_more} alt=" " className={`absolute z-1000 bottom-[1rem] left-[4rem]`} />
+      <motion.div
+        className={`absolute z-1000 bottom-[1rem] left-[4rem]`}
+        animate={{
+          y: [0, -10, 0], // bob up and down
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+          delay: 2.5, 
+          repeat: Infinity,
+          repeatDelay: 2.5, 
+        }}>
+        <img src={scroll_more} alt=" "/>
+      </motion.div>
 
     </div>
   );
