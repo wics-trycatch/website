@@ -6,15 +6,18 @@ import Navbar from "../components/Navbar";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 import HeroInfoBox from "../components/HeroInfoBox";
+import GridBox from "../components/GridBox"
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
 import logo from "../assets/images/shared/logo_full.png";
 import scroll_more from "../assets/images/home/scroll_more.svg";
+import paint_window from "../assets/images/home/paint_app_window.svg";
+import bunny from "../assets/images/home/bunny.gif";
 
 function Home() {
   return (
-    <div className={`max-w-[128rem] mx-[auto] pt-[2rem]`}>
+    <div className={`bg-light-cyan overflow-x-none max-w-[128rem] mx-[auto] pt-[2rem]`}>
       <Navbar/>
       {/* Hero section */}
       <div className={`relative`}>
@@ -83,6 +86,60 @@ function Home() {
         <img src={scroll_more} alt=" "/>
       </motion.div>
 
+      <section className={`mt-[3rem] mx-[5%]`}>
+        <img src={paint_window} alt=" " />
+      </section>
+
+      <section className={`relative mt-[3rem] mx-[5%] overflow-hidden`}>
+        <GridBox width="w-full" height="h-[40rem]" />
+        <div className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}>
+          {/* Discover Tech */}
+          <div>
+            <p className={`${styles.highlightsTitle}`}>
+              DISCOVER TECH
+            </p>
+            <p>
+              Explore coding, robotics, and design through hands-on workshops built for all ages and experience levels!
+            </p>
+          </div>
+          {/* END Discover Tech */}
+
+          {/* Meet Role Models */}
+          <div>
+            <p className={`${styles.highlightsTitle}`}>
+              MEET ROLE MODELS
+            </p>
+            <p>
+              Connect with women in tech—from students to seasoned professionals—and hear what it’s really like in computing and engineering fields.
+            </p>
+          </div>
+          {/* END Meet Role Models */}
+
+          {/* Be Inspired */}
+          <div>
+            <p className={`${styles.highlightsTitle}`}>
+              BE INSPIRED
+            </p>
+            <p>
+              Fuel your curiosity with keynotes, panels, and prizes. Walk away with new skills, new friends, and a glimpse into your future.
+            </p>
+          </div>
+          {/* END Be Inspired */}
+        </div>
+
+        <div>
+          <img src={bunny} alt=" " className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`} />
+          {/* Blue saturation overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundColor: "rgba(164, 235, 255, 1)", // semi-transparent blue
+              mixBlendMode: "saturation",
+            }}
+          />
+        </div>
+      </section>
+      
     </div>
   );
 }
