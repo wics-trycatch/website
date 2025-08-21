@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import Navbar from "../components/Navbar";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
+import HeroInfoBox from "../components/HeroInfoBox";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -15,7 +16,7 @@ function Home() {
       {/* Hero section */}
       <div className={`relative`}>
         <div
-          className={`absolute z-100 top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}
+          className={`absolute z-100 top-[6rem] md:top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}
         >
           <img
             src={logo}
@@ -59,6 +60,11 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <div className={`absolute z-10 right-[0rem] bottom-[3rem]`}>
+        <HeroInfoBox />
+      </div>
+
     </div>
   );
 }
