@@ -18,7 +18,7 @@ import scribble from "../assets/images/home/pixel_scribble.svg"
 
 function Home() {
   return (
-    <div className={`bg-light-cyan overflow-x-none max-w-[128rem] mx-[auto] pt-[2rem]`}>
+    <div className={`overflow-x-hidden max-w-[128rem] mx-[auto] pt-[2rem] pb-[2rem]`}>
       <Navbar/>
       {/* Hero section */}
       <div className={`relative`}>
@@ -69,14 +69,14 @@ function Home() {
       </div>
 
       {/* Try/CATCH location and date box */}
-      <div className={`absolute z-10 right-[-1rem] bottom-[4rem]`}>
+      <div className={`absolute z-100 right-0 translate-x-[1rem] bottom-[4rem] sm:hidden`}>
         <HeroInfoBox />
       </div>
       {/* END Try/CATCH location and date box */}
 
       {/* Scroll to learn more */}
       <motion.div
-        className={`absolute z-1000 bottom-[1rem] left-[4rem]`}
+        className={`absolute z-1000 bottom-[1rem] left-[4rem] sm:hidden`}
         animate={{
           y: [0, -10, 0], // bob up and down
         }}
