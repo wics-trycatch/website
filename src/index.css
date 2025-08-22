@@ -11,3 +11,8 @@
   --font-body-bold: 'SpaceGrotesk-Bold', sans-serif;
   --font-body-medium: 'SpaceGrotesk-Medium', sans-serif;
 }
+
+html{
+  background-color: var(--color-light-cyan);
+  overflow-x: hidden;
+}
