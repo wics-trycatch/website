@@ -1,0 +1,20 @@
+.displayText{
+    font-family: "Aeroblade", sans-serif;
+    -webkit-text-stroke: 8px black;
+    filter: drop-shadow(3px 5px 0 black);
+}
+
+.outsideStroke {
+   paint-order: stroke fill;
+}
+
+.headshot::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(157, 217, 254, 1) 0%, rgba(157, 217, 254, 0) 50%);
+}
+
+.card{
+    filter: drop-shadow(9px 9px 0 var(--color-dark-blue));
+}
