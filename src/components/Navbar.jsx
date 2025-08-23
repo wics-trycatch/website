@@ -35,7 +35,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`mx-[5%] px-[2.5rem] pt-[2rem] pb-[0.5rem] flex justify-between bg-dark-blue`}
+      className={`px-[2.5rem] pt-[2rem] pb-[0.5rem] flex justify-between bg-dark-blue`}
     >
       <Link to="/">
         <img
@@ -80,7 +80,7 @@ function Navbar() {
           </Link>
         </li>
         <li role="menuitem" tabIndex="0">
-          <Link to="/">
+          <Link to="/sfu-wics">
             SFU WICS
           </Link>
         </li>
@@ -124,7 +124,7 @@ function Navbar() {
               <Link to="/">FAQ</Link>
             </li>
             <li>
-              <Link to="/">SFU WICS</Link>
+              <Link to="/sfu-wics">SFU WICS</Link>
             </li>
             <li>
               <Button text="REGISTER" type="navbar" />
