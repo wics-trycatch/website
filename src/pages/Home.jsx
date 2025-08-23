@@ -18,7 +18,7 @@ import scribble from "../assets/images/home/pixel_scribble.svg"
 
 function Home() {
   return (
-    <div className={`overflow-x-hidden max-w-[128rem] mx-[auto] pt-[2rem] pb-[2rem]`}>
+    <div className={`mx-auto`}>
       <Navbar/>
       {/* Hero section */}
       <div className={`relative`}>
@@ -46,7 +46,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className={`scale-90 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}>
+        <div className={`scale-100 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}>
           <PhotoWindow
             img={banner_base}
             imgWidth="w-[100%]"
@@ -93,14 +93,14 @@ function Home() {
       {/* END Hero section */}
 
       {/* What is Try/CATCH? */}
-      <section className={`relative mt-[3rem] mx-[5%]`}>
-        <img src={paint_window} alt=" " />
-        <div className={`${styles.about} absolute top-[5.75rem] left-[4.5rem]`}>
-            <h2 className={`${styles.outsideStroke}`}><span className={`block`}>What is</span><span className={`block`}>Try/CATCH?</span></h2>
+      <section className={`relative mt-[3rem]`}>
+        <img src={paint_window} alt=" " className={`w-full`} />
+        <div className={`${styles.about} absolute top-[7rem] left-[4.5rem]`}>
+            <h2 className={`${styles.outsideStroke} ml-[1rem]`}><span className={`block`}>What is</span><span className={`block`}>Try/CATCH?</span></h2>
 
-            <img src={scribble} alt=" " className={`pl-[4.5rem] mt-[-0.1rem] h-[1.5rem]`}/>
+            <img src={scribble} alt=" " className={`pl-[5.5rem] mt-[0.25rem] h-[1.5rem]`}/>
 
-            <p className={`${styles.aboutDesc} pl-[0.25rem] pr-[1.5rem]`}>
+            <p className={`${styles.aboutDesc} pl-[1rem] pr-[2rem]`}>
               <span className={`block mt-[1rem] mb-[1rem]`}>
                 Try/CATCH (Computing and Technology Conference for Her) is a one-day event designed to spark curiosity and confidence in female and non-binary high school students in grades 8-12. 
               </span>
@@ -118,7 +118,7 @@ function Home() {
       {/* END What is Try/CATCH? */}
 
       {/* Highlights */}
-      <section className={`relative mt-[1.5rem] mx-[5%] overflow-hidden`}>
+      <section className={`relative mt-[1.5rem] overflow-hidden`}>
         <GridBox width="w-full" height="h-[40rem]" />
         <div className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}>
           {/* Discover Tech */}
