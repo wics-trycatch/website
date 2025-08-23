@@ -63,6 +63,11 @@ function Navbar() {
               </Link>
             </li>
             <li role="menuitem" tabIndex="0">
+              <Link to="/speakers">
+                SPEAKERS
+              </Link>
+            </li>
+            <li role="menuitem" tabIndex="0">
               <Link to="/">
                 WORKSHOPS
               </Link>
@@ -111,6 +116,9 @@ function Navbar() {
               <ul className="ml-4 mt-2 flex flex-col gap-2">
                 <li>
                   <Link to="/">SCHEDULE</Link>
+                </li>
+                <li>
+                  <Link to="/speakers">SPEAKERS</Link>
                 </li>
                 <li>
                   <Link to="/">WORKSHOPS</Link>
