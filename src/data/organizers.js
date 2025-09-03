@@ -24,7 +24,7 @@ export const organizers = [
     name: "Mara",
     role: "Co-Chair • Website Developer",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi everyone! My name is Mara, and I’m a third-year Computing Science student at SFU. I’ve been involved with Try/CATCH in the past as a workshop volunteer, host, and web developer, and I’m so excited to return this year as one of the Co-Chairs! I've attended Try/CATCH myself back in high school, so it feels extra special to now be helping lead this amazing yearly WiCS event. Outside of school, I love singing, dancing, and watching anime and K-pop shows!"
   },
   {
     img: bhakti,
@@ -33,7 +33,7 @@ export const organizers = [
     name: "Bhakti",
     role: "Co-Chair",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hello! I am Bhakti. I am a Computer Science major and the Co-Chair for the Try/CATCH event. I believe representation play a key role in helping students see themselves in the field, and through this event I hope to motivate the next generation of women to pursue their interests in technology with confidence."
   },
   {
     img: aniyah,
@@ -42,7 +42,7 @@ export const organizers = [
     name: "Aniyah",
     role: "Logistics Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi! My name is Aniyah and I'm a fourth-year Computer Science and Math Joint Major. In my free time I love to read books, play video games, and cuddle with my dogs. I'm so happy to be a part of Try/CATCH 2025 and look forward to meet all the attendees!"
   },
   {
     img: grace,
@@ -60,7 +60,7 @@ export const organizers = [
     name: "Meyer",
     role: "Logistics Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "I’m a third-year Software Systems student, and I’m so excited to be part of this year’s Try/CATCH team! In my free time, I love reading, exploring cafés, and spending time in nature. I’m looking forward to helping create a welcoming environment for everyone at Try/CATCH 2025! :)"
   },
   {
     img: mariaK,
@@ -69,7 +69,7 @@ export const organizers = [
     name: "Maria K.",
     role: "Sponsorships Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi! My name is Maria and I am a third year MBB & CS joint major. I think showing younger female and non binary students the opportunities they have in CS is a super important initiative which is why I'm excited to join the Try/CATCH committee this year. In my free time, I love listening to music and going to music events whenever I can. Can't wait to meet all the attendees this year!"
   },
   {
     img: vidhi,
@@ -78,7 +78,7 @@ export const organizers = [
     name: "Vidhi",
     role: "Sponsorships Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "I’m a 3rd-year Computing Science student. Outside of school, I enjoy exploring new cafes, spending time outdoors, and trying out creative projects. My interests lie in human-computer interaction and software development, and I’m looking forward to connecting with everyone at Try/CATCH!"
   },
   {
     img: gloria,
@@ -87,7 +87,7 @@ export const organizers = [
     name: "Gloria",
     role: "Treasurer",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi everyone! I’m Gloria, a graduate student in the MPCS Big Data program. I love exploring new restaurants/coffee shops around the city, playing recreational sports, and enjoying board games. I am super excited to meet and support young women and non-binary students in STEM at this year's Try/CATCH! :)"
   },
   {
     img: serena,
@@ -96,7 +96,7 @@ export const organizers = [
     name: "Serena",
     role: "Communications Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "I’m a Computing Science and Psychology student at SFU. I started coding at the end of my first year of university and now really enjoy making cool projects. In my free time, I like going for walks, painting, and playing video games with my sisters. I’m excited to be a part of the Try/Catch team again this year and look forward to helping create a fun experience for everyone attending!"
   },
   {
     img: poorvi,
@@ -105,7 +105,7 @@ export const organizers = [
     name: "Poorvi",
     role: "Communications Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi, I’m Poorvi! I’m an AI/ML and full-stack developer with hands-on experience in research, data-driven projects, and building software tools. I’ve worked on projects ranging from analysing large datasets to developing apps that support health and wellness. I’m passionate about exploring new technologies and love sharing that excitement with others, helping people see what’s possible in tech."
   },
   {
     img: sydney,
@@ -114,7 +114,7 @@ export const organizers = [
     name: "Sydney",
     role: "Logistics Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "I am a second-year Computing Science major at SFU and Director of Communications for WiCS! When I'm not lost in assignments, you can find me making jewelry, playing guitar, or listening to music. I'm super excited for Try/CATCH 2025 and can't wait to meet all of you :D"
   },
   {
     img: emily,
@@ -123,7 +123,7 @@ export const organizers = [
     name: "Emily",
     role: "Logistics Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi! I'm Emily, a third-year Computing Science major with an Interactive Arts & Technology minor. In my free time, I love reading, painting, and binge-watching 2000s shows and movies. I'm so excited to be on the recruitment team for Try/CATCH this year, and I'm looking forward to meeting everyone!"
   },
   {
     img: selina,
@@ -132,7 +132,7 @@ export const organizers = [
     name: "Selina",
     role: "Visual Design Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi! I am a second year computing science student in the dual degree program. I love playing video games and reading. I adore cute and pretty aesthetics. "
   },
   {
     img: amelia,
@@ -141,7 +141,7 @@ export const organizers = [
     name: "Amelia",
     role: "Visual Design Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hello! I’m Amelia, a second-year student in the Computing Science Dual Degree with Zhejiang. I’m excited to be part of the visual design team for Try/CATCH this year! In my free time, I like drawing on my iPad, playing video games with friends, and listening to music!"
   },
   {
     img: mariaF,
@@ -159,7 +159,7 @@ export const organizers = [
     name: "Sayna",
     role: "Merch & Swag Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hii! I’m Sayna, a third year data science student. I’m part of the merch and swag team for Try/CATCH 2025, and I’m super excited to help make this event memorable! In my free time, I love catching up on pop culture, whether it’s the latest shows or trends. Can’t wait to meet everyone!! "
   },
   {
     img: bianca,
