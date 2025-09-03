@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import ShowMoreText from "react-show-more-text";
 
 import styles from "./ProfileCard.module.css";
 
 function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
   const [expanded, setExpanded] = useState(false);
+  const [height, setHeight] = useState("6.25rem");
+  const blurbRef = useRef(null);
+
+  useEffect(() => {
+    if (blurbRef.current) {
+      if (expanded) {
+        // set to full scroll height when expanded
+        setHeight(`${blurbRef.current.scrollHeight}px`);
+      } else {
+        setHeight("6.25rem");
+      }
+    }
+  }, [expanded, blurb]);
 
   return (
     <div
-      className={`${styles.card} overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue h-[36rem] flex flex-col`}
+      className={`${styles.card} overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col`}
     >
       <div
         className={`transition-all duration-500 ${
@@ -30,11 +43,11 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
         </div>
       </div>
       {/* Text Section */}
-      <div className="flex-1 overflow-hidden relative px-[1.25rem]">
+      <div className="flex-1 overflow-hidden relative px-[1.25rem] pb-[1.5rem]">
         <div
-          className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
-            expanded ? "line-clamp-none" : "line-clamp-5"
-          }`}
+          ref={blurbRef}
+          style={{ maxHeight: height }}
+          className={`font-body text-[1rem]/[1.25rem] pb-[0.5rem] transition-all duration-500 overflow-hidden ${expanded ? "" : "line-clamp-5"}`}
         >
           {blurb}
         </div>
