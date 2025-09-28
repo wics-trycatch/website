@@ -25,3 +25,31 @@
   font-weight: normal;
   src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Dream MMA';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Dream MMA.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Saira-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Saira-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Saira-Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Saira-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Saira-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Saira-Medium.ttf') format('truetype');
+}
