@@ -1,5 +1,5 @@
 .heroDesc {
-    font-family: "SpaceGrotesk-Medium", sans-serif;
+    font-family: var(--font-body-medium);
     font-size: 1.25rem;
     line-height: 1.25rem;
     color: var(--color-dark-blue);
@@ -13,7 +13,7 @@
 }
 
 .about h2{
-    font-family: "Aeroblade", sans-serif;
+    font-family: var(--font-display);
     font-size: 1.85rem;
     line-height:1.85rem;
 
@@ -24,7 +24,7 @@
 }
 
 .aboutDesc{
-    font-family: "SpaceGrotesk-Regular", sans-serif;
+    font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.25rem;
 }
@@ -34,7 +34,7 @@
 }
 
 .highlights p{
-    font-family: "SpaceGrotesk-Regular", sans-serif;
+    font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.25rem;
 }
@@ -44,7 +44,7 @@
 }
 
 .highlightsTitle{
-    font-family: "SpaceGrotesk-Bold", sans-serif;
+    font-family: var(--font-body-bold);
     font-size: 1.25rem;
     margin-bottom:0.25rem;
 }
