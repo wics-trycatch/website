@@ -56,7 +56,7 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
           paddingBottom: "0.75rem",
           paddingLeft: "1.25rem",
           paddingRight: "1.25rem",
-          maxHeight: expanded ? "100rem" : "10rem",
+          maxHeight: expanded ? "32rem" : "10rem", // Limit to full card height
           background: "linear-gradient(to bottom, transparent 0%, rgba(157, 217, 254, 1) 30%, rgba(157, 217, 254, 1) 30%, rgba(157, 217, 254, 1) 100%)"
         }}
       >
@@ -96,9 +96,11 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
         <div
           ref={textRef}
-          className="font-body text-[1rem]/[1.25rem] transition-all duration-500 overflow-hidden"
+          className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
+            expanded ? "overflow-y-auto" : "overflow-hidden"
+          }`}
           style={{
-            maxHeight: expanded ? expandedHeight : collapsedHeight,
+            maxHeight: expanded ? "18rem" : collapsedHeight, // 18rem leaves room for name/role/button
           }}
         >
           {blurb}
