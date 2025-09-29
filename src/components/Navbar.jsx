@@ -80,7 +80,7 @@ function Navbar() {
           </Link>
         </li>
         <li role="menuitem" tabIndex="0">
-          <Link to="/">
+          <Link to="/faq">
             FAQ
           </Link>
         </li>

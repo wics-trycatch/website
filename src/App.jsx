@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 
 import Home from './pages/Home.jsx';
+import Faq from './pages/Faq.jsx';
 import Wics from './pages/Wics.jsx';
 import Speakers from './pages/Speakers.jsx';
 
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/sfu-wics" element={<Wics />} />
           <Route path="/speakers" element={<Speakers />} />
         </Routes>

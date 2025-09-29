@@ -69,7 +69,7 @@ function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/" 
+                  to="/faq" 
                   className="hover:text-powder-blue transition-colors duration-300"
                 >
                   FAQ
