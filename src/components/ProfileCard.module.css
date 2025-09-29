@@ -15,6 +15,13 @@
     background:linear-gradient(to top, rgba(157, 217, 254, 1) 0%, rgba(157, 217, 254, 0) 50%);
 }
 
+.keynoteHeadshot::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to left, rgba(157, 217, 254, 1) 0%, rgba(157, 217, 254, 0) 20%);
+}
+
 .card{
     filter: drop-shadow(9px 9px 0 var(--color-dark-blue));
 }

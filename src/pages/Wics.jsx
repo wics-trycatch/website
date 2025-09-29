@@ -8,11 +8,11 @@ function Wics() {
   return (
     <div>
       <div>
-        <h1 className="displayText outsideStroke text-[2rem] text-powder-blue">
-          <DisplayText text="sfu wics" fontSize="72" />
+        <h1 className="text-[2rem] text-powder-blue">
+          <DisplayText text="sfu wics"/>
         </h1>
 
-        <p className={`mt-[1rem]`}>
+        <p className={`mt-[-0.5rem]`}>
           Try/CATCH is entirely run by enthusiastic volunteers from Simon Fraser
           University Computing Science students, faculty and staff. As such,
           Try/CATCH is dependent on the generosity of our sponsors in order to
@@ -25,10 +25,18 @@ function Wics() {
           Try/CATCH 2025 Committee
         </h2>
 
-        <div className="grid gap-[2rem] mt-[1rem]">
-          {organizers.map((org, i) => (
-            <ProfileCard key={i} {...org} />
-          ))}
+        <div className="grid gap-[2rem]">
+          <div className="grid gap-[2rem] md:grid-cols-2 mt-[1rem]">
+            {organizers.slice(0, 2).map((org, i) => (
+              <ProfileCard key={i} {...org} />
+            ))}
+          </div>
+          
+          <div className="grid gap-[2rem] md:grid-cols-2 lg:grid-cols-3 mt-[1rem]">
+            {organizers.slice(2).map((org, i) => (
+              <ProfileCard key={i + 2} {...org} />
+            ))}
+          </div>
         </div>
 
       </section>
