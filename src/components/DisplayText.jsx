@@ -1,3 +1,5 @@
+import styles from "./HeroInfoBox.module.css";
+
 function DisplayText({ text, x="5", y="100", fontSize }) {
   return (
     <svg
@@ -18,8 +20,9 @@ function DisplayText({ text, x="5", y="100", fontSize }) {
         strokeLinejoin="round"
         strokeLinecap="round"
         fontFamily="Dream MMA"
+        className={`${styles.displayText} ${styles.outsideStroke}`}
       >
-        {text}
+        {text.toLowerCase()}
       </text>
     </svg>
   );
