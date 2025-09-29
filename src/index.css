@@ -17,7 +17,7 @@ html{
   overflow-x: hidden;
 }
 
-.displayText{
+/* .displayText{
     font-family: var(--font-display);
     -webkit-text-stroke: 8px var(--color-dark-blue);
     filter: drop-shadow(3px 5px 0 var(--color-dark-blue));
@@ -25,7 +25,7 @@ html{
 
 .outsideStroke {
    paint-order: stroke fill;
-}
+} */
 
 p{
   font-family: var(--font-body);
