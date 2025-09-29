@@ -34,11 +34,29 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
           className={`relative w-full h-full object-cover ${imgProperties}`}
         />
         <div className={`absolute bottom-[1.25rem] left-[1.25rem] z-100`}>
-          <p
-            className={`${styles.displayText} ${styles.outsideStroke} !text-[1.875rem] text-white mb-[1rem]`}
+          <svg
+            viewBox="0 0 600 150"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="heading"
+            className="w-full h-auto"
           >
-            {name}
-          </p>
+            <title id="heading">sfu wics</title>
+            <text
+              x="8"
+              y="120"
+              fontSize="3.75rem"
+              fill="white"
+              stroke="black"
+              strokeWidth="13"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              fontFamily="Dream MMA"
+              className={`${styles.displayText} ${styles.outsideStroke}`}
+            >
+              {name.toLowerCase()}
+            </text>
+          </svg>
           <p className={`!text-[1.25rem] !font-body-medium`}>{role}</p>
         </div>
       </div>
