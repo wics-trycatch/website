@@ -31,7 +31,7 @@ function HeroInfoBox() {
           <em
             className={`${styles.displayText} ${styles.outsideStroke} block font-display text-[1.5rem]/[1.5rem] text-powder-blue mt-[0.75rem]`}
           >
-            <span className={`block`}>October</span>
+            <span className={`block`}>october</span>
             <span className={`block`}> 25, 2025</span>
           </em>
         </p>
