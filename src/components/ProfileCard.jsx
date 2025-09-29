@@ -5,35 +5,69 @@ import styles from "./ProfileCard.module.css";
 
 function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
   const [expanded, setExpanded] = useState(false);
-  const [height, setHeight] = useState("6.25rem");
-  const blurbRef = useRef(null);
+  const [collapsedHeight, setCollapsedHeight] = useState("6.25rem"); // 5 lines height
+  const [expandedHeight, setExpandedHeight] = useState("auto");
+  const textRef = useRef(null);
+  const hiddenRef = useRef(null);
 
   useEffect(() => {
-    if (blurbRef.current) {
-      if (expanded) {
-        // set to full scroll height when expanded
-        setHeight(`${blurbRef.current.scrollHeight}px`);
-      } else {
-        setHeight("6.25rem");
-      }
+    if (hiddenRef.current && textRef.current) {
+      const fullHeight = hiddenRef.current.scrollHeight;
+      setExpandedHeight(`${fullHeight}px`);
+      
+      const lineHeight = 20; // 1.25rem in pixels
+      const fiveLineHeight = lineHeight * 5;
+      setCollapsedHeight(`${fiveLineHeight}px`);
     }
-  }, [expanded, blurb]);
+  }, [blurb]);
 
   return (
     <div
-      className={`${styles.card} overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col`}
+      className={`${styles.card} overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
     >
       <div
-        className={`transition-all duration-500 ${
-          expanded ? "h-[14rem]" : "h-[26.5rem]"
-        } overflow-hidden relative ${styles.headshot} object-cover`}
+        className={`transition-all duration-500 h-[22rem] overflow-hidden relative ${styles.headshot} object-cover`}
       >
         <img
           src={img}
           alt={alt}
           className={`relative w-full h-full object-cover ${imgProperties}`}
         />
-        <div className={`absolute bottom-[1.25rem] left-[1.25rem] z-100`}>
+      </div>
+      
+      {/* Hidden element to measure full text height */}
+      <div
+        ref={hiddenRef}
+        className="absolute opacity-0 pointer-events-none font-body text-[1rem]/[1.25rem] px-[1.25rem]"
+        style={{ 
+          top: "-9999px", 
+          width: "calc(100% - 2.5rem)",
+          visibility: "hidden"
+        }}
+      >
+        {blurb}
+      </div>
+      
+      {/* Text Section */}
+      <div 
+        className="absolute bottom-0 left-0 bg-sky-blue transition-all duration-500 z-20"
+        style={{
+          paddingTop: expanded ? "7rem" : "1rem",
+          paddingBottom: "0.75rem",
+          paddingLeft: "1.25rem",
+          paddingRight: "1.25rem",
+          maxHeight: expanded ? "100rem" : "10rem",
+          background: "linear-gradient(to bottom, transparent 0%, rgba(157, 217, 254, 1) 30%, rgba(157, 217, 254, 1) 30%, rgba(157, 217, 254, 1) 100%)"
+        }}
+      >
+        {/* Name and Role*/}
+        <div
+          className={`absolute transition-all duration-500 z-30`}
+          style={{
+            top: expanded ? "0rem" : "-6rem",
+            left: "1.25rem"
+          }}
+        >
           <svg
             viewBox="0 0 600 150"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +75,7 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
             aria-labelledby="heading"
             className="w-full h-auto ml-[-0.15rem]"
           >
-            <title id="heading">sfu wics</title>
+            <title id="heading">{name}</title>
             <text
               x="8"
               y="120"
@@ -59,19 +93,19 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
           </svg>
           <p className={`!text-[1.25rem] !font-body-medium`}>{role}</p>
         </div>
-      </div>
-      {/* Text Section */}
-      <div className="flex-1 overflow-hidden relative px-[1.25rem] pb-[1.5rem]">
+
         <div
-          ref={blurbRef}
-          style={{ maxHeight: height }}
-          className={`font-body text-[1rem]/[1.25rem] pb-[0.5rem] transition-all duration-500 overflow-hidden ${expanded ? "" : "line-clamp-5"}`}
+          ref={textRef}
+          className="font-body text-[1rem]/[1.25rem] transition-all duration-500 overflow-hidden"
+          style={{
+            maxHeight: expanded ? expandedHeight : collapsedHeight,
+          }}
         >
           {blurb}
         </div>
         <button
           onClick={() => setExpanded((prev) => !prev)}
-          className="font-body-bold text-dark-blue cursor-pointer"
+          className="font-body-bold text-dark-blue cursor-pointer mt-2"
         >
           {expanded ? "Show less" : "Read more"}
         </button>
