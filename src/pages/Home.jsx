@@ -23,19 +23,19 @@ function Home() {
       {/* Hero section */}
       <div className={`relative`}>
         <div
-          className={`absolute z-100 top-[3.4rem] md:top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}
+          className={`absolute z-100 top-[3.4rem] lg:top-[4rem] pl-[2.25rem] pr-[2.5rem] sm:pl-[1rem] md:pl-[3.5rem] 2xl:pl-[10rem]`}
         >
           <img
             src={logo}
             alt="Try/CATCH Logo"
-            className={`w-[24rem] md:w-[30rem] 2xl:w-[50rem]`}
+            className={`w-[24rem] sm:w-[30rem] lg:w-[40rem] 2xl:w-[50rem] sm:ml-[1rem]`}
           />
           <div className={`mt-[1rem] ml-[2rem] mr-[1rem]`}>
-            <p className={`${styles.heroDesc} max-w-[18rem] 2xl:max-w-[40rem]`}>
+            <p className={`${styles.heroDesc} max-w-[18rem] sm:max-w-[24rem] lg:max-w-[28rem] 2xl:max-w-[40rem]`}>
               A tech conference for high school girls and non-binary students to
               learn, connect, and get inspired.
             </p>
-            <div className={`mt-[2rem] 2xl:mt-[4rem]`}>
+            <div className={`mt-[2rem] sm:mt-[3rem] 2xl:mt-[4rem]`}>
               <Button
                 link="/"
                 text="REGISTER"
@@ -50,7 +50,7 @@ function Home() {
           <PhotoWindow
             img={banner_base}
             imgWidth="w-[100%]"
-            imgHeight="h-[80vh] sm:h-[92vh]"
+            imgHeight="h-[36rem] lg:h-[40rem] 2xl:h-[56rem]"
             imgPosition="object-[55%_15%]"
             windowBorder="border-[0px]"
             alt="Group photo of Try/CATCH 2024 attendees at the SFU ASB Atrium"
@@ -59,7 +59,7 @@ function Home() {
             <PhotoWindow
                 img={banner_texture}
                 imgWidth="w-[100%]"
-                imgHeight="h-[80vh] sm:h-[92vh]"
+                imgHeight="h-[36rem] lg:h-[40rem] 2xl:h-[56rem]"
                 imgPosition="object-[55%_15%]"
                 windowBorder="border-[0px]"
                 alt=" "
@@ -69,14 +69,14 @@ function Home() {
       </div>
 
       {/* Try/CATCH location and date box */}
-      <div className={`absolute z-100 right-[-1rem] bottom-[4rem]`}>
+      <div className={`absolute z-100 right-[-1rem] sm:right-[1rem] lg:right-[2rem] bottom-[10rem] sm:bottom-[10%] drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
         <HeroInfoBox />
       </div>
       {/* END Try/CATCH location and date box */}
 
       {/* Scroll to learn more */}
-      <motion.div
-        className={`absolute z-1000 bottom-[1rem] left-[4rem] sm:hidden`}
+      {/* <motion.div
+        className={`absolute z-1000 bottom-[1%] sm:bottom-[6%] left-[4rem] sm:left-[8rem] lg:left-[15rem]`}
         animate={{
           y: [0, -10, 0], // bob up and down
         }}
@@ -87,9 +87,10 @@ function Home() {
           repeat: Infinity,
           repeatDelay: 2.5, 
         }}>
-        <img src={scroll_more} alt=" "/>
-      </motion.div>
+        <img src={scroll_more} alt=" " className={`lg:w-[20rem]`} />
+      </motion.div> */}
       {/* END Scroll to learn more */}
+
       {/* END Hero section */}
 
       {/* What is Try/CATCH? */}
