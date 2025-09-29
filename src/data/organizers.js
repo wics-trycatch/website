@@ -51,7 +51,7 @@ export const organizers = [
     name: "Grace",
     role: "Logistics Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Grace is a 4th year Computing Science student at SFU. In her free time, she enjoys drawing, scrapbooking, and thrifting! She is very excited to be part of this year Try/CATCH committee, and cannot wait to meet you all :D"
   },
   {
     img: meyer,
@@ -150,7 +150,7 @@ export const organizers = [
     name: "Maria F.",
     role: "Merch & Swag Coordinator",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi everyone! My name is Maria and I am in my third year of cs here at SFU. I'm part of the merch and swag team, and am looking forward to meeting you all and welcoming you to WiCS!"
   },
   {
     img: sayna,
@@ -168,6 +168,6 @@ export const organizers = [
     name: "Bianca",
     role: "Website Developer",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Hi, I'm Bianca! I'm a 4th-year student, majoring in Computer Science and minoring in Interactive Arts and Technology. I was a Visual Designer and Workshop Host for Try/CATCH last year, and I loved helping students get interested in tech and just being part of such a fun, welcoming event! This year, I designed the website you're looking at now :D Looking forward to another great Try/CATCH! <3"
   },
 ];
