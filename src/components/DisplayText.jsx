@@ -3,7 +3,7 @@ import styles from "./HeroInfoBox.module.css";
 function DisplayText({ text, x="5", y="100" }) {
   return (
     <svg
-      viewBox="0 0 600 150"
+      viewBox="0 0 1000 150"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-labelledby="heading"
