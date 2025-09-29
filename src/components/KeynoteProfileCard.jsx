@@ -61,7 +61,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
                     xmlns="http://www.w3.org/2000/svg"
                     role="img"
                     aria-labelledby="heading"
-                    className="w-full h-auto ml-[-0.15rem]"
+                    className="max-h-[7rem] mt-[1.5rem] ml-[-0.15rem]"
                 >
                     <title id="heading">{name}</title>
                     <text
