@@ -39,7 +39,7 @@ function HeroInfoBox() {
               aria-labelledby="heading"
               className="h-[2.7rem] sm:h-[3.5rem] lg:h-[5rem] mt-[-1.25rem] mb-[0.5rem] lg:mb-[-0.5rem]"
             >
-              <title id="heading">event date</title>
+              <title id="heading">pct 25, 2025</title>
               <text
                 x="8"
                 y="100"
