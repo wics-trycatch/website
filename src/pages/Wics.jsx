@@ -25,10 +25,18 @@ function Wics() {
           Try/CATCH 2025 Committee
         </h2>
 
-        <div className="grid gap-[2rem] mt-[1rem]">
-          {organizers.map((org, i) => (
-            <ProfileCard key={i} {...org} />
-          ))}
+        <div className="grid gap-[2rem]">
+          <div className="grid gap-[2rem] md:grid-cols-2 mt-[1rem]">
+            {organizers.slice(0, 2).map((org, i) => (
+              <ProfileCard key={i} {...org} />
+            ))}
+          </div>
+          
+          <div className="grid gap-[2rem] md:grid-cols-2 lg:grid-cols-3 mt-[1rem]">
+            {organizers.slice(2).map((org, i) => (
+              <ProfileCard key={i + 2} {...org} />
+            ))}
+          </div>
         </div>
 
       </section>
