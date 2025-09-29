@@ -1,4 +1,5 @@
 import ProfileCard from "../components/ProfileCard";
+import KeynoteProfileCard from "../components/KeynoteProfileCard";
 import { organizers } from "../data/organizers";
 import { keynote } from "../data/keynote";
 import { panelists } from "../data/panelists";
@@ -26,7 +27,14 @@ function Speakers() {
 
         <div className="grid gap-[2rem] mt-[1rem]">
           {keynote.map((speaker, i) => (
-            <ProfileCard key={i} {...speaker} />
+            <div key={i}>
+              <div className="hidden lg:block">
+                <KeynoteProfileCard {...speaker} />
+              </div>
+              <div className="block lg:hidden">
+                <ProfileCard {...speaker} />
+              </div>
+            </div>
           ))}
         </div>
       </section>
