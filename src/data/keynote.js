@@ -5,9 +5,9 @@ export const keynote = [
     img: keynote_speaker,
     imgProperties: "object-center",
     alt: "Keynote speaker headshot",
-    name: "Keynote Speaker",
-    role: "SFU Instructor in Computing Science",
+    name: "Rimika",
+    role: "Keynote Speaker",
     blurb:
-      "Lorem ipsum dolor sit amet consectetur. Fames ultricies ornare augue arcu fringilla rhoncus. In donec ut magna sed massa risus eget nulla. Massa neque nibh arcu in. Praesent eu aliquet non pharetra lectus lectus. Fermentum eget aliquam habitasse enim ornare condimentum. Bibendum cursus sed eros malesuada. In fermentum in et sit odio varius ornare nunc. Urna cras tempus faucibus malesuada et facilisis fringilla. Vitae congue eget sit feugiat in vitae imperdiet maecenas euismod. Amet."
+      "Rimika Chaudhury is a postdoctoral fellow working with Dr. Sheelagh Carpendale at Simon Fraser University (SFU). She received her PhD in Human-Computer Interaction from SFU. Prior to this, she has spent 3 years in the industry, teaching programming to people from diverse backgrounds. At SFU, under the supervision of Dr. Parmit Chilana, Rimika’s doctoral research focused on designing technologies that empower people in managing their learning experiences. Her work culminated into a first-of-its kind prototype - a Fitbit-inspired self-monitoring tool for supporting self-directed, online learning. Looking forward, she is preparing to move to McGill University, Montreal, where she will work at the intersection of technology and health, to develop technological tools to make health knowledge more accessible for people in need. Rimika has been an active member of the Women in Computing Science (WiCS) community since 2017, serving as a volunteer, workshop organizer and speaker."
   },
 ];

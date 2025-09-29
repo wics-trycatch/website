@@ -10,7 +10,7 @@ function Speakers() {
         <h1
           className={`displayText outsideStroke font-display text-[2rem] text-powder-blue`}
         >
-          Speakers
+          speakers
         </h1>
         <p className={`mt-[1rem]`}>
           Hear from inspiring women in tech as they share their journeys, challenges, and advice. Our keynote speaker and panelists bring real-world insights from industry and academia.

@@ -112,7 +112,7 @@ export const organizers = [
     imgProperties: "object-center",
     alt: "Sydney headshot",
     name: "Sydney",
-    role: "Logistics Coordinator",
+    role: "Recruitment Coordinator",
     blurb:
       "I am a second-year Computing Science major at SFU and Director of Communications for WiCS! When I'm not lost in assignments, you can find me making jewelry, playing guitar, or listening to music. I'm super excited for Try/CATCH 2025 and can't wait to meet all of you :D"
   },
@@ -121,7 +121,7 @@ export const organizers = [
     imgProperties: "object-center",
     alt: "Emily headshot",
     name: "Emily",
-    role: "Logistics Coordinator",
+    role: "Recruitment Coordinator",
     blurb:
       "Hi! I'm Emily, a third-year Computing Science major with an Interactive Arts & Technology minor. In my free time, I love reading, painting, and binge-watching 2000s shows and movies. I'm so excited to be on the recruitment team for Try/CATCH this year, and I'm looking forward to meeting everyone!"
   },
