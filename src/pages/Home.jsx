@@ -170,7 +170,6 @@ function Home() {
         {/* END Bunny GIF */}
       </section>
       {/* END Highlights */}
-
     </div>
   );
 }
