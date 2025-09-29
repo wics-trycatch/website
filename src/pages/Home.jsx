@@ -23,12 +23,12 @@ function Home() {
       {/* Hero section */}
       <div className={`relative`}>
         <div
-          className={`absolute z-100 top-[6rem] md:top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}
+          className={`absolute z-100 top-[3.4rem] md:top-[13rem] pl-[2.25rem] pr-[2.5rem] md:pl-[6rem] lg:pl-[8rem] 2xl:pl-[10rem]`}
         >
           <img
             src={logo}
             alt="Try/CATCH Logo"
-            className={`w-[20rem] md:w-[30rem] 2xl:w-[50rem]`}
+            className={`w-[24rem] md:w-[30rem] 2xl:w-[50rem]`}
           />
           <div className={`mt-[1rem] ml-[2rem] mr-[1rem]`}>
             <p className={`${styles.heroDesc} max-w-[18rem] 2xl:max-w-[40rem]`}>
@@ -69,7 +69,7 @@ function Home() {
       </div>
 
       {/* Try/CATCH location and date box */}
-      <div className={`absolute z-100 right-0 translate-x-[1rem] bottom-[4rem] sm:hidden`}>
+      <div className={`absolute z-100 right-[-1rem] bottom-[4rem]`}>
         <HeroInfoBox />
       </div>
       {/* END Try/CATCH location and date box */}
