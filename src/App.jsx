@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
 
 import Home from './pages/Home.jsx';
 import Wics from './pages/Wics.jsx';
@@ -16,6 +17,7 @@ function App() {
           <Route path="/sfu-wics" element={<Wics />} />
           <Route path="/speakers" element={<Speakers />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   )
