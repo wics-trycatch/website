@@ -8,7 +8,7 @@ import kaomoji_box from "../assets/images/shared/kaomoji_message.svg";
 function HeroInfoBox() {
   return (
     <div
-      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] h-[15rem] bg-sky-blue border-[8px] border-t-[40px] border-dark-blue`}
+      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] 2xl:w-[40rem] h-[15rem] 2xl:h-[20rem] bg-sky-blue border-[8px] border-t-[40px] border-dark-blue`}
     >
       <h2 className={`absolute top-0 font-body-bold text-white m-[0.5rem]`}>
         EVENT DATE ── .✦
@@ -25,9 +25,9 @@ function HeroInfoBox() {
         lineColor="rgba(226,244,255,0.3)"
       >
         <p
-          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[13rem] lg:max-w-[18rem]`}
+          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[13rem] lg:max-w-[18rem] 2xl:max-w-[20rem]`}
         >
-          <span className={`text-[1rem]/[1.25rem] lg:text-[1.25rem]/[1.25rem]`}>Try/CATCH is happening at{" "}
+          <span className={`text-[1rem]/[1.25rem] lg:text-[1.25rem]/[1.25rem] 2xl:text-[1.5rem]/[1.5rem]`}>Try/CATCH is happening at{" "}
           <span className={`font-body-bold`}>SFU Burnaby Campus</span> on...{" "}</span>
           <em
             className={`${styles.displayText} ${styles.outsideStroke} block font-display text-[1.5rem]/[1.5rem] text-powder-blue mt-[0.75rem]`}

@@ -49,7 +49,7 @@ function Home() {
           </div>
         </div>
         <div
-          className={`scale-100 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}
+          className={`relative scale-100 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}
         >
           <PhotoWindow
             img={banner_base}
@@ -69,16 +69,16 @@ function Home() {
               alt=" "
             />
           </div>
+
+          {/* Try/CATCH location and date box */}
+          <div
+            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem] drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}
+          >
+            <HeroInfoBox />
+          </div>
+          {/* END Try/CATCH location and date box */}
         </div>
       </div>
-
-      {/* Try/CATCH location and date box */}
-      <div
-        className={`absolute z-100 right-[-1rem] sm:right-[1rem] lg:right-[2rem] bottom-[10rem] sm:bottom-[10%] drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}
-      >
-        <HeroInfoBox />
-      </div>
-      {/* END Try/CATCH location and date box */}
 
       {/* Scroll to learn more */}
       {/* <motion.div
