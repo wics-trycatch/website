@@ -34,7 +34,7 @@ function Speakers() {
           Panelists
         </h2>
 
-        <div className="grid gap-[2rem] mt-[1rem]">
+        <div className="grid gap-[2rem] md:grid-cols-2 mt-[1rem]">
           {panelists.map((speaker, i) => (
             <ProfileCard key={i} {...speaker} />
           ))}
