@@ -8,11 +8,11 @@ function Wics() {
   return (
     <div>
       <div>
-        <h1 className="displayText outsideStroke text-[2rem] text-powder-blue">
-          <DisplayText text="sfu wics" fontSize="72" />
+        <h1 className="text-[2rem] text-powder-blue">
+          <DisplayText text="sfu wics"/>
         </h1>
 
-        <p className={`mt-[1rem]`}>
+        <p className={`mt-[-0.5rem]`}>
           Try/CATCH is entirely run by enthusiastic volunteers from Simon Fraser
           University Computing Science students, faculty and staff. As such,
           Try/CATCH is dependent on the generosity of our sponsors in order to
