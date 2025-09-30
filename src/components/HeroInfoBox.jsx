@@ -8,26 +8,26 @@ import kaomoji_box from "../assets/images/shared/kaomoji_message.svg";
 function HeroInfoBox() {
   return (
     <div
-      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] 2xl:w-[40rem] h-[15rem] 2xl:h-[20rem] bg-sky-blue border-[8px] border-t-[40px] border-dark-blue`}
+      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] 2xl:w-[40rem] h-[15rem] 2xl:h-[20rem] bg-sky-blue border-[8px] border-t-[40px] 2xl:border-t-[60px] border-dark-blue`}
     >
-      <h2 className={`absolute top-0 font-body-bold text-white m-[0.5rem]`}>
+      <h2 className={`absolute top-0 font-body-bold text-white 2xl:text-[1.5rem] m-[0.5rem] 2xl:m-[1rem] 2xl:ml-[1.25rem]`}>
         EVENT DATE ── .✦
       </h2>
       <img
         src={window_options}
         alt=" "
-        className={`absolute top-[0.85rem] right-[1.5rem] sm:right-[0.75rem]`}
+        className={`absolute top-[0.85rem] 2xl:top-[1.5rem] right-[1.5rem] sm:right-[0.75rem] 2xl:right-[1.5rem] 2xl:h-[1.25rem]`}
       />
       <GridLines
-        className="absolute inset-0 p-[1rem] m-[8px] mt-[40px]"
+        className="absolute inset-0 p-[1rem] m-[8px] mt-[40px] 2xl:mt-[60px]"
         cellWidth={40}
         strokeWidth={4}
         lineColor="rgba(226,244,255,0.3)"
       >
         <p
-          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[13rem] lg:max-w-[18rem] 2xl:max-w-[20rem]`}
+          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[13rem] lg:max-w-[18rem] 2xl:max-w-[24rem] 2xl:ml-[0.75rem]`}
         >
-          <span className={`text-[1rem]/[1.25rem] lg:text-[1.25rem]/[1.25rem] 2xl:text-[1.5rem]/[1.5rem]`}>Try/CATCH is happening at{" "}
+          <span className={`text-[1rem]/[1.25rem] lg:text-[1.25rem]/[1.25rem] 2xl:text-[1.75rem]/[1.75rem]`}>Try/CATCH is happening at{" "}
           <span className={`font-body-bold`}>SFU Burnaby Campus</span> on...{" "}</span>
           <em
             className={`${styles.displayText} ${styles.outsideStroke} block font-display text-[1.5rem]/[1.5rem] text-powder-blue mt-[0.75rem]`}
@@ -37,7 +37,7 @@ function HeroInfoBox() {
               xmlns="http://www.w3.org/2000/svg"
               role="img"
               aria-labelledby="heading"
-              className="h-[2.7rem] sm:h-[3.5rem] lg:h-[5rem] mt-[-1.25rem] mb-[0.5rem] lg:mb-[-0.5rem]"
+              className="h-[2.7rem] sm:h-[3.5rem] lg:h-[5rem] 2xl:h-[6rem] mt-[-1.25rem] mb-[0.5rem] lg:mb-[-0.5rem] 2xl:mb-0"
             >
               <title id="heading">pct 25, 2025</title>
               <text
@@ -62,7 +62,7 @@ function HeroInfoBox() {
       <img
         src={kaomoji_box}
         alt=" "
-        className={`absolute top-[4.5rem] sm:top-[3.25rem] lg:top-[4rem] right-[1.5rem] lg:right-[2rem] lg:w-[10rem]`}
+        className={`absolute top-[4.5rem] sm:top-[3.25rem] lg:top-[4rem] 2xl:top-[6.5rem] right-[1.5rem] lg:right-[2rem] 2xl:right-[2.5rem] lg:w-[10rem] 2xl:w-[12rem]`}
       />
     </div>
   );
