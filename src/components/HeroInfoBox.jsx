@@ -69,7 +69,7 @@ function HeroInfoBox() {
       <img
         src={star}
         alt=""
-        className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] left-[-1.5rem] sm:left-[-2rem]`}
+        className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
       />
     </div>
   );
