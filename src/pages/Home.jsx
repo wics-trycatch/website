@@ -77,9 +77,16 @@ function Home() {
 
           {/* Try/CATCH location and date box */}
           <div
-            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem] drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}
+            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem]`}
           >
-            <HeroInfoBox />
+            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
+              <HeroInfoBox />
+            </div>
+            <img
+              src={star_light_blue}
+              alt=""
+              className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
+            />
           </div>
           {/* END Try/CATCH location and date box */}
 
