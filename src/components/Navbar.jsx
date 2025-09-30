@@ -58,7 +58,7 @@ function Navbar() {
           </div>
           <ul role="menu" className={`${styles.dropdownContent}`}>
             <li role="menuitem" tabIndex="0">
-              <Link to="/">
+              <Link to="/schedule">
                 SCHEDULE
               </Link>
             </li>
@@ -68,7 +68,7 @@ function Navbar() {
               </Link>
             </li>
             <li role="menuitem" tabIndex="0">
-              <Link to="/">
+              <Link to="/workshops">
                 WORKSHOPS
               </Link>
             </li>
