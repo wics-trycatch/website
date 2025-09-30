@@ -78,25 +78,26 @@ function Home() {
             <HeroInfoBox />
           </div>
           {/* END Try/CATCH location and date box */}
+
+          {/* Scroll to learn more */}
+          <motion.div
+            className={`absolute z-1000 bottom-[-2rem] left-[2rem] md:left-[6rem] xl:left-[12rem] 2xl:left-[16rem]`}
+            animate={{
+              y: [0, -10, 0], // bob up and down
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut",
+              delay: 2.5, 
+              repeat: Infinity,
+              repeatDelay: 2.5, 
+            }}>
+            <img src={scroll_more} alt=" " className={`lg:w-[20rem] 2xl:w-[24rem]`} />
+          </motion.div>
+          {/* END Scroll to learn more */}
+
         </div>
       </div>
-
-      {/* Scroll to learn more */}
-      {/* <motion.div
-        className={`absolute z-1000 bottom-[1%] sm:bottom-[6%] left-[4rem] sm:left-[8rem] lg:left-[15rem]`}
-        animate={{
-          y: [0, -10, 0], // bob up and down
-        }}
-        transition={{
-          duration: 1,
-          ease: "easeInOut",
-          delay: 2.5, 
-          repeat: Infinity,
-          repeatDelay: 2.5, 
-        }}>
-        <img src={scroll_more} alt=" " className={`lg:w-[20rem]`} />
-      </motion.div> */}
-      {/* END Scroll to learn more */}
 
       {/* END Hero section */}
 
