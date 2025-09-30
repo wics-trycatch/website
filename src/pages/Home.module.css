@@ -33,12 +33,6 @@
    paint-order: stroke fill;
 }
 
-.highlights p{
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.25rem;
-}
-
 .highlights h2 ~ p{
     margin-bottom: 1.25rem;
 }
@@ -59,6 +53,11 @@
     .heroDesc{
         font-size: 1.5rem;
         line-height:1.75rem;
+    }
+
+    .aboutDesc{
+        font-size: 1.25rem;
+        line-height: 1.5rem;
     }
 }
 
