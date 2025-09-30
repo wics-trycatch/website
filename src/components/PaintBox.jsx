@@ -25,7 +25,7 @@ function PaintBox() {
 
     
       <div className={`relative pl-[3.5rem]`}>
-        <div className={`${styles.about} mt-[3rem] pb-[2rem] min-h-[30.3rem] overflow-x-hidden bg-white border-[3px] border-black`}>
+        <div className={`${styles.about} mt-[3rem] pb-[2rem] lg:p-[0.75rem] 2xl:pt-[2.25rem] 2xl:px-[2rem] lg:pb-[2.25rem] [4rem] min-h-[30.3rem] overflow-x-hidden bg-white border-[3px] border-black`}>
           <h2 className={`mt-[1.5rem] ml-[0.5rem] sm:ml-[1.5rem] md:ml-[0.75rem] max-w-[15rem]`}>
             <svg
               viewBox="0 0 500 150"
@@ -55,7 +55,7 @@ function PaintBox() {
               xmlns="http://www.w3.org/2000/svg"
               role="img"
               aria-labelledby="heading"
-              className="h-[14.5vw] md:h-[7.5vw] 2xl:h-[8rem] mb-[0.5rem] lg:mb-[-0.5rem] md:mb-[0.5rem]"
+              className="h-[14.5vw] md:h-[7.5vw] 2xl:h-[8rem] mb-[0.5rem] md:mb-[0.5rem]"
             >
               <title id="heading">try/catch</title>
               <text
@@ -77,10 +77,10 @@ function PaintBox() {
           <img
             src={scribble}
             alt=" "
-            className={`pl-[3.5rem] sm:pl-[6rem] md:pl-[3.5rem] mt-[-1rem] h-[1.5rem] sm:h-[2rem] md:h-[1.5rem]`}
+            className={`pl-[16vw] md:pl-[10vw] 2xl:pl-[11rem] mt-[-5.5vw] md:mt-[-3vw] 2xl:mt-[-3.5rem] 2xl:mb-[3rem] h-[6vw] md:h-[3vw] 2xl:h-[3rem]`}
           />
           <p
-            className={`${styles.aboutDesc} mt-[1rem] pl-[1rem] sm:pl-[2rem] md:pl-[1rem] pr-[0.75rem] sm:pr-[2rem] md:pr-[0.75rem] h-[77%]`}
+            className={`${styles.aboutDesc} mt-[1rem] pl-[1rem] sm:pl-[2rem] md:pl-[1rem] pr-[0.75rem] sm:pr-[2rem] md:pr-[0.75rem] 2xl:pb-[8rem] h-[77%] 2xl:max-w-[48rem]`}
           >
             <span className={`block mb-[1rem]`}>
               Try/CATCH (Computing and Technology Conference for Her) is a one-day
