@@ -9,7 +9,7 @@ import star from "../assets/images/shared/star_light_blue.svg";
 function HeroInfoBox() {
   return (
     <div
-      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] 2xl:w-[40rem] h-[15rem] 2xl:h-[20rem] bg-sky-blue border-[8px] border-t-[40px] 2xl:border-t-[60px] border-dark-blue`}
+      className={`w-[17rem] sm:w-[22rem] lg:w-[30rem] 2xl:w-[40rem] h-[15rem] 2xl:h-[20rem] bg-sky-blue border-[8px] border-t-[40px] 2xl:border-t-[60px] border-dark-blue `}
     >
       <h2 className={`absolute top-0 font-body-bold text-white 2xl:text-[1.5rem] m-[0.5rem] 2xl:m-[1rem] 2xl:ml-[1.25rem]`}>
         EVENT DATE ── .✦
@@ -64,12 +64,6 @@ function HeroInfoBox() {
         src={kaomoji_box}
         alt=" "
         className={`absolute top-[4.5rem] sm:top-[3.25rem] lg:top-[4rem] 2xl:top-[6.5rem] right-[1.5rem] lg:right-[2rem] 2xl:right-[2.5rem] lg:w-[10rem] 2xl:w-[12rem]`}
-      />
-
-      <img
-        src={star}
-        alt=""
-        className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
       />
     </div>
   );
