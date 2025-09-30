@@ -106,28 +106,28 @@ function Home() {
           <img
             src={star_light_blue}
             alt=" "
-            className={`absolute z-1000 w-[3rem] top-[1rem] left-[-1.5rem]`}
+            className={`absolute z-1000 w-[3rem] md:w-[4rem] 2xl:w-[5.5rem] top-[1rem] 2xl:top-[3rem] left-[-1.5rem] md:left-[-2.5rem] 2xl:left-[-3.5rem]`}
           />
 
           {/* Light blue sparkle top right */}
           <img
             src={sparkles_light_blue}
             alt=" "
-            className={`absolute z-1000 w-[3.4rem] top-[7rem] right-[-1.25rem]`}
+            className={`absolute z-1000 w-[3.5rem] md:w-[4.75rem] 2xl:w-[7rem] top-[7rem] md:top-[10rem] xl:top-[16rem] right-[-1.25rem] md:right-[1.5rem] xl:right-[5rem]`}
           />
 
           {/* Blue star bottom right */}
           <img
             src={star_blue}
             alt=" "
-            className={`absolute z-1000 w-[2.5rem] bottom-[15rem] right-[-1.5rem]`}
+            className={`absolute z-1000 w-[2.5rem] md:w-[3.25rem] 2xl:w-[4.5rem] bottom-[15rem] 2xl:bottom-[26rem] right-[-1.5rem] md:right-[-2rem] 2xl:right-[-2.5rem]`}
           />
 
           {/* Blue sparkle bottom left */}
           <img
             src={sparkles_blue}
             alt=" "
-            className={`absolute z-1000 w-[4.5rem] bottom-[1rem] left-[-2rem]`}
+            className={`absolute z-1000 w-[4.5rem] md:w-[5.5rem] 2xl:w-[8rem] bottom-[1rem] 2xl:bottom-[6rem] left-[-2rem] md:left-[-2.25rem] 2xl:left-[-3rem]`}
           />
 
           {/* END Stars */}
