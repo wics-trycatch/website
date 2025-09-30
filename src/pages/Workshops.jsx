@@ -94,11 +94,8 @@ function Workshops() {
       </section>
 
       <div className="mt-[3rem] px-[1.5rem] py-[1.5rem] bg-powder-blue border-[4px] border-dark-blue rounded-md">
-        <p className="font-body-bold text-[1.125rem] xl:text-[1.25rem] text-dark-blue mb-[0.5rem]">
-          Questions about workshops?
-        </p>
         <p className="font-body text-[1rem]/[1.5rem] xl:text-[1.125rem]/[1.75rem] text-dark-blue">
-          Each workshop is designed for all skill levels. You'll choose your workshops when you arrive at the event. 
+          During the event, you'll participate in two workshops. When you register for the event, you'll let us know your top workshop choices and we'll do our best to accomodate everyone for their top choices!
           For more information, email us at{" "}
           <a 
             href="mailto:wics@sfu.ca" 

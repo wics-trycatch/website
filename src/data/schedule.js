@@ -14,7 +14,7 @@ export const scheduleData = [
     {
       time: "10:05 AM - 12:00 PM",
       activity: "1st Workshop",
-      location: "CSIL 9840, CSIL 9804, ASB 9896, ASB 9703, TASC 9204",
+      location: "CSIL 9840, CSIL 9804, CSIL 9700, ASB 9703",
       description: "On the back of your student attendee name tag, you'll see which workshop you're assigned to for your 1st workshop! Follow your line leader to get settled into the correct room."
     },
     {
@@ -26,7 +26,7 @@ export const scheduleData = [
     {
       time: "1:30 PM - 3:30 PM",
       activity: "2nd Workshop",
-      location: "CSIL 9840, CSIL 9804, ASB 9896, ASB 9703, TASC 9204",
+      location: "CSIL 9840, CSIL 9804, CSIL 9700, ASB 9703",
       description: "On the back of your student attendee name tag, you'll see which workshop you're assigned to for your 2nd workshop! Follow your line leader to get settled into the correct room."
     },
     {
@@ -37,8 +37,8 @@ export const scheduleData = [
     },
     {
       time: "4:00 PM - 4:45 PM",
-      activity: "Panel Session & Parent Info",
-      location: "AQ3181 (Panel), AQ3182 (Parent Info)",
+      activity: "Panel Session & Parent Info Session",
+      location: "AQ3181 (Panel), AQ3182 (Parent)",
       description: "Listen to a diverse group of women in computing and engineering share their experiences, challenges, and triumphs. Ask questions and gain insights into different career paths in technology. Parents can attend an information session in AQ3182."
     },
     {
