@@ -22,7 +22,7 @@ function Home() {
     <div className={`mx-auto`}>
       <Navbar />
       {/* Hero section */}
-      <div className={`relative`}>
+      <div className={`relative z-1000`}>
         <div
           className={`absolute z-100 top-[3.4rem] lg:top-[4rem] pl-[2.25rem] pr-[2.5rem] sm:pl-[1rem] md:pl-[3.5rem] 2xl:pl-[10rem]`}
         >
@@ -81,7 +81,7 @@ function Home() {
 
           {/* Scroll to learn more */}
           <motion.div
-            className={`absolute z-1000 bottom-[-2rem] left-[2rem] md:left-[6rem] xl:left-[12rem] 2xl:left-[16rem]`}
+            className={`absolute z-1000 bottom-[-5rem] md:bottom-[-2rem] left-[2rem] md:left-[6rem] xl:left-[12rem] 2xl:left-[16rem]`}
             animate={{
               y: [0, -10, 0], // bob up and down
             }}
@@ -92,7 +92,7 @@ function Home() {
               repeat: Infinity,
               repeatDelay: 2.5, 
             }}>
-            <img src={scroll_more} alt=" " className={`lg:w-[20rem] 2xl:w-[24rem]`} />
+            <img src={scroll_more} alt=" " className={`w-[16rem] lg:w-[20rem] 2xl:w-[24rem]`} />
           </motion.div>
           {/* END Scroll to learn more */}
 
