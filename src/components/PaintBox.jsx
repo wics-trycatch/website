@@ -18,7 +18,7 @@ function PaintBox() {
     >
       <div className={`w-full border-b-[3rem] border-dark-blue`}>
           <img src={window_name} alt=" " className={`absolute h-[1.5rem] sm:h-[2rem] top-[1.75rem] sm:top-[1.5rem] left-[2rem] sm:left-[1.5rem]`} />
-          <img src={window_options} alt=" " className={`absolute h-[1.5rem] :h-[2rem] top-[1.75rem] sm:top-[1.5rem] right-[2rem] sm:right-[1.5rem]`} />
+          <img src={window_options} alt=" " className={`absolute h-[1.5rem] sm:h-[2rem] top-[1.75rem] sm:top-[1.5rem] right-[2rem] sm:right-[1.5rem]`} />
           <img src={paint_nav} alt=" " className={`absolute h-[1.75rem] sm:h-[2.25rem] md:h-[1.75rem] top-[4.25rem] left-[1.25rem] sm:left-[1.75rem]`} />
           <img src={paint_tools_single} alt=" " className={`absolute w-[2.75rem] top-[7rem] left-[1.25rem]`} />
       </div>
