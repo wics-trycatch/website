@@ -16,13 +16,17 @@ import scroll_more from "../assets/images/home/scroll_more.svg";
 import paint_window from "../assets/images/home/paint_app_window.svg";
 import bunny from "../assets/images/home/bunny.gif";
 import scribble from "../assets/images/home/pixel_scribble.svg";
+import star_light_blue from "../assets/images/shared/star_light_blue.svg";
+import star_blue from "../assets/images/shared/star_blue.svg";
+import sparkles_light_blue from "../assets/images/shared/sparkles_light_blue.svg";
+import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
 
 function Home() {
   return (
     <div className={`mx-auto`}>
       <Navbar />
       {/* Hero section */}
-      <div className={`relative`}>
+      <div className={`relative z-1000`}>
         <div
           className={`absolute z-100 top-[3.4rem] lg:top-[4rem] pl-[2.25rem] pr-[2.5rem] sm:pl-[1rem] md:pl-[3.5rem] 2xl:pl-[10rem]`}
         >
@@ -73,44 +77,86 @@ function Home() {
 
           {/* Try/CATCH location and date box */}
           <div
-            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem] drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}
+            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem]`}
           >
-            <HeroInfoBox />
+            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
+              <HeroInfoBox />
+            </div>
+            <img
+              src={star_light_blue}
+              alt=""
+              className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
+            />
           </div>
           {/* END Try/CATCH location and date box */}
+
+          {/* Scroll to learn more */}
+          <motion.div
+            className={`absolute z-1000 bottom-[-5rem] md:bottom-[-2rem] left-[2rem] md:left-[6rem] xl:left-[12rem] 2xl:left-[16rem]`}
+            animate={{
+              y: [0, -10, 0], // bob up and down
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut",
+              delay: 2.5, 
+              repeat: Infinity,
+              repeatDelay: 2.5, 
+            }}>
+            <img src={scroll_more} alt=" " className={`w-[16rem] lg:w-[20rem] 2xl:w-[24rem]`} />
+          </motion.div>
+          {/* END Scroll to learn more */}
+
+          {/* Stars */}
+            
+          {/* Light blue star top left */}
+          <img
+            src={star_light_blue}
+            alt=" "
+            className={`absolute z-1000 w-[3rem] md:w-[4rem] 2xl:w-[5.5rem] top-[1rem] 2xl:top-[3rem] left-[-1.5rem] md:left-[-2.5rem] 2xl:left-[-3.5rem]`}
+          />
+
+          {/* Light blue sparkle top right */}
+          <img
+            src={sparkles_light_blue}
+            alt=" "
+            className={`absolute z-1000 w-[3.5rem] md:w-[4.75rem] 2xl:w-[7rem] top-[7rem] md:top-[10rem] xl:top-[16rem] right-[-1.25rem] md:right-[1.5rem] xl:right-[5rem]`}
+          />
+
+          {/* Blue star bottom right */}
+          <img
+            src={star_blue}
+            alt=" "
+            className={`absolute z-1000 w-[2.5rem] md:w-[3.25rem] 2xl:w-[4.5rem] bottom-[15rem] 2xl:bottom-[26rem] right-[-1.5rem] md:right-[-2rem] 2xl:right-[-2.5rem]`}
+          />
+
+          {/* Blue sparkle bottom left */}
+          <img
+            src={sparkles_blue}
+            alt=" "
+            className={`absolute z-1000 w-[4.5rem] md:w-[5.5rem] 2xl:w-[8rem] bottom-[1rem] 2xl:bottom-[6rem] left-[-2rem] md:left-[-2.25rem] 2xl:left-[-3rem]`}
+          />
+
+          {/* END Stars */}
+
         </div>
       </div>
 
-      {/* Scroll to learn more */}
-      {/* <motion.div
-        className={`absolute z-1000 bottom-[1%] sm:bottom-[6%] left-[4rem] sm:left-[8rem] lg:left-[15rem]`}
-        animate={{
-          y: [0, -10, 0], // bob up and down
-        }}
-        transition={{
-          duration: 1,
-          ease: "easeInOut",
-          delay: 2.5, 
-          repeat: Infinity,
-          repeatDelay: 2.5, 
-        }}>
-        <img src={scroll_more} alt=" " className={`lg:w-[20rem]`} />
-      </motion.div> */}
-      {/* END Scroll to learn more */}
-
       {/* END Hero section */}
 
-      <div className={`relative grid md:grid-cols-2`}>
+      <div className={`relative mt-[2rem] grid md:grid-cols-2`}>
     
         {/* What is Try/CATCH? */}
         <PaintBox />
         {/* END What is Try/CATCH? */}
 
         {/* Highlights */}
-        <section className={`relative mt-[1.5rem] overflow-hidden`}>
-          <GridBox width="w-full" height="h-[40rem]" />
+        <section className={`relative md:static mt-[1.5rem]`}>
+          <div className={`md:absolute md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
+            <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[40rem] md:h-[calc(100%-4rem)]" />
+          </div>
           <div
-            className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}
+            className={`${styles.highlights} absolute top-[3rem] md:top-[8.5rem] px-[1.5rem] h-full`}
           >
             {/* Discover Tech */}
             <div>
@@ -142,25 +188,26 @@ function Home() {
               </p>
             </div>
             {/* END Be Inspired */}
-          </div>
 
-          {/* Bunny GIF */}
-          <div>
-            <img
-              src={bunny}
-              alt=" "
-              className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`}
-            />
-            {/* Blue saturation overlay */}
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundColor: "rgba(164, 235, 255, 1)",
-                mixBlendMode: "saturation",
-              }}
-            />
+            {/* Bunny GIF */}
+            <div>
+              <img
+                src={bunny}
+                alt=" "
+                className={`absolute h-[17rem] bottom-[1.5rem] md:bottom-[6rem] right-[2.5rem]`}
+              />
+              {/* Blue saturation overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundColor: "rgba(164, 235, 255, 1)",
+                  mixBlendMode: "saturation",
+                }}
+              />
+            </div>
+            {/* END Bunny GIF */}
+
           </div>
-          {/* END Bunny GIF */}
         </section>
         {/* END Highlights */}
 
