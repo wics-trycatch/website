@@ -151,8 +151,8 @@ function Home() {
         {/* END What is Try/CATCH? */}
 
         {/* Highlights */}
-        <section className={`relative md:static mt-[1.5rem] overflow-hidden`}>
-          <div className={`md:absolute md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem]`}>
+        <section className={`relative md:static mt-[1.5rem]`}>
+          <div className={`md:absolute md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
             <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[40rem] md:h-[calc(100%-4rem)]" />
           </div>
           <div
