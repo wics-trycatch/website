@@ -51,7 +51,7 @@ function Navbar() {
         aria-label="Main menu"
         className={`${styles.navList} hidden xl:flex gap-[3rem] xl:gap-[2rem]`}
       >
-        <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-100`}>
+        <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-10000`}>
           <div className={`flex`}>
             <span className={`mr-[0.5rem]`}>EVENT DETAILS</span>
             <ChevronDown size={iconSize} />
