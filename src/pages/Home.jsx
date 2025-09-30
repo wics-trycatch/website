@@ -7,6 +7,7 @@ import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 import HeroInfoBox from "../components/HeroInfoBox";
 import GridBox from "../components/GridBox";
+import PaintBox from "../components/PaintBox";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -99,102 +100,72 @@ function Home() {
 
       {/* END Hero section */}
 
-      {/* What is Try/CATCH? */}
-      <section className={`relative mt-[3rem]`}>
-        <img src={paint_window} alt=" " className={`w-full`} />
-        <div className={`${styles.about} absolute top-[7rem] left-[4.5rem]`}>
-          <h2 className={`${styles.outsideStroke} ml-[1rem]`}>
-            <span className={`block`}>What is</span>
-            <span className={`block`}>Try/CATCH?</span>
-          </h2>
+      <div className={`relative grid md:grid-cols-2`}>
+    
+        {/* What is Try/CATCH? */}
+        <PaintBox />
+        {/* END What is Try/CATCH? */}
 
-          <img
-            src={scribble}
-            alt=" "
-            className={`pl-[5.5rem] mt-[0.25rem] h-[1.5rem]`}
-          />
-
-          <p className={`${styles.aboutDesc} pl-[1rem] pr-[2rem]`}>
-            <span className={`block mt-[1rem] mb-[1rem]`}>
-              Try/CATCH (Computing and Technology Conference for Her) is a
-              one-day event designed to spark curiosity and confidence in female
-              and non-binary high school students in grades 8-12.
-            </span>
-
-            <span className={`block mb-[1rem]`}>
-              The event offers interactive workshops in programming, robotics,
-              and design, as well as a keynote, a Women in Tech panel, and
-              opportunities to network with university students, alumnae, and
-              industry professionals.
-            </span>
-
-            <span className={`block`}>
-              With over 1,400 participants since 2009, Try/CATCH is more than
-              just a conference—it's a space to explore technology in a
-              supportive, inclusive, and empowering environment.
-            </span>
-          </p>
-        </div>
-      </section>
-      {/* END What is Try/CATCH? */}
-
-      {/* Highlights */}
-      <section className={`relative mt-[1.5rem] overflow-hidden`}>
-        <GridBox width="w-full" height="h-[40rem]" />
-        <div
-          className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}
-        >
-          {/* Discover Tech */}
-          <div>
-            <h2 className={`${styles.highlightsTitle}`}>DISCOVER TECH</h2>
-            <p>
-              Explore coding, robotics, and design through hands-on workshops
-              built for all ages and experience levels!
-            </p>
-          </div>
-          {/* END Discover Tech */}
-
-          {/* Meet Role Models */}
-          <div>
-            <h2 className={`${styles.highlightsTitle}`}>MEET ROLE MODELS</h2>
-            <p>
-              Connect with women in tech—from students to seasoned
-              professionals—and hear what it’s really like in computing and
-              engineering fields.
-            </p>
-          </div>
-          {/* END Meet Role Models */}
-
-          {/* Be Inspired */}
-          <div>
-            <h2 className={`${styles.highlightsTitle}`}>BE INSPIRED</h2>
-            <p>
-              Fuel your curiosity with keynotes, panels, and prizes. Walk away
-              with new skills, new friends, and a glimpse into your future.
-            </p>
-          </div>
-          {/* END Be Inspired */}
-        </div>
-
-        {/* Bunny GIF */}
-        <div>
-          <img
-            src={bunny}
-            alt=" "
-            className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`}
-          />
-          {/* Blue saturation overlay */}
+        {/* Highlights */}
+        <section className={`relative mt-[1.5rem] overflow-hidden`}>
+          <GridBox width="w-full" height="h-[40rem]" />
           <div
-            className="absolute inset-0"
-            style={{
-              backgroundColor: "rgba(164, 235, 255, 1)",
-              mixBlendMode: "saturation",
-            }}
-          />
-        </div>
-        {/* END Bunny GIF */}
-      </section>
-      {/* END Highlights */}
+            className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}
+          >
+            {/* Discover Tech */}
+            <div>
+              <h2 className={`${styles.highlightsTitle}`}>DISCOVER TECH</h2>
+              <p>
+                Explore coding, robotics, and design through hands-on workshops
+                built for all ages and experience levels!
+              </p>
+            </div>
+            {/* END Discover Tech */}
+
+            {/* Meet Role Models */}
+            <div>
+              <h2 className={`${styles.highlightsTitle}`}>MEET ROLE MODELS</h2>
+              <p>
+                Connect with women in tech—from students to seasoned
+                professionals—and hear what it’s really like in computing and
+                engineering fields.
+              </p>
+            </div>
+            {/* END Meet Role Models */}
+
+            {/* Be Inspired */}
+            <div>
+              <h2 className={`${styles.highlightsTitle}`}>BE INSPIRED</h2>
+              <p>
+                Fuel your curiosity with keynotes, panels, and prizes. Walk away
+                with new skills, new friends, and a glimpse into your future.
+              </p>
+            </div>
+            {/* END Be Inspired */}
+          </div>
+
+          {/* Bunny GIF */}
+          <div>
+            <img
+              src={bunny}
+              alt=" "
+              className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`}
+            />
+            {/* Blue saturation overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundColor: "rgba(164, 235, 255, 1)",
+                mixBlendMode: "saturation",
+              }}
+            />
+          </div>
+          {/* END Bunny GIF */}
+        </section>
+        {/* END Highlights */}
+
+      </div>
+
     </div>
   );
 }
