@@ -37,7 +37,7 @@ function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/" 
+                  to="/schedule" 
                   className="hover:text-powder-blue transition-colors duration-300"
                 >
                   Schedule
@@ -53,7 +53,7 @@ function Footer() {
               </li>
               <li>
                 <Link 
-                  to="/" 
+                  to="/workshops" 
                   className="hover:text-powder-blue transition-colors duration-300"
                 >
                   Workshops
