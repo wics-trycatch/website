@@ -16,6 +16,10 @@ import scroll_more from "../assets/images/home/scroll_more.svg";
 import paint_window from "../assets/images/home/paint_app_window.svg";
 import bunny from "../assets/images/home/bunny.gif";
 import scribble from "../assets/images/home/pixel_scribble.svg";
+import star_light_blue from "../assets/images/shared/star_light_blue.svg";
+import star_blue from "../assets/images/shared/star_blue.svg";
+import sparkles_light_blue from "../assets/images/shared/sparkles_light_blue.svg";
+import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
 
 function Home() {
   return (
@@ -95,6 +99,38 @@ function Home() {
             <img src={scroll_more} alt=" " className={`w-[16rem] lg:w-[20rem] 2xl:w-[24rem]`} />
           </motion.div>
           {/* END Scroll to learn more */}
+
+          {/* Stars */}
+            
+          {/* Light blue star top left */}
+          <img
+            src={star_light_blue}
+            alt=" "
+            className={`absolute z-1000 w-[3rem] top-[1rem] left-[-1.5rem]`}
+          />
+
+          {/* Light blue sparkle top right */}
+          <img
+            src={sparkles_light_blue}
+            alt=" "
+            className={`absolute z-1000 w-[3.4rem] top-[7rem] right-[-1.25rem]`}
+          />
+
+          {/* Blue star bottom right */}
+          <img
+            src={star_blue}
+            alt=" "
+            className={`absolute z-1000 w-[2.5rem] bottom-[15rem] right-[-1.5rem]`}
+          />
+
+          {/* Blue sparkle bottom left */}
+          <img
+            src={sparkles_blue}
+            alt=" "
+            className={`absolute z-1000 w-[4.5rem] bottom-[1rem] left-[-2rem]`}
+          />
+
+          {/* END Stars */}
 
         </div>
       </div>
