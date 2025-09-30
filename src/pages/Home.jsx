@@ -144,17 +144,19 @@ function Home() {
 
       {/* END Hero section */}
 
-      <div className={`relative grid md:grid-cols-2`}>
+      <div className={`relative mt-[2rem] grid md:grid-cols-2`}>
     
         {/* What is Try/CATCH? */}
         <PaintBox />
         {/* END What is Try/CATCH? */}
 
         {/* Highlights */}
-        <section className={`relative mt-[1.5rem] overflow-hidden`}>
-          <GridBox width="w-full" height="h-[40rem]" />
+        <section className={`relative md:static mt-[1.5rem] overflow-hidden`}>
+          <div className={`md:absolute md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem]`}>
+            <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[40rem] md:h-[calc(100%-4rem)]" />
+          </div>
           <div
-            className={`${styles.highlights} absolute top-[3.5rem] px-[1.5rem]`}
+            className={`${styles.highlights} absolute top-[3rem] md:top-[8.5rem] px-[1.5rem] h-full`}
           >
             {/* Discover Tech */}
             <div>
@@ -186,25 +188,26 @@ function Home() {
               </p>
             </div>
             {/* END Be Inspired */}
-          </div>
 
-          {/* Bunny GIF */}
-          <div>
-            <img
-              src={bunny}
-              alt=" "
-              className={`absolute h-[17rem] bottom-[-1.45rem] left-[2.5rem]`}
-            />
-            {/* Blue saturation overlay */}
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundColor: "rgba(164, 235, 255, 1)",
-                mixBlendMode: "saturation",
-              }}
-            />
+            {/* Bunny GIF */}
+            <div>
+              <img
+                src={bunny}
+                alt=" "
+                className={`absolute h-[17rem] bottom-[1.5rem] md:bottom-[6rem] right-[2.5rem]`}
+              />
+              {/* Blue saturation overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundColor: "rgba(164, 235, 255, 1)",
+                  mixBlendMode: "saturation",
+                }}
+              />
+            </div>
+            {/* END Bunny GIF */}
+
           </div>
-          {/* END Bunny GIF */}
         </section>
         {/* END Highlights */}
 
