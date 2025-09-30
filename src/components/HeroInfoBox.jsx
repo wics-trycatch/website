@@ -4,6 +4,7 @@ import styles from "./HeroInfoBox.module.css";
 import DisplayText from "./DisplayText";
 import window_options from "../assets/images/shared/window_options_simple.svg";
 import kaomoji_box from "../assets/images/shared/kaomoji_message.svg";
+import star from "../assets/images/shared/star_light_blue.svg";
 
 function HeroInfoBox() {
   return (
@@ -63,6 +64,12 @@ function HeroInfoBox() {
         src={kaomoji_box}
         alt=" "
         className={`absolute top-[4.5rem] sm:top-[3.25rem] lg:top-[4rem] 2xl:top-[6.5rem] right-[1.5rem] lg:right-[2rem] 2xl:right-[2.5rem] lg:w-[10rem] 2xl:w-[12rem]`}
+      />
+
+      <img
+        src={star}
+        alt=""
+        className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
       />
     </div>
   );
