@@ -10,7 +10,7 @@ import scribble from "../assets/images/home/pixel_scribble.svg";
 function PaintBox() {
   return (
     <section
-      className={`relative mt-[3rem] p-[1rem]`}
+      className={`relative mt-[3rem] p-[1rem] bg-light-cyan`}
       style={{
         boxShadow:
           "inset 0 -5px 0 0 var(--color-sky-blue), inset -5px 0 0 0 var(--color-sky-blue), inset 0 5px 0 0 white, inset 5px 0 0 0 white",
