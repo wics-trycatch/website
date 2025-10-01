@@ -35,7 +35,7 @@ function NavbarSecondary() {
 
   return (
     <nav
-      className={`pt-[2rem] pb-[0.5rem] mb-[3rem] flex justify-between bg-light-blue ${styles.secondary}`}
+      className={`pt-[2rem] pb-[0.5rem] mt-[-1rem] mb-[3rem] flex justify-between bg-light-blue ${styles.secondary}`}
     >
       <Link to="/">
         <img

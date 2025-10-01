@@ -53,7 +53,7 @@ function Navbar() {
       >
         <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-10000`}>
           <div className={`flex`}>
-            <span className={`mr-[0.5rem]`}>EVENT DETAILS</span>
+            <span className={`mr-[0.5rem] cursor-default`}>EVENT DETAILS</span>
             <ChevronDown size={iconSize} />
           </div>
           <ul role="menu" className={`${styles.dropdownContent}`}>
