@@ -23,5 +23,5 @@
 }
 
 .card{
-    filter: drop-shadow(9px 9px 0 var(--color-dark-blue));
+    box-shadow: 9px 9px 0 var(--color-dark-blue);
 }
