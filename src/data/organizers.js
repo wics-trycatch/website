@@ -1,6 +1,6 @@
 import amelia from "../assets/images/wics/organizers/amelia.jpg";
 import aniyah from "../assets/images/wics/organizers/aniyah.jpg";
-import bhakti from "../assets/images/wics/organizers/bhakti.jpg";
+import bhakti from "../assets/images/wics/organizers/bhakti.JPG";
 import bianca from "../assets/images/wics/organizers/bianca.png";
 import emily from "../assets/images/wics/organizers/emily.png";
 import gloria from "../assets/images/wics/organizers/gloria.jpg";
