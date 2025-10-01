@@ -29,6 +29,17 @@
     line-height: 1.2rem;
 }
 
+.infoDesc, .infoDescBold{
+    color: var(--color-dark-blue);
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+.infoDescBold{
+    font-family: var(--font-body-bold);
+}
+
 .outsideStroke {
    paint-order: stroke fill;
 }
@@ -59,6 +70,11 @@
         font-size: 1.5rem;
         margin-top: 1rem;
     }
+
+    .infoDesc, .infoDescBold{
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
 }
 
 @media (min-width: 64rem){
@@ -75,6 +91,13 @@
     .statParagraph{
         font-size: 2rem;
         margin-top: 1rem;
+    }
+}
+
+@media (min-width: 80rem){
+    .infoDesc, .infoDescBold{
+        font-size: 2rem;
+        line-height: 2rem;
     }
 }
 

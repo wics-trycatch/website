@@ -64,7 +64,8 @@ function Home() {
             </p>
             <div className={`mt-[2rem] sm:mt-[3rem] 2xl:mt-[4rem]`}>
               <Button
-                link="/"
+                link="https://trycatch2025.eventbrite.ca/"
+                target="_blank" rel="noopener noreferrer"
                 text="REGISTER"
                 size="small"
                 fontSize="text-[1.25rem]"
@@ -264,15 +265,85 @@ function Home() {
 
       {/* Past year photos */}
       <div className={`relative mt-[8rem] 2xl:mt-[14rem]`}>
-        {/* <PhotoCamera /> */}
-
         <PhotoCamera 
           images={[photo1, photo2, photo3, photo4, photo5, photo6]} mobileImages={[photo1_mobile, photo2_mobile, photo3_mobile, photo4_mobile, photo5_mobile, photo6_mobile]} 
           interval={3000} 
         />
+        <div className={`absolute inset-0 z-[-100] bg-gradient-to-t from-sky-blue to-light-blue`}></div>
       </div>
-
       {/* END Past year photos */}
+
+      {/* More Try/CATCH 2025 Info */}
+      <div className={`py-[3rem] 2xl:py-[10rem] pb-[10rem] 2xl:pb-[20rem] bg-sky-blue`}>
+        <div className={`2xl:ml-[-1rem]`}>
+          <h2 className={`pt-[3rem] md:pt-[7rem]`}>
+            {/* Mobile SVG */}
+            <svg
+              viewBox="0 0 1200 220"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="heading"
+              className="w-full max-h-[20rem] p-[1rem] md:hidden"
+            >
+              <title id="heading">try/catch 2025</title>
+              <text
+                x="600"
+                y="100"
+                fontSize={120}
+                fill="var(--color-powder-blue)"
+                stroke="var(--color-dark-blue)"
+                strokeWidth="10"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fontFamily="Dream MMA"
+                textAnchor="middle"
+                className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
+              >
+                <tspan x="600" dy="0">try/catch</tspan>
+                <tspan x="600" dy="95">2025</tspan>
+              </text>
+            </svg>
+            {/* Desktop SVG */}
+            <svg
+              viewBox="0 0 1200 150"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="heading"
+              className="w-full max-h-[12rem] p-[1rem] hidden md:block"
+            >
+              <title id="heading">try/catch 2025</title>
+              <text
+                x="600"
+                y="100"
+                fontSize={72}
+                fill="var(--color-powder-blue)"
+                stroke="var(--color-dark-blue)"
+                strokeWidth="10"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fontFamily="Dream MMA"
+                textAnchor="middle"
+                className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
+              >
+                try/catch 2025
+              </text>
+            </svg>
+          </h2>
+          
+          <div className={`px-[2rem]`}>
+            <p className={`${styles.infoDesc} text-center mx-auto pt-[1.5rem] sm:pt-[2rem] md:pt-[0rem] xl:pt-[4rem] sm:max-w-[35rem] xl:max-w-[56rem]`}>
+              This year's Try/CATCH event will be taking place on Saturday, October 25th, 2025 at the SFU Burnaby campus. <span className={`${styles.infoDescBold}`}>Registration is open!</span>
+            </p>
+            <div className={`flex flex-col sm:flex-row gap-[1rem] sm:gap-[2rem] justify-center mt-[4rem]`}>
+                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" />
+                <Button link="/schedule" text="EVENT SCHEDULE" bgColor="bg-light-blue" type="hero" />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* END More Try/CATCH 2025 Info */}
+
+      
 
     </div>
   );
