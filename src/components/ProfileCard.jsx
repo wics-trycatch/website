@@ -23,10 +23,10 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
   return (
     <div
-      className={`${styles.card} relative overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
+      className={`${styles.card} relative rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
     >
       <div
-        className={`transition-all duration-500 h-[22rem] overflow-hidden relative ${styles.headshot} object-cover`}
+        className={`transition-all duration-500 h-[22rem] relative ${styles.headshot} object-cover`}
       >
         <img
           src={img}
