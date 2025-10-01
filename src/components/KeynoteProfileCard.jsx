@@ -23,7 +23,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
   return (
     <div
-      className={`${styles.card} overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
+      className={`${styles.card} relative overflow-hidden rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
     >
         <div className={`grid grid-cols-[40%_auto]`}>
             <div
@@ -98,7 +98,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
         </div>
 
         {/* Hidden element to measure full text height */}
-        <div
+        {/* <div
             ref={hiddenRef}
             className="absolute opacity-0 pointer-events-none font-body text-[1rem]/[1.25rem] px-[1.25rem]"
             style={{ 
@@ -108,7 +108,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
             }}
         >
             {blurb}
-        </div>
+        </div> */}
 
     </div>
   );
