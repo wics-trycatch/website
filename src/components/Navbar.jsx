@@ -75,7 +75,7 @@ function Navbar() {
           </ul>
         </li>
         <li role="menuitem" tabIndex="0">
-          <Link to="/">
+          <Link to="/sponsors">
             SPONSORS
           </Link>
         </li>
@@ -115,21 +115,21 @@ function Navbar() {
               </div>
               <ul className="ml-4 mt-2 flex flex-col gap-2">
                 <li>
-                  <Link to="/">SCHEDULE</Link>
+                  <Link to="/schedule">SCHEDULE</Link>
                 </li>
                 <li>
                   <Link to="/speakers">SPEAKERS</Link>
                 </li>
                 <li>
-                  <Link to="/">WORKSHOPS</Link>
+                  <Link to="/workshops">WORKSHOPS</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <Link to="/">SPONSORS</Link>
+              <Link to="/sponsors">SPONSORS</Link>
             </li>
             <li>
-              <Link to="/">FAQ</Link>
+              <Link to="/faq">FAQ</Link>
             </li>
             <li>
               <Link to="/sfu-wics">SFU WICS</Link>
