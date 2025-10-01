@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import HeroInfoBox from "../components/HeroInfoBox";
 import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
+import HighlightsParagraph from "../components/HighlightsParagraph";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -144,69 +145,32 @@ function Home() {
 
       {/* END Hero section */}
 
-      <div className={`relative mt-[2rem] grid md:grid-cols-2`}>
+      <div className={`relative h-full mt-[2rem] grid md:grid-cols-2`}>
     
         {/* What is Try/CATCH? */}
-        <PaintBox />
+        <div>
+          <PaintBox />
+          {/* <div className={`px-[2rem] pt-[4rem] pb-[12rem] md:absolute md:top-[5rem] md:right-[-12rem]`}>
+            <HighlightsParagraph />
+          </div> */}
+        </div>
+
+        <div className={`px-[2rem] pt-[4rem] h-full hidden md:block md:absolute md:inset-y-[5rem] md:right-[0] md:max-w-[50%]`}>
+          <HighlightsParagraph />
+        </div>
         {/* END What is Try/CATCH? */}
 
         {/* Highlights */}
         <section className={`relative md:static mt-[1.5rem]`}>
-          <div className={`md:absolute md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
-            <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[40rem] md:h-[calc(100%-4rem)]" />
-          </div>
-          <div
-            className={`${styles.highlights} absolute top-[3rem] md:top-[8.5rem] px-[1.5rem] h-full`}
-          >
-            {/* Discover Tech */}
-            <div>
-              <h2 className={`${styles.highlightsTitle}`}>DISCOVER TECH</h2>
-              <p>
-                Explore coding, robotics, and design through hands-on workshops
-                built for all ages and experience levels!
-              </p>
+          <div className={`md:absolute h-full md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
+            <div className={`absolute z-[-1000] w-full h-full`}>
+              <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[100%] md:h-[calc(100%-4rem)]" />
             </div>
-            {/* END Discover Tech */}
 
-            {/* Meet Role Models */}
-            <div>
-              <h2 className={`${styles.highlightsTitle}`}>MEET ROLE MODELS</h2>
-              <p>
-                Connect with women in tech—from students to seasoned
-                professionals—and hear what it’s really like in computing and
-                engineering fields.
-              </p>
+            <div className={`px-[2rem] pt-[4rem] pb-[12rem] md:hidden`}>
+              <HighlightsParagraph />
             </div>
-            {/* END Meet Role Models */}
-
-            {/* Be Inspired */}
-            <div>
-              <h2 className={`${styles.highlightsTitle}`}>BE INSPIRED</h2>
-              <p>
-                Fuel your curiosity with keynotes, panels, and prizes. Walk away
-                with new skills, new friends, and a glimpse into your future.
-              </p>
-            </div>
-            {/* END Be Inspired */}
-
-            {/* Bunny GIF */}
-            <div>
-              <img
-                src={bunny}
-                alt=" "
-                className={`absolute h-[17rem] bottom-[1.5rem] md:bottom-[6rem] right-[2.5rem]`}
-              />
-              {/* Blue saturation overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundColor: "rgba(164, 235, 255, 1)",
-                  mixBlendMode: "saturation",
-                }}
-              />
-            </div>
-            {/* END Bunny GIF */}
-
+          
           </div>
         </section>
         {/* END Highlights */}

@@ -26,20 +26,14 @@
 .aboutDesc{
     font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.25rem;
+    line-height: 1.2rem;
 }
 
 .outsideStroke {
    paint-order: stroke fill;
 }
 
-.highlights p{
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.25rem;
-}
-
-.highlights h2 ~ p{
+.highlightsTitle ~ p{
     margin-bottom: 1.25rem;
 }
 
@@ -60,11 +54,20 @@
         font-size: 1.5rem;
         line-height:1.75rem;
     }
+
+    .aboutDesc{
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    }
 }
 
 @media (min-width: 96rem){
     .heroDesc{
         font-size: 2rem;
         line-height:2rem;
+    }
+
+    .highlightsTitle{
+        font-size: 2rem;
     }
 }
