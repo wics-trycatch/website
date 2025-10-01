@@ -61,6 +61,19 @@
     margin-top: 0.5rem;
 }
 
+.sfuWics{
+    color:white;
+    font-family: "Roboto-Slab";
+    font-size:2.5rem;
+}
+
+.sfuWicsDesc{
+    color:white;
+    font-family: var(--font-body);
+    font-size:1rem;
+    line-height:1.25rem;
+}   
+
 @media (min-width: 48rem){
     .heroBanner::after{
         background:linear-gradient(5deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 60%)
@@ -75,6 +88,18 @@
         font-size: 1.5rem;
         line-height: 1.5rem;
     }
+
+    .sfuWics{
+        color:white;
+        font-family: "Roboto-Slab";
+        font-size:4rem;
+    }   
+
+    .sfuWicsDesc{
+        color:white;
+        font-size:1.25rem;
+        line-height:1.5rem;
+    }   
 }
 
 @media (min-width: 64rem){

@@ -41,6 +41,9 @@ import photo4_mobile from '../assets/images/home/camera_photo_mobile_4.png';
 import photo5_mobile from '../assets/images/home/camera_photo_mobile_5.png';
 import photo6_mobile from '../assets/images/home/camera_photo_mobile_6.png';
 
+import wics_photo from "../assets/images/shared/sfu_wics.jpg"
+import wics_logo from "../assets/images/shared/sponsors/wics_white.png"
+
 function Home() {
   return (
     <div className={`mx-auto`}>
@@ -343,7 +346,23 @@ function Home() {
       </div>
       {/* END More Try/CATCH 2025 Info */}
 
-      
+      <div className={`mb-[-4rem]`}>
+        <div className={`grid lg:grid-cols-2`}>
+          <div className={`relative bg-dark-blue lg:w-[100%] h-[30rem] lg:h-full`}>
+            <img src={wics_logo} alt="SFU WiCS 'W' Logo Mark" className={`p-[3rem]`} />
+            <div className={`absolute bottom-0 p-[3rem]`}>
+              <h2 className={`${styles.sfuWics}`}>
+                SFU WiCS
+              </h2>
+              <p className={`${styles.sfuWicsDesc}`}>
+                The SFU Women in Computing Science (WiCS) is a student-led society that aims to empower women in computing science by providing opportunities to build lasting connections with other women in tech and by supporting each other as we progress through our time at SFU!
+              </p>
+            </div>
+          </div>
+
+          <img src={wics_photo} alt="Group photo of SFU Women in Computing Science executives" className={`w-auto h-[50rem] object-cover`}/>
+        </div>
+      </div>
 
     </div>
   );
