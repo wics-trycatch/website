@@ -1,4 +1,4 @@
-import keynote_speaker from "../assets/images/wics/placeholder_headshot.png";
+import keynote_speaker from "../assets/images/speakers/keynote/rimika.jpg";
 
 export const keynote = [
   {
