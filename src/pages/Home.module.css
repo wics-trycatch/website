@@ -33,7 +33,7 @@
    paint-order: stroke fill;
 }
 
-.highlights h2 ~ p{
+.highlightsTitle ~ p{
     margin-bottom: 1.25rem;
 }
 
@@ -65,5 +65,9 @@
     .heroDesc{
         font-size: 2rem;
         line-height:2rem;
+    }
+
+    .highlightsTitle{
+        font-size: 2rem;
     }
 }
