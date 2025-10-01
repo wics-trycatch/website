@@ -1,20 +1,20 @@
 import amelia from "../assets/images/wics/organizers/amelia.jpg";
 import aniyah from "../assets/images/wics/organizers/aniyah.jpg";
 import bhakti from "../assets/images/wics/organizers/bhakti.JPG";
-import bianca from "../assets/images/wics/organizers/bianca.png";
+import bianca from "../assets/images/wics/organizers/Bianca.png";
 import emily from "../assets/images/wics/organizers/emily.png";
-import gloria from "../assets/images/wics/organizers/gloria.jpg";
+import gloria from "../assets/images/wics/organizers/gloria.JPG";
 import grace from "../assets/images/wics/organizers/grace.jpeg";
 import mara from "../assets/images/wics/organizers/mara.jpg";
 import mariaF from "../assets/images/wics/organizers/maria_f.jpg";
 import mariaK from "../assets/images/wics/organizers/maria_k.jpg";
 import meyer from "../assets/images/wics/organizers/meyer.jpg";
-import poorvi from "../assets/images/wics/organizers/poorvi.jpg";
+import poorvi from "../assets/images/wics/organizers/poorvi.JPG";
 import sayna from "../assets/images/wics/organizers/sayna.jpeg";
 import selina from "../assets/images/wics/organizers/selina.jpg";
 import serena from "../assets/images/wics/organizers/serena.jpg";
 import sydney from "../assets/images/wics/organizers/sydney.jpeg";
-import vidhi from "../assets/images/wics/organizers/vidhi.jpeg";
+import vidhi from "../assets/images/wics/organizers/vidhi.JPEG";
 
 
 export const organizers = [
