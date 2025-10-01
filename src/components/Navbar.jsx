@@ -111,7 +111,7 @@ function Navbar() {
 
       {/* Mobile Hamburger menu */}
       {hamburgerOpen && (
-        <div className="z-10000 absolute top-[7.95rem] w-[90%] left-[5%] bg-dark-blue px-6 py-4 xl:hidden">
+        <div className="z-10000 absolute top-[7.5rem] w-[90%] left-[5%] bg-dark-blue px-6 py-6 xl:hidden">
           <ul role="menu" className="flex flex-col gap-4 text-white">
             <li>
               <div className="flex items-center justify-between">
