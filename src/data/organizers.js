@@ -11,7 +11,7 @@ import mariaK from "../assets/images/wics/organizers/maria_k.jpg";
 import meyer from "../assets/images/wics/organizers/meyer.jpg";
 import poorvi from "../assets/images/wics/organizers/poorvi.jpg";
 import sayna from "../assets/images/wics/organizers/sayna.jpeg";
-import selina from "../assets/images/wics/organizers/selina.jpeg";
+import selina from "../assets/images/wics/organizers/selina.jpg";
 import serena from "../assets/images/wics/organizers/serena.jpg";
 import sydney from "../assets/images/wics/organizers/sydney.jpeg";
 import vidhi from "../assets/images/wics/organizers/vidhi.jpeg";
