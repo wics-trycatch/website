@@ -360,7 +360,7 @@ function Home() {
             </div>
           </div>
 
-          <img src={wics_photo} alt="Group photo of SFU Women in Computing Science executives" className={`w-auto h-[50rem] object-cover`}/>
+          <img src={wics_photo} alt="Group photo of SFU Women in Computing Science executives" className={`lg:w-auto lg:h-[50rem] object-cover`}/>
         </div>
       </div>
 

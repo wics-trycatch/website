@@ -71,7 +71,7 @@ function PhotoCamera({ images = [], mobileImages = [], interval = 3000 }) {
                 src={mobileImages[currentIndex]}
                 alt={`Photo ${currentIndex + 1}`}
                 className={`w-full h-full object-cover transition-all duration-200 ${
-                  isSnapping ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+                  isSnapping ? 'opacity-0 scale-95' : 'opacity-100 scale-105'
                 }`}
               />
               {/* Camera flash effect for mobile */}
