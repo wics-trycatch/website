@@ -43,9 +43,21 @@
     margin-bottom:0.25rem;
 }
 
+.statParagraph{
+    font-family: var(--font-body-medium);
+    font-size: 1.25rem;
+    color: black;
+    margin-top: 0.5rem;
+}
+
 @media (min-width: 48rem){
     .heroBanner::after{
         background:linear-gradient(5deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 60%)
+    }
+    
+    .statParagraph{
+        font-size: 1.5rem;
+        margin-top: 1rem;
     }
 }
 
@@ -58,6 +70,11 @@
     .aboutDesc{
         font-size: 1.25rem;
         line-height: 1.5rem;
+    }
+
+    .statParagraph{
+        font-size: 2rem;
+        margin-top: 1rem;
     }
 }
 

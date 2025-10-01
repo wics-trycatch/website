@@ -9,6 +9,7 @@ import HeroInfoBox from "../components/HeroInfoBox";
 import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
 import HighlightsParagraph from "../components/HighlightsParagraph";
+import FolderStatCard from "../components/FolderStatCard";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -21,6 +22,9 @@ import star_light_blue from "../assets/images/shared/star_light_blue.svg";
 import star_blue from "../assets/images/shared/star_blue.svg";
 import sparkles_light_blue from "../assets/images/shared/sparkles_light_blue.svg";
 import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
+import attendees from "../assets/images/home/folder_attendees.svg";
+import workshops from "../assets/images/home/folder_workshops.svg";
+import sponsors from "../assets/images/home/folder_sponsors.svg";
 
 function Home() {
   return (
@@ -176,7 +180,7 @@ function Home() {
       
       {/* Last year we had... */}
       <div>
-        <h2 className={`mt-[1.5rem]`}>
+        <h2 className={`mt-[1.5rem] md:mt-[3.5rem] 2xl:mt-[5rem]`}>
           {/* Mobile SVG */}
           <svg
             viewBox="0 0 1200 220"
@@ -229,11 +233,24 @@ function Home() {
           </svg>
         </h2>
 
-        <div>
-            
+        <div className={`flex flex-col sm:flex-row gap-[3rem] mt-[2rem]`}>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={attendees} alt="85 Attendees" text="ATTENDEES" />
+            </div>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={workshops} alt="5 Workshops" text="WORKSHOPS" />
+            </div>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={sponsors} alt="10 Sponsors" text="SPONSORS" />
+            </div>
         </div>
       </div>
       {/* END Last year we had... */}
+
+      {/* Past year photos */}
+
+
+      {/* END Past year photos */}
 
     </div>
   );
