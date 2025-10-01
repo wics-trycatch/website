@@ -4,12 +4,16 @@ li {
     font-size: 1rem;
 }
 
+.secondary li{
+    color: var(--color-dark-blue);
+}
+
 .navList li{
     transition: transform 0.3s ease-out;
 }
 
 .navList li:hover{
-    color: var(--color-powder-blue);
+    color: var(--color-sky-blue);
     transform: translate(0, -5px);
     transition: transform 0.3s ease-out;
 }
