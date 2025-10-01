@@ -29,6 +29,17 @@
     line-height: 1.2rem;
 }
 
+.infoDesc, .infoDescBold{
+    color: var(--color-dark-blue);
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+}
+
+.infoDescBold{
+    font-family: var(--font-body-bold);
+}
+
 .outsideStroke {
    paint-order: stroke fill;
 }
@@ -43,10 +54,52 @@
     margin-bottom:0.25rem;
 }
 
+.statParagraph{
+    font-family: var(--font-body-medium);
+    font-size: 1.25rem;
+    color: black;
+    margin-top: 0.5rem;
+}
+
+.sfuWics{
+    color:white;
+    font-family: "Roboto-Slab";
+    font-size:2.5rem;
+}
+
+.sfuWicsDesc{
+    color:white;
+    font-family: var(--font-body);
+    font-size:1rem;
+    line-height:1.25rem;
+}   
+
 @media (min-width: 48rem){
     .heroBanner::after{
         background:linear-gradient(5deg, rgba(203, 243, 251, 1) 0%, rgba(203, 243, 251, 0) 60%)
     }
+    
+    .statParagraph{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .infoDesc, .infoDescBold{
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
+
+    .sfuWics{
+        color:white;
+        font-family: "Roboto-Slab";
+        font-size:4rem;
+    }   
+
+    .sfuWicsDesc{
+        color:white;
+        font-size:1.25rem;
+        line-height:1.5rem;
+    }   
 }
 
 @media (min-width: 64rem){
@@ -58,6 +111,18 @@
     .aboutDesc{
         font-size: 1.25rem;
         line-height: 1.5rem;
+    }
+
+    .statParagraph{
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (min-width: 80rem){
+    .infoDesc, .infoDescBold{
+        font-size: 2rem;
+        line-height: 2rem;
     }
 }
 

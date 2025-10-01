@@ -53,3 +53,10 @@
   font-weight: normal;
   src: url('./assets/fonts/Saira-Medium.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Roboto-Slab';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/RobotoSlab-Bold.ttf') format('truetype');
+}

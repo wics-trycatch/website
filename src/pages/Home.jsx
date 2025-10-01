@@ -9,6 +9,8 @@ import HeroInfoBox from "../components/HeroInfoBox";
 import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
 import HighlightsParagraph from "../components/HighlightsParagraph";
+import FolderStatCard from "../components/FolderStatCard";
+import PhotoCamera from "../components/PhotoCamera";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -21,6 +23,26 @@ import star_light_blue from "../assets/images/shared/star_light_blue.svg";
 import star_blue from "../assets/images/shared/star_blue.svg";
 import sparkles_light_blue from "../assets/images/shared/sparkles_light_blue.svg";
 import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
+import attendees from "../assets/images/home/folder_attendees.svg";
+import workshops from "../assets/images/home/folder_workshops.svg";
+import sponsors from "../assets/images/home/folder_sponsors.svg";
+
+import photo1 from '../assets/images/home/camera_photo_1.png';
+import photo2 from '../assets/images/home/camera_photo_2.png';
+import photo3 from '../assets/images/home/camera_photo_3.png';
+import photo4 from '../assets/images/home/camera_photo_4.png';
+import photo5 from '../assets/images/home/camera_photo_5.png';
+import photo6 from '../assets/images/home/camera_photo_6.png';
+
+import photo1_mobile from '../assets/images/home/camera_photo_mobile_1.png';
+import photo2_mobile from '../assets/images/home/camera_photo_mobile_2.png';
+import photo3_mobile from '../assets/images/home/camera_photo_mobile_3.png';
+import photo4_mobile from '../assets/images/home/camera_photo_mobile_4.png';
+import photo5_mobile from '../assets/images/home/camera_photo_mobile_5.png';
+import photo6_mobile from '../assets/images/home/camera_photo_mobile_6.png';
+
+import wics_photo from "../assets/images/shared/sfu_wics.jpg"
+import wics_logo from "../assets/images/shared/sponsors/wics_white.png"
 
 function Home() {
   return (
@@ -45,7 +67,8 @@ function Home() {
             </p>
             <div className={`mt-[2rem] sm:mt-[3rem] 2xl:mt-[4rem]`}>
               <Button
-                link="/"
+                link="https://trycatch2025.eventbrite.ca/"
+                target="_blank" rel="noopener noreferrer"
                 text="REGISTER"
                 size="small"
                 fontSize="text-[1.25rem]"
@@ -137,16 +160,13 @@ function Home() {
             alt=" "
             className={`absolute z-1000 w-[4.5rem] md:w-[5.5rem] 2xl:w-[8rem] bottom-[1rem] 2xl:bottom-[6rem] left-[-2rem] md:left-[-2.25rem] 2xl:left-[-3rem]`}
           />
-
           {/* END Stars */}
-
         </div>
       </div>
-
       {/* END Hero section */}
 
+      {/* About Try/CATCH */}
       <div className={`relative h-full mt-[2rem] grid md:grid-cols-2`}>
-    
         {/* What is Try/CATCH? */}
         <div>
           <PaintBox />
@@ -155,12 +175,12 @@ function Home() {
           </div> */}
         </div>
 
+        {/* Highlights */}
         <div className={`px-[2rem] pt-[4rem] h-full hidden md:block md:absolute md:inset-y-[5rem] md:right-[0] md:max-w-[50%]`}>
           <HighlightsParagraph />
         </div>
         {/* END What is Try/CATCH? */}
 
-        {/* Highlights */}
         <section className={`relative md:static mt-[1.5rem]`}>
           <div className={`md:absolute h-full md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
             <div className={`absolute z-[-1000] w-full h-full`}>
@@ -174,7 +194,174 @@ function Home() {
           </div>
         </section>
         {/* END Highlights */}
+      </div>
+      {/* END About Try/CATCH */}
+      
+      {/* Last year we had... */}
+      <div className={`2xl:py-[5rem]`}>
+        <h2 className={`mt-[3rem] md:mt-[7rem] 2xl:mb-[5rem]`}>
+          {/* Mobile SVG */}
+          <svg
+            viewBox="0 0 1200 220"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="heading"
+            className="w-full max-h-[20rem] p-[1rem] md:hidden ml-[-1rem]"
+          >
+            <title id="heading">last year we had...</title>
+            <text
+              x="8"
+              y="100"
+              fontSize={120}
+              fill="white"
+              stroke="var(--color-dark-blue)"
+              strokeWidth="10"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              fontFamily="Dream MMA"
+              className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
+            >
+              <tspan x="10" dy="0">last year</tspan>
+              <tspan x="10" dy="95">we had...</tspan>
+            </text>
+          </svg>
 
+          {/* Desktop SVG */}
+          <svg
+            viewBox="0 0 1200 150"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="heading"
+            className="w-full max-h-[12rem] p-[1rem] hidden md:block"
+          >
+            <title id="heading">last year we had...</title>
+            <text
+              x="8"
+              y="100"
+              fontSize={72}
+              fill="white"
+              stroke="var(--color-dark-blue)"
+              strokeWidth="10"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              fontFamily="Dream MMA"
+              className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
+            >
+              last year we had...
+            </text>
+          </svg>
+        </h2>
+
+        <div className={`flex flex-col sm:flex-row gap-[3rem] mt-[2rem]`}>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={attendees} alt="85 Attendees" text="ATTENDEES" />
+            </div>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={workshops} alt="5 Workshops" text="WORKSHOPS" />
+            </div>
+            <div className={`mx-auto`}>
+              <FolderStatCard folderImg={sponsors} alt="10 Sponsors" text="SPONSORS" />
+            </div>
+        </div>
+      </div>
+      {/* END Last year we had... */}
+
+      {/* Past year photos */}
+      <div className={`relative mt-[8rem] 2xl:mt-[14rem]`}>
+        <PhotoCamera 
+          images={[photo1, photo2, photo3, photo4, photo5, photo6]} mobileImages={[photo1_mobile, photo2_mobile, photo3_mobile, photo4_mobile, photo5_mobile, photo6_mobile]} 
+          interval={3000} 
+        />
+        <div className={`absolute inset-0 z-[-100] bg-gradient-to-t from-sky-blue to-light-blue`}></div>
+      </div>
+      {/* END Past year photos */}
+
+      {/* More Try/CATCH 2025 Info */}
+      <div className={`py-[3rem] 2xl:py-[10rem] pb-[10rem] 2xl:pb-[20rem] bg-sky-blue`}>
+        <div className={`2xl:ml-[-1rem]`}>
+          <h2 className={`pt-[3rem] md:pt-[7rem]`}>
+            {/* Mobile SVG */}
+            <svg
+              viewBox="0 0 1200 220"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="heading"
+              className="w-full max-h-[20rem] p-[1rem] md:hidden"
+            >
+              <title id="heading">try/catch 2025</title>
+              <text
+                x="600"
+                y="100"
+                fontSize={120}
+                fill="var(--color-powder-blue)"
+                stroke="var(--color-dark-blue)"
+                strokeWidth="10"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fontFamily="Dream MMA"
+                textAnchor="middle"
+                className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
+              >
+                <tspan x="600" dy="0">try/catch</tspan>
+                <tspan x="600" dy="95">2025</tspan>
+              </text>
+            </svg>
+            {/* Desktop SVG */}
+            <svg
+              viewBox="0 0 1200 150"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-labelledby="heading"
+              className="w-full max-h-[12rem] p-[1rem] hidden md:block"
+            >
+              <title id="heading">try/catch 2025</title>
+              <text
+                x="600"
+                y="100"
+                fontSize={72}
+                fill="var(--color-powder-blue)"
+                stroke="var(--color-dark-blue)"
+                strokeWidth="10"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                fontFamily="Dream MMA"
+                textAnchor="middle"
+                className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
+              >
+                try/catch 2025
+              </text>
+            </svg>
+          </h2>
+          
+          <div className={`px-[2rem]`}>
+            <p className={`${styles.infoDesc} text-center mx-auto pt-[1.5rem] sm:pt-[2rem] md:pt-[0rem] xl:pt-[4rem] sm:max-w-[35rem] xl:max-w-[56rem]`}>
+              This year's Try/CATCH event will be taking place on Saturday, October 25th, 2025 at the SFU Burnaby campus. <span className={`${styles.infoDescBold}`}>Registration is open!</span>
+            </p>
+            <div className={`flex flex-col sm:flex-row gap-[1rem] sm:gap-[2rem] justify-center mt-[4rem]`}>
+                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" />
+                <Button link="/schedule" text="EVENT SCHEDULE" bgColor="bg-light-blue" type="hero" />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* END More Try/CATCH 2025 Info */}
+
+      <div className={`mb-[-4rem]`}>
+        <div className={`grid lg:grid-cols-2`}>
+          <div className={`relative bg-dark-blue lg:w-[100%] h-[30rem] lg:h-full`}>
+            <img src={wics_logo} alt="SFU WiCS 'W' Logo Mark" className={`p-[3rem]`} />
+            <div className={`absolute bottom-0 p-[3rem]`}>
+              <h2 className={`${styles.sfuWics}`}>
+                SFU WiCS
+              </h2>
+              <p className={`${styles.sfuWicsDesc}`}>
+                The SFU Women in Computing Science (WiCS) is a student-led society that aims to empower women in computing science by providing opportunities to build lasting connections with other women in tech and by supporting each other as we progress through our time at SFU!
+              </p>
+            </div>
+          </div>
+
+          <img src={wics_photo} alt="Group photo of SFU Women in Computing Science executives" className={`w-auto h-[50rem] object-cover`}/>
+        </div>
       </div>
 
     </div>
