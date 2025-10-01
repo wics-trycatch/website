@@ -1,0 +1,12 @@
+.name{
+    color: var(--color-dark-blue);
+    font-family: var(--font-body-bold);
+    font-size: 2rem;
+    line-height: 2rem;
+}
+
+.tier{
+    color: var(--color-dark-blue);
+    font-family: var(--font-body-medium);
+    font-size: 1.25rem;
+}
