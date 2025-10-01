@@ -47,7 +47,7 @@ import wics_logo from "../assets/images/shared/sponsors/wics_white.png"
 function Home() {
   return (
     <div className={`mx-auto`}>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* Hero section */}
       <div className={`relative z-1000`}>
         <div

@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Button from "./Button";
 
-import logo from "../assets/images/shared/logo_simple_white.png";
+import logo from "../assets/images/shared/logo_simple_regular.png";
 
 import { ChevronDown, Menu, X } from "lucide-react";
 
-function Navbar() {
+function NavbarSecondary() {
   const [iconSize, setIconSize] = useState(36);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
@@ -35,7 +35,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`px-[2.5rem] pt-[2rem] pb-[0.5rem] flex justify-between bg-dark-blue`}
+      className={`pt-[2rem] pb-[0.5rem] mb-[3rem] flex justify-between bg-light-blue ${styles.secondary}`}
     >
       <Link to="/">
         <img
@@ -53,7 +53,7 @@ function Navbar() {
       >
         <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-10000`}>
           <div className={`flex`}>
-            <span className={`mr-[0.5rem]`}>EVENT DETAILS</span>
+            <span className={`mr-[0.5rem] cursor-default`}>EVENT DETAILS</span>
             <ChevronDown size={iconSize} />
           </div>
           <ul role="menu" className={`${styles.dropdownContent}`}>
@@ -94,7 +94,7 @@ function Navbar() {
             link="https://trycatch2025.eventbrite.ca/"
             target="_blank" rel="noopener noreferrer"
             text="REGISTER"
-            type="navbar"
+            type="navbarSecondary"
           />
         </li>
       </ul>
@@ -102,7 +102,7 @@ function Navbar() {
 
       {/* Hamburger menu button for mobile */}
       <button
-        className="xl:hidden text-white -translate-y-2"
+        className="xl:hidden text-dark-blue -translate-y-2"
         onClick={() => setHamburgerOpen(!hamburgerOpen)}
         aria-label="Toggle menu"
       >
@@ -115,7 +115,7 @@ function Navbar() {
           <ul role="menu" className="flex flex-col gap-4 text-white">
             <li>
               <div className="flex items-center justify-between">
-                <span>EVENT DETAILS</span>
+                <span className={`cursor-default`}>EVENT DETAILS</span>
                 <ChevronDown size={24} />
               </div>
               <ul className="ml-4 mt-2 flex flex-col gap-2">
@@ -144,7 +144,7 @@ function Navbar() {
                 link="https://trycatch2025.eventbrite.ca/"
                 target="_blank" rel="noopener noreferrer"
                 text="REGISTER"
-                type="navbar"
+                type="navbarSecondary"
               />
             </li>
           </ul>
@@ -156,4 +156,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarSecondary;
