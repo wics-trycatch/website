@@ -10,6 +10,7 @@ import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
 import HighlightsParagraph from "../components/HighlightsParagraph";
 import FolderStatCard from "../components/FolderStatCard";
+import PhotoCamera from "../components/PhotoCamera";
 
 import banner_base from "../assets/images/home/banner_base.png";
 import banner_texture from "../assets/images/home/banner_texture.png";
@@ -25,6 +26,20 @@ import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
 import attendees from "../assets/images/home/folder_attendees.svg";
 import workshops from "../assets/images/home/folder_workshops.svg";
 import sponsors from "../assets/images/home/folder_sponsors.svg";
+
+import photo1 from '../assets/images/home/camera_photo_1.png';
+import photo2 from '../assets/images/home/camera_photo_2.png';
+import photo3 from '../assets/images/home/camera_photo_3.png';
+import photo4 from '../assets/images/home/camera_photo_4.png';
+import photo5 from '../assets/images/home/camera_photo_5.png';
+import photo6 from '../assets/images/home/camera_photo_6.png';
+
+import photo1_mobile from '../assets/images/home/camera_photo_mobile_1.png';
+import photo2_mobile from '../assets/images/home/camera_photo_mobile_2.png';
+import photo3_mobile from '../assets/images/home/camera_photo_mobile_3.png';
+import photo4_mobile from '../assets/images/home/camera_photo_mobile_4.png';
+import photo5_mobile from '../assets/images/home/camera_photo_mobile_5.png';
+import photo6_mobile from '../assets/images/home/camera_photo_mobile_6.png';
 
 function Home() {
   return (
@@ -179,8 +194,8 @@ function Home() {
       {/* END About Try/CATCH */}
       
       {/* Last year we had... */}
-      <div>
-        <h2 className={`mt-[1.5rem] md:mt-[3.5rem] 2xl:mt-[5rem]`}>
+      <div className={`2xl:py-[5rem]`}>
+        <h2 className={`mt-[3rem] md:mt-[7rem] 2xl:mb-[5rem]`}>
           {/* Mobile SVG */}
           <svg
             viewBox="0 0 1200 220"
@@ -248,7 +263,14 @@ function Home() {
       {/* END Last year we had... */}
 
       {/* Past year photos */}
+      <div className={`relative mt-[8rem] 2xl:mt-[14rem]`}>
+        {/* <PhotoCamera /> */}
 
+        <PhotoCamera 
+          images={[photo1, photo2, photo3, photo4, photo5, photo6]} mobileImages={[photo1_mobile, photo2_mobile, photo3_mobile, photo4_mobile, photo5_mobile, photo6_mobile]} 
+          interval={3000} 
+        />
+      </div>
 
       {/* END Past year photos */}
 
