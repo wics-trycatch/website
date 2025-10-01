@@ -10,6 +10,7 @@ import Wics from './pages/Wics.jsx';
 import Speakers from './pages/Speakers.jsx';
 import Workshops from './pages/Workshops.jsx';
 import Schedule from './pages/Schedule.jsx';
+import Sponsors from './pages/Sponsors.jsx';
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/sponsors" element={<Sponsors />} />
         </Routes>
         <Footer />
     </div>
