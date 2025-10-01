@@ -90,7 +90,12 @@ function Navbar() {
           </Link>
         </li>
         <li role="menuitem" tabIndex="0">
-          <Button text="REGISTER" type="navbar" />
+          <Button
+            link="https://trycatch2025.eventbrite.ca/"
+            target="_blank" rel="noopener noreferrer"
+            text="REGISTER"
+            type="navbar"
+          />
         </li>
       </ul>
       {/* END Desktop Full Navbar */}
@@ -135,7 +140,12 @@ function Navbar() {
               <Link to="/sfu-wics">SFU WICS</Link>
             </li>
             <li>
-              <Button text="REGISTER" type="navbar" />
+              <Button
+                link="https://trycatch2025.eventbrite.ca/"
+                target="_blank" rel="noopener noreferrer"
+                text="REGISTER"
+                type="navbar"
+              />
             </li>
           </ul>
         </div>
