@@ -23,7 +23,19 @@ li {
     position:absolute;
 
     background-color:#FFF;
-    padding: 0.5rem;
+    padding: 1rem 1.75rem;
+}
+
+.secondary .dropdownContent{
+    display:none;
+    position:absolute;
+
+    background-color:var(--color-sky-blue);
+    padding: 1rem 1.75rem;
+}
+
+.secondary .dropdownContent li:hover{
+    color:#FFF !important;
 }
 
 .dropdownContent li{

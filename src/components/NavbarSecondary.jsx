@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Button from "./Button";
 
-import logo from "../assets/images/shared/logo_simple_white.png";
+import logo from "../assets/images/shared/logo_simple_regular.png";
 
 import { ChevronDown, Menu, X } from "lucide-react";
 
