@@ -137,16 +137,13 @@ function Home() {
             alt=" "
             className={`absolute z-1000 w-[4.5rem] md:w-[5.5rem] 2xl:w-[8rem] bottom-[1rem] 2xl:bottom-[6rem] left-[-2rem] md:left-[-2.25rem] 2xl:left-[-3rem]`}
           />
-
           {/* END Stars */}
-
         </div>
       </div>
-
       {/* END Hero section */}
 
+      {/* About Try/CATCH */}
       <div className={`relative h-full mt-[2rem] grid md:grid-cols-2`}>
-    
         {/* What is Try/CATCH? */}
         <div>
           <PaintBox />
@@ -155,12 +152,12 @@ function Home() {
           </div> */}
         </div>
 
+        {/* Highlights */}
         <div className={`px-[2rem] pt-[4rem] h-full hidden md:block md:absolute md:inset-y-[5rem] md:right-[0] md:max-w-[50%]`}>
           <HighlightsParagraph />
         </div>
         {/* END What is Try/CATCH? */}
 
-        {/* Highlights */}
         <section className={`relative md:static mt-[1.5rem]`}>
           <div className={`md:absolute h-full md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
             <div className={`absolute z-[-1000] w-full h-full`}>
@@ -174,8 +171,69 @@ function Home() {
           </div>
         </section>
         {/* END Highlights */}
-
       </div>
+      {/* END About Try/CATCH */}
+      
+      {/* Last year we had... */}
+      <div>
+        <h2 className={`mt-[1.5rem]`}>
+          {/* Mobile SVG */}
+          <svg
+            viewBox="0 0 1200 220"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="heading"
+            className="w-full max-h-[20rem] p-[1rem] md:hidden ml-[-1rem]"
+          >
+            <title id="heading">last year we had...</title>
+            <text
+              x="8"
+              y="100"
+              fontSize={120}
+              fill="white"
+              stroke="var(--color-dark-blue)"
+              strokeWidth="10"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              fontFamily="Dream MMA"
+              className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
+            >
+              <tspan x="10" dy="0">last year</tspan>
+              <tspan x="10" dy="95">we had...</tspan>
+            </text>
+          </svg>
+
+          {/* Desktop SVG */}
+          <svg
+            viewBox="0 0 1200 150"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby="heading"
+            className="w-full max-h-[12rem] p-[1rem] hidden md:block"
+          >
+            <title id="heading">last year we had...</title>
+            <text
+              x="8"
+              y="100"
+              fontSize={72}
+              fill="white"
+              stroke="var(--color-dark-blue)"
+              strokeWidth="10"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              fontFamily="Dream MMA"
+              className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
+            >
+              last year we had...
+            </text>
+          </svg>
+        </h2>
+
+        <div>
+            
+        </div>
+      </div>
+      {/* END Last year we had... */}
 
     </div>
   );
