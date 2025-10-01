@@ -38,7 +38,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
         
             {/* Text Section */}
             <div 
-                className="mt-[-3rem] bg-sky-blue transition-all duration-500 z-20"
+                className="ml-[3rem] mr-[4rem] mt-[-3rem] bg-sky-blue transition-all duration-500 z-20"
                 style={{
                 paddingTop: expanded ? "0rem" : "1rem",
                 paddingBottom: "0.75rem",
@@ -83,22 +83,16 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
                 </div>
 
                 <div
-                ref={textRef}
-                className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
-                    expanded ? "overflow-y-auto" : "overflow-hidden"
-                }`}
-                style={{
-                    maxHeight: expanded ? "18rem" : collapsedHeight, // 18rem leaves room for name/role/button
-                }}
+                    ref={textRef}
+                    className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
+                        expanded ? "overflow-y-auto" : "overflow-hidden"
+                    }`}
+                    style={{
+                        maxHeight: expanded ? "18rem" : collapsedHeight, // 18rem leaves room for name/role/button
+                    }}
                 >
-                {blurb}
+                    {blurb}
                 </div>
-                <button
-                onClick={() => setExpanded((prev) => !prev)}
-                className="font-body-bold text-dark-blue cursor-pointer mt-2"
-                >
-                {expanded ? "Show less" : "Read more"}
-                </button>
             </div>
 
         </div>

@@ -96,21 +96,16 @@ function ProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
         <div
           ref={textRef}
-          className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
-            expanded ? "overflow-y-auto" : "overflow-hidden"
+          onClick={() => setExpanded((prev) => !prev)}
+          className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 cursor-pointer ${
+            expanded ? "overflow-y-auto" : "overflow-hidden line-clamp-5"
           }`}
           style={{
-            maxHeight: expanded ? "18rem" : collapsedHeight, // 18rem leaves room for name/role/button
+            maxHeight: expanded ? "18rem" : collapsedHeight,
           }}
         >
           {blurb}
         </div>
-        <button
-          onClick={() => setExpanded((prev) => !prev)}
-          className="font-body-bold text-dark-blue cursor-pointer mt-2"
-        >
-          {expanded ? "Show less" : "Read more"}
-        </button>
       </div>
     </div>
   );

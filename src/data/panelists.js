@@ -1,7 +1,7 @@
-import panelist1 from "../assets/images/wics/placeholder_headshot.png";
-import panelist2 from "../assets/images/wics/placeholder_headshot.png";
-import panelist3 from "../assets/images/wics/placeholder_headshot.png";
-import panelist4 from "../assets/images/wics/placeholder_headshot.png";
+import panelist1 from "../assets/images/speakers/panelists/archita.png";
+import panelist2 from "../assets/images/speakers/panelists/kaitlynn.jpg";
+import panelist3 from "../assets/images/speakers/panelists/christina.png";
+import panelist4 from "../assets/images/speakers/panelists/eunsong.png";
 
 export const panelists = [
   {
