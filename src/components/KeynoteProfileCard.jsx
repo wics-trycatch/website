@@ -23,7 +23,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
   return (
     <div
-      className={`${styles.card} relative rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
+      className={`${styles.card} overflow-hidden relative rounded-md border-[5px] border-sky-blue bg-sky-blue flex flex-col h-[32rem]`}
     >
         <div className={`grid grid-cols-[40%_auto]`}>
             <div
