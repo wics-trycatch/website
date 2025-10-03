@@ -52,7 +52,7 @@ export const organizers = [
     name: "Grace",
     role: "Logistics Coordinator",
     blurb:
-      "Grace is a 4th year Computing Science student at SFU. In her free time, she enjoys drawing, scrapbooking, and thrifting! She is very excited to be part of this year Try/CATCH committee, and cannot wait to meet you all :D"
+      "Hi everyone, I'm Grace, and I'm currently a 4th year Computing Science student at SFU! In my free time, I enjoy drawing, scrapbooking, and thrifting. I'm super excited to be part of this year's Try/CATCH committee, and cannot wait to meet you all! ^-^"
   },
   {
     img: meyer,
