@@ -5,12 +5,12 @@ import logo_school_of_cs from "../assets/images/shared/sponsors/school of cs.png
 import logo_fas from "../assets/images/shared/sponsors/fas.png"
 
 export const sponsors = [
-    // {
-    //     name: "Safe Software",
-    //     logo: logo_safe_software,
-    //     blurb: "Description of the sponsor and their contribution...",
-    //     tier: "Gold Sponsor"
-    // },
+    {
+        name: "Safe Software",
+        logo: logo_safe_software,
+        blurb: "Headquartered in Surrey, British Columbia, Safe Software is the creator of FME, the only All-Data, Any-AI enterprise integration platform with comprehensive support for spatial data. The company was founded in 1993 and has been focused on bringing life to data since its inception. Whether your challenges have to do with spatial data, big data, real-time stream data, cloud migration, or business intelligence, Safe Software is here to help you spend more time reaping the benefits of information, and less time fighting it.",
+        tier: "Gold Sponsor"
+    },
     {
         name: "Teck",
         logo: logo_teck,
