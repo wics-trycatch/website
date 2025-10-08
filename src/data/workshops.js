@@ -73,7 +73,7 @@ export const workshops = [
         },
         {
           img: horward,
-          name: "Horward",
+          name: "Horward Nguyen",
           blurb: "Hi! I'm a 4th year Software Systems student at SFU with skills in embedded programming, web development, circuit design, and audio/music production. I make robots for fun, and I spend my spare time contributing to open-source projects, improving my home theater and home automation system, and playing DoTA & LoL. I also attend many developer conferences in Vancouver. Say hi if you see me!"
         }
       ]
