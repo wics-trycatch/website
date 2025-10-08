@@ -59,7 +59,7 @@ export const workshops = [
     },
     {
       title: "Game Dev Workshop",
-      description: "Discover what makes apps and websites intuitive and beautiful! Learn the principles of user interface and user experience design through practical exercises. Using design tools like Figma, you'll create wireframes, prototypes, and visual designs for a mobile app. Perfect for creative thinkers who want to understand how to design technology that people love to use.",
+      description: " An intro to Unity game development workshop making a fishing game inspired by Animal Crossing from scratch!",
       hosts: [
         {
           img: joyce,
