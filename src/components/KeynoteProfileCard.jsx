@@ -5,7 +5,7 @@ import styles from "./ProfileCard.module.css";
 
 function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
   const [expanded, setExpanded] = useState(false);
-  const [collapsedHeight, setCollapsedHeight] = useState("6.25rem"); // 5 lines height
+  const [collapsedHeight, setCollapsedHeight] = useState("20rem"); // 5 lines height
   const [expandedHeight, setExpandedHeight] = useState("auto");
   const textRef = useRef(null);
   const hiddenRef = useRef(null);
@@ -16,7 +16,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
       setExpandedHeight(`${fullHeight}px`);
       
       const lineHeight = 20; // 1.25rem in pixels
-      const fiveLineHeight = lineHeight * 18;
+      const fiveLineHeight = lineHeight * 20;
       setCollapsedHeight(`${fiveLineHeight}px`);
     }
   }, [blurb]);
@@ -40,7 +40,7 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
             <div 
                 className="ml-[3rem] mr-[4rem] mt-[-3rem] bg-sky-blue transition-all duration-500 z-20"
                 style={{
-                paddingTop: expanded ? "0rem" : "1rem",
+                paddingTop: expanded ? "1rem" : "1rem",
                 paddingBottom: "0.75rem",
                 paddingLeft: "1.25rem",
                 paddingRight: "1.25rem",
@@ -84,11 +84,12 @@ function KeynoteProfileCard({ img, imgProperties, alt, name, role, blurb }) {
 
                 <div
                     ref={textRef}
+                    onClick={() => setExpanded((prev) => !prev)}
                     className={`font-body text-[1rem]/[1.25rem] transition-all duration-500 ${
-                        expanded ? "overflow-y-auto" : "overflow-hidden"
+                        expanded ? "overflow-y-auto" : "overflow-hidden line-clamp-18"
                     }`}
                     style={{
-                        maxHeight: expanded ? "18rem" : collapsedHeight, // 18rem leaves room for name/role/button
+                        maxHeight: expanded ? "20rem" : collapsedHeight, // 18rem leaves room for name/role/button
                     }}
                 >
                     {blurb}
