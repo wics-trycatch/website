@@ -6,7 +6,7 @@ import rebecca from "../assets/images/workshops/rebecca_figma.png"
 import mara from "../assets/images/workshops/mara_machine.jpg"
 import peter from "../assets/images/workshops/peter_gamedev.jpg"
 import joyce from "../assets/images/workshops/joyce_gamedev.jpg"
-import horward from "../assets/images/workshops/howard_gamedev.jpg"
+import howard from "../assets/images/workshops/howard_gamedev.jpg"
 
 export const workshops = [
     {
@@ -72,8 +72,8 @@ export const workshops = [
           blurb: "Peter is a fourth-year Software Systems student at SFU and Vice President of the Game Development Club! Ever since pre-school he's been playing games, and in high school he learned the skills to program them to life. Beyond the virtual realm, you can find him soaking in ear-ringing live music, scouring review sites for rad movies, and sipping loose leaf tea next to his two cats. Peter can't wait to have a great time meeting everyone at Try/Catch 2025!"
         },
         {
-          img: horward,
-          name: "Horward Nguyen",
+          img: howard,
+          name: "Howard Nguyen",
           blurb: "Hi! I'm a 4th year Software Systems student at SFU with skills in embedded programming, web development, circuit design, and audio/music production. I make robots for fun, and I spend my spare time contributing to open-source projects, improving my home theater and home automation system, and playing DoTA & LoL. I also attend many developer conferences in Vancouver. Say hi if you see me!"
         }
       ]
