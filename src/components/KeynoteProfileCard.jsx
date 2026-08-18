@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import ShowMoreText from "react-show-more-text";
 
 import styles from "./ProfileCard.module.css";
 

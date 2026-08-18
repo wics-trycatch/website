@@ -95,6 +95,7 @@ function Navbar() {
             target="_blank" rel="noopener noreferrer"
             text="REGISTER"
             type="navbar"
+            disabled
           />
         </li>
       </ul>
@@ -145,6 +146,7 @@ function Navbar() {
                 target="_blank" rel="noopener noreferrer"
                 text="REGISTER"
                 type="navbar"
+                disabled
               />
             </li>
           </ul>
