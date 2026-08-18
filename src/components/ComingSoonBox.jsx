@@ -26,7 +26,7 @@ function ComingSoonBox() {
         lineColor="rgba(226,244,255,0.5)"
       >
         <p
-          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[17rem] lg:max-w-[22rem] 2xl:max-w-[28rem] 2xl:ml-[0.75rem]`}
+          className={`absolute font-body text-dark-blue bottom-[0.75rem] max-w-[17rem] lg:max-w-[22rem] 2xl:max-w-[29rem] 2xl:ml-[0.75rem]`}
         >
           <span className={`text-[1rem]/[1.25rem] lg:text-[1.25rem]/[1.25rem] 2xl:text-[1.75rem]/[1.75rem]`}>Save the date! The {" "}
           <span className={`font-body-bold`}>Try/CATCH 2026</span> conference is happening on...{" "}</span>

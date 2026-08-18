@@ -74,6 +74,7 @@ function Home() {
                 size="small"
                 fontSize="text-[1.25rem]"
                 type="hero"
+                disabled
               />
             </div>
           </div>
@@ -349,7 +350,7 @@ function Home() {
               This year's Try/CATCH event will be taking place on Saturday, October 25th, 2025 at the SFU Burnaby campus. <span className={`${styles.infoDescBold}`}>Registration is open!</span>
             </p>
             <div className={`flex flex-col sm:flex-row gap-[1rem] sm:gap-[2rem] justify-center mt-[4rem]`}>
-                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" />
+                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" disabled />
                 <Button link="/schedule" text="EVENT SCHEDULE" bgColor="bg-light-blue" type="hero" />
             </div>
           </div>
