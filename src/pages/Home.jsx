@@ -102,7 +102,7 @@ function Home() {
 
           {/* Coming Soon box */}
           <div
-            className={`absolute z-1000 right-[-1.75rem] md:right-[-2.75rem] lg:right-[-1.75rem] bottom-[-3.5rem] 2xl:bottom-[4rem]`}
+            className={`absolute z-1000 right-[-3rem] md:right-[-2.75rem] lg:right-[-1.75rem] bottom-[-2rem] sm:bottom-[-3.5rem] 2xl:bottom-[1.75rem]`}
           >
             <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
               <ComingSoonBox />
