@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 import HeroInfoBox from "../components/HeroInfoBox";
+import ComingSoonBox from "../components/ComingSoonBox";
 import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
 import HighlightsParagraph from "../components/HighlightsParagraph";
@@ -98,6 +99,16 @@ function Home() {
               alt=" "
             />
           </div>
+
+          {/* Coming Soon box */}
+          <div
+            className={`absolute z-1000 right-[-1.75rem] md:right-[-2.75rem] lg:right-[-1.75rem] bottom-[-3.5rem] 2xl:bottom-[4rem]`}
+          >
+            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
+              <ComingSoonBox />
+            </div>
+          </div>
+          {/* END Coming Soon Box */}
 
           {/* Try/CATCH location and date box */}
           <div
