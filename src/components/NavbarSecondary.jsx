@@ -95,6 +95,7 @@ function NavbarSecondary() {
             target="_blank" rel="noopener noreferrer"
             text="REGISTER"
             type="navbarSecondary"
+            disabled
           />
         </li>
       </ul>
@@ -145,6 +146,7 @@ function NavbarSecondary() {
                 target="_blank" rel="noopener noreferrer"
                 text="REGISTER"
                 type="navbarSecondary"
+                disabled
               />
             </li>
           </ul>

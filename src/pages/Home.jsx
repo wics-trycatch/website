@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import PhotoWindow from "../components/PhotoWindow";
 import Button from "../components/Button";
 import HeroInfoBox from "../components/HeroInfoBox";
+import ComingSoonBox from "../components/ComingSoonBox";
 import GridBox from "../components/GridBox";
 import PaintBox from "../components/PaintBox";
 import HighlightsParagraph from "../components/HighlightsParagraph";
@@ -73,6 +74,7 @@ function Home() {
                 size="small"
                 fontSize="text-[1.25rem]"
                 type="hero"
+                disabled
               />
             </div>
           </div>
@@ -98,6 +100,16 @@ function Home() {
               alt=" "
             />
           </div>
+
+          {/* Coming Soon box */}
+          <div
+            className={`absolute z-1000 right-[-3rem] md:right-[-2.75rem] lg:right-[-1.75rem] bottom-[-2rem] sm:bottom-[-3.5rem] 2xl:bottom-[1.75rem]`}
+          >
+            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
+              <ComingSoonBox />
+            </div>
+          </div>
+          {/* END Coming Soon Box */}
 
           {/* Try/CATCH location and date box */}
           <div
@@ -338,7 +350,7 @@ function Home() {
               This year's Try/CATCH event will be taking place on Saturday, October 25th, 2025 at the SFU Burnaby campus. <span className={`${styles.infoDescBold}`}>Registration is open!</span>
             </p>
             <div className={`flex flex-col sm:flex-row gap-[1rem] sm:gap-[2rem] justify-center mt-[4rem]`}>
-                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" />
+                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" disabled />
                 <Button link="/schedule" text="EVENT SCHEDULE" bgColor="bg-light-blue" type="hero" />
             </div>
           </div>
