@@ -1,62 +1,15 @@
 @font-face {
-  font-family: 'Aeroblade';
+  font-family: 'Quicksand';
+  src: url('./assets_26/fonts/quicksand/variable/quicksand-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 300 700;
   font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/Aeroblade DEMO.ttf') format('truetype');
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'SpaceGrotesk-Regular';
+  font-family: 'Special Gothic';
+  src: url('./assets_26/fonts/special_gothic/variable/special-gothic-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 400 700;
   font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'SpaceGrotesk-Bold';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/SpaceGrotesk-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'SpaceGrotesk-Medium';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Dream MMA';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/Dream MMA.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Saira-Regular';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/Saira-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Saira-Bold';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/Saira-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Saira-Medium';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/Saira-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Roboto-Slab';
-  font-style: normal;
-  font-weight: normal;
-  src: url('./assets/fonts/RobotoSlab-Bold.ttf') format('truetype');
+  font-display: swap;
 }
