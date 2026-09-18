@@ -1,8 +1,0 @@
-.displayText{
-    -webkit-text-stroke: 8px var(--color-dark-blue);
-    filter: drop-shadow(3px 3px 0px var(--color-dark-blue));
-}
-
-.outsideStroke {
-   paint-order: stroke fill;
-}

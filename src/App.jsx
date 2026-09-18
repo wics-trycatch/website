@@ -26,7 +26,7 @@ function ScrollToTop() {
 function App() {
 
   return (
-    <div className={`overflow-x-hidden max-w-[128rem] mx-auto px-[5%] py-[2rem]`}>
+    <div className={`max-w-[128rem] mx-auto px-[5%] py-[2rem]`}>
         <NavbarWrapper />
         <ScrollToTop />
         <Routes>

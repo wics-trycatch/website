@@ -1,159 +1,167 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
-import Button from "./Button";
 
-import logo from "../assets/images/shared/logo_simple_white.png";
+import blob from "../assets_26/images/shared/blob_tiny.svg";
 
 import { ChevronDown, Menu, X } from "lucide-react";
 
 function Navbar() {
-  const [iconSize, setIconSize] = useState(36);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1280) {
-        setIconSize(24); // xl = 80rem = 1280px
-      } else if (window.innerWidth < 1536) {
-        setIconSize(32); // 2xl = 96rem = 1536px
-      } else {
-        setIconSize(36); // Larger than 2xl
-      }
-
       if (window.innerWidth >= 1280) {
         setHamburgerOpen(false);
       }
     };
 
-    handleResize(); // set on mount
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (currentY < 80 || currentY < lastScrollY.current) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`px-[2.5rem] pt-[2rem] pb-[0.5rem] flex justify-between bg-dark-blue`}
+      className={`sticky top-0 z-30 bg-navy -mx-[5.5556%] -mt-[2rem] px-[2.5%] py-[1.5rem] flex items-center justify-between transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
     >
-      <Link to="/">
-        <img
-          src={logo}
-          alt="Homepage"
-          className="h-[2.5rem] xl:h-[2.75rem] 2xl:h-[3rem] w-[auto] -translate-y-2"
-        />
+      <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <img src={blob} alt="try/CATCH home" className="h-[2rem] w-auto" />
       </Link>
 
-      {/* Desktop Full Navbar */}
+      {/* Desktop nav */}
       <ul
         role="menu"
         aria-label="Main menu"
-        className={`${styles.navList} hidden xl:flex gap-[3rem] xl:gap-[2rem]`}
+        className={`${styles.navList26} hidden xl:flex items-center gap-[2rem]`}
       >
-        <li role="menuitem" tabIndex="0" className={`${styles.dropdown} z-10000`}>
-          <div className={`flex`}>
-            <span className={`mr-[0.5rem] cursor-default`}>EVENT DETAILS</span>
-            <ChevronDown size={iconSize} />
+        <li role="menuitem" tabIndex="0" className={styles.dropdown26}>
+          <div className="flex items-center gap-[0.35rem] cursor-default">
+            <span>About</span>
+            <ChevronDown size={18} />
           </div>
-          <ul role="menu" className={`${styles.dropdownContent}`}>
-            <li role="menuitem" tabIndex="0">
-              <Link to="/schedule">
-                SCHEDULE
-              </Link>
-            </li>
-            <li role="menuitem" tabIndex="0">
-              <Link to="/speakers">
-                SPEAKERS
-              </Link>
-            </li>
-            <li role="menuitem" tabIndex="0">
-              <Link to="/workshops">
-                WORKSHOPS
-              </Link>
-            </li>
-          </ul>
-        </li>
-        <li role="menuitem" tabIndex="0">
-          <Link to="/sponsors">
-            SPONSORS
-          </Link>
-        </li>
-        <li role="menuitem" tabIndex="0">
-          <Link to="/faq">
-            FAQ
-          </Link>
-        </li>
-        <li role="menuitem" tabIndex="0">
-          <Link to="/sfu-wics">
-            SFU WICS
-          </Link>
-        </li>
-        <li role="menuitem" tabIndex="0">
-          <Button
-            link="https://trycatch2025.eventbrite.ca/"
-            target="_blank" rel="noopener noreferrer"
-            text="REGISTER"
-            type="navbar"
-            disabled
-          />
-        </li>
-      </ul>
-      {/* END Desktop Full Navbar */}
-
-      {/* Hamburger menu button for mobile */}
-      <button
-        className="xl:hidden text-white -translate-y-2"
-        onClick={() => setHamburgerOpen(!hamburgerOpen)}
-        aria-label="Toggle menu"
-      >
-        {hamburgerOpen ? <X size={36} /> : <Menu size={36} />}
-      </button>
-
-      {/* Mobile Hamburger menu */}
-      {hamburgerOpen && (
-        <div className="z-10000 absolute top-[7.5rem] w-[90%] left-[5%] bg-dark-blue px-6 py-6 xl:hidden">
-          <ul role="menu" className="flex flex-col gap-4 text-white">
-            <li>
-              <div className="flex items-center justify-between">
-                <span>EVENT DETAILS</span>
-                <ChevronDown size={24} />
-              </div>
-              <ul className="ml-4 mt-2 flex flex-col gap-2">
-                <li>
-                  <Link to="/schedule">SCHEDULE</Link>
-                </li>
-                <li>
-                  <Link to="/speakers">SPEAKERS</Link>
-                </li>
-                <li>
-                  <Link to="/workshops">WORKSHOPS</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/sponsors">SPONSORS</Link>
-            </li>
+          <ul role="menu" className={styles.dropdownContent26}>
             <li>
               <Link to="/faq">FAQ</Link>
             </li>
             <li>
-              <Link to="/sfu-wics">SFU WICS</Link>
+              <Link to="/sfu-wics">SFU WiCS</Link>
+            </li>
+          </ul>
+        </li>
+
+        <li role="menuitem" tabIndex="0" className={styles.dropdown26}>
+          <div className="flex items-center gap-[0.35rem] cursor-default">
+            <span>Event Details</span>
+            <ChevronDown size={18} />
+          </div>
+          <ul role="menu" className={styles.dropdownContent26}>
+            <li>
+              <Link to="/schedule">Schedule</Link>
             </li>
             <li>
-              <Button
-                link="https://trycatch2025.eventbrite.ca/"
-                target="_blank" rel="noopener noreferrer"
-                text="REGISTER"
-                type="navbar"
-                disabled
-              />
+              <Link to="/speakers">Speakers</Link>
+            </li>
+            <li>
+              <Link to="/workshops">Workshops</Link>
+            </li>
+          </ul>
+        </li>
+
+        <li role="menuitem" tabIndex="0">
+          <Link to="/sponsors">Sponsors</Link>
+        </li>
+
+        <li role="menuitem" tabIndex="0">
+          <Link
+            to="/schedule"
+            className="font-quicksand font-bold text-navy bg-yellow rounded-full px-[1.5rem] py-[0.5rem] hover:scale-105 transition-transform duration-300 inline-block"
+          >
+            Register
+          </Link>
+        </li>
+      </ul>
+      {/* END desktop nav */}
+
+      {/* Hamburger for mobile */}
+      <button
+        className="xl:hidden text-white"
+        onClick={() => setHamburgerOpen(!hamburgerOpen)}
+        aria-label="Toggle menu"
+      >
+        {hamburgerOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {hamburgerOpen && (
+        <div className="absolute top-full left-0 right-0 z-30 bg-navy px-[6%] py-[1.5rem] xl:hidden">
+          <ul className="flex flex-col gap-[1rem] font-quicksand text-white">
+            <li>
+              <div className="flex items-center justify-between">
+                <span>About</span>
+                <ChevronDown size={20} />
+              </div>
+              <ul className="ml-4 mt-2 flex flex-col gap-2">
+                <li>
+                  <Link to="/faq" onClick={() => setHamburgerOpen(false)}>FAQ</Link>
+                </li>
+                <li>
+                  <Link to="/sfu-wics" onClick={() => setHamburgerOpen(false)}>SFU WiCS</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div className="flex items-center justify-between">
+                <span>Event Details</span>
+                <ChevronDown size={20} />
+              </div>
+              <ul className="ml-4 mt-2 flex flex-col gap-2">
+                <li>
+                  <Link to="/schedule" onClick={() => setHamburgerOpen(false)}>Schedule</Link>
+                </li>
+                <li>
+                  <Link to="/speakers" onClick={() => setHamburgerOpen(false)}>Speakers</Link>
+                </li>
+                <li>
+                  <Link to="/workshops" onClick={() => setHamburgerOpen(false)}>Workshops</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
+            </li>
+            <li>
+              <Link
+                to="/schedule"
+                onClick={() => setHamburgerOpen(false)}
+                className="font-quicksand font-bold text-navy bg-yellow rounded-full px-[1.5rem] py-[0.5rem] inline-block w-fit"
+              >
+                Register
+              </Link>
             </li>
           </ul>
         </div>
       )}
-      {/* END Mobile Hamburger Menu */}
-
     </nav>
   );
 }

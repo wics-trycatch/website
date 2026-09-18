@@ -1,381 +1,494 @@
-import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Users, Wrench, Award, ChevronDown } from "lucide-react";
 import styles from "./Home.module.css";
 
-import Navbar from "../components/Navbar";
-import PhotoWindow from "../components/PhotoWindow";
-import Button from "../components/Button";
-import HeroInfoBox from "../components/HeroInfoBox";
-import ComingSoonBox from "../components/ComingSoonBox";
-import GridBox from "../components/GridBox";
-import PaintBox from "../components/PaintBox";
-import HighlightsParagraph from "../components/HighlightsParagraph";
-import FolderStatCard from "../components/FolderStatCard";
-import PhotoCamera from "../components/PhotoCamera";
+// event date used for the countdown — update this once a real registration
+// deadline is set; for now it just counts down to the event itself
+const EVENT_DATE = new Date("2026-10-24T00:00:00");
 
-import banner_base from "../assets/images/home/banner_base.png";
-import banner_texture from "../assets/images/home/banner_texture.png";
-import logo from "../assets/images/shared/logo_full.png";
-import scroll_more from "../assets/images/home/scroll_more.svg";
-import paint_window from "../assets/images/home/paint_app_window.svg";
-import bunny from "../assets/images/home/bunny.gif";
-import scribble from "../assets/images/home/pixel_scribble.svg";
-import star_light_blue from "../assets/images/shared/star_light_blue.svg";
-import star_blue from "../assets/images/shared/star_blue.svg";
-import sparkles_light_blue from "../assets/images/shared/sparkles_light_blue.svg";
-import sparkles_blue from "../assets/images/shared/sparkles_blue.svg";
-import attendees from "../assets/images/home/folder_attendees.svg";
-import workshops from "../assets/images/home/folder_workshops.svg";
-import sponsors from "../assets/images/home/folder_sponsors.svg";
+function useCountdown(target) {
+  const getRemaining = () => {
+    const diff = target - new Date();
+    if (diff <= 0) return { days: 0, hours: 0, mins: 0 };
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      mins: Math.floor((diff / (1000 * 60)) % 60),
+    };
+  };
 
-import photo1 from '../assets/images/home/camera_photo_1.png';
-import photo2 from '../assets/images/home/camera_photo_2.png';
-import photo3 from '../assets/images/home/camera_photo_3.png';
-import photo4 from '../assets/images/home/camera_photo_4.png';
-import photo5 from '../assets/images/home/camera_photo_5.png';
-import photo6 from '../assets/images/home/camera_photo_6.png';
+  const [remaining, setRemaining] = useState(getRemaining);
 
-import photo1_mobile from '../assets/images/home/camera_photo_mobile_1.png';
-import photo2_mobile from '../assets/images/home/camera_photo_mobile_2.png';
-import photo3_mobile from '../assets/images/home/camera_photo_mobile_3.png';
-import photo4_mobile from '../assets/images/home/camera_photo_mobile_4.png';
-import photo5_mobile from '../assets/images/home/camera_photo_mobile_5.png';
-import photo6_mobile from '../assets/images/home/camera_photo_mobile_6.png';
+  useEffect(() => {
+    const id = setInterval(() => setRemaining(getRemaining()), 1000 * 30);
+    return () => clearInterval(id);
+  }, [target]);
 
-import wics_photo from "../assets/images/shared/sfu_wics.jpg"
-import wics_logo from "../assets/images/shared/sponsors/wics_white.png"
+  return remaining;
+}
+
+// Shared 2026 brand assets
+import logoTiny from "../assets_26/images/shared/logo_tiny.svg";
+import frameBg from "../assets_26/images/shared/frame_bg.svg";
+import heroArc from "../assets_26/images/shared/hero_arc.svg";
+
+// About section highlight icons
+import codeIcon from "../assets_26/images/home/code_icon.svg";
+import peopleIcon from "../assets_26/images/home/people_icon.svg";
+import inspirationIcon from "../assets_26/images/home/inspiration_icon.svg";
+
+// Gallery connector
+import polaroidLine from "../assets_26/images/home/polaroid_line.svg";
+
+// SFU WiCS value icons
+import soundIcon from "../assets_26/images/home/sound_icon.svg";
+import navigateIcon from "../assets_26/images/home/navigate_icon.svg";
+import mountainIcon from "../assets_26/images/home/mountain_icon.svg";
+import blocksIcon from "../assets_26/images/home/blocks_icon.svg";
+
+
+// Gallery / workshop polaroids
+import figmaWk from "../assets_26/images/wics/figma_wk.svg";
+import panelQna from "../assets_26/images/wics/panel_qna.svg";
+import gameDev from "../assets_26/images/wics/game__dev.svg";
+import ml from "../assets_26/images/wics/ml.svg";
+import sonyToio from "../assets_26/images/wics/sony_toio.svg";
+import sfuWicsPhoto from "../assets_26/images/wics/sfuwics.svg.svg";
+import groupPhoto from "../assets_26/images/wics/trycatch2024.png";
+
+const galleryItems = [
+  { img: figmaWk, caption: "Figma Workshop" },
+  { img: panelQna, caption: "Panel and Q&A" },
+  { img: gameDev, caption: "Game Dev Workshop" },
+  { img: sonyToio, caption: "Sony Toio Robots Workshop" },
+  { img: ml, caption: "Machine Learning Workshop" },
+];
+
+const highlights = [
+  {
+    icon: codeIcon,
+    title: "Discover Tech",
+    desc: "Explore coding, robotics, and design through hands-on workshops for all levels.",
+  },
+  {
+    icon: peopleIcon,
+    title: "Meet Role Models",
+    desc: "Connect with women in tech, from students to seasoned professionals.",
+  },
+  {
+    icon: inspirationIcon,
+    title: "Be Inspired",
+    desc: "Fuel your curiosity with keynotes, panels, and prizes. Walk away with new skills and a glimpse into your future.",
+  },
+];
+
+const wicsValues = [
+  { icon: soundIcon, label: "promote", desc: "women in Computing Science", bg: "bg-purple-deep" },
+  { icon: navigateIcon, label: "support", desc: "students through their journey", bg: "bg-purple-medium" },
+  { icon: mountainIcon, label: "challenge", desc: "biases and barriers in tech", bg: "bg-yellow" },
+  { icon: blocksIcon, label: "build", desc: "a strong, inclusive community", bg: "bg-pink-light" },
+];
+
+// positions/sizes pulled directly from the Figma frame (as % of the three
+// circles' own combined bounding box, so both edges sit flush and the
+// section's own padding gives equal spacing on the left and right)
+const stats = [
+  {
+    icon: Users, number: "79", label: "Attendees",
+    bg: "bg-purple-medium", textColor: "text-lavender-pale",
+    left: "0%", top: "0%", width: "35.716%", height: "100%",
+    numSize: "10.582cqw", labelSize: "3.307cqw", iconSize: "8.268cqw", iconWeight: 2,
+    mLeft: "6%", mTop: "2%", mWidth: "56%", mHeight: "33.87%",
+    mNumSize: "15.5cqw", mLabelSize: "5.3cqw", mIconSize: "13.5cqw",
+  },
+  {
+    icon: Wrench, number: "4", label: "Workshops",
+    bg: "bg-purple-deep", textColor: "text-lavender-pale",
+    left: "42.828%", top: "21.169%", width: "27.202%", height: "76.157%",
+    numSize: "7.937cqw", labelSize: "2.977cqw", iconSize: "6.945cqw", iconWeight: 1.25,
+    mLeft: "46%", mTop: "36%", mWidth: "42%", mHeight: "25.40%",
+    mNumSize: "11.8cqw", mLabelSize: "4.0cqw", mIconSize: "10.2cqw",
+  },
+  {
+    icon: Award, number: "3", label: "Sponsors",
+    bg: "bg-yellow", textColor: "text-navy",
+    left: "76.601%", top: "27.625%", width: "23.398%", height: "64.352%",
+    numSize: "7.937cqw", labelSize: "2.977cqw", iconSize: "7.110cqw", iconWeight: 1.25,
+    mLeft: "12%", mTop: "68%", mWidth: "34%", mHeight: "20.56%",
+    mNumSize: "9.6cqw", mLabelSize: "3.25cqw", mIconSize: "8.2cqw",
+  },
+];
+
+// card 305.3x411.61 (r10), photo 269.1x296.34 (r5, 2px stroke) — pulled
+// directly from Figma, so padding works out to 1.1306rem on every side
+// base size matches the Figma card (scale 1); mobile passes a smaller scale
+// so everything (card, photo inset, padding, radius) shrinks together
+function Polaroid({ img, caption, className = "", scale = 1 }) {
+  const card = { w: 15.65 * scale, h: 21.1 * scale };
+  const photo = { w: 13.79 * scale, h: 15.19 * scale };
+  const pad = 0.93 * scale;
+  const radius = 0.51 * scale;
+  const photoRadius = 0.26 * scale;
+  const textSize = 1.15 * scale;
+
+  return (
+    <div
+      className={`bg-lavender-pale shadow-lg flex flex-col hover:scale-105 hover:-translate-y-[0.4rem] transition-transform duration-300 ${className}`}
+      style={{ width: `${card.w}rem`, height: `${card.h}rem`, padding: `${pad}rem`, borderRadius: `${radius}rem` }}
+    >
+      <div
+        className="overflow-hidden shrink-0"
+        style={{ width: `${photo.w}rem`, height: `${photo.h}rem`, borderRadius: `${photoRadius}rem` }}
+      >
+        <img src={img} alt={caption} className="w-full h-full object-cover" />
+      </div>
+      <p
+        className="font-quicksand font-bold text-navy text-center flex-1 flex items-center justify-center"
+        style={{ fontSize: `${textSize}rem`, marginTop: `${pad * 0.8}rem` }}
+      >
+        {caption}
+      </p>
+    </div>
+  );
+}
+
+// the 3-over-2 zig-zag grid, reused at both tablet and desktop scale so the
+// same layout logic doesn't have to be duplicated by hand
+function GalleryGrid({ scale, connectorRem, gapXRem }) {
+  return (
+    <div
+      className="grid grid-cols-5 gap-y-0 max-w-[70rem] w-full mx-auto justify-items-center"
+      style={{ gridTemplateRows: `auto ${connectorRem}rem auto`, columnGap: `${gapXRem}rem` }}
+    >
+      <div className="col-start-1 row-start-1">
+        <Polaroid {...galleryItems[0]} scale={scale} />
+      </div>
+      <div className="col-start-3 row-start-1">
+        <Polaroid {...galleryItems[1]} scale={scale} />
+      </div>
+      <div className="col-start-5 row-start-1">
+        <Polaroid {...galleryItems[2]} scale={scale} />
+      </div>
+
+      <img src={polaroidLine} alt="" aria-hidden="true" className="pointer-events-none row-start-2 col-start-1 col-span-2 justify-self-center w-auto" style={{ height: `${connectorRem}rem` }} />
+      <img src={polaroidLine} alt="" aria-hidden="true" className="pointer-events-none row-start-2 col-start-2 col-span-2 justify-self-center w-auto scale-x-[-1]" style={{ height: `${connectorRem}rem` }} />
+      <img src={polaroidLine} alt="" aria-hidden="true" className="pointer-events-none row-start-2 col-start-3 col-span-2 justify-self-center w-auto" style={{ height: `${connectorRem}rem` }} />
+      <img src={polaroidLine} alt="" aria-hidden="true" className="pointer-events-none row-start-2 col-start-4 col-span-2 justify-self-center w-auto scale-x-[-1]" style={{ height: `${connectorRem}rem` }} />
+
+      <div className="col-start-2 row-start-3">
+        <Polaroid {...galleryItems[3]} scale={scale} />
+      </div>
+      <div className="col-start-4 row-start-3">
+        <Polaroid {...galleryItems[4]} scale={scale} />
+      </div>
+    </div>
+  );
+}
 
 function Home() {
+  const { days, hours, mins } = useCountdown(EVENT_DATE);
+
   return (
-    <div className={`mx-auto`}>
-      {/* <Navbar /> */}
-      {/* Hero section */}
-      <div className={`relative z-1000`}>
-        <div
-          className={`absolute z-100 top-[3.4rem] lg:top-[4rem] pl-[2.25rem] pr-[2.5rem] sm:pl-[1rem] md:pl-[3.5rem] 2xl:pl-[10rem]`}
-        >
-          <img
-            src={logo}
-            alt="Try/CATCH Logo"
-            className={`w-[24rem] sm:w-[30rem] lg:w-[40rem] 2xl:w-[50rem] sm:ml-[1rem]`}
-          />
-          <div className={`mt-[1rem] ml-[2rem] mr-[1rem]`}>
-            <p
-              className={`${styles.heroDesc} max-w-[18rem] sm:max-w-[24rem] lg:max-w-[28rem] 2xl:max-w-[40rem]`}
-            >
-              A tech conference for high school girls and non-binary students to
-              learn, connect, and get inspired.
-            </p>
-            <div className={`mt-[2rem] sm:mt-[3rem] 2xl:mt-[4rem]`}>
-              <Button
-                link="https://trycatch2025.eventbrite.ca/"
-                target="_blank" rel="noopener noreferrer"
-                text="REGISTER"
-                size="small"
-                fontSize="text-[1.25rem]"
-                type="hero"
-                disabled
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          className={`relative scale-100 origin-top ${styles.heroBanner} border-[8px] border-dark-blue`}
-        >
-          <PhotoWindow
-            img={banner_base}
-            imgWidth="w-[100%]"
-            imgHeight="h-[36rem] lg:h-[40rem] 2xl:h-[56rem]"
-            imgPosition="object-[55%_15%]"
-            windowBorder="border-[0px]"
-            alt="Group photo of Try/CATCH 2024 attendees at the SFU ASB Atrium"
-          />
-          <div className={`absolute inset-0`}>
-            <PhotoWindow
-              img={banner_texture}
-              imgWidth="w-[100%]"
-              imgHeight="h-[36rem] lg:h-[40rem] 2xl:h-[56rem]"
-              imgPosition="object-[55%_15%]"
-              windowBorder="border-[0px]"
-              alt=" "
-            />
-          </div>
+    <div className="relative bg-navy overflow-hidden -mx-[5.5556%]">
+      {/* star + constellation background, tiled behind the whole page */}
+      <div
+        className="absolute inset-0 opacity-75 pointer-events-none"
+        style={{ backgroundImage: `url(${frameBg})`, backgroundRepeat: "repeat", backgroundSize: "56rem auto" }}
+        aria-hidden="true"
+      />
 
-          {/* Coming Soon box */}
-          <div
-            className={`absolute z-1000 right-[-3rem] md:right-[-2.75rem] lg:right-[-1.75rem] bottom-[-2rem] sm:bottom-[-3.5rem] 2xl:bottom-[1.75rem]`}
+      {/* HERO */}
+      <section className="relative pt-[2rem]">
+        {/* mobile + tablet: simple centered stack, no arc, lighter text */}
+        <div className="xl:hidden flex flex-col items-center text-center gap-[1.25rem] px-[10%] pt-[2.5rem] pb-[3rem]">
+          <img src={logoTiny} alt="try/CATCH" className="w-[13rem]" />
+          <p className="font-quicksand font-bold text-pink-light text-[0.95rem] leading-relaxed max-w-[18rem]">
+            A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
+          </p>
+          <Link
+            to="/schedule"
+            className="bg-yellow text-navy font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem]"
           >
-            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
-              <ComingSoonBox />
-            </div>
-          </div>
-          {/* END Coming Soon Box */}
-
-          {/* Try/CATCH location and date box */}
-          <div
-            className={`absolute z-100 right-[-3rem] md:right-[-4rem] lg:right-[-3rem] bottom-[-2rem] 2xl:bottom-[4rem]`}
-          >
-            <div className={`drop-shadow-[6px_6px_0_rgba(14,41,109,0.75)] md:drop-shadow-[8px_8px_0_rgba(14,41,109,0.75)]`}>
-              <HeroInfoBox />
-            </div>
-            <img
-              src={star_light_blue}
-              alt=""
-              className={`absolute w-[3.5rem] md:w-[4rem] 2xl:w-[5.5rem] top-[4.5rem] sm:top-[3.5rem] 2xl:top-[4rem] left-[-1.5rem] sm:left-[-2rem] 2xl:left-[-3rem]`}
-            />
-          </div>
-          {/* END Try/CATCH location and date box */}
-
-          {/* Scroll to learn more */}
-          <motion.div
-            className={`absolute z-1000 bottom-[-5rem] md:bottom-[-2rem] left-[2rem] md:left-[6rem] xl:left-[12rem] 2xl:left-[16rem]`}
-            animate={{
-              y: [0, -10, 0], // bob up and down
-            }}
-            transition={{
-              duration: 1,
-              ease: "easeInOut",
-              delay: 2.5, 
-              repeat: Infinity,
-              repeatDelay: 2.5, 
-            }}>
-            <img src={scroll_more} alt=" " className={`w-[16rem] lg:w-[20rem] 2xl:w-[24rem]`} />
-          </motion.div>
-          {/* END Scroll to learn more */}
-
-          {/* Stars */}
-            
-          {/* Light blue star top left */}
-          <img
-            src={star_light_blue}
-            alt=" "
-            className={`absolute z-1000 w-[3rem] md:w-[4rem] 2xl:w-[5.5rem] top-[1rem] 2xl:top-[3rem] left-[-1.5rem] md:left-[-2.5rem] 2xl:left-[-3.5rem]`}
-          />
-
-          {/* Light blue sparkle top right */}
-          <img
-            src={sparkles_light_blue}
-            alt=" "
-            className={`absolute z-1000 w-[3.5rem] md:w-[4.75rem] 2xl:w-[7rem] top-[7rem] md:top-[10rem] xl:top-[16rem] right-[-1.25rem] md:right-[1.5rem] xl:right-[5rem]`}
-          />
-
-          {/* Blue star bottom right */}
-          <img
-            src={star_blue}
-            alt=" "
-            className={`absolute z-1000 w-[2.5rem] md:w-[3.25rem] 2xl:w-[4.5rem] bottom-[15rem] 2xl:bottom-[26rem] right-[-1.5rem] md:right-[-2rem] 2xl:right-[-2.5rem]`}
-          />
-
-          {/* Blue sparkle bottom left */}
-          <img
-            src={sparkles_blue}
-            alt=" "
-            className={`absolute z-1000 w-[4.5rem] md:w-[5.5rem] 2xl:w-[8rem] bottom-[1rem] 2xl:bottom-[6rem] left-[-2rem] md:left-[-2.25rem] 2xl:left-[-3rem]`}
-          />
-          {/* END Stars */}
-        </div>
-      </div>
-      {/* END Hero section */}
-
-      {/* About Try/CATCH */}
-      <div className={`relative h-full mt-[2rem] grid md:grid-cols-2`}>
-        {/* What is Try/CATCH? */}
-        <div>
-          <PaintBox />
-          {/* <div className={`px-[2rem] pt-[4rem] pb-[12rem] md:absolute md:top-[5rem] md:right-[-12rem]`}>
-            <HighlightsParagraph />
-          </div> */}
+            Register Now!
+          </Link>
+          <p className="font-quicksand font-bold text-lavender-pale text-[0.8rem] leading-relaxed mt-[0.5rem]">
+            Try/CATCH is happening in SFU Burnaby campus on Oct 24th, 2026!
+          </p>
         </div>
 
-        {/* Highlights */}
-        <div className={`px-[2rem] pt-[4rem] h-full hidden md:block md:absolute md:inset-y-[5rem] md:right-[0] md:max-w-[50%]`}>
-          <HighlightsParagraph />
-        </div>
-        {/* END What is Try/CATCH? */}
+        {/* desktop: full arc with content laid over it */}
+        <div className="relative hidden xl:block">
+          <img src={heroArc} alt="" aria-hidden="true" className="block w-full h-auto pointer-events-none" />
 
-        <section className={`relative md:static mt-[1.5rem]`}>
-          <div className={`md:absolute h-full md:w-full md:h-full z-[-1000] md:right-[-12rem] lg:right-[-24rem] top-[5rem] drop-shadow-[6px_6px_0_rgba(157,217,254,1)] md:drop-shadow-[6px_6px_0_rgba(157,217,254,1)]`}>
-            <div className={`absolute z-[-1000] w-full h-full`}>
-              <GridBox width="md:w-[calc(100%-12rem)] lg:w-[calc(100%-24rem)]" height="h-[100%] md:h-[calc(100%-4rem)]" />
-            </div>
+          <div className={`absolute left-1/2 -translate-x-1/2 bottom-[8%] ${styles.heroGrid}`}>
+            <img src={logoTiny} alt="try/CATCH" className={`${styles.heroLogo} w-[24rem]`} />
 
-            <div className={`px-[2rem] pt-[4rem] pb-[12rem] md:hidden`}>
-              <HighlightsParagraph />
-            </div>
-          
-          </div>
-        </section>
-        {/* END Highlights */}
-      </div>
-      {/* END About Try/CATCH */}
-      
-      {/* Last year we had... */}
-      <div className={`2xl:py-[5rem]`}>
-        <h2 className={`mt-[3rem] md:mt-[7rem] 2xl:mb-[5rem]`}>
-          {/* Mobile SVG */}
-          <svg
-            viewBox="0 0 1200 220"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-labelledby="heading"
-            className="w-full max-h-[20rem] p-[1rem] md:hidden ml-[-1rem]"
-          >
-            <title id="heading">last year we had...</title>
-            <text
-              x="8"
-              y="100"
-              fontSize={120}
-              fill="white"
-              stroke="var(--color-dark-blue)"
-              strokeWidth="10"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              fontFamily="Dream MMA"
-              className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
-            >
-              <tspan x="10" dy="0">last year</tspan>
-              <tspan x="10" dy="95">we had...</tspan>
-            </text>
-          </svg>
-
-          {/* Desktop SVG */}
-          <svg
-            viewBox="0 0 1200 150"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-labelledby="heading"
-            className="w-full max-h-[12rem] p-[1rem] hidden md:block"
-          >
-            <title id="heading">last year we had...</title>
-            <text
-              x="8"
-              y="100"
-              fontSize={72}
-              fill="white"
-              stroke="var(--color-dark-blue)"
-              strokeWidth="10"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              fontFamily="Dream MMA"
-              className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
-            >
-              last year we had...
-            </text>
-          </svg>
-        </h2>
-
-        <div className={`flex flex-col sm:flex-row gap-[3rem] mt-[2rem]`}>
-            <div className={`mx-auto`}>
-              <FolderStatCard folderImg={attendees} alt="85 Attendees" text="ATTENDEES" />
-            </div>
-            <div className={`mx-auto`}>
-              <FolderStatCard folderImg={workshops} alt="5 Workshops" text="WORKSHOPS" />
-            </div>
-            <div className={`mx-auto`}>
-              <FolderStatCard folderImg={sponsors} alt="10 Sponsors" text="SPONSORS" />
-            </div>
-        </div>
-      </div>
-      {/* END Last year we had... */}
-
-      {/* Past year photos */}
-      <div className={`relative mt-[8rem] 2xl:mt-[14rem]`}>
-        <PhotoCamera 
-          images={[photo1, photo2, photo3, photo4, photo5, photo6]} mobileImages={[photo1_mobile, photo2_mobile, photo3_mobile, photo4_mobile, photo5_mobile, photo6_mobile]} 
-          interval={3000} 
-        />
-        <div className={`absolute inset-0 z-[-100] bg-gradient-to-t from-sky-blue to-light-blue`}></div>
-      </div>
-      {/* END Past year photos */}
-
-      {/* More Try/CATCH 2025 Info */}
-      <div className={`py-[3rem] 2xl:py-[10rem] pb-[10rem] 2xl:pb-[20rem] bg-sky-blue`}>
-        <div className={`2xl:ml-[-1rem]`}>
-          <h2 className={`pt-[3rem] md:pt-[7rem]`}>
-            {/* Mobile SVG */}
-            <svg
-              viewBox="0 0 1200 220"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-labelledby="heading"
-              className="w-full max-h-[20rem] p-[1rem] md:hidden"
-            >
-              <title id="heading">try/catch 2025</title>
-              <text
-                x="600"
-                y="100"
-                fontSize={120}
-                fill="var(--color-powder-blue)"
-                stroke="var(--color-dark-blue)"
-                strokeWidth="10"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                fontFamily="Dream MMA"
-                textAnchor="middle"
-                className={`${styles.displayText} ${styles.outsideStroke} stroke-[20px] drop-shadow-[10px_12px_0_rgba(14,41,109,1)]`}
+            <div className={`${styles.heroDesc} flex flex-col items-center text-center gap-[1.5rem] max-w-[24rem]`}>
+              <p className="font-quicksand font-bold text-pink-light text-[1.6rem] leading-snug">
+                A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
+              </p>
+              <Link
+                to="/schedule"
+                className="border-2 border-white text-white font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] hover:bg-white hover:text-navy transition-colors duration-300"
               >
-                <tspan x="600" dy="0">try/catch</tspan>
-                <tspan x="600" dy="95">2025</tspan>
-              </text>
-            </svg>
-            {/* Desktop SVG */}
-            <svg
-              viewBox="0 0 1200 150"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-labelledby="heading"
-              className="w-full max-h-[12rem] p-[1rem] hidden md:block"
-            >
-              <title id="heading">try/catch 2025</title>
-              <text
-                x="600"
-                y="100"
-                fontSize={72}
-                fill="var(--color-powder-blue)"
-                stroke="var(--color-dark-blue)"
-                strokeWidth="10"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                fontFamily="Dream MMA"
-                textAnchor="middle"
-                className={`${styles.displayText} ${styles.outsideStroke} stroke-[14px] drop-shadow-[8px_8px_0_rgba(14,41,109,1)]`}
-              >
-                try/catch 2025
-              </text>
-            </svg>
-          </h2>
-          
-          <div className={`px-[2rem]`}>
-            <p className={`${styles.infoDesc} text-center mx-auto pt-[1.5rem] sm:pt-[2rem] md:pt-[0rem] xl:pt-[4rem] sm:max-w-[35rem] xl:max-w-[56rem]`}>
-              This year's Try/CATCH event will be taking place on Saturday, October 25th, 2025 at the SFU Burnaby campus. <span className={`${styles.infoDescBold}`}>Registration is open!</span>
-            </p>
-            <div className={`flex flex-col sm:flex-row gap-[1rem] sm:gap-[2rem] justify-center mt-[4rem]`}>
-                <Button link="https://trycatch2025.eventbrite.ca/" target="_blank" rel="noopener noreferrer" text="REGISTER" bgColor="bg-powder-blue" type="hero" disabled />
-                <Button link="/schedule" text="EVENT SCHEDULE" bgColor="bg-light-blue" type="hero" />
+                Register
+              </Link>
             </div>
+
+            <p className={`${styles.heroDate} font-quicksand font-bold text-pink-light text-left text-[1.35rem] leading-snug`}>
+              Try/CATCH is happening in<br /> SFU Burnaby campus on Oct 24th, 2026!
+            </p>
+          </div>
+
+          <div className="absolute bottom-[1.5rem] left-[54%] -translate-x-1/2 w-[2.75rem] h-[2.75rem] rounded-full border-2 border-lavender-pale/60 flex items-center justify-center animate-bounce">
+            <ChevronDown size={20} className="text-lavender-pale" />
           </div>
         </div>
-      </div>
-      {/* END More Try/CATCH 2025 Info */}
+      </section>
 
-      <div className={`mb-[-4rem]`}>
-        <div className={`grid lg:grid-cols-2`}>
-          <div className={`relative bg-dark-blue lg:w-[100%] h-[30rem] lg:h-full`}>
-            <img src={wics_logo} alt="SFU WiCS 'W' Logo Mark" className={`p-[3rem]`} />
-            <div className={`absolute bottom-0 p-[3rem]`}>
-              <h2 className={`${styles.sfuWics}`}>
-                SFU WiCS
-              </h2>
-              <p className={`${styles.sfuWicsDesc}`}>
-                The SFU Women in Computing Science (WiCS) is a student-led society that aims to empower women in computing science by providing opportunities to build lasting connections with other women in tech and by supporting each other as we progress through our time at SFU!
+      {/* ABOUT */}
+      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40">
+        <div className="xl:grid xl:grid-cols-[1fr_1.2fr] xl:gap-[5rem] xl:items-center">
+          <div className="max-w-[38rem]">
+            <h2 className={`${styles.sectionHeading} mb-[1.5rem]`}>About Try/CATCH</h2>
+
+            <p className="font-quicksand font-bold text-pink-light text-[1rem] xl:text-[1.5rem] leading-relaxed">
+              Try/CATCH (Computing and Technology Conference for Her) is a one-day event
+              designed to spark curiosity and confidence in female and non-binary high
+              school students in grades 8&ndash;12.
+            </p>
+            <p className="font-quicksand font-bold text-pink-light text-[1rem] xl:text-[1.5rem] leading-relaxed mt-[1rem]">
+              With over 1,400 participants since 2009, it&apos;s more than a conference
+              &mdash; it&apos;s a space to explore technology in a supportive, inclusive
+              environment.
+            </p>
+          </div>
+
+          <div className="relative mt-[2rem] xl:mt-0 rounded-[0.5rem] overflow-hidden max-w-[65rem] xl:max-w-none mx-auto">
+            <img src={groupPhoto} alt="Try/CATCH 2024 attendees at SFU Burnaby" className="w-full h-auto object-cover" />
+            <span className="absolute bottom-[0.75rem] left-[0.75rem] bg-navy/80 text-white font-quicksand font-bold text-[0.85rem] rounded-full px-[1rem] py-[0.35rem]">
+              Try/Catch 2024, SFU Burnaby
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2rem] mt-[3rem]">
+          {highlights.map(({ icon, title, desc }) => (
+            <div key={title} className="flex flex-col items-center text-center gap-[0.75rem]">
+              <div className="bg-yellow rounded-[1.25rem] xl:rounded-[1.875rem] p-[1rem] xl:p-[1.25rem]">
+                <img src={icon} alt="" aria-hidden="true" className="w-[1.75rem] h-[1.75rem] xl:w-[2.25rem] xl:h-[2.25rem]" />
+              </div>
+              <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.1rem] xl:text-[2.25rem]">{title}</h3>
+              <p className="font-quicksand font-bold text-pink-light text-[0.9rem] xl:text-[1.25rem] leading-relaxed max-w-[16rem] xl:max-w-[22rem]">
+                {desc}
               </p>
             </div>
-          </div>
-
-          <img src={wics_photo} alt="Group photo of SFU Women in Computing Science executives" className={`lg:w-auto lg:h-[50rem] object-cover`}/>
+          ))}
         </div>
-      </div>
 
+        <Link
+          to="/schedule"
+          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] hover:gap-[0.75rem] transition-all duration-300"
+        >
+          See the full schedule <span aria-hidden="true">&#8594;</span>
+        </Link>
+      </section>
+
+      {/* STATS */}
+      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40">
+        <h2 className={`${styles.sectionHeading} mb-[2rem]`}>Last year we had...</h2>
+
+        {/* mobile: circles stacked top to bottom, connected by a vertical squiggle */}
+        <div className="md:hidden relative @container" style={{ aspectRatio: "375 / 620" }}>
+          <svg
+            viewBox="0 0 193 372"
+            className="absolute top-1/2 left-1/2 pointer-events-none"
+            style={{ width: "48%", height: "auto", transform: "translate(-50%, -50%)" }}
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M36.2667 0.959202C180.967 43.576 192.614 65.4639 191.614 141.963C190.614 218.463 -5.14943 269.718 1.11415 371.463"
+              stroke="#ECE3FF"
+              strokeWidth="2"
+              strokeDasharray="5 5"
+              opacity="0.8"
+            />
+          </svg>
+
+          {stats.map(({ icon: Icon, number, label, bg, textColor, mLeft, mTop, mWidth, mHeight, mNumSize, mLabelSize, mIconSize, iconWeight }) => (
+            <div
+              key={label}
+              className={`${bg} rounded-full overflow-hidden flex flex-col items-center justify-center gap-[0.25rem] absolute`}
+              style={{ left: mLeft, top: mTop, width: mWidth, height: mHeight }}
+            >
+              <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: mIconSize, height: mIconSize }} />
+              <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: mNumSize }}>
+                {number}
+              </span>
+              <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: mLabelSize }}>
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* tablet + desktop: circles in a row, extra side gutter so the
+            line's overhanging tips never get clipped at narrower widths */}
+        <div className="hidden md:block px-[8%]">
+          <div
+            className="relative @container max-w-[75rem] mx-auto"
+            style={{ aspectRatio: "1209.55 / 432" }}
+          >
+            {/* single dashed thread, layered behind the circles, shifted left
+                and widened so its start/end tips peek out past the first and
+                last circle instead of hiding underneath them */}
+            <svg
+              viewBox="0 0 1392 295"
+              className="absolute top-1/2 pointer-events-none"
+              style={{ left: "-16%", width: "130%", height: "auto", transform: "translateY(-50%) rotate(10deg)" }}
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M201.065 292.805C-498.318 -30.7102 820.657 319.175 1391.17 1.31033"
+                stroke="#ECE3FF"
+                strokeWidth="3"
+                strokeDasharray="5 5"
+                opacity="0.8"
+              />
+            </svg>
+
+            {stats.map(({ icon: Icon, number, label, bg, textColor, left, top, width, height, numSize, labelSize, iconSize, iconWeight }) => (
+              <div
+                key={label}
+                className={`${bg} rounded-full flex flex-col items-center justify-center gap-[0.25rem] absolute`}
+                style={{ left, top, width, height }}
+              >
+                <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: iconSize, height: iconSize }} />
+                <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: numSize }}>
+                  {number}
+                </span>
+                <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: labelSize }}>
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY */}
+      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-start gap-[0.5rem]">
+        <h2 className={styles.sectionHeading}>Moments from last year</h2>
+        <p className="font-quicksand font-bold text-pink-light text-[0.8rem] whitespace-nowrap md:text-[1.15rem] md:whitespace-normal mb-[2rem] md:mb-[3rem]">
+          A little constellation of memories from try/CATCH 2025
+        </p>
+
+        {/* mobile: one photo per row, gently alternating left/right within a
+            padded column (not full-width swings), connected end to end */}
+        <div className="md:hidden flex flex-col items-center w-full px-[12%]">
+          {galleryItems.map((item, i) => (
+            <div key={item.caption} className="w-full flex flex-col items-center">
+              <div className={`w-full flex ${i % 2 === 0 ? "justify-start" : "justify-end"}`}>
+                <Polaroid {...item} scale={0.62} />
+              </div>
+              {i < galleryItems.length - 1 && (
+                <img
+                  src={polaroidLine}
+                  alt=""
+                  aria-hidden="true"
+                  className={`pointer-events-none h-[4rem] w-auto ${i % 2 === 0 ? "self-center" : "self-center scale-x-[-1]"}`}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* desktop: 3-over-2 zig-zag. the middle grid row is reserved purely
+            for the connector art, so each row of photos sits flush against
+            wherever that connector ends instead of leaving a gap */}
+        {/* tablet: everything scaled down from the full desktop size */}
+        <div className="hidden md:block xl:hidden w-full">
+          <GalleryGrid scale={0.7} connectorRem={4} gapXRem={1.1} />
+        </div>
+
+        {/* true desktop: full size */}
+        <div className="hidden xl:block w-full">
+          <GalleryGrid scale={1} connectorRem={5.7} gapXRem={1.6} />
+        </div>
+      </section>
+
+      {/* SFU WICS TEASER */}
+      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col gap-[1.5rem] md:gap-[2rem]">
+        <p className="font-quicksand font-bold text-yellow text-[0.85rem] md:text-[0.95rem] tracking-[0.15em] uppercase">
+          The team behind Try/CATCH
+        </p>
+        <h2 className={`${styles.sectionHeading} -mt-[1rem]`}>SFU Women in Computing Science</h2>
+
+        <p className="font-quicksand font-bold text-pink-light text-[1rem] md:text-[1.15rem] leading-relaxed">
+          Try/CATCH is entirely run by enthusiastic volunteers from Simon Fraser University
+          Computing Science students, faculty and staff. SFU Women in Computing Science
+          (WiCS) is a student-led society dedicated to building a supportive network for
+          gender-diverse students throughout their computing science studies. We organize
+          a diverse range of activities, including social, technical, and outreach
+          initiatives that aim to empower and connect women in tech.
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-[1.5rem] md:gap-[2rem] mt-[0.5rem] justify-items-center md:justify-items-start mx-auto md:mx-0">
+          {wicsValues.map(({ icon, label, desc, bg }) => (
+            <div key={label} className="flex flex-col items-center text-center md:items-start md:text-left gap-[0.5rem]">
+              <div className={`${bg} rounded-[1rem] w-[4.5rem] h-[4.5rem] md:w-[5.5rem] md:h-[5.5rem] flex items-center justify-center`}>
+                <img src={icon} alt="" aria-hidden="true" className="w-[1.75rem] h-[1.75rem] md:w-[2.1rem] md:h-[2.1rem]" />
+              </div>
+              <p className="font-special-gothic font-bold text-lavender-pale text-[1.5rem]">{label}</p>
+              <p className="font-quicksand text-pink-light text-[0.8rem] md:text-[0.9rem] leading-snug">{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative mt-[1rem] rounded-[0.5rem] md:rounded-[1.25rem] overflow-hidden">
+          <img src={sfuWicsPhoto} alt="SFU WiCS at Try/CATCH 2025" className="w-full h-auto object-cover" />
+          <span className="absolute bottom-[0.75rem] left-[0.75rem] bg-navy/80 text-white font-quicksand font-bold text-[0.85rem] rounded-full px-[1rem] py-[0.35rem]">
+            SFU WiCS @ Try/CATCH 2025
+          </span>
+        </div>
+      </section>
+
+      {/* COUNTDOWN / REGISTER CTA */}
+      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-center text-center gap-[0.75rem]">
+        <p className="font-special-gothic font-bold text-yellow text-[1rem] md:text-[1.25rem] tracking-[0.15em] uppercase">
+          Secure your spot
+        </p>
+        <p className="font-quicksand font-bold text-pink-light text-[0.95rem] md:text-[1.1rem]">
+          Registration closes in
+        </p>
+
+        <div className="flex items-start gap-[2rem] md:gap-[3.5rem] mt-[1.5rem] mb-[2rem]">
+          {[
+            { value: days, label: "Days" },
+            { value: hours, label: "Hrs" },
+            { value: mins, label: "Mins" },
+          ].map(({ value, label }) => (
+            <div key={label} className="flex flex-col items-center gap-[0.25rem]">
+              <span className="font-special-gothic font-bold text-lavender-pale text-[2.75rem] md:text-[4rem] leading-none">
+                {String(value).padStart(2, "0")}
+              </span>
+              <span className="font-quicksand font-bold text-yellow text-[0.75rem] md:text-[0.85rem] tracking-[0.1em] uppercase">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <Link
+          to="/schedule"
+          className="bg-yellow text-navy font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] hover:scale-105 transition-transform duration-300"
+        >
+          Register Now
+        </Link>
+      </section>
     </div>
   );
 }

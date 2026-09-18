@@ -57,3 +57,38 @@ li {
         font-size: 1.5rem;
     }
 }
+
+/* 2026 navbar */
+.navList26 li{
+    font-family: var(--font-quicksand);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #FFF;
+}
+
+.dropdown26{
+    position: relative;
+}
+
+.dropdownContent26{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background-color: var(--color-navy);
+    border: 1px solid var(--color-purple-medium);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    white-space: nowrap;
+    z-index: 30;
+}
+
+.dropdownContent26 li{
+    padding: 0.25rem 0;
+}
+
+.dropdown26:hover .dropdownContent26,
+.dropdown26:focus-within .dropdownContent26{
+    display: block;
+}

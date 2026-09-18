@@ -6,13 +6,27 @@
   --color-powder-blue: #CBF3FB;
   --color-light-cyan: #E2F4FF;
 
+  /* 2026 rebrand palette */
+  --color-navy: #0C1821;
+  --color-purple-deep: #492A8D;
+  --color-purple-medium: #7353BA;
+  --color-pink-light: #EFC3F5;
+  --color-lavender-pale: #ECE3FF;
+  --color-yellow: #FFC27B;
+  --color-accent-blue: #6FB4F7;
+
   --font-quicksand: 'Quicksand', sans-serif;
   --font-special-gothic: 'Special Gothic', sans-serif;
 }
 
 html{
-  background-color: var(--color-light-cyan);
+  background-color: var(--color-navy);
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
 }
 
 /* .displayText{
@@ -25,10 +39,12 @@ html{
    paint-order: stroke fill;
 } */
 
-p{
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.25rem;
+@layer base {
+  p{
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
 }
 
 @keyframes flash {

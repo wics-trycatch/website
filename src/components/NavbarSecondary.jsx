@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
@@ -11,6 +11,8 @@ import { ChevronDown, Menu, X } from "lucide-react";
 function NavbarSecondary() {
   const [iconSize, setIconSize] = useState(36);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,11 +35,30 @@ function NavbarSecondary() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (currentY < 80 || currentY < lastScrollY.current) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <nav
-      className={`pt-[2rem] pb-[0.5rem] mt-[-1rem] mb-[3rem] flex justify-between bg-light-blue ${styles.secondary}`}
+      className={`sticky top-0 z-30 pt-[2rem] pb-[0.5rem] mt-[-1rem] mb-[3rem] flex justify-between bg-light-blue transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      } ${styles.secondary}`}
     >
-      <Link to="/">
+      <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
         <img
           src={logo}
           alt="Homepage"
