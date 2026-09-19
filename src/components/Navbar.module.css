@@ -88,7 +88,23 @@ li {
     padding: 0.25rem 0;
 }
 
+/* invisible bridge over the gap between the label and the menu, so the menu
+   doesn't close while the mouse travels down to it */
+.dropdownContent26::before{
+    content: "";
+    position: absolute;
+    left: -0.5rem;
+    right: -0.5rem;
+    top: -1rem;
+    height: 1rem;
+}
+
 .dropdown26:hover .dropdownContent26,
 .dropdown26:focus-within .dropdownContent26{
     display: block;
+}
+
+/* while the navbar is slid out of view (scrolling down), keep its dropdowns closed */
+.navHidden .dropdownContent26{
+    display: none !important;
 }
