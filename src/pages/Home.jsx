@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Users, Wrench, Award, ChevronDown } from "lucide-react";
 import styles from "./Home.module.css";
+import Schedule from "./Schedule.jsx";
+import { scrollToSection } from "../utils/scrollToSection";
 
 // event date used for the countdown — update this once a real registration
 // deadline is set; for now it just counts down to the event itself
@@ -189,6 +191,16 @@ function GalleryGrid({ scale, connectorRem, gapXRem }) {
 function Home() {
   const { days, hours, mins } = useCountdown(EVENT_DATE);
 
+  // Arriving from another page via a navbar link: scroll to the requested section.
+  // (Tried twice because images further up the page can shift the layout as they load.)
+  const location = useLocation();
+  useEffect(() => {
+    const id = location.state?.scrollTo;
+    if (!id) return;
+    const timers = [60, 600].map((ms) => setTimeout(() => scrollToSection(id), ms));
+    return () => timers.forEach(clearTimeout);
+  }, [location.state]);
+
   return (
     <div className="relative bg-navy overflow-hidden -mx-[5.5556%]">
       {/* star + constellation background, tiled behind the whole page */}
@@ -287,12 +299,13 @@ function Home() {
           ))}
         </div>
 
-        <Link
-          to="/schedule"
-          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] hover:gap-[0.75rem] transition-all duration-300"
+        <button
+          type="button"
+          onClick={() => scrollToSection("schedule")}
+          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] mx-auto hover:gap-[0.75rem] transition-all duration-300 cursor-pointer"
         >
           See the full schedule <span aria-hidden="true">&#8594;</span>
-        </Link>
+        </button>
       </section>
 
       {/* STATS */}
@@ -456,8 +469,11 @@ function Home() {
         </div>
       </section>
 
+      {/* SCHEDULE */}
+      <Schedule />
+
       {/* COUNTDOWN / REGISTER CTA */}
-      <section className="relative px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-center text-center gap-[0.75rem]">
+      <section id="register" className="relative scroll-mt-20 px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-center text-center gap-[0.75rem]">
         <p className="font-special-gothic font-bold text-yellow text-[1rem] md:text-[1.25rem] tracking-[0.15em] uppercase">
           Secure your spot
         </p>

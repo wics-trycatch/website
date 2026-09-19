@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import NavbarWrapper from "./components/NavbarWrapper.jsx";
@@ -9,7 +9,6 @@ import Faq from './pages/Faq.jsx';
 import Wics from './pages/Wics.jsx';
 import Speakers from './pages/Speakers.jsx';
 import Workshops from './pages/Workshops.jsx';
-import Schedule from './pages/Schedule.jsx';
 import Sponsors from './pages/Sponsors.jsx';
 
 // Component to scroll to top on route change
@@ -35,7 +34,8 @@ function App() {
           <Route path="/sfu-wics" element={<Wics />} />
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/workshops" element={<Workshops />} />
-          <Route path="/schedule" element={<Schedule />} />
+          {/* the schedule now lives on the home page; old links land there */}
+          <Route path="/schedule" element={<Navigate to="/" replace state={{ scrollTo: "schedule" }} />} />
           <Route path="/sponsors" element={<Sponsors />} />
         </Routes>
         <Footer />

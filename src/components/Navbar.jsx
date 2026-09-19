@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
 
@@ -7,10 +7,35 @@ import blob from "../assets_26/images/shared/blob_tiny.svg";
 
 import { ChevronDown, Menu, X } from "lucide-react";
 
+import { scrollToSection } from "../utils/scrollToSection";
+
+// A link that jumps to a section of the home page. On the home page it just
+// scrolls. From any other page it goes home first, and Home does the scrolling.
+function SectionLink({ section, pathname, onNavigate, className, children }) {
+  return (
+    <Link
+      to="/"
+      state={{ scrollTo: section }}
+      className={className}
+      onClick={(e) => {
+        onNavigate?.();
+        if (pathname === "/") {
+          e.preventDefault();
+          scrollToSection(section);
+        }
+      }}
+    >
+      {children}
+    </Link>
+  );
+}
+
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const { pathname } = useLocation();
+  const closeMenu = () => setHamburgerOpen(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,7 +68,7 @@ function Navbar() {
   return (
     <nav
       className={`sticky top-0 z-30 bg-navy -mx-[5.5556%] -mt-[2rem] px-[2.5%] py-[1.5rem] flex items-center justify-between transition-transform duration-300 ${
-        visible ? "translate-y-0" : "-translate-y-full"
+        visible ? "translate-y-0" : `-translate-y-full ${styles.navHidden}`
       }`}
     >
       <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
@@ -78,7 +103,7 @@ function Navbar() {
           </div>
           <ul role="menu" className={styles.dropdownContent26}>
             <li>
-              <Link to="/schedule">Schedule</Link>
+              <SectionLink section="schedule" pathname={pathname}>Schedule</SectionLink>
             </li>
             <li>
               <Link to="/speakers">Speakers</Link>
@@ -94,12 +119,13 @@ function Navbar() {
         </li>
 
         <li role="menuitem" tabIndex="0">
-          <Link
-            to="/schedule"
+          <SectionLink
+            section="register"
+            pathname={pathname}
             className="font-quicksand font-bold text-navy bg-yellow rounded-full px-[1.5rem] py-[0.5rem] hover:scale-105 transition-transform duration-300 inline-block"
           >
             Register
-          </Link>
+          </SectionLink>
         </li>
       </ul>
       {/* END desktop nav */}
@@ -137,7 +163,7 @@ function Navbar() {
               </div>
               <ul className="ml-4 mt-2 flex flex-col gap-2">
                 <li>
-                  <Link to="/schedule" onClick={() => setHamburgerOpen(false)}>Schedule</Link>
+                  <SectionLink section="schedule" pathname={pathname} onNavigate={closeMenu}>Schedule</SectionLink>
                 </li>
                 <li>
                   <Link to="/speakers" onClick={() => setHamburgerOpen(false)}>Speakers</Link>
@@ -151,13 +177,14 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
-              <Link
-                to="/schedule"
-                onClick={() => setHamburgerOpen(false)}
+              <SectionLink
+                section="register"
+                pathname={pathname}
+                onNavigate={closeMenu}
                 className="font-quicksand font-bold text-navy bg-yellow rounded-full px-[1.5rem] py-[0.5rem] inline-block w-fit"
               >
                 Register
-              </Link>
+              </SectionLink>
             </li>
           </ul>
         </div>
