@@ -1,81 +1,72 @@
-import vidhi from "../assets/images/workshops/vidhi_robots.JPEG"
-import xueying from "../assets/images/workshops/xueying_robots.JPG"
-import sylvia from "../assets/images/workshops/sylvia_figma.jpg"
-import stephanie from "../assets/images/workshops/stephanie_figma.jpg"
-import rebecca from "../assets/images/workshops/rebecca_figma.png"
-import mara from "../assets/images/workshops/mara_machine.jpg"
-import peter from "../assets/images/workshops/peter_gamedev.jpg"
-import joyce from "../assets/images/workshops/joyce_gamedev.jpg"
-import howard from "../assets/images/workshops/howard_gamedev.jpg"
+// Sample content for the 2026 workshops page. Edit freely.
+//
+// icon:    "figma" | "brain" | "gamepad" | "bot"      (the round icon on the card)
+// accent:  "purple" | "pink" | "yellow" | "lavender"  (the card's border and glow color)
+// summary: the short blurb shown on the closed card
+// description: the longer text shown once the card is opened
+// hosts:   one entry per host. Add a photo by importing it at the top of this
+//          file and setting img: myPhoto. Without an img, their initial is shown.
+//          The "Hosted by ..." line on the card is built from the hosts' first names.
+//
+// import manjariPhoto from "../assets_26/images/workshops/manjari.jpg";
+
+export const workshopsMeta = {
+  eyebrow: "Learn by building",
+  intro:
+    "Explore hands-on workshops designed to introduce you to different areas of technology. Each workshop is led by experienced instructors who are passionate about sharing their knowledge. Click on any workshop to learn more about what you'll build and who will be teaching!",
+};
+
+const manjari = {
+  name: "Manjari Prasad",
+  // img: manjariPhoto,
+  bio: "Manjari is a third year student at SFU, working towards a BSc in Computing Science and a minor in Statistics. During her spare time, she loves playing the piano and reading books.",
+};
+
+const tina = {
+  name: "Tina Kaur",
+  // img: tinaPhoto,
+  bio: "Tina is a second year student at SFU, working towards a BSc in Computing Science.",
+};
 
 export const workshops = [
-    {
-      title: "Code in Motion: Programming Sony Toio Robots with Unity",
-      description: "In this interactive workshop, students will learn how to bring robots to life with code! Using Sony Toio robots and Unity, participants will get hands-on experience writing simple C# scripts to control real robots. Starting with the basics of moving, turning, and looping, students will then work in teams to design fun robot challenges — from choreographed dances to obstacle courses. By the end, they'll see how their code directly shapes the robots' behavior, giving them a taste of both game development and robotics programming. No prior coding experience is required; just curiosity and creativity!",
-      hosts: [
-        {
-          img: vidhi,
-          name: "Vidhi Aggarwal",
-          blurb: "Hi everyone! My name is Vidhi, and I'm a 3rd-year Computing Science student at SFU. My interests lie in AI, web development, and human-computer interaction (HCI), and I love working on projects that bring innovative and people-focused ideas to life. When I'm not studying, you'll probably find me playing table tennis or enjoying music on long walks. I'm really looking forward to joining Try/CATCH again this year and can't wait to meet you all 😆"
-        },
-        {
-          img: xueying,
-          name: "Xueying Zhang",
-          blurb: " Xueying is a PhD student in Computing Science at SFU, where she explores how technology and design can come together to support people's everyday lives. Before her PhD, she worked as a product designer in Toronto. Now, her research in Human-Computer Interaction (HCI) focuses on tangible interfaces, inclusive design, health and wellbeing. She loves building playful, meaningful interactions with both humans and robots."
-        }
-      ]
-    },
-    {
-      title: "Design Your First App in Figma Workshop",
-      description: "Ever wonder how the apps we use every day are created before they're coded? In this workshop, students will dive into Figma, an industry-standard design tool, and design their first mobile app prototype. Participants will create a set of three connected screens. Along the way, they'll learn the basics of user interface (UI) design, explore how to make clickable prototypes, and share their creations. ",
-      hosts: [
-        {
-          img: sylvia,
-          name: "Sylvia Zhang",
-          blurb: "Sylvia is a product and UX designer with experience leading digital design for student tech organizations. She is passionate about making design accessible to everyone and loves guiding others in transforming their ideas into engaging digital experiences."
-        },
-        {
-          img: rebecca,
-          name: "Rebecca Yeung",
-          blurb: "My name is Rebecca, and I'm currently in my 3rd year majoring in Interactive Arts and Technology (SIAT). My main areas of focus are in UI/UX design, as well as interaction design. In my spare time I love to experiment with baking and I love to read. I have also recently, in the summer, picked up running as a side hobby! I am always open to talk anything related to design or just about life!"
-        },
-        {
-          img: stephanie,
-          name: "Stephanie Mok",
-          blurb: "My name is Stephanie and I am currently in my 3rd year majoring in Interactive Arts and Technology. I'm most interested in graphic/UI design as well as speculative design! In my free time I enjoy baking and I try to read as much as I can… I've also been an avid blind box collector for years so if you are as well I love talking to people about it!"
-        }
-      ]
-    },
-    {
-      title: "Sentiment Classifiers with Machine Learning Workshop (Intermediate)",
-      description: " Can a computer really read feelings? Think about the last time you left a review on a product...what if a computer could instantly understand your mood just from the words you typed? We can tackle that challenge using the power of Machine Learning, and in this workshop, you'll learn how it works. Just like how humans learn from experience, machines learn from data. Using a dataset with real Amazon reviews, you'll train a supervised learning classifier to predict whether text is positive or negative. We'll warm up with Python basics, then dive into vectorization, model training, and testing accuracy. As one of our more advanced workshops, it pushes your skills beyond coding into real-world AI applications. By the end, you'll have built your own sentiment analysis classifier and sharpened both coding and problem-solving skills!",
-      hosts: [
-        {
-          img: mara,
-          name: "Mara Liwayway David",
-          blurb: "Hey everyone! My name is Mara and I'm a 3rd-year Computing Science student at SFU. I'm excited to be one of your Co-Chairs, Web Developers, and Workshop Hosts for Try/CATCH 2025! Since 2022, I've been teaching coding with organizations like Code Ninjas and SFU Science Alive, as well as leading workshops at hackathons and outreach events on topics from robotics to web development. Last summer, I completed AI4Good Lab, a 7-week AI/ML bootcamp where I built and presented a machine learning project in Montreal. That experience opened my eyes to the endless possibilities of AI/ML and I can't wait to share this passion with you through our Machine Learning workshop! Outside of coding, I love playing guitar, engaging in multimedia, and doing anything with friends (badminton, karaoke, board/card games, ROBLOX, really anything!)."
-        }
-      ]
-    },
-    {
-      title: "Game Dev Workshop",
-      description: " An intro to Unity game development workshop making a fishing game inspired by Animal Crossing from scratch!",
-      hosts: [
-        {
-          img: joyce,
-          name: "Joyce Zhang",
-          blurb: "Joyce is a 5th-year Computing Science student and an executive of SFU's Game Developers Club. Her love for games as a form of storytelling began in high school after playing Papers, Please and _Celeste + many other titles. She eventually began running beginner-friendly GameMaker workshops for her high school's coding club and has since continued creating her own projects in her free time. Joyce is excited to meet fellow developers and share the medium that first sparked her passion for programming."
-        },
-        {
-          img: peter,
-          name: "Peter Soava",
-          blurb: "Peter is a fourth-year Software Systems student at SFU and Vice President of the Game Development Club! Ever since pre-school he's been playing games, and in high school he learned the skills to program them to life. Beyond the virtual realm, you can find him soaking in ear-ringing live music, scouring review sites for rad movies, and sipping loose leaf tea next to his two cats. Peter can't wait to have a great time meeting everyone at Try/Catch 2025!"
-        },
-        {
-          img: howard,
-          name: "Howard Nguyen",
-          blurb: "Hi! I'm a 4th year Software Systems student at SFU with skills in embedded programming, web development, circuit design, and audio/music production. I make robots for fun, and I spend my spare time contributing to open-source projects, improving my home theater and home automation system, and playing DoTA & LoL. I also attend many developer conferences in Vancouver. Say hi if you see me!"
-        }
-      ]
-    }
-  ];
+  {
+    title: "Figma Workshop",
+    icon: "figma",
+    accent: "purple",
+    summary:
+      "Participants will learn the basics of user interface (UI) design, explore how to make clickable prototypes, and share their creations.",
+    description:
+      "Ever wonder how the apps we use every day are created before they're coded? In this workshop, students will dive into Figma, an industry-standard design tool, and design their first mobile app prototype. Participants will create a set of three connected screens. Along the way, they'll learn the basics of user interface (UI) design, explore how to make clickable prototypes, and share their creations.",
+    hosts: [manjari, tina],
+  },
+  {
+    title: "Machine Learning Workshop",
+    icon: "brain",
+    accent: "pink",
+    summary:
+      "Participants will build their own sentiment analysis classifier and sharpen both coding and problem-solving skills!",
+    description:
+      "Can a computer really read feelings? Think about the last time you left a review on a product. What if a computer could instantly understand your mood just from the words you typed? In this workshop, you'll use real Amazon reviews to train a supervised learning classifier that predicts whether text is positive or negative. We'll warm up with Python basics, then dive into vectorization, model training, and testing accuracy. By the end, you'll have built your own sentiment analysis classifier and sharpened both coding and problem-solving skills!",
+    hosts: [manjari, tina],
+  },
+  {
+    title: "Game Dev Workshop",
+    icon: "gamepad",
+    accent: "yellow",
+    summary:
+      "Participants will receive an intro to Unity game development workshop making a fishing game inspired by Animal Crossing from scratch!",
+    description:
+      "An intro to Unity game development, where you'll make a cozy fishing game inspired by Animal Crossing completely from scratch. You'll learn how scenes, sprites and scripts fit together, then add your own twist to the game. No prior experience needed, just curiosity and creativity!",
+    hosts: [manjari, tina],
+  },
+  {
+    title: "Sony Toio Robots",
+    icon: "bot",
+    accent: "lavender",
+    summary:
+      "Participants will see how their code directly shapes the robots' behaviour, giving them a taste of both game development and robotics programming.",
+    description:
+      "Learn how to bring robots to life with code! Using Sony Toio robots and Unity, you'll write simple C# scripts to control real robots. Starting with the basics of moving, turning, and looping, you'll then work in teams to design fun robot challenges, from choreographed dances to obstacle courses. By the end, you'll see how your code directly shapes the robots' behaviour, giving you a taste of both game development and robotics programming.",
+    hosts: [manjari, tina],
+  },
+];
