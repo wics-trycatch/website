@@ -1,14 +1,8 @@
-import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
-import NavbarSecondary from "./NavbarSecondary.jsx";
 
+// Every page now uses the same (home page style) navbar.
 function NavbarWrapper() {
-  const location = useLocation();
-
-  // Adjust this to match your Home route ("/")
-  const isHome = location.pathname === "/";
-
-  return isHome ? <Navbar /> : <NavbarSecondary />;
+  return <Navbar />;
 }
 
 export default NavbarWrapper;
