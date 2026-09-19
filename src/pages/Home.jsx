@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Users, Wrench, Award, ChevronDown } from "lucide-react";
 import styles from "./Home.module.css";
-import Schedule from "./Schedule.jsx";
 import { scrollToSection } from "../utils/scrollToSection";
 
-// event date used for the countdown — update this once a real registration
-// deadline is set; for now it just counts down to the event itself
-const EVENT_DATE = new Date("2026-10-24T00:00:00");
+// Registration closes at midnight on Oct 21, 2026 (i.e. the very end of
+// Oct 21 / start of Oct 22) — the CTA countdown below targets this date.
+const REGISTRATION_DEADLINE = new Date("2026-10-22T00:00:00");
 
 function useCountdown(target) {
   const getRemaining = () => {
@@ -189,7 +188,7 @@ function GalleryGrid({ scale, connectorRem, gapXRem }) {
 }
 
 function Home() {
-  const { days, hours, mins } = useCountdown(EVENT_DATE);
+  const { days, hours, mins } = useCountdown(REGISTRATION_DEADLINE);
 
   // Arriving from another page via a navbar link: scroll to the requested section.
   // (Tried twice because images further up the page can shift the layout as they load.)
@@ -218,12 +217,12 @@ function Home() {
           <p className="font-quicksand font-bold text-pink-light text-[0.95rem] leading-relaxed max-w-[18rem]">
             A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
           </p>
-          <Link
-            to="/schedule"
-            className="bg-yellow text-navy font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem]"
+          <span
+            aria-disabled="true"
+            className="bg-white/20 text-lavender-pale/70 font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem] cursor-not-allowed select-none"
           >
-            Register Now!
-          </Link>
+            Registration Opens Soon
+          </span>
           <p className="font-quicksand font-bold text-lavender-pale text-[0.8rem] leading-relaxed mt-[0.5rem]">
             Try/CATCH is happening in SFU Burnaby campus on Oct 24th, 2026!
           </p>
@@ -240,12 +239,12 @@ function Home() {
               <p className="font-quicksand font-bold text-pink-light text-[1.6rem] leading-snug">
                 A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
               </p>
-              <Link
-                to="/schedule"
-                className="border-2 border-white text-white font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] hover:bg-white hover:text-navy transition-colors duration-300"
+              <span
+                aria-disabled="true"
+                className="border-2 border-white/30 text-white/50 font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] cursor-not-allowed select-none"
               >
-                Register
-              </Link>
+                Registration Opens Soon
+              </span>
             </div>
 
             <p className={`${styles.heroDate} font-quicksand font-bold text-pink-light text-left text-[1.35rem] leading-snug`}>
@@ -299,13 +298,12 @@ function Home() {
           ))}
         </div>
 
-        <button
-          type="button"
-          onClick={() => scrollToSection("schedule")}
-          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] mx-auto hover:gap-[0.75rem] transition-all duration-300 cursor-pointer"
+        <Link
+          to="/schedule"
+          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] mx-auto hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
         >
           See the full schedule <span aria-hidden="true">&#8594;</span>
-        </button>
+        </Link>
       </section>
 
       {/* STATS */}
@@ -469,9 +467,6 @@ function Home() {
         </div>
       </section>
 
-      {/* SCHEDULE */}
-      <Schedule />
-
       {/* COUNTDOWN / REGISTER CTA */}
       <section id="register" className="relative scroll-mt-20 px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-center text-center gap-[0.75rem]">
         <p className="font-special-gothic font-bold text-yellow text-[1rem] md:text-[1.25rem] tracking-[0.15em] uppercase">
@@ -498,12 +493,12 @@ function Home() {
           ))}
         </div>
 
-        <Link
-          to="/schedule"
-          className="bg-yellow text-navy font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] hover:scale-105 transition-transform duration-300"
+        <span
+          aria-disabled="true"
+          className="bg-white/20 text-lavender-pale/70 font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] cursor-not-allowed select-none"
         >
-          Register Now
-        </Link>
+          Registration Opens Soon
+        </span>
       </section>
     </div>
   );

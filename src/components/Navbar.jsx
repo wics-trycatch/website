@@ -103,7 +103,7 @@ function Navbar() {
           </div>
           <ul role="menu" className={styles.dropdownContent26}>
             <li>
-              <SectionLink section="schedule" pathname={pathname}>Schedule</SectionLink>
+              <Link to="/schedule">Schedule</Link>
             </li>
             <li>
               <Link to="/speakers">Speakers</Link>
@@ -163,7 +163,7 @@ function Navbar() {
               </div>
               <ul className="ml-4 mt-2 flex flex-col gap-2">
                 <li>
-                  <SectionLink section="schedule" pathname={pathname} onNavigate={closeMenu}>Schedule</SectionLink>
+                  <Link to="/schedule" onClick={() => setHamburgerOpen(false)}>Schedule</Link>
                 </li>
                 <li>
                   <Link to="/speakers" onClick={() => setHamburgerOpen(false)}>Speakers</Link>

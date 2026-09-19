@@ -1,9 +1,26 @@
-import { useCallback, useId, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 import styles from "./Home.module.css";
 import rocket from "../assets_26/images/shared/rocket.svg";
-import { scheduleData, scheduleMeta } from "../data/schedule";
+import frameBg from "../assets_26/images/shared/frame_bg.svg";
+import { scheduleData, scheduleMeta, EVENT_DATE } from "../data/schedule";
+
+// Real start time (as a Date) for each stop, anchored to the actual event day.
+const stopTimes = scheduleData.map(({ start }) => {
+  const [h, m] = start.split(":").map(Number);
+  return new Date(EVENT_DATE.year, EVENT_DATE.month - 1, EVENT_DATE.day, h, m);
+});
+
+// Whichever stop's start time has most recently passed (clamped to the
+// first stop before the day starts, and the last stop once it's over).
+function currentStopIndex(now) {
+  let idx = 0;
+  for (let i = 0; i < stopTimes.length; i++) {
+    if (now >= stopTimes[i]) idx = i;
+  }
+  return idx;
+}
 
 /* ------------------------------------------------------------------ */
 /* Small pieces                                                        */
@@ -46,7 +63,7 @@ function defaultMapUrl(location) {
 
 function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circleRef, itemRef }) {
   const panelId = useId();
-  const { time, title, location, description, color, rocket: showRocket } = item;
+  const { time, title, location, description, color } = item;
 
   const mapUrl = item.mapUrl === undefined ? defaultMapUrl(location) : item.mapUrl;
   const canExpand = Boolean(description);
@@ -63,21 +80,13 @@ function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circ
         />
       )}
 
-      {/* timeline circle (+ rocket) */}
+      {/* timeline circle */}
       <div className="relative z-10 -mt-1 shrink-0">
         <span
           ref={circleRef}
           aria-hidden
           className={`block h-9 w-9 rounded-full ${CIRCLE_STYLES[color] ?? CIRCLE_STYLES.medium}`}
         />
-        {showRocket && (
-          <img
-            src={rocket}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[1.1rem] z-20 w-[2.7rem] max-w-none -translate-x-1/2 select-none"
-          />
-        )}
       </div>
 
       {/* text */}
@@ -146,6 +155,8 @@ function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circ
 function Schedule() {
   const [openItems, setOpenItems] = useState(() => new Set());
   const [connectorPath, setConnectorPath] = useState("");
+  const [stopIndex, setStopIndex] = useState(() => currentStopIndex(new Date()));
+  const [rocketPos, setRocketPos] = useState(null);
 
   const containerRef = useRef(null);
   const circleRefs = useRef([]);
@@ -197,70 +208,123 @@ function Schedule() {
     );
   }, [split]);
 
+  // Tracks the rocket's current stop (circle center, relative to the
+  // container) so it can be positioned with a simple CSS transform.
+  const measureRocket = useCallback(() => {
+    const box = containerRef.current;
+    const circle = circleRefs.current[stopIndex];
+    if (!box || !circle) return;
+
+    const b = box.getBoundingClientRect();
+    const c = circle.getBoundingClientRect();
+    setRocketPos({
+      x: c.left + c.width / 2 - b.left,
+      y: c.top + c.height / 2 - b.top,
+    });
+  }, [stopIndex]);
+
   useLayoutEffect(() => {
     measure();
-    const observer = new ResizeObserver(measure);
+    measureRocket();
+    const observer = new ResizeObserver(() => {
+      measure();
+      measureRocket();
+    });
     if (containerRef.current) observer.observe(containerRef.current);
     itemRefs.current.forEach((el) => el && observer.observe(el));
-    window.addEventListener("resize", measure);
+    const onResize = () => {
+      measure();
+      measureRocket();
+    };
+    window.addEventListener("resize", onResize);
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", measure);
+      window.removeEventListener("resize", onResize);
     };
-  }, [measure]);
+  }, [measure, measureRocket]);
+
+  // Keep the rocket synced to the visitor's actual clock, checking often
+  // enough that it hops to the next stop within a few seconds of it starting.
+  useEffect(() => {
+    const id = setInterval(() => {
+      setStopIndex(currentStopIndex(new Date()));
+    }, 10 * 1000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <section
-      id="schedule"
-      className="relative scroll-mt-20 px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col gap-[1.5rem] md:gap-[2rem]"
-    >
-      <p className="font-quicksand font-bold text-yellow text-[0.85rem] md:text-[0.95rem] tracking-[0.15em] uppercase">
-        {scheduleMeta.dateLabel}
-      </p>
-      <h2 className={`${styles.sectionHeading} -mt-[1rem]`}>Schedule</h2>
-      <p className="font-quicksand font-bold text-pink-light text-[1rem] md:text-[1.15rem] leading-relaxed max-w-[40rem]">
-        {scheduleMeta.intro}
-      </p>
+    <div className="relative bg-navy overflow-hidden -mx-[5.5556%]">
+      {/* star + constellation background, tiled behind the whole page */}
+      <div
+        className="absolute inset-0 opacity-75 pointer-events-none"
+        style={{ backgroundImage: `url(${frameBg})`, backgroundRepeat: "repeat", backgroundSize: "56rem auto" }}
+        aria-hidden="true"
+      />
 
-      <div ref={containerRef} className="relative mt-[0.5rem] pb-6 lg:grid lg:grid-cols-2 lg:gap-x-24 lg:pl-2">
-        {connectorPath && (
-          <svg aria-hidden className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible lg:block">
-            <path
-              d={connectorPath}
-              fill="none"
-              stroke="rgb(236 227 255 / 0.45)"
-              strokeWidth="2"
-              strokeDasharray="4 6"
-              strokeLinecap="round"
-            />
-          </svg>
-        )}
+      <section
+        id="schedule"
+        className="relative scroll-mt-20 px-[6%] pt-[3rem] md:pt-[4rem] pb-[3rem] md:pb-[4rem] flex flex-col items-center gap-[1.5rem] md:gap-[2rem]"
+      >
+        <div className="w-full max-w-[75rem] flex flex-col items-start gap-[1.5rem] md:gap-[2rem]">
+          <p className="font-quicksand font-bold text-yellow text-[0.85rem] md:text-[0.95rem] tracking-[0.15em] uppercase">
+            {scheduleMeta.dateLabel}
+          </p>
+          <h2 className={`${styles.sectionHeading} -mt-[1rem]`}>Schedule</h2>
+          <p className="font-quicksand font-bold text-pink-light text-[1rem] md:text-[1.15rem] leading-relaxed">
+            {scheduleMeta.intro}
+          </p>
 
-        {columns.map((items, colIndex) => {
-          const offset = colIndex === 0 ? 0 : split;
-          return (
-            // display: contents on small screens so both halves flow as one list
-            <ol key={colIndex} className="contents lg:block">
-              {items.map((item, i) => {
-                const index = offset + i;
-                return (
-                  <ScheduleItem
-                    key={index}
-                    item={item}
-                    hasLine={index < scheduleData.length - 1}
-                    hideLineOnDesktop={index === split - 1}
-                    isOpen={openItems.has(index)}
-                    onToggle={() => toggle(index)}
-                    circleRef={(el) => (circleRefs.current[index] = el)}
-                    itemRef={(el) => (itemRefs.current[index] = el)}
-                  />
-                );
-              })}
-            </ol>
-          );
-        })}
-      </div>
-    </section>
+          <div ref={containerRef} className="relative w-full mt-[0.5rem] pb-6 lg:grid lg:grid-cols-2 lg:gap-x-24">
+            {connectorPath && (
+              <svg aria-hidden className="pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible lg:block">
+                <path
+                  d={connectorPath}
+                  fill="none"
+                  stroke="rgb(236 227 255 / 0.45)"
+                  strokeWidth="2"
+                  strokeDasharray="4 6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
+
+            {rocketPos && (
+              <img
+                src={rocket}
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute left-0 top-0 z-20 w-[2.7rem] max-w-none select-none transition-transform duration-[1500ms] ease-in-out"
+                style={{ transform: `translate(${rocketPos.x}px, ${rocketPos.y}px) translate(-50%, -50%)` }}
+              />
+            )}
+
+            {columns.map((items, colIndex) => {
+              const offset = colIndex === 0 ? 0 : split;
+              return (
+                // display: contents on small screens so both halves flow as one list
+                <ol key={colIndex} className="contents lg:block">
+                  {items.map((item, i) => {
+                    const index = offset + i;
+                    return (
+                      <ScheduleItem
+                        key={index}
+                        item={item}
+                        hasLine={index < scheduleData.length - 1}
+                        hideLineOnDesktop={index === split - 1}
+                        isOpen={openItems.has(index)}
+                        onToggle={() => toggle(index)}
+                        circleRef={(el) => (circleRefs.current[index] = el)}
+                        itemRef={(el) => (itemRefs.current[index] = el)}
+                      />
+                    );
+                  })}
+                </ol>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

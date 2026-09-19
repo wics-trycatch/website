@@ -84,6 +84,19 @@ li {
     z-index: 30;
 }
 
+/* Invisible bridge over the gap between the nav label and the dropdown box.
+   Without this, moving the mouse straight down from "About"/"Event Details"
+   into the menu crosses a sliver of un-hovered space and the menu closes
+   before the pointer arrives, so the first click on it never lands. */
+.dropdownContent26::before{
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
+}
+
 .dropdownContent26 li{
     padding: 0.25rem 0;
 }
