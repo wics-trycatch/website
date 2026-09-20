@@ -12,6 +12,8 @@ const DICE_FACES = 3; // the die only rolls 1, 2 or 3
 const PIPS_FOR = { 1: [2], 2: [0, 4], 3: [0, 2, 4] }; // indexes into the die's 5 pips (TL, TR, centre, BL, BR)
 const HOP_MS = 320; // one square
 const SLIDE_MS = 900; // ladder climb / snake slide
+const START_DELAY_MS = 3000; // pause between pressing Start and the first question
+const ARC = 0.45; // hop height, as a fraction of a square's radius
 const ROCKET_FOOT = { x: 145.4, y: 381.2 }; // bottom-centre of the rocket artwork, in its own coordinates
 const CLOSED = Symbol('closed'); // thrown to abandon a turn when the game is closed / restarted
 
@@ -28,13 +30,13 @@ export default function SnakesAndLadders({ onClose }) {
   const board = useMemo(() => parseBoard(portrait ? mobileSvg : desktopSvg), [portrait]);
 
   const [pos, setPos] = useState(1);
-  const [travel, setTravel] = useState({ mode: 'hop', n: 0 });
   const [die, setDie] = useState({ value: 3, rolling: false });
   const [rolls, setRolls] = useState(0);
   const [busy, setBusy] = useState(false);
   const [won, setWon] = useState(false);
-  // square 1 is never landed on, so its question is the warm-up shown when the game opens
-  const [modal, setModal] = useState(() => ({ type: 'mcq', square: 1, q: MCQS[1], id: 0, onDone: () => setModal(null) }));
+  const [started, setStarted] = useState(false); // the start card shows until the player presses Start
+  const [warming, setWarming] = useState(false); // Start was pressed; waiting out the pause before the first question
+  const [modal, setModal] = useState(null);
   const [toast, setToast] = useState('');
 
   const run = useRef(0); // bumped on restart so an in-flight turn stops
@@ -43,6 +45,9 @@ export default function SnakesAndLadders({ onClose }) {
   const turning = useRef(false); // synchronous guard: state updates can lag behind a fast double tap
   const seen = useRef([]); // snake challenges already shown this game
   const root = useRef(null);
+  const warmup = useRef(null); // timer for that pause
+  const tokenRef = useRef(null); // the rocket's outer <g>: moves square to square
+  const hopRef = useRef(null); // its inner <g>: the little up-and-down arc
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = onClose; });
 
@@ -51,13 +56,14 @@ export default function SnakesAndLadders({ onClose }) {
     const opener = document.activeElement;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    root.current?.focus();
+    if (!root.current?.contains(document.activeElement)) root.current?.focus();
     const onKey = (e) => e.key === 'Escape' && closeRef.current?.();
     document.addEventListener('keydown', onKey);
     const app = document.getElementById('root');
     app?.setAttribute('inert', ''); // the page behind can't be tabbed into or clicked
     return () => {
       alive.current = false;
+      clearTimeout(warmup.current);
       document.body.style.overflow = overflow;
       document.removeEventListener('keydown', onKey);
       app?.removeAttribute('inert');
@@ -67,7 +73,7 @@ export default function SnakesAndLadders({ onClose }) {
 
   // when a question card closes, its button disappears and focus falls to <body>. Put it back in the game.
   useEffect(() => {
-    if (!modal) root.current?.focus();
+    if (!modal && !root.current?.contains(document.activeElement)) root.current?.focus();
   }, [modal]);
 
   useEffect(() => {
@@ -84,22 +90,61 @@ export default function SnakesAndLadders({ onClose }) {
     return pick;
   };
 
+  // Where the rocket sits (its own top-left) when standing on a square
+  const spot = (square) => {
+    const sq = board.steps[square];
+    return { x: sq.x - ROCKET_FOOT.x * board.rocket.scale, y: sq.y - sq.r + 2 - ROCKET_FOOT.y * board.rocket.scale }; // feet on top of the square
+  };
+
+  // Flies the rocket through `squares` as ONE continuous animation, so it doesn't stop and restart on every square.
+  // React is told the final square straight away; the animation just covers the trip, so nothing snaps when it ends.
+  const fly = (squares, ms, easing, arc) => {
+    const token = tokenRef.current;
+    if (!token?.animate || squares.length < 2) return;
+    token.animate(
+      squares.map((sq) => ({ transform: `translate(${spot(sq).x}px, ${spot(sq).y}px)` })),
+      { duration: ms, easing },
+    );
+    if (arc) {
+      const lift = -Math.round(board.steps[squares[0]].r * ARC);
+      hopRef.current?.animate(
+        [{ transform: 'translateY(0)', easing: 'ease-out' }, { transform: `translateY(${lift}px)`, easing: 'ease-in' }, { transform: 'translateY(0)' }], // up slows, down speeds up
+        { duration: ms / (squares.length - 1), iterations: squares.length - 1 },
+      );
+    }
+  };
+
   const restart = () => {
     run.current += 1;
     turning.current = false;
     seen.current = [];
-    setTravel((t) => ({ mode: 'slide', n: t.n + 1 }));
+    tokenRef.current?.getAnimations?.({ subtree: true }).forEach((a) => a.cancel());
+    if (pos !== 1) fly([pos, 1], SLIDE_MS, 'ease-in-out', false);
     setPos(1);
     setRolls(0);
     setDie({ value: 3, rolling: false });
     setWon(false);
     setBusy(false);
-    setModal({ type: 'mcq', square: 1, q: MCQS[1], id: ++asks.current, onDone: () => setModal(null) });
+    clearTimeout(warmup.current);
+    setWarming(false);
+    setModal(null);
+    setStarted(false); // a new game begins at the start card, same as opening it
     setToast('');
   };
 
+  // square 1 is never landed on, so its question is the warm-up that opens the game
+  const start = () => {
+    setStarted(true);
+    setWarming(true);
+    setToast('Get ready…');
+    warmup.current = setTimeout(() => {
+      setWarming(false);
+      setModal({ type: 'mcq', square: 1, q: MCQS[1], id: ++asks.current, onDone: () => setModal(null) });
+    }, START_DELAY_MS);
+  };
+
   const takeTurn = async () => {
-    if (busy || won || modal || turning.current) return;
+    if (!started || warming || busy || won || modal || turning.current) return;
     turning.current = true;
     const id = run.current;
     const live = () => { if (!alive.current || run.current !== id) throw CLOSED; };
@@ -111,11 +156,23 @@ export default function SnakesAndLadders({ onClose }) {
       }).then((ok) => { live(); return ok; });
 
     let at = pos;
-    const move = async (to, mode) => {
+    // walking to `to` one square at a time, hopping
+    const walk = async (to) => {
+      const path = [];
+      for (let sq = at; sq <= to; sq++) path.push(sq);
+      const ms = HOP_MS * (path.length - 1);
       at = to;
-      setTravel((t) => ({ mode, n: t.n + 1 }));
       setPos(to);
-      await sleep(mode === 'hop' ? HOP_MS : SLIDE_MS);
+      fly(path, ms, 'linear', true);
+      await sleep(ms);
+    };
+    // ladder climb / snake slide, straight there
+    const slide = async (to) => {
+      const from = at;
+      at = to;
+      setPos(to);
+      fly([from, to], SLIDE_MS, 'ease-in-out', false);
+      await sleep(SLIDE_MS);
     };
 
     // What happens when the rocket lands on `square`
@@ -131,7 +188,7 @@ export default function SnakesAndLadders({ onClose }) {
         }
         setToast(`Sliding down to square ${tail}…`);
         await sleep(500);
-        await move(tail, 'slide');
+        await slide(tail);
         return land(tail);
       }
       if (square === board.last) {
@@ -144,7 +201,7 @@ export default function SnakesAndLadders({ onClose }) {
       if (top && ok) {
         setToast(`Up the ladder to square ${top}!`);
         await sleep(450);
-        await move(top, 'slide');
+        await slide(top);
         if (top === board.last) setWon(true);
       }
     };
@@ -165,7 +222,7 @@ export default function SnakesAndLadders({ onClose }) {
       await sleep(400);
 
       const target = Math.min(at + value, board.last); // reaching or passing the last square counts as arriving
-      for (let s = at + 1; s <= target; s++) await move(s, 'hop');
+      await walk(target);
       await land(at);
     } catch (err) {
       if (err !== CLOSED) throw err;
@@ -175,11 +232,9 @@ export default function SnakesAndLadders({ onClose }) {
     }
   };
 
-  const ready = !busy && !won && !modal;
-  const here = board.steps[pos];
+  const ready = started && !warming && !busy && !won && !modal;
+  const { x: tokenX, y: tokenY } = spot(pos);
   const scale = board.rocket.scale;
-  const tokenX = here.x - ROCKET_FOOT.x * scale;
-  const tokenY = here.y - here.r + 2 - ROCKET_FOOT.y * scale; // feet on top of the square
   const d = board.die;
 
   const onDieKey = (e) => {
@@ -192,15 +247,8 @@ export default function SnakesAndLadders({ onClose }) {
         <g dangerouslySetInnerHTML={{ __html: board.markup }} />
 
         {/* rocket */}
-        <g
-          className="sl-token"
-          style={{ transform: `translate(${tokenX}px, ${tokenY}px)`, transition: `transform ${travel.mode === 'hop' ? HOP_MS : SLIDE_MS}ms ease-in-out` }}
-        >
-          <g
-            key={travel.n}
-            className={travel.mode === 'hop' && travel.n ? 'sl-hop' : ''}
-            style={{ '--sl-hop': `${-Math.round(here.r * 0.45)}px`, '--sl-hop-ms': `${HOP_MS}ms` }}
-          >
+        <g className="sl-token" ref={tokenRef} style={{ transform: `translate(${tokenX}px, ${tokenY}px)` }}>
+          <g ref={hopRef}>
             <g transform={`scale(${scale})`} dangerouslySetInnerHTML={{ __html: board.rocket.markup }} />
           </g>
         </g>
@@ -241,6 +289,18 @@ export default function SnakesAndLadders({ onClose }) {
       </div>
 
       {(toast || ready) && <div className="sl-toast" role="status">{toast || 'Tap the dice to roll'}</div>}
+
+      {!started && (
+        <div className="sl-scrim">
+          <div className="sl-card sl-start" role="group" aria-label="Start the game">
+            <h2 className="sl-q">Snakes and Ladders</h2>
+            <p>Roll the dice and answer a quick question on each square to reach square {board.last}. Ladders take you up. Snakes bring a small coding challenge.</p>
+            <div className="sl-actions">
+              <button type="button" className="sl-btn sl-btn-primary" autoFocus onClick={start}>Start</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {modal?.type === 'mcq' && <QuestionCard key={modal.id} {...modal} />}
       {modal?.type === 'code' && <CodeChallenge key={modal.id} {...modal} />}

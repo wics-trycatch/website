@@ -152,7 +152,7 @@ function Navbar() {
             yet, just holding its place in the nav. Rename the text below
             once we settle on what to call it. */}
         <li role="none">
-          <button type="button" role="menuitem" onClick={() => setPlaying(true)}>Play</button>
+          <button type="button" role="menuitem" className="cursor-pointer" onClick={() => setPlaying(true)}>Play</button>
         </li>
 
         <li role="menuitem" tabIndex="0">
@@ -169,7 +169,7 @@ function Navbar() {
 
       {/* Hamburger for mobile */}
       <button
-        className="xl:hidden text-white"
+        className="xl:hidden text-white cursor-pointer"
         onClick={() => setHamburgerOpen(!hamburgerOpen)}
         aria-label="Toggle menu"
       >
@@ -214,7 +214,7 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
-              <button type="button" onClick={() => { closeMenu(); setPlaying(true); }}>Play</button>
+              <button type="button" className="cursor-pointer" onClick={() => { closeMenu(); setPlaying(true); }}>Play</button>
             </li>
             <li>
               <SectionLink
