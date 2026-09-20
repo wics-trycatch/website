@@ -254,7 +254,7 @@ function Home() {
             </p>
           </div>
 
-          <div className="absolute bottom-[1.5rem] left-[54%] -translate-x-1/2 w-[2.75rem] h-[2.75rem] rounded-full border-2 border-lavender-pale/60 flex items-center justify-center animate-bounce">
+          <div className="absolute bottom-[1.5rem] left-[48%] -translate-x-1/2 w-[2.75rem] h-[2.75rem] rounded-full border-2 border-lavender-pale/60 flex items-center justify-center animate-bounce">
             <ChevronDown size={20} className="text-lavender-pale" />
           </div>
         </div>
