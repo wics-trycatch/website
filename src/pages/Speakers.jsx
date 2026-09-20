@@ -37,7 +37,7 @@ function LinkedInBadge({ href, accent }) {
 // a row layout a bit earlier (lg instead of sm) since there's only one of
 // them and more room to give it. Every card glows on hover (yellow for the
 // keynote, purple for panelists) — the LinkedIn badge picks up the same accent.
-function SpeakerCard({ img, alt, name, role, blurb, linkedin, keynote: isKeynote }) {
+function SpeakerCard({ img, imgProperties, alt, name, role, blurb, linkedin, keynote: isKeynote }) {
   const accent = isKeynote ? "yellow" : "purple";
   const glow = isKeynote
     ? "hover:shadow-[0_0_16px_2px_rgb(255_194_123/0.4)]"
@@ -46,29 +46,33 @@ function SpeakerCard({ img, alt, name, role, blurb, linkedin, keynote: isKeynote
   return (
     <div
       className={`group relative rounded-[1.25rem] md:rounded-[1.5rem] border border-purple-medium/40 transition-shadow duration-300 flex flex-col gap-[1.25rem] md:gap-[1.5rem] p-[1.25rem] md:p-[1.5rem] ${glow} ${
-        isKeynote ? "lg:flex-row lg:items-center" : "sm:flex-row sm:items-center"
+        isKeynote ? "md:flex-row md:items-center" : "sm:flex-row sm:items-center"
       }`}
     >
       <div
-        className={`shrink-0 overflow-hidden rounded-[0.9375rem] aspect-square mx-auto sm:mx-0 ${
-          isKeynote ? "w-[11rem] sm:w-[13rem] lg:w-[15rem]" : "w-[9rem] sm:w-[10.5rem] md:w-[12rem]"
+        className={`shrink-0 overflow-hidden rounded-[0.9375rem] aspect-square mx-auto md:mx-0 ${
+          isKeynote ? "w-[13rem] md:w-[16rem] lg:w-[18rem]" : "w-[9rem] sm:w-[10.5rem] md:w-[12rem]"
         }`}
       >
-        <img src={img} alt={alt || `${name} headshot`} className="w-full h-full object-cover" />
+        <img
+          src={img}
+          alt={alt || `${name} headshot`}
+          className={`w-full h-full object-cover ${imgProperties || "object-center"}`}
+        />
       </div>
 
       {/* divider between the photo and the bio — only makes sense once
           they're sitting side by side in a row */}
       <div
         aria-hidden="true"
-        className={`hidden w-px self-stretch bg-[rgb(239_195_245_/_0.45)] ${isKeynote ? "lg:block" : "sm:block"}`}
+        className={`hidden w-px self-stretch bg-[rgb(239_195_245_/_0.45)] ${isKeynote ? "md:block" : "sm:block"}`}
       />
 
       <div
-        className={`flex-1 flex flex-col gap-[0.5rem] text-center ${isKeynote ? "lg:text-left" : "sm:text-left"}`}
+        className={`flex-1 flex flex-col gap-[0.5rem] text-center ${isKeynote ? "md:text-left" : "sm:text-left"}`}
       >
         <div
-          className={`flex items-center justify-center gap-[0.6rem] ${isKeynote ? "lg:justify-start" : "sm:justify-start"}`}
+          className={`flex items-center justify-center gap-[0.6rem] ${isKeynote ? "md:justify-start" : "sm:justify-start"}`}
         >
           <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.25rem] md:text-[1.5rem]">{name}</h3>
           <LinkedInBadge href={linkedin} accent={accent} />

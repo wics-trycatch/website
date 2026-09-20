@@ -91,29 +91,20 @@ li {
 .dropdownContent26::before{
     content: "";
     position: absolute;
-    top: -0.5rem;
-    left: 0;
-    right: 0;
-    height: 0.5rem;
-}
-
-.dropdownContent26 li{
-    padding: 0.25rem 0;
-}
-
-/* invisible bridge over the gap between the label and the menu, so the menu
-   doesn't close while the mouse travels down to it */
-.dropdownContent26::before{
-    content: "";
-    position: absolute;
     left: -0.5rem;
     right: -0.5rem;
     top: -1rem;
     height: 1rem;
 }
 
-.dropdown26:hover .dropdownContent26,
-.dropdown26:focus-within .dropdownContent26{
+.dropdownContent26 li{
+    padding: 0.25rem 0;
+}
+
+/* Visibility is driven from React state (only one dropdown open at a time),
+   not :hover/:focus-within — those let two menus show at once when one was
+   still focused (e.g. via keyboard) while the other was being hovered. */
+.dropdownContent26.open{
     display: block;
 }
 

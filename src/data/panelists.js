@@ -1,48 +1,49 @@
-import archita from "../assets/images/speakers/panelists/archita.png";
-import christina from "../assets/images/speakers/panelists/christina.png";
-import kaitlynn from "../assets/images/speakers/panelists/kaitlynn.jpg";
-import eunsong from "../assets/images/speakers/panelists/eunsong.png";
+import avni from "../assets_26/images/speakers/panelists/Avni (panelist).jpeg";
+import bianca from "../assets_26/images/speakers/panelists/Bianca (panelist).jpg";
+import placeholder from "../assets/images/wics/placeholder_headshot.png";
 
+// Ascending order by name.
 export const panelists = [
   {
-    img: archita,
+    img: avni,
     imgProperties: "object-center",
-    alt: "Panelist 1 headshot",
-    name: "Archita",
+    alt: "Avni Kapoor headshot",
+    name: "Avni Kapoor",
     role: "Panelist",
-    // TODO: swap for her real LinkedIn URL once you have it
-    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
+    linkedin: "https://www.linkedin.com/in/avni-kapoor/",
     blurb:
-      "Hello Try/Catchers!! My name is Archita, and I’m a fourth-year CS student concentrating in AI/ML with a minor in Statistics. I was previously a Technical Executive at WICS, where I hosted technical events for women and non-binary students in CS. Outside of school, I’ve been fortunate learn about AI/ML through 4 industry internships and academic research at SFU, UBC, and UofT. I am mostly interested in the intersection of AI and Medicine, but recently I’ve also been exploring Operating Systems, Biomedical Engineering, and Medical Robotics. In my free time, I love going on runs, hanging out with friends, and listening to music. I’m super excited to meet you all at SFU, and I hope you have the best time at Try/Catch 2025!"
+      "Hi! My name is Avni, I am in my final year of studying computing and cognitive science (and last semester!). The only way I'd describe my experiences so far at SFU is - interdisciplinary. Everything from my degree to work experiences, leadership roles have all been in multiple fields and I think there is longevity in that approach. Try/CATCH was the first WiCS event I helped out with in my second year and have since tried with all my might to contribute every year to this wonderful event and look forward to sharing all my learnings with the wonderful attendees.",
   },
   {
-    img: christina,
+    // TODO: swap in her real photo and bio once we have them
+    img: placeholder,
     imgProperties: "object-center",
-    alt: "Panelist 2 headshot",
-    name: "Christina",
+    alt: "Bhakti Bhanushali headshot placeholder",
+    name: "Bhakti Bhanushali",
     role: "Panelist",
-    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
+    linkedin: "https://www.linkedin.com/in/bsbhakti/",
     blurb:
-      "Hi, I’m Christina. I’m in my fourth year in Interactive Arts and Technology at SFU, but I previously graduated from BCIT’s Computer Systems Technology program. I’ve been working in tech since 2020, contracting for and interning at startups as well as larger tech companies like Electronic Arts, SAP, and Asana. In my spare time, I like eating chicken katsu, reading fantasy books, and tending to my farm in Stardew Valley. Feel free to hit me up if you have any questions about design internships, font pairings, and everything in between."
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Bio coming soon!",
   },
   {
-    img: kaitlynn,
+    img: bianca,
     imgProperties: "object-center",
-    alt: "Panelist 3 headshot",
-    name: "Kaitlynn",
+    alt: "Bianca Dimaano headshot",
+    name: "Bianca Dimaano",
     role: "Panelist",
-    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
+    linkedin: "https://www.linkedin.com/in/biancadimaano/",
     blurb:
-      "Hi everyone, I'm Kaitlynn! I’m a Software Engineer at EA and also part of a startup’s founding team. I recently graduated from SFU, where I studied Computer Science and Business. I love keeping myself busy with all sorts of hobbies, lately I’ve been especially into baking, cycling, and boxing. I’m also a big foodie, so I’m always checking out new spots to eat. If you ever need recommendations, I’ve got plenty to share! After being a part of WiCS for years and organizing Try/CATCH a few times, I'm thrilled to be back as a panelist and excited to share my journey with you!"
+      "Hi, I'm Bianca! I'm a 4th-year Computer Science major and Interactive Arts & Technology (SIAT) minor at SFU. I'm currently an Associate Product Designer at Vena Solutions, where I first started as a co-op Product Designer and spent a year gaining hands-on experience in UX/UI design, user research, and design systems. I'm especially interested in how design and technology can come together to make complex experiences feel more approachable, and I love how UX design gives me a space to bring together my technical background and creativity. I've previously volunteered at Try/CATCH as a Visual Designer, Website Developer, and Workshop Host, and I'm super excited to be invited as a panelist this year to share my journey with you! In my free time, you can almost always find me playing video games or nose deep in a romance novel. Looking forward to Try/CATCH 2026 and meeting you all! :D",
   },
   {
-    img: eunsong,
+    // TODO: swap in her real photo and bio once we have them
+    img: placeholder,
     imgProperties: "object-center",
-    alt: "Panelist 4 headshot",
-    name: "Eunsong",
+    alt: "Gahee Kim headshot placeholder",
+    name: "Gahee Kim",
     role: "Panelist",
-    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
+    linkedin: "https://www.linkedin.com/in/gaheek/",
     blurb:
-      "Hey there! I’m Song, a 4th year Computer Science student at SFU. Throughout my time here, I’ve explored different areas of CS- from interning as a fullstack developer, to researching security vulnerabilities with LLMs at SFU’s Reliable Systems Lab, to my current role as a Software Engineer Intern working on AI/ML R&D at a cybersecurity startup. In my first year, I founded the Developers and Systems Club, which hosts industry talks, workshops, and hackathons for programmers of all levels, and has since grown to over 400 members! With WiCS, I’ve hosted fullstack workshops and taken part in the mentorship program as both a mentee and mentor. Outside of school, I enjoy hackathons, coding, DJing, and going to concerts. I’m so excited to be at Try/CATCH this year and can’t wait to meet everyone <3"
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Bio coming soon!",
   },
 ];

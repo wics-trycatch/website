@@ -1,15 +1,16 @@
-import keynote_speaker from "../assets/images/speakers/keynote/rimika.jpg";
+import ouldooz from "../assets_26/images/speakers/keynote/Dr. Ouldooz (keynote speaker).png";
 
 export const keynote = [
   {
-    img: keynote_speaker,
-    imgProperties: "object-center",
-    alt: "Keynote speaker headshot",
-    name: "Rimika",
+    img: ouldooz,
+    // her photo was getting cropped at the top with a plain center crop —
+    // pin it to the top instead so her head isn't cut off
+    imgProperties: "object-top",
+    alt: "Dr. Ouldooz Baghban Karimi headshot",
+    name: "Dr. Ouldooz Baghban Karimi",
     role: "Keynote Speaker",
-    // TODO: swap for her real LinkedIn URL once you have it
-    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
+    linkedin: "https://www.linkedin.com/in/ouldoozbk/",
     blurb:
-      "Rimika Chaudhury is a postdoctoral fellow working with Dr. Sheelagh Carpendale at Simon Fraser University (SFU). She received her PhD in Human-Computer Interaction from SFU. Prior to this, she has spent 3 years in the industry, teaching programming to people from diverse backgrounds. At SFU, under the supervision of Dr. Parmit Chilana, Rimika’s doctoral research focused on designing technologies that empower people in managing their learning experiences. Her work culminated into a first-of-its kind prototype - a Fitbit-inspired self-monitoring tool for supporting self-directed, online learning. Looking forward, she is preparing to move to McGill University, Montreal, where she will work at the intersection of technology and health, to develop technological tools to make health knowledge more accessible for people in need. Rimika has been an active member of the Women in Computing Science (WiCS) community since 2017, serving as a volunteer, workshop organizer and speaker."
+      "Dr. Ouldooz Baghban Karimi teaches and conducts research on data, systems, and networks. She is passionate about networks and systems, computing science education, and facilitating progress towards diversity, inclusion, equity, and fair access in the computing science discipline and through computing science in society. She is active in taking opportunities to serve the community. She has served as the Chair of the Diversity Committee at the School of Computing Science, Simon Fraser University (2019-2025), Diversity and Inclusion Chair at ACM MMSys 2023, co-chair of CAN-CWIC 2023 and CAN-CWIC West, and steering committee member of CAN-CWIC since 2024. She is currently a Senior Lecturer and a Rajan Family Scholar at the School of Computing Science, Simon Fraser University.",
   },
 ];

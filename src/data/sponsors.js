@@ -1,36 +1,25 @@
-import logo_safe_software from "../assets/images/shared/sponsors/safe_software.png"
-import logo_teck from "../assets/images/shared/sponsors/teck.png"
-import logo_orbis from "../assets/images/shared/sponsors/orbis.png"
-import logo_school_of_cs from "../assets/images/shared/sponsors/school of cs.png"
-import logo_fas from "../assets/images/shared/sponsors/fas.png"
+import logo_teck from "../assets/images/shared/sponsors/teck.png";
+import logo_orbis from "../assets/images/shared/sponsors/orbis.png";
 
+// tier: "Gold Sponsor" | "Silver Sponsor" | "Bronze Sponsor" | "Supporter"
+// website: shown as an external-link icon on the logo card. Left as our best
+// guess for Teck's homepage — swap it out if there's a more specific link
+// (e.g. a careers page) you'd rather point to.
 export const sponsors = [
-    {
-        name: "Safe Software",
-        logo: logo_safe_software,
-        blurb: "Headquartered in Surrey, British Columbia, Safe Software is the creator of FME, the only All-Data, Any-AI enterprise integration platform with comprehensive support for spatial data. The company was founded in 1993 and has been focused on bringing life to data since its inception. Whether your challenges have to do with spatial data, big data, real-time stream data, cloud migration, or business intelligence, Safe Software is here to help you spend more time reaping the benefits of information, and less time fighting it.",
-        tier: "Gold Sponsor"
-    },
-    {
-        name: "Teck",
-        logo: logo_teck,
-        tier: "Bronze Sponsor",
-        blurb: "Teck is a leading Canadian resource company focused on responsibly providing the metals essential for global development and the energy transition while caring for the people, communities, and land that we love.\n\nTeck has been selected as one of Canada’s Top 100 Employer for Young People for the past four years, Global 100 Most Sustainable Corporations six times, and in 2024 Teck was named to Forbes World’s Top Employers and World’s Top Employers for Women lists.\n\nTeck hires more than 100 students each year to work at our various operations and offices in Canada and the USA. At Teck, we have a range of opportunities for students to expand their knowledge and skills in a rapidly expanding sector. If you are driven to succeed, self-motivated and seeking a fast-paced, dynamic organization with extensive education and career development opportunities, you have come to the right place."
-    },
-    {
-        name: "Orbis",
-        logo: logo_orbis,
-        tier: "Bronze Sponsor",
-        blurb: "Orbis is a global investment management firm, aiming to deliver excellent long-term fund performance for our clients, who range from individuals to large institutions. We are a global firm with offices in 8 countries around the world, around 400 employees globally and more than $40 billion in assets under management. What defines our Orbis family is not those numbers, but how we do things day-by-day, how we add value for our clients, and the values that we live and work by.\n\nFor more information on Orbis and our current opportunities, visit www.orbis.com/careers"
-    },
-    {
-        name: "",
-        logo: logo_school_of_cs,
-        tier: "Supporter"
-    },
-    {
-        name: "",
-        logo: logo_fas,
-        tier: "Supporter"
-    },
-]
+  {
+    name: "Teck",
+    logo: logo_teck,
+    tier: "Silver Sponsor",
+    website: "https://www.teck.com/",
+    blurb:
+      "Teck is a leading Canadian resource company focused on responsibly providing the metals essential for global development and the energy transition while caring for the people, communities and land that we love.\n\nTeck has been selected as one of Canada’s Top 100 Employer for nine consecutive years, one of Corporate Knights Best 50 Corporate Citizens for 19 consecutive years, and was named to the Forbes World’s Best Companies and Forbes World's Top Companies for Women in 2024.\n\nTeck hires more than 100 students each year to work at our various operations and offices in Canada and the USA. At Teck, we have a range of opportunities for students to expand their knowledge and skills in a rapidly expanding sector. If you are driven to succeed, self-motivated and seeking a fast-paced, dynamic organization with extensive education and career development opportunities, you have come to the right place.",
+  },
+  {
+    name: "Orbis",
+    logo: logo_orbis,
+    tier: "Silver Sponsor",
+    website: "https://www.orbis.com/careers",
+    blurb:
+      "Orbis is a global investment management firm, aiming to deliver excellent long-term fund performance for our clients, who range from individuals to large institutions. We are a global firm with offices in 8 countries around the world, around 400 employees globally and over $50 billion in assets under management. What defines us is not those numbers, but how we do things day-by-day, how we add value for our clients, and the values that we live and work by.\n\nFor more information on Orbis and our current opportunities, visit www.orbis.com/careers.",
+  },
+];

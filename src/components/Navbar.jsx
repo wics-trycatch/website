@@ -33,9 +33,20 @@ function SectionLink({ section, pathname, onNavigate, className, children }) {
 function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [openDropdown, setOpenDropdown] = useState(null); // "about" | "event" | null
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
   const closeMenu = () => setHamburgerOpen(false);
+
+  // Only one desktop dropdown open at a time. onBlur only closes if focus
+  // actually left the li (not just moved to a link inside its own menu) —
+  // without that check, tabbing into a dropdown item would close the menu
+  // you're tabbing into.
+  const closeDropdownIfOutside = (e, key) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setOpenDropdown((cur) => (cur === key ? null : cur));
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -81,12 +92,20 @@ function Navbar() {
         aria-label="Main menu"
         className={`${styles.navList26} hidden xl:flex items-center gap-[2rem]`}
       >
-        <li role="menuitem" tabIndex="0" className={styles.dropdown26}>
+        <li
+          role="menuitem"
+          tabIndex="0"
+          className={styles.dropdown26}
+          onMouseEnter={() => setOpenDropdown("about")}
+          onMouseLeave={() => setOpenDropdown((cur) => (cur === "about" ? null : cur))}
+          onFocus={() => setOpenDropdown("about")}
+          onBlur={(e) => closeDropdownIfOutside(e, "about")}
+        >
           <div className="flex items-center gap-[0.35rem] cursor-default">
             <span>About</span>
             <ChevronDown size={18} />
           </div>
-          <ul role="menu" className={styles.dropdownContent26}>
+          <ul role="menu" className={`${styles.dropdownContent26} ${openDropdown === "about" ? styles.open : ""}`}>
             <li>
               <Link to="/faq">FAQ</Link>
             </li>
@@ -96,12 +115,20 @@ function Navbar() {
           </ul>
         </li>
 
-        <li role="menuitem" tabIndex="0" className={styles.dropdown26}>
+        <li
+          role="menuitem"
+          tabIndex="0"
+          className={styles.dropdown26}
+          onMouseEnter={() => setOpenDropdown("event")}
+          onMouseLeave={() => setOpenDropdown((cur) => (cur === "event" ? null : cur))}
+          onFocus={() => setOpenDropdown("event")}
+          onBlur={(e) => closeDropdownIfOutside(e, "event")}
+        >
           <div className="flex items-center gap-[0.35rem] cursor-default">
             <span>Event Details</span>
             <ChevronDown size={18} />
           </div>
-          <ul role="menu" className={styles.dropdownContent26}>
+          <ul role="menu" className={`${styles.dropdownContent26} ${openDropdown === "event" ? styles.open : ""}`}>
             <li>
               <Link to="/schedule">Schedule</Link>
             </li>
@@ -116,6 +143,13 @@ function Navbar() {
 
         <li role="menuitem" tabIndex="0">
           <Link to="/sponsors">Sponsors</Link>
+        </li>
+
+        {/* Reserved slot for the Snakes & Ladders game link — not wired up
+            yet, just holding its place in the nav. Rename the text below
+            once we settle on what to call it. */}
+        <li role="menuitem" tabIndex="-1" aria-disabled="true">
+          <span className="text-white/40 cursor-not-allowed select-none">Play</span>
         </li>
 
         <li role="menuitem" tabIndex="0">
