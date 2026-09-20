@@ -104,7 +104,8 @@ const stats = [
     mNumSize: "15.5cqw", mLabelSize: "5.3cqw", mIconSize: "13.5cqw",
   },
   {
-    icon: Wrench, number: "4", label: "Workshops",
+    icon: Wrench, number: "4", label: "Workshops", link: "/workshops",
+    glow: "hover:shadow-[0_0_28px_8px_rgb(73_42_141/0.6)]",
     bg: "bg-purple-deep", textColor: "text-lavender-pale",
     left: "42.828%", top: "21.169%", width: "27.202%", height: "76.157%",
     numSize: "7.937cqw", labelSize: "2.977cqw", iconSize: "6.945cqw", iconWeight: 1.25,
@@ -112,7 +113,8 @@ const stats = [
     mNumSize: "11.8cqw", mLabelSize: "4.0cqw", mIconSize: "10.2cqw",
   },
   {
-    icon: Award, number: "3", label: "Sponsors",
+    icon: Award, number: "3", label: "Sponsors", link: "/sponsors",
+    glow: "hover:shadow-[0_0_28px_8px_rgb(255_194_123/0.6)]",
     bg: "bg-yellow", textColor: "text-navy",
     left: "76.601%", top: "27.625%", width: "23.398%", height: "64.352%",
     numSize: "7.937cqw", labelSize: "2.977cqw", iconSize: "7.110cqw", iconWeight: 1.25,
@@ -336,21 +338,27 @@ function Home() {
             />
           </svg>
 
-          {stats.map(({ icon: Icon, number, label, bg, textColor, mLeft, mTop, mWidth, mHeight, mNumSize, mLabelSize, mIconSize, iconWeight }) => (
-            <div
-              key={label}
-              className={`${bg} rounded-full overflow-hidden flex flex-col items-center justify-center gap-[0.25rem] absolute`}
-              style={{ left: mLeft, top: mTop, width: mWidth, height: mHeight }}
-            >
-              <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: mIconSize, height: mIconSize }} />
-              <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: mNumSize }}>
-                {number}
-              </span>
-              <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: mLabelSize }}>
-                {label}
-              </span>
-            </div>
-          ))}
+          {stats.map(({ icon: Icon, number, label, bg, textColor, mLeft, mTop, mWidth, mHeight, mNumSize, mLabelSize, mIconSize, iconWeight, link, glow }) => {
+            const Wrapper = link ? Link : "div";
+            return (
+              <Wrapper
+                key={label}
+                {...(link ? { to: link } : {})}
+                className={`${bg} rounded-full overflow-hidden flex flex-col items-center justify-center gap-[0.25rem] absolute ${
+                  link ? `hover:scale-105 transition-all duration-300 ${glow ?? ""}` : ""
+                }`}
+                style={{ left: mLeft, top: mTop, width: mWidth, height: mHeight }}
+              >
+                <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: mIconSize, height: mIconSize }} />
+                <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: mNumSize }}>
+                  {number}
+                </span>
+                <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: mLabelSize }}>
+                  {label}
+                </span>
+              </Wrapper>
+            );
+          })}
         </div>
 
         {/* tablet + desktop: circles in a row, extra side gutter so the
@@ -379,22 +387,43 @@ function Home() {
               />
             </svg>
 
-            {stats.map(({ icon: Icon, number, label, bg, textColor, left, top, width, height, numSize, labelSize, iconSize, iconWeight }) => (
-              <div
-                key={label}
-                className={`${bg} rounded-full flex flex-col items-center justify-center gap-[0.25rem] absolute`}
-                style={{ left, top, width, height }}
-              >
-                <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: iconSize, height: iconSize }} />
-                <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: numSize }}>
-                  {number}
-                </span>
-                <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: labelSize }}>
-                  {label}
-                </span>
-              </div>
-            ))}
+            {stats.map(({ icon: Icon, number, label, bg, textColor, left, top, width, height, numSize, labelSize, iconSize, iconWeight, link, glow }) => {
+              const Wrapper = link ? Link : "div";
+              return (
+                <Wrapper
+                  key={label}
+                  {...(link ? { to: link } : {})}
+                  className={`${bg} rounded-full flex flex-col items-center justify-center gap-[0.25rem] absolute ${
+                    link ? `hover:scale-105 transition-all duration-300 ${glow ?? ""}` : ""
+                  }`}
+                  style={{ left, top, width, height }}
+                >
+                  <Icon size="100%" strokeWidth={iconWeight} className={textColor} style={{ width: iconSize, height: iconSize }} />
+                  <span className={`font-special-gothic font-bold leading-none ${textColor}`} style={{ fontSize: numSize }}>
+                    {number}
+                  </span>
+                  <span className={`font-special-gothic font-bold ${textColor}`} style={{ fontSize: labelSize }}>
+                    {label}
+                  </span>
+                </Wrapper>
+              );
+            })}
           </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-[0.75rem] sm:gap-[4.5rem] mt-[2.5rem]">
+          <Link
+            to="/workshops"
+            className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
+          >
+            Explore workshops <span aria-hidden="true">&#8594;</span>
+          </Link>
+          <Link
+            to="/sponsors"
+            className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
+          >
+            See our sponsors <span aria-hidden="true">&#8594;</span>
+          </Link>
         </div>
       </section>
 
