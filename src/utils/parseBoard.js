@@ -47,6 +47,21 @@ export function parseBoard(raw) {
   const pips = pipEls.map((c) => ({ cx: num(c, 'cx'), cy: num(c, 'cy'), r: num(c, 'r'), fill: c.getAttribute('fill') }));
   pipEls.forEach((c) => c.remove());
 
+  // Twinkle: the background stars get classes + staggered timings so CSS can animate them.
+  // Done before the ids are stripped below, since the ids are how we find them.
+  const stars = svg.querySelector('g[id^="Stars"]');
+  if (stars) {
+    const rnd = (i, k) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); }; // stable, so the sky doesn't reshuffle
+    const tag = (el, cls, i, minS, maxS) => {
+      const dur = minS + rnd(i, 1) * (maxS - minS);
+      el.setAttribute('class', cls);
+      el.setAttribute('style', `animation-duration:${dur.toFixed(2)}s;animation-delay:${(-rnd(i, 2) * dur).toFixed(2)}s`); // negative delay = already mid-cycle, so they never start in sync
+    };
+    const kids = [...stars.children];
+    kids.filter((el) => el.localName === 'circle').forEach((el, i) => i % 3 !== 0 && tag(el, 'sl-twinkle', i, 1.8, 4.2)); // two dots in three; the rest stay steady
+    kids.filter((el) => el.localName === 'path' && /^sparkle-/.test(el.getAttribute('id') || '')).forEach((el, i) => tag(el, 'sl-sparkle', i, 2.4, 4));
+  }
+
   // Keep gradient ids (prefixed so they can't clash with the host page), drop all other ids
   svg.querySelectorAll('[id]').forEach((el) => {
     if (DEF_TAGS.has(el.localName)) el.setAttribute('id', `sl-${el.getAttribute('id')}`);

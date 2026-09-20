@@ -13,8 +13,18 @@
 /* ---------- board ---------- */
 .sl-board { display: block; width: 100%; height: 100vh; height: 100dvh; }
 .sl-token { pointer-events: none; }
-.sl-hop { animation: sl-hop var(--sl-hop-ms) ease-out; }
-@keyframes sl-hop { 50% { transform: translateY(var(--sl-hop)); } }
+
+/* background stars (tagged in parseBoard). Duration + delay are set per star inline so they never pulse together */
+.sl-twinkle { transform-box: fill-box; transform-origin: center; animation: sl-twinkle ease-in-out infinite; }
+@keyframes sl-twinkle {
+  0%, 100% { opacity: 0.12; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.7); }
+}
+.sl-sparkle { transform-box: fill-box; transform-origin: center; animation: sl-sparkle ease-in-out infinite; }
+@keyframes sl-sparkle {
+  0%, 100% { transform: scale(0.3) rotate(0deg); opacity: 0.2; }
+  50% { transform: scale(1.5) rotate(45deg); opacity: 1; }
+}
 
 .sl-die { cursor: default; outline: none; }
 .sl-die.ready { cursor: pointer; }
@@ -98,14 +108,17 @@
 @media (max-width: 420px) { .sl-blocks { grid-template-columns: 1fr; } }
 
 /* ---------- win ---------- */
-.sl-win { text-align: center; }
+.sl-win, .sl-start { text-align: center; }
+.sl-start p { margin: 0; font-size: 15px; line-height: 1.5; color: rgba(236, 227, 255, 0.8); }
+.sl-start .sl-q { margin-bottom: 10px; }
 .sl-win p { margin: 0; color: rgba(236, 227, 255, 0.8); }
-.sl-win .sl-actions { justify-content: center; }
+.sl-win .sl-actions, .sl-start .sl-actions { justify-content: center; }
 .sl-win-emoji { font-size: 44px; margin-bottom: 6px; animation: sl-hop-big 1.2s ease-in-out infinite; }
 @keyframes sl-hop-big { 50% { transform: translateY(-10px); } }
 
 @keyframes sl-fade { from { opacity: 0; } }
 @keyframes sl-pop { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
 @media (prefers-reduced-motion: reduce) {
-  .sl-overlay, .sl-overlay * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  /* everything settles down except the background stars, which always twinkle */
+  .sl-overlay, .sl-overlay *:not(.sl-twinkle):not(.sl-sparkle) { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
