@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { shuffle } from '../data/questions';
+import { shuffle, SNAKE_FLAVORS } from '../data/questions';
 import { Inline } from './QuestionCard';
 
 const TOKEN = /(\/\/.*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|\b(let|const|var|function|return|if|else|for|while|true|false|break|continue)\b|\b(\d+)\b|\b([A-Za-z_$][\w$]*)(?=\()/g;
@@ -26,6 +26,7 @@ export default function CodeChallenge({ challenge, square, tail, onDone }) {
   const [over, setOver] = useState(false);
   const card = useRef(null);
   useEffect(() => card.current?.focus(), []);
+  const flavor = SNAKE_FLAVORS[challenge.flavor] ?? { emoji: '🐍', label: 'Snake bite!' };
 
   const [before, after] = challenge.code.split('______');
   const ok = ran && options[picked].ok;
@@ -44,7 +45,7 @@ export default function CodeChallenge({ challenge, square, tail, onDone }) {
   return (
     <div className="sl-scrim">
       <div className="sl-card" ref={card} tabIndex={-1} role="group" aria-label={`Snake bite on square ${square}`}>
-        <div className="sl-tag sl-tag-snake">🐍 Snake bite on square {square}! Fix the code to stay put</div>
+        <div className="sl-tag sl-tag-snake">{flavor.emoji} {flavor.label} Fix the code to stay put</div>
         <h2 className="sl-q"><Inline text={challenge.prompt} /></h2>
 
         <div className="sl-window">

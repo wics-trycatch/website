@@ -3,19 +3,22 @@ import { createPortal } from 'react-dom';
 import desktopSvg from '../assets_26/images/shared/snakes-and-ladders.svg?raw';
 import mobileSvg from '../assets_26/images/shared/snakes-and-ladders-mobile.svg?raw';
 import { parseBoard } from '../utils/parseBoard';
-import { CODE_CHALLENGES, MCQS } from '../data/questions';
-import QuestionCard from '../components/QuestionCard';
+import { submitEntry } from '../utils/submitEntry';
+import { assignSquares } from '../utils/pickGame';
+import { loadProgress, saveProgress, clearProgress } from '../utils/gameProgress';
+import { POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
+import ActivityCard from '../components/ActivityCard';
+import McqCard from '../components/McqCard';
 import CodeChallenge from '../components/CodeChallenge';
 import '../snakes-and-ladders.css';
 
-const DICE_FACES = 3; // the die only rolls 1, 2 or 3
+const DICE_FACES = 2; // the die only rolls 1 or 2 — keeps a full playthrough from finishing in a couple rolls
 const PIPS_FOR = { 1: [2], 2: [0, 4], 3: [0, 2, 4] }; // indexes into the die's 5 pips (TL, TR, centre, BL, BR)
 const HOP_MS = 320; // one square
 const SLIDE_MS = 900; // ladder climb / snake slide
-const START_DELAY_MS = 3000; // pause between pressing Start and the first question
-const ARC = 0.45; // hop height, as a fraction of a square's radius
 const ROCKET_FOOT = { x: 145.4, y: 381.2 }; // bottom-centre of the rocket artwork, in its own coordinates
 const CLOSED = Symbol('closed'); // thrown to abandon a turn when the game is closed / restarted
+const NAME_KEY = 'sl-player-name';
 
 const PORTRAIT = '(orientation: portrait)';
 const subscribe = (cb) => {
@@ -25,17 +28,77 @@ const subscribe = (cb) => {
 };
 const usePortrait = () => useSyncExternalStore(subscribe, () => window.matchMedia(PORTRAIT).matches, () => false);
 
+// Ask for the player's name before the board is playable — this is what
+// lets a finished game be tied back to a real person for the prize table,
+// and lets them come back later under the same name to resume.
+function NameGate({ onSubmit }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const inputRef = useRef(null);
+  useEffect(() => inputRef.current?.focus(), []);
+
+  // First + last name (not just first) so two people who happen to share a
+  // first name don't collide with each other's saved progress or prize entry.
+  const ready = firstName.trim() && lastName.trim();
+  const submit = (e) => {
+    e.preventDefault();
+    if (ready) onSubmit(`${firstName.trim()} ${lastName.trim()}`);
+  };
+
+  return (
+    <div className="sl-scrim">
+      <div className="sl-card sl-start" role="group" aria-label="Enter your name to play">
+        <h2 className="sl-q">What's your name?</h2>
+        <p>
+          We'll use this to know who to give the prize to if you reach the end — and if you leave and come back,
+          entering the same name picks up right where you left off. 🏁
+        </p>
+        <form onSubmit={submit}>
+          <div className="sl-name-fields">
+            <input
+              ref={inputRef}
+              className="sl-input"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First name"
+              aria-label="First name"
+              maxLength={40}
+            />
+            <input
+              className="sl-input"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last name"
+              aria-label="Last name"
+              maxLength={40}
+            />
+          </div>
+          <div className="sl-actions">
+            <button type="submit" className="sl-btn sl-btn-primary" disabled={!ready}>
+              Let's play 🚀
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function SnakesAndLadders({ onClose }) {
   const portrait = usePortrait();
   const board = useMemo(() => parseBoard(portrait ? mobileSvg : desktopSvg), [portrait]);
 
+  const [name, setName] = useState(() => sessionStorage.getItem(NAME_KEY) || '');
   const [pos, setPos] = useState(1);
-  const [die, setDie] = useState({ value: 3, rolling: false });
   const [rolls, setRolls] = useState(0);
+  const [content, setContent] = useState(null); // { [square]: itemId } for this game
+  const [travel, setTravel] = useState({ mode: 'hop', n: 0 });
+  const [die, setDie] = useState({ value: 3, rolling: false });
   const [busy, setBusy] = useState(false);
   const [won, setWon] = useState(false);
-  const [started, setStarted] = useState(false); // the start card shows until the player presses Start
-  const [warming, setWarming] = useState(false); // Start was pressed; waiting out the pause before the first question
+  // square 1 is never landed on, so its item is the warm-up shown once a name is entered
   const [modal, setModal] = useState(null);
   const [toast, setToast] = useState('');
 
@@ -45,9 +108,6 @@ export default function SnakesAndLadders({ onClose }) {
   const turning = useRef(false); // synchronous guard: state updates can lag behind a fast double tap
   const seen = useRef([]); // snake challenges already shown this game
   const root = useRef(null);
-  const warmup = useRef(null); // timer for that pause
-  const tokenRef = useRef(null); // the rocket's outer <g>: moves square to square
-  const hopRef = useRef(null); // its inner <g>: the little up-and-down arc
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = onClose; });
 
@@ -56,14 +116,13 @@ export default function SnakesAndLadders({ onClose }) {
     const opener = document.activeElement;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    if (!root.current?.contains(document.activeElement)) root.current?.focus();
+    root.current?.focus();
     const onKey = (e) => e.key === 'Escape' && closeRef.current?.();
     document.addEventListener('keydown', onKey);
     const app = document.getElementById('root');
     app?.setAttribute('inert', ''); // the page behind can't be tabbed into or clicked
     return () => {
       alive.current = false;
-      clearTimeout(warmup.current);
       document.body.style.overflow = overflow;
       document.removeEventListener('keydown', onKey);
       app?.removeAttribute('inert');
@@ -71,9 +130,64 @@ export default function SnakesAndLadders({ onClose }) {
     };
   }, []);
 
-  // when a question card closes, its button disappears and focus falls to <body>. Put it back in the game.
+  const itemFor = (square) => {
+    const id = content?.[square];
+    return id ? POOL_BY_ID.get(id) : null;
+  };
+
+  const warmUp = () => {
+    const item = itemFor(1);
+    if (!item) return;
+    setModal({
+      type: item.kind,
+      square: 1,
+      item,
+      activity: item,
+      id: ++asks.current,
+      onDone: (raw) => {
+        const { text: answer, photoDataUrl } = typeof raw === 'object' && raw !== null ? raw : { text: raw, photoDataUrl: null };
+        submitEntry({ name, square: 1, activity: item.title ?? item.q, answer, photoDataUrl, result: 'done' });
+        setModal(null);
+      },
+    });
+  };
+
+  // Once a name is entered: resume saved progress for that name if there is
+  // any, otherwise start a fresh game (new random square assignment).
   useEffect(() => {
-    if (!modal && !root.current?.contains(document.activeElement)) root.current?.focus();
+    if (!name || content) return;
+    const saved = loadProgress(name);
+    if (saved?.contentIds) {
+      setContent(saved.contentIds);
+      setPos(saved.pos ?? 1);
+      setRolls(saved.rolls ?? 0);
+    } else {
+      setContent(assignSquares(board));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name]);
+
+  // Whenever a game's square assignment is (re)computed — fresh game, resumed
+  // game, or restart — show the square-1 warm-up if they haven't moved yet.
+  useEffect(() => {
+    if (name && content && !modal && pos === 1 && rolls === 0 && !won) warmUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [content]);
+
+  // Keep progress saved as the game goes, so leaving and coming back resumes.
+  useEffect(() => {
+    if (!name || !content || won) return;
+    saveProgress(name, { pos, rolls, contentIds: content });
+  }, [name, content, pos, rolls, won]);
+
+  const submitName = (n) => {
+    sessionStorage.setItem(NAME_KEY, n);
+    setName(n);
+  };
+
+  // when a card closes, its button disappears and focus falls to <body>. Put it back in the game.
+  useEffect(() => {
+    if (!modal) root.current?.focus();
   }, [modal]);
 
   useEffect(() => {
@@ -82,126 +196,108 @@ export default function SnakesAndLadders({ onClose }) {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const nextChallenge = () => {
-    let pool = CODE_CHALLENGES.filter((c) => !seen.current.includes(c.id));
-    if (!pool.length) { seen.current = []; pool = CODE_CHALLENGES; }
+  const nextChallenge = (flavor) => {
+    let pool = CODE_CHALLENGES.filter((c) => c.flavor === flavor && !seen.current.includes(c.id));
+    if (!pool.length) {
+      seen.current = seen.current.filter((id) => !CODE_CHALLENGES.some((c) => c.id === id && c.flavor === flavor));
+      pool = CODE_CHALLENGES.filter((c) => c.flavor === flavor);
+    }
     const pick = pool[Math.floor(Math.random() * pool.length)];
     seen.current.push(pick.id);
     return pick;
-  };
-
-  // Where the rocket sits (its own top-left) when standing on a square
-  const spot = (square) => {
-    const sq = board.steps[square];
-    return { x: sq.x - ROCKET_FOOT.x * board.rocket.scale, y: sq.y - sq.r + 2 - ROCKET_FOOT.y * board.rocket.scale }; // feet on top of the square
-  };
-
-  // Flies the rocket through `squares` as ONE continuous animation, so it doesn't stop and restart on every square.
-  // React is told the final square straight away; the animation just covers the trip, so nothing snaps when it ends.
-  const fly = (squares, ms, easing, arc) => {
-    const token = tokenRef.current;
-    if (!token?.animate || squares.length < 2) return;
-    token.animate(
-      squares.map((sq) => ({ transform: `translate(${spot(sq).x}px, ${spot(sq).y}px)` })),
-      { duration: ms, easing },
-    );
-    if (arc) {
-      const lift = -Math.round(board.steps[squares[0]].r * ARC);
-      hopRef.current?.animate(
-        [{ transform: 'translateY(0)', easing: 'ease-out' }, { transform: `translateY(${lift}px)`, easing: 'ease-in' }, { transform: 'translateY(0)' }], // up slows, down speeds up
-        { duration: ms / (squares.length - 1), iterations: squares.length - 1 },
-      );
-    }
   };
 
   const restart = () => {
     run.current += 1;
     turning.current = false;
     seen.current = [];
-    tokenRef.current?.getAnimations?.({ subtree: true }).forEach((a) => a.cancel());
-    if (pos !== 1) fly([pos, 1], SLIDE_MS, 'ease-in-out', false);
+    setTravel((t) => ({ mode: 'slide', n: t.n + 1 }));
     setPos(1);
     setRolls(0);
     setDie({ value: 3, rolling: false });
     setWon(false);
     setBusy(false);
-    clearTimeout(warmup.current);
-    setWarming(false);
-    setModal(null);
-    setStarted(false); // a new game begins at the start card, same as opening it
     setToast('');
-  };
-
-  // square 1 is never landed on, so its question is the warm-up that opens the game
-  const start = () => {
-    setStarted(true);
-    setWarming(true);
-    setToast('Get ready…');
-    warmup.current = setTimeout(() => {
-      setWarming(false);
-      setModal({ type: 'mcq', square: 1, q: MCQS[1], id: ++asks.current, onDone: () => setModal(null) });
-    }, START_DELAY_MS);
+    setModal(null);
+    setContent(assignSquares(board)); // triggers the warm-up via the effect above
   };
 
   const takeTurn = async () => {
-    if (!started || warming || busy || won || modal || turning.current) return;
+    if (busy || won || modal || turning.current || !content) return;
     turning.current = true;
     const id = run.current;
     const live = () => { if (!alive.current || run.current !== id) throw CLOSED; };
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)).then(live);
-    // Shows a card and resolves with true/false once the player has answered it
+    // Shows a card and resolves with whatever it hands back once the player finishes it
     const ask = (props) =>
       new Promise((resolve) => {
-        setModal({ ...props, id: ++asks.current, onDone: (ok) => { setModal(null); resolve(ok); } });
-      }).then((ok) => { live(); return ok; });
+        setModal({ ...props, id: ++asks.current, onDone: (value) => { setModal(null); resolve(value); } });
+      }).then((value) => { live(); return value; });
 
     let at = pos;
-    // walking to `to` one square at a time, hopping
-    const walk = async (to) => {
-      const path = [];
-      for (let sq = at; sq <= to; sq++) path.push(sq);
-      const ms = HOP_MS * (path.length - 1);
+    const move = async (to, mode) => {
       at = to;
+      setTravel((t) => ({ mode, n: t.n + 1 }));
       setPos(to);
-      fly(path, ms, 'linear', true);
-      await sleep(ms);
+      await sleep(mode === 'hop' ? HOP_MS : SLIDE_MS);
     };
-    // ladder climb / snake slide, straight there
-    const slide = async (to) => {
-      const from = at;
-      at = to;
-      setPos(to);
-      fly([from, to], SLIDE_MS, 'ease-in-out', false);
-      await sleep(SLIDE_MS);
+
+    const doSquare = async (square, extra) => {
+      const item = itemFor(square);
+      if (!item) return;
+      const raw = await ask({ type: item.kind, square, item, activity: item, ...extra });
+      // ActivityCard (kind: 'task') hands back { text, photoDataUrl }; McqCard hands back a plain string.
+      const { text: answer, photoDataUrl } = typeof raw === 'object' && raw !== null ? raw : { text: raw, photoDataUrl: null };
+      submitEntry({
+        name,
+        square,
+        activity: item.title ?? item.q,
+        answer,
+        photoDataUrl,
+        result: extra?.final ? 'WINNER' : 'done',
+      });
+      return answer;
     };
 
     // What happens when the rocket lands on `square`
     const land = async (square) => {
       const tail = board.snakes[square];
       if (tail) {
-        // Snake: tiny coding problem. Right = stay, wrong = slide to the tail and get that square's MCQ.
-        const ok = await ask({ type: 'code', square, tail, challenge: nextChallenge() });
+        // Snake: tiny coding problem. Right = stay and still do that square's
+        // item. Wrong = slide to the tail and land there instead.
+        const flavor = ['loop', 'syntax', 'bug'][Math.floor(Math.random() * 3)];
+        const challenge = nextChallenge(flavor);
+        const ok = await ask({ type: 'code', square, tail, challenge });
+        submitEntry({
+          name,
+          square,
+          activity: `Snake bite (${flavor})`,
+          answer: challenge.prompt,
+          result: ok ? 'escaped snake' : `bit by snake - slid to ${tail}`,
+        });
         if (ok) {
           setToast(`The snake lets go. You stay on square ${square}.`);
-          await ask({ type: 'mcq', square, q: MCQS[square] });
+          await doSquare(square);
           return;
         }
         setToast(`Sliding down to square ${tail}…`);
         await sleep(500);
-        await slide(tail);
+        await move(tail, 'slide');
         return land(tail);
       }
+
       if (square === board.last) {
-        let ok = false;
-        while (!ok) ok = await ask({ type: 'mcq', square, q: MCQS[square], final: true });
+        await doSquare(square, { final: true });
+        if (name) clearProgress(name); // they're done — a re-open should start fresh, not "resume" a finished game
         return setWon(true);
       }
+
       const top = board.ladders[square];
-      const ok = await ask({ type: 'mcq', square, q: MCQS[square], ladderTo: top });
-      if (top && ok) {
+      await doSquare(square, top ? { ladderTo: top } : undefined);
+      if (top) {
         setToast(`Up the ladder to square ${top}!`);
         await sleep(450);
-        await slide(top);
+        await move(top, 'slide');
         if (top === board.last) setWon(true);
       }
     };
@@ -222,7 +318,7 @@ export default function SnakesAndLadders({ onClose }) {
       await sleep(400);
 
       const target = Math.min(at + value, board.last); // reaching or passing the last square counts as arriving
-      await walk(target);
+      for (let s = at + 1; s <= target; s++) await move(s, 'hop');
       await land(at);
     } catch (err) {
       if (err !== CLOSED) throw err;
@@ -232,9 +328,11 @@ export default function SnakesAndLadders({ onClose }) {
     }
   };
 
-  const ready = started && !warming && !busy && !won && !modal;
-  const { x: tokenX, y: tokenY } = spot(pos);
+  const ready = !busy && !won && !modal && !!name && !!content;
+  const here = board.steps[pos];
   const scale = board.rocket.scale;
+  const tokenX = here.x - ROCKET_FOOT.x * scale;
+  const tokenY = here.y - here.r + 2 - ROCKET_FOOT.y * scale; // feet on top of the square
   const d = board.die;
 
   const onDieKey = (e) => {
@@ -247,8 +345,15 @@ export default function SnakesAndLadders({ onClose }) {
         <g dangerouslySetInnerHTML={{ __html: board.markup }} />
 
         {/* rocket */}
-        <g className="sl-token" ref={tokenRef} style={{ transform: `translate(${tokenX}px, ${tokenY}px)` }}>
-          <g ref={hopRef}>
+        <g
+          className="sl-token"
+          style={{ transform: `translate(${tokenX}px, ${tokenY}px)`, transition: `transform ${travel.mode === 'hop' ? HOP_MS : SLIDE_MS}ms ease-in-out` }}
+        >
+          <g
+            key={travel.n}
+            className={travel.mode === 'hop' && travel.n ? 'sl-hop' : ''}
+            style={{ '--sl-hop': `${-Math.round(here.r * 0.45)}px`, '--sl-hop-ms': `${HOP_MS}ms` }}
+          >
             <g transform={`scale(${scale})`} dangerouslySetInnerHTML={{ __html: board.rocket.markup }} />
           </g>
         </g>
@@ -277,6 +382,7 @@ export default function SnakesAndLadders({ onClose }) {
       </svg>
 
       <div className="sl-hud">
+        {name && <span className="sl-chip">{name}</span>}
         <span className="sl-chip">Square <b>{pos}</b> / {board.last}</span>
         <span className="sl-chip">Rolls <b>{rolls}</b></span>
         <span className="sl-spacer" />
@@ -290,27 +396,17 @@ export default function SnakesAndLadders({ onClose }) {
 
       {(toast || ready) && <div className="sl-toast" role="status">{toast || 'Tap the dice to roll'}</div>}
 
-      {!started && (
-        <div className="sl-scrim">
-          <div className="sl-card sl-start" role="group" aria-label="Start the game">
-            <h2 className="sl-q">Snakes and Ladders</h2>
-            <p>Roll the dice and answer a quick question on each square to reach square {board.last}. Ladders take you up. Snakes bring a small coding challenge.</p>
-            <div className="sl-actions">
-              <button type="button" className="sl-btn sl-btn-primary" autoFocus onClick={start}>Start</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {modal?.type === 'mcq' && <QuestionCard key={modal.id} {...modal} />}
+      {!name && <NameGate onSubmit={submitName} />}
+      {modal?.type === 'task' && <ActivityCard key={modal.id} {...modal} />}
+      {modal?.type === 'mcq' && <McqCard key={modal.id} {...modal} />}
       {modal?.type === 'code' && <CodeChallenge key={modal.id} {...modal} />}
 
       {won && (
         <div className="sl-scrim">
           <div className="sl-card sl-win" role="alertdialog" aria-label="You won">
             <div className="sl-win-emoji" aria-hidden="true">🚀</div>
-            <h2 className="sl-q">You reached square {board.last}!</h2>
-            <p>Finished in {rolls} {rolls === 1 ? 'roll' : 'rolls'}. Nice debugging.</p>
+            <h2 className="sl-q">You reached square {board.last}, {name}!</h2>
+            <p>Finished in {rolls} {rolls === 1 ? 'roll' : 'rolls'}. You're all set — the team will review entries after the event and reach out about your prize!</p>
             <div className="sl-actions">
               <button type="button" className="sl-btn sl-btn-primary" autoFocus onClick={restart}>Play again</button>
               <button type="button" className="sl-btn" onClick={onClose}>Close</button>
