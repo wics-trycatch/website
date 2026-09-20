@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { Bot, Brain, ChevronDown, Figma, Gamepad2 } from "lucide-react";
+import { Bot, ChevronDown, Code2, Figma, Gamepad2, ShieldCheck } from "lucide-react";
 
 import styles from "./Home.module.css";
 import frameBg from "../assets_26/images/shared/frame_bg.svg";
 import rocket from "../assets_26/images/shared/rocket.svg";
 import { workshops, workshopsMeta } from "../data/workshops";
 
-const ICONS = { figma: Figma, brain: Brain, gamepad: Gamepad2, bot: Bot };
+const ICONS = { figma: Figma, shield: ShieldCheck, gamepad: Gamepad2, bot: Bot, code: Code2 };
 
 // Each accent colors the card's border, its glow, and its round icon.
 const ACCENTS = {
