@@ -166,7 +166,7 @@ export const organizers = [
     alt: "Sanika Goyal headshot",
     name: "Sanika Goyal",
     role: "Logistics",
-    linkedin: PLACEHOLDER_LINKEDIN,
+    linkedin: "https://www.linkedin.com/in/sgoyal04/",
     blurb:
       "Hi! I'm a fourth-year Computing Science student on the logistics team, and I'm excited to help coordinate this event. We're so glad you're here and I hope you have a fantastic time connecting and learning today! Outside of school, I'm a total summer enthusiast who loves making the most of the sunny weather by playing tennis, badminton, and exploring new spots around town.",
   },
