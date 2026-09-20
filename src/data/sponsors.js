@@ -1,5 +1,5 @@
-import logo_teck from "../assets/images/shared/sponsors/teck.png";
-import logo_orbis from "../assets/images/shared/sponsors/orbis.png";
+import logo_teck from "../assets_26/images/shared/sponsors/teck.png";
+import logo_orbis from "../assets_26/images/shared/sponsors/orbis.png";
 
 // tier: "Gold Sponsor" | "Silver Sponsor" | "Bronze Sponsor" | "Supporter"
 // website: shown as an external-link icon on the logo card. Left as our best

@@ -1,6 +1,6 @@
 import avni from "../assets_26/images/speakers/panelists/Avni (panelist).jpeg";
 import bianca from "../assets_26/images/speakers/panelists/Bianca (panelist).jpg";
-import placeholder from "../assets/images/wics/placeholder_headshot.png";
+import placeholder from "../assets_26/images/wics/placeholder_headshot.png";
 
 // Ascending order by name.
 export const panelists = [
