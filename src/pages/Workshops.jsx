@@ -26,6 +26,13 @@ const ACCENTS = {
     card: "border-lavender-pale/60 shadow-[0_4px_0_0_rgb(236_227_255/0.7),0_12px_30px_-8px_rgb(236_227_255/0.3)]",
     icon: "bg-lavender-pale text-navy",
   },
+  // A second purple option for when "purple" is already taken by another
+  // card — swaps which of the two purples is the border vs. the icon so it
+  // still reads as distinct next to it.
+  indigo: {
+    card: "border-purple-deep shadow-[0_4px_0_0_rgb(73_42_141/0.9),0_12px_30px_-8px_rgb(73_42_141/0.55)]",
+    icon: "bg-purple-medium text-lavender-pale",
+  },
 };
 
 const focusRing =
@@ -215,9 +222,20 @@ function Workshops() {
 
   // Desktop: two columns that grow independently, so opening a card only moves
   // the cards under it. Phone: one column in the original order (via `order`).
+  // When there's an odd number of workshops, the last one doesn't get paired —
+  // pull it out of the two-column grid and center it on its own row instead of
+  // letting it dangle alone at the bottom of one column.
+  const hasLoneCard = workshops.length % 2 === 1;
+  const lastIndex = workshops.length - 1;
+  const loneEntry = hasLoneCard ? { w: workshops[lastIndex], i: lastIndex } : null;
+
+  const gridEntries = workshops
+    .map((w, i) => ({ w, i }))
+    .filter(({ i }) => !(hasLoneCard && i === lastIndex));
+
   const columns = [
-    workshops.map((w, i) => ({ w, i })).filter(({ i }) => i % 2 === 0),
-    workshops.map((w, i) => ({ w, i })).filter(({ i }) => i % 2 === 1),
+    gridEntries.filter(({ i }) => i % 2 === 0),
+    gridEntries.filter(({ i }) => i % 2 === 1),
   ];
 
   return (
@@ -260,6 +278,23 @@ function Workshops() {
             </div>
           ))}
         </div>
+
+        {loneEntry && (
+          <div className="mx-auto mt-6 max-w-[34rem] md:flex md:max-w-[64rem] md:justify-center">
+            <div className="md:w-full md:max-w-[30rem]">
+              <WorkshopCard
+                workshop={loneEntry.w}
+                order={loneEntry.i}
+                registerTitle={registerTitle}
+                titleHeight={titleHeight}
+                registerSummary={registerSummary}
+                summaryHeight={summaryHeight}
+                isOpen={openItems.has(loneEntry.i)}
+                onToggle={() => toggle(loneEntry.i)}
+              />
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );

@@ -104,7 +104,7 @@ const stats = [
     mNumSize: "15.5cqw", mLabelSize: "5.3cqw", mIconSize: "13.5cqw",
   },
   {
-    icon: Wrench, number: "4", label: "Workshops", link: "/workshops",
+    icon: Wrench, number: "5", label: "Workshops", link: "/workshops",
     glow: "hover:shadow-[0_0_28px_8px_rgb(73_42_141/0.6)]",
     bg: "bg-purple-deep", textColor: "text-lavender-pale",
     left: "42.828%", top: "21.169%", width: "27.202%", height: "76.157%",
