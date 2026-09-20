@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import NavbarWrapper from "./components/NavbarWrapper.jsx";
@@ -7,7 +7,7 @@ import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Schedule from './pages/Schedule.jsx';
 import Faq from './pages/Faq.jsx';
-import Wics from './pages/Wics.jsx';
+import OurTeam from './pages/OurTeam.jsx';
 import Speakers from './pages/Speakers.jsx';
 import Workshops from './pages/Workshops.jsx';
 import Sponsors from './pages/Sponsors.jsx';
@@ -32,7 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/faq" element={<Faq />} />
-          <Route path="/sfu-wics" element={<Wics />} />
+          <Route path="/our-team" element={<OurTeam />} />
+          {/* old link — send it to the renamed page */}
+          <Route path="/sfu-wics" element={<Navigate to="/our-team" replace />} />
           <Route path="/speakers" element={<Speakers />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/schedule" element={<Schedule />} />

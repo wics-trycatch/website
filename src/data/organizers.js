@@ -1,174 +1,173 @@
-import amelia from "../assets/images/wics/organizers/amelia.jpg";
-import aniyah from "../assets/images/wics/organizers/aniyah.jpg";
-import bhakti from "../assets/images/wics/organizers/bhakti.JPG";
-import bianca from "../assets/images/wics/organizers/Bianca.png";
-import emily from "../assets/images/wics/organizers/emily.png";
-import gloria from "../assets/images/wics/organizers/gloria.JPG";
-import grace from "../assets/images/wics/organizers/grace.jpeg";
-import mara from "../assets/images/wics/organizers/mara.jpg";
-import mariaF from "../assets/images/wics/organizers/maria_f.jpg";
-import mariaK from "../assets/images/wics/organizers/maria_k.jpg";
-import meyer from "../assets/images/wics/organizers/meyer.jpg";
-import poorvi from "../assets/images/wics/organizers/poorvi.JPG";
-import sayna from "../assets/images/wics/organizers/sayna.jpeg";
-import selina from "../assets/images/wics/organizers/selina.jpg";
-import serena from "../assets/images/wics/organizers/serena.jpg";
-import sydney from "../assets/images/wics/organizers/sydney.jpeg";
-import vidhi from "../assets/images/wics/organizers/vidhi.JPEG";
+import sydney from "../assets_26/images/our-team/sydney.jpg";
+import aeris from "../assets_26/images/our-team/aeris.jpg";
+import sanya from "../assets_26/images/our-team/sanya.jpg";
+import serena from "../assets_26/images/our-team/serena.jpg";
+import aniyah from "../assets_26/images/our-team/aniyah.jpg";
+import malaika from "../assets_26/images/our-team/malaika.jpg";
+import an from "../assets_26/images/our-team/an.jpg";
+import jennifer from "../assets_26/images/our-team/jennifer.jpg";
+import manjari from "../assets_26/images/our-team/manjari.jpg";
+import tina from "../assets_26/images/our-team/tina.jpg";
+import laraib from "../assets_26/images/our-team/laraib.jpg";
+import sahaj from "../assets_26/images/our-team/sahaj.jpg";
+import sherry from "../assets_26/images/our-team/sherry.jpg";
+import alexis from "../assets_26/images/our-team/alexis.jpg";
+import sanika from "../assets_26/images/our-team/sanika.jpg";
 
+//temporary placeholder for LinkedIn links until we get the real ones
+const PLACEHOLDER_LINKEDIN = "https://www.linkedin.com/";
 
+export const chair = {
+  img: sydney,
+  imgProperties: "object-center",
+  alt: "Sydney Komanac headshot",
+  name: "Sydney Komanac",
+  role: "Chair",
+  linkedin: "https://www.linkedin.com/in/sydney-komanac-9982a0354/",
+  blurb:
+    "Hey everyone! I'm Sydney, a 3rd year Computing Science and Biochemistry student at SFU and the lead of Try/CATCH 2026. I got into programming back in high school and love everything this event stands for: support, inspiration, and connection for young students! Outside of school you can find me drawing, trying new eats, or spending time with my cats :D Looking forward to meeting you all at another great Try/CATCH!",
+};
+
+// Ordered to roughly cluster by team
 export const organizers = [
   {
-    img: mara,
+    img: aeris,
     imgProperties: "object-center",
-    alt: "Mara headshot",
-    name: "Mara",
-    role: "Co-Chair • Website Developer",
+    alt: "Aeris Chan headshot",
+    name: "Aeris Chan",
+    role: "Finances",
+    linkedin: "https://www.linkedin.com/in/aeris-chan-b26555354/",
     blurb:
-      "Hi everyone! My name is Mara, and I’m a third-year Computing Science student at SFU. I’ve been involved with Try/CATCH in the past as a workshop volunteer, host, and web developer, and I’m so excited to return this year as one of the Co-Chairs! I've attended Try/CATCH myself back in high school, so it feels extra special to now be helping lead this amazing yearly WiCS event. Outside of school, I love singing, dancing, and watching anime and K-pop shows!"
+      "Hi! I am a second year student in Computing Science with an interest in creative works and numbers! I love doing math, hence why finances:D Together with the rest of the team, I hope to make Try/CATCH superr amazing! Merch here we come:D",
   },
   {
-    img: bhakti,
+    img: sanya,
     imgProperties: "object-center",
-    alt: "Bhakti headshot",
-    name: "Bhakti",
-    role: "Co-Chair",
+    alt: "Sanya Sharma headshot",
+    name: "Sanya Sharma",
+    role: "Finances, Communications",
+    linkedin: PLACEHOLDER_LINKEDIN,
     blurb:
-      "Hello! I am Bhakti. I am a Computer Science major and the Co-Chair for the Try/CATCH event. I believe representation play a key role in helping students see themselves in the field, and through this event I hope to motivate the next generation of women to pursue their interests in technology with confidence."
-  },
-  {
-    img: aniyah,
-    imgProperties: "object-center",
-    alt: "Aniyah headshot",
-    name: "Aniyah",
-    role: "Logistics Coordinator",
-    blurb:
-      "Hi! My name is Aniyah and I'm a fourth-year Computer Science and Math Joint Major. In my free time I love to read books, play video games, and cuddle with my dogs. I'm so happy to be a part of Try/CATCH 2025 and look forward to meet all the attendees!"
-  },
-  {
-    img: grace,
-    imgProperties: "object-center",
-    alt: "Grace headshot",
-    name: "Grace",
-    role: "Logistics Coordinator",
-    blurb:
-      "Hi everyone, I'm Grace, and I'm currently a 4th year Computing Science student at SFU! In my free time, I enjoy drawing, scrapbooking, and thrifting. I'm super excited to be part of this year's Try/CATCH committee, and cannot wait to meet you all! ^-^"
-  },
-  {
-    img: meyer,
-    imgProperties: "object-center",
-    alt: "Meyer headshot",
-    name: "Meyer",
-    role: "Logistics Coordinator",
-    blurb:
-      "I’m a third-year Software Systems student, and I’m so excited to be part of this year’s Try/CATCH team! In my free time, I love reading, exploring cafés, and spending time in nature. I’m looking forward to helping create a welcoming environment for everyone at Try/CATCH 2025! :)"
-  },
-  {
-    img: mariaK,
-    imgProperties: "object-center",
-    alt: "Maria K headshot",
-    name: "Maria K.",
-    role: "Sponsorships Coordinator",
-    blurb:
-      "Hi! My name is Maria and I am a third year MBB & CS joint major. I think showing younger female and non binary students the opportunities they have in CS is a super important initiative which is why I'm excited to join the Try/CATCH committee this year. In my free time, I love listening to music and going to music events whenever I can. Can't wait to meet all the attendees this year!"
-  },
-  {
-    img: vidhi,
-    imgProperties: "object-center",
-    alt: "Vidhi headshot",
-    name: "Vidhi",
-    role: "Sponsorships Coordinator",
-    blurb:
-      "I’m a 3rd-year Computing Science student. Outside of school, I enjoy exploring new cafes, spending time outdoors, and trying out creative projects. My interests lie in human-computer interaction and software development, and I’m looking forward to connecting with everyone at Try/CATCH!"
-  },
-  {
-    img: gloria,
-    imgProperties: "object-center",
-    alt: "Gloria headshot",
-    name: "Gloria",
-    role: "Treasurer",
-    blurb:
-      "Hi everyone! I’m Gloria, a graduate student in the MPCS Big Data program. I love exploring new restaurants/coffee shops around the city, playing recreational sports, and enjoying board games. I am super excited to meet and support young women and non-binary students in STEM at this year's Try/CATCH! :)"
+      "Hi! I'm Sanya, and I'm in my third year of computing science. I am a part of the finance and communications team for Try/Catch 2026. In my free time, I like reading romance and fantasy. I can't wait to meet everyone and have a great time at Try/Catch! :D",
   },
   {
     img: serena,
     imgProperties: "object-center",
-    alt: "Serena headshot",
-    name: "Serena",
-    role: "Communications Coordinator",
+    alt: "Serena Dhillon headshot",
+    name: "Serena Dhillon",
+    role: "Communications",
+    linkedin: "https://www.linkedin.com/in/serena-dhillon-414976255/",
     blurb:
-      "I’m a Computing Science and Psychology student at SFU. I started coding at the end of my first year of university and now really enjoy making cool projects. In my free time, I like going for walks, painting, and playing video games with my sisters. I’m excited to be a part of the Try/Catch team again this year and look forward to helping create a fun experience for everyone attending!"
+      "Hi I'm Serena! I'm a Computing Science and Psychology student at SFU. I started coding at the end of my first year of university and now really enjoy making cool projects. In my free time, I like going for walks, painting, and playing video games. I'm excited to be a part of the Try/Catch team again this year and look forward to helping create a fun experience for everyone attending!",
   },
   {
-    img: poorvi,
+    img: aniyah,
     imgProperties: "object-center",
-    alt: "Poorvi headshot",
-    name: "Poorvi",
-    role: "Communications Coordinator",
+    alt: "Aniyah Bohnen headshot",
+    name: "Aniyah Bohnen",
+    role: "Recruitment",
+    linkedin: "https://www.linkedin.com/in/aniyah-bohnen/",
     blurb:
-      "Hi, I’m Poorvi! I’m an AI/ML and full-stack developer with hands-on experience in research, data-driven projects, and building software tools. I’ve worked on projects ranging from analysing large datasets to developing apps that support health and wellness. I’m passionate about exploring new technologies and love sharing that excitement with others, helping people see what’s possible in tech."
+      "Hii, I'm Aniyah! I'm a Computer Science and Mathematics student at SFU. I love reading books, going to pilates, and cuddling with my dogs in my free time. I'm so happy to be a part of Try/CATCH 2026 and look forward to meet all the attendees!",
   },
   {
-    img: sydney,
+    img: malaika,
     imgProperties: "object-center",
-    alt: "Sydney headshot",
-    name: "Sydney",
-    role: "Recruitment Coordinator",
+    alt: "Malaika Qureshi headshot",
+    name: "Malaika Qureshi",
+    role: "Recruitment",
+    linkedin: "https://www.linkedin.com/in/malaika-qureshi-7a7495251/",
     blurb:
-      "I am a second-year Computing Science major at SFU and Director of Communications for WiCS! When I'm not lost in assignments, you can find me making jewelry, playing guitar, or listening to music. I'm super excited for Try/CATCH 2025 and can't wait to meet all of you :D"
+      "Hii! My name is Malaika and I am a fourth-year Computing Science major and Psychology minor at SFU. I love my cats, reading, hiking, thrifting and desserts. I am so excited to be part of this year's Try/CATCH team and am looking forward to meeting all the attendees <3",
   },
   {
-    img: emily,
+    img: an,
     imgProperties: "object-center",
-    alt: "Emily headshot",
-    name: "Emily",
-    role: "Recruitment Coordinator",
+    alt: "An Nguyen headshot",
+    name: "An Nguyen",
+    role: "Visual Design",
+    linkedin: "https://www.linkedin.com/in/an-nguyen-6621692b0/",
     blurb:
-      "Hi! I'm Emily, a third-year Computing Science major with an Interactive Arts & Technology minor. In my free time, I love reading, painting, and binge-watching 2000s shows and movies. I'm so excited to be on the recruitment team for Try/CATCH this year, and I'm looking forward to meeting everyone!"
+      "Hewoo everyone :> I'm An and I'm super happy to join Try/Catch this year as a member of the Visual Design team! I'm currently a 4th-year CS student with a minor in IAT. WiCS has been such an incredible part of my uni journey as I gained so many opportunities to grow and meet amazing people. I hope you will join us at Try/Catch 2026 and get to experience that same growth for yourself in this community! ˗ˋˏ ♡ ˎˊ˗",
   },
   {
-    img: selina,
+    img: jennifer,
     imgProperties: "object-center",
-    alt: "Selina headshot",
-    name: "Selina",
-    role: "Visual Design Coordinator",
+    alt: "Jennifer Huang headshot",
+    name: "Jennifer Huang",
+    role: "Visual Design",
+    linkedin: "https://www.linkedin.com/in/jennifer-huanng/",
     blurb:
-      "Hi! I am a second year computing science student in the dual degree program. I love playing video games and reading. I adore cute and pretty aesthetics. "
+      "Hiii! I'm Jennifer, a 4th-year Software Systems student at SFU. ♡ I'm so happy to have helped bring Try/CATCH 2026 to life as part of the visual design team! It's been so lovely working alongside all the amazing WiCS members and getting to be a part of the planning process.\n\nSo excited to see y'all at Try/CATCH! Can't wait to meet you all!",
   },
   {
-    img: amelia,
+    img: manjari,
     imgProperties: "object-center",
-    alt: "Amelia headshot",
-    name: "Amelia",
-    role: "Visual Design Coordinator",
+    alt: "Manjari Prasad headshot",
+    name: "Manjari Prasad",
+    role: "Website",
+    linkedin: "https://www.linkedin.com/in/manjari-prasad-31320134a/",
     blurb:
-      "Hello! I’m Amelia, a second-year student in the Computing Science Dual Degree with Zhejiang. I’m excited to be part of the visual design team for Try/CATCH this year! In my free time, I like drawing on my iPad, playing video games with friends, and listening to music!"
+      "Hi everyone! I'm Manjari, a third-year Computing Science student at SFU. I volunteered with Try/CATCH last year, and I'm thrilled to be back this time building the website you're on right now! When I'm not coding, you'll usually find me curled up with a book or at the piano. I can't wait to meet all of you at Try/CATCH 2026!",
   },
   {
-    img: mariaF,
+    img: tina,
     imgProperties: "object-center",
-    alt: "Maria F headshot",
-    name: "Maria F.",
-    role: "Merch & Swag Coordinator",
+    alt: "Tanveen Kaur headshot",
+    name: "Tanveen Kaur",
+    role: "Website",
+    linkedin: "https://www.linkedin.com/in/tanveen-kaur-44ba52291/",
     blurb:
-      "Hi everyone! My name is Maria and I am in my third year of cs here at SFU. I'm part of the merch and swag team, and am looking forward to meeting you all and welcoming you to WiCS!"
+      "Heyy everyone my name is Tanveen. I'm currently a third-year CS student and I built the website. In my free time I like going to the gym, watching sitcoms and reading books. So excited for Try/CATCH this year!!",
   },
   {
-    img: sayna,
+    img: laraib,
     imgProperties: "object-center",
-    alt: "Sayna headshot",
-    name: "Sayna",
-    role: "Merch & Swag Coordinator",
+    alt: "Laraib Yousfani headshot",
+    name: "Laraib Yousfani",
+    role: "Sponsorships",
+    linkedin: "https://www.linkedin.com/in/laraib-yousfani/",
     blurb:
-      "Hii! I’m Sayna, a third year data science student. I’m part of the merch and swag team for Try/CATCH 2025, and I’m super excited to help make this event memorable! In my free time, I love catching up on pop culture, whether it’s the latest shows or trends. Can’t wait to meet everyone!! "
+      "Hellooo! I'm Laraib, a 4th year student at SFU. When I'm not busy with coursework, you'll find me reading and baking to unwind, or raging in Valorant (recently got back into it ofc). Can't wait to meet everyone and make some fun memories at Try/CATCH this year! 🫂",
   },
   {
-    img: bianca,
+    img: sahaj,
     imgProperties: "object-center",
-    alt: "Bianca headshot",
-    name: "Bianca",
-    role: "Website Developer",
+    alt: "Sahaj Bhangu headshot",
+    name: "Sahaj Bhangu",
+    role: "Sponsorships",
+    linkedin: "https://www.linkedin.com/in/sahaj-bhangu-74b1a8326/",
     blurb:
-      "Hi, I'm Bianca! I'm a 4th-year student, majoring in Computer Science and minoring in Interactive Arts and Technology. I was a Visual Designer and Workshop Host for Try/CATCH last year, and I loved helping students get interested in tech and just being part of such a fun, welcoming event! This year, I designed the website you're looking at now :D Looking forward to another great Try/CATCH! <3"
+      "Hey! I'm Sahaj, one of the sponsorships coordinators for this year's Try/CATCH! I am a second-year student studying computer science here at SFU. In my free time, you can find me curled up in my hammock with a book, or outside running or playing tennis. I'm so excited to meet everyone, so if you see me, don't be shy to say hi! :>",
+  },
+  {
+    img: sherry,
+    imgProperties: "object-center",
+    alt: "Sherry Lu headshot",
+    name: "Sherry Lu",
+    role: "Sponsorships",
+    linkedin: PLACEHOLDER_LINKEDIN,
+    blurb:
+      "Hi! My name is Sherry. I'm currently a third-year student in Computing Science major. In my leisure time, I love grocery hauls and the joy of restocking food. Try/CATCH event has generated a new experience to me by first time working with many people, who have backgrounds similar to mine.",
+  },
+  {
+    img: alexis,
+    imgProperties: "object-center",
+    alt: "Alexis Yew headshot",
+    name: "Alexis Yew",
+    role: "Logistics",
+    linkedin: "https://www.linkedin.com/in/alexis-yew/",
+    blurb:
+      "Hi! I'm Alexis, a 4th year CS and Business joint major. I'm part of the logistics team of TRY/CATCH 2026's wonderful committee. Besides classes, I am a lover of indie games and hyperpop music! Don't be afraid to say hi, I am a yapper once I start talking :D",
+  },
+  {
+    img: sanika,
+    imgProperties: "object-center",
+    alt: "Sanika Goyal headshot",
+    name: "Sanika Goyal",
+    role: "Logistics",
+    linkedin: PLACEHOLDER_LINKEDIN,
+    blurb:
+      "Hi! I'm a fourth-year Computing Science student on the logistics team, and I'm excited to help coordinate this event. We're so glad you're here and I hope you have a fantastic time connecting and learning today! Outside of school, I'm a total summer enthusiast who loves making the most of the sunny weather by playing tennis, badminton, and exploring new spots around town.",
   },
 ];

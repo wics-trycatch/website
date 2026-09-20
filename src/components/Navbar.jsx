@@ -110,7 +110,7 @@ function Navbar() {
               <Link to="/faq">FAQ</Link>
             </li>
             <li>
-              <Link to="/sfu-wics">SFU WiCS</Link>
+              <Link to="/our-team">Our Team</Link>
             </li>
           </ul>
         </li>
@@ -186,7 +186,7 @@ function Navbar() {
                   <Link to="/faq" onClick={() => setHamburgerOpen(false)}>FAQ</Link>
                 </li>
                 <li>
-                  <Link to="/sfu-wics" onClick={() => setHamburgerOpen(false)}>SFU WiCS</Link>
+                  <Link to="/our-team" onClick={() => setHamburgerOpen(false)}>Our Team</Link>
                 </li>
               </ul>
             </li>
