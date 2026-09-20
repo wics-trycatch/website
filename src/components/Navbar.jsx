@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
+
+const SnakesAndLadders = lazy(() => import("../pages/SnakesAndLadders.jsx"));
 import { Link, useLocation } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
@@ -34,6 +36,7 @@ function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [openDropdown, setOpenDropdown] = useState(null); // "about" | "event" | null
+  const [playing, setPlaying] = useState(false);
   const lastScrollY = useRef(0);
   const { pathname } = useLocation();
   const closeMenu = () => setHamburgerOpen(false);
@@ -148,8 +151,8 @@ function Navbar() {
         {/* Reserved slot for the Snakes & Ladders game link — not wired up
             yet, just holding its place in the nav. Rename the text below
             once we settle on what to call it. */}
-        <li role="menuitem" tabIndex="-1" aria-disabled="true">
-          <span className="text-white/40 cursor-not-allowed select-none">Play</span>
+        <li role="none">
+          <button type="button" role="menuitem" onClick={() => setPlaying(true)}>Play</button>
         </li>
 
         <li role="menuitem" tabIndex="0">
@@ -211,6 +214,9 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
+              <button type="button" onClick={() => { closeMenu(); setPlaying(true); }}>Play</button>
+            </li>
+            <li>
               <SectionLink
                 section="register"
                 pathname={pathname}
@@ -222,6 +228,11 @@ function Navbar() {
             </li>
           </ul>
         </div>
+      )}
+      {playing && (
+        <Suspense fallback={null}>
+          <SnakesAndLadders onClose={() => setPlaying(false)} />
+        </Suspense>
       )}
     </nav>
   );
