@@ -298,12 +298,20 @@ function Home() {
           ))}
         </div>
 
-        <Link
-          to="/schedule"
-          className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] justify-center mt-[2.5rem] mx-auto hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
-        >
-          See the full schedule <span aria-hidden="true">&#8594;</span>
-        </Link>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-[1.25rem] sm:gap-[4.5rem] mt-[2.5rem]">
+          <Link
+            to="/schedule"
+            className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
+          >
+            See the full schedule <span aria-hidden="true">&#8594;</span>
+          </Link>
+          <Link
+            to="/speakers"
+            className="font-quicksand font-bold text-yellow text-[1.1rem] xl:text-[1.25rem] flex items-center gap-[0.5rem] hover:gap-[0.75rem] transition-all duration-300 cursor-pointer w-fit"
+          >
+            Meet our speakers <span aria-hidden="true">&#8594;</span>
+          </Link>
+        </div>
       </section>
 
       {/* STATS */}
