@@ -2,7 +2,17 @@ import styles from "./Home.module.css";
 import frameBg from "../assets_26/images/shared/frame_bg.svg";
 import { chair, organizers } from "../data/organizers";
 
+/* ------------------------------------------------------------------ */
 /* Color accents                                                       */
+/* ------------------------------------------------------------------ */
+
+// Sydney gets yellow. Everyone else cycles through these three per column,
+// left to right, so the grid reads as a repeating 3-color rhythm. Each
+// accent carries its own pill color, hover glow, and LinkedIn badge
+// treatment (badge is tinted with the accent at rest, inverts on hover) —
+// written out as full literal class strings so Tailwind's build-time scan
+// picks them all up (it can't see classes assembled from interpolated
+// runtime values).
 const ACCENTS = {
   yellow: {
     pill: "bg-yellow text-navy",
@@ -22,19 +32,24 @@ const ACCENTS = {
     badgeBase: "bg-pink-light text-navy",
     badgeHover: "hover:bg-navy hover:text-pink-light hover:scale-110",
   },
-  lavenderPale: {
-    pill: "bg-lavender-pale/80 text-navy",
-    glow: "hover:shadow-[0_0_16px_2px_rgb(236_227_255/0.5)]",
-    badgeBase: "bg-lavender-pale text-navy",
-    badgeHover: "hover:bg-navy hover:text-lavender-pale hover:scale-110",
+  white: {
+    pill: "bg-white/85 text-navy",
+    glow: "hover:shadow-[0_0_16px_2px_rgb(255_255_255/0.4)]",
+    badgeBase: "bg-white text-navy",
+    badgeHover: "hover:bg-navy hover:text-white hover:scale-110",
   },
 };
-const ACCENT_CYCLE = ["purpleDeep", "pinkLight", "lavenderPale"];
+
+// Column 0 = dark purple, column 1 = light pink, column 2 = white — except
+// Sydney (always the very first card), who gets yellow instead.
+const COLUMN_ACCENTS = ["purpleDeep", "pinkLight", "white"];
 
 /* ------------------------------------------------------------------ */
 /* Small pieces                                                        */
 /* ------------------------------------------------------------------ */
 
+// Some people (e.g. Sanya: "Finances, Communications") sit on more than one
+// team — give each team its own pill instead of cramming them into one.
 function RolePill({ role, accent }) {
   const roles = role.split(",").map((r) => r.trim()).filter(Boolean);
   return (
@@ -68,47 +83,15 @@ function LinkedInBadge({ href, accent }) {
   );
 }
 
-// The featured Chair card — same idea as the keynote card on the Speakers
-// page: bigger, sits on its own, glows yellow.
-function ChairCard({ img, imgProperties, alt, name, role, blurb, linkedin }) {
-  const accent = ACCENTS.yellow;
-  return (
-    <div
-      className={`group relative w-full rounded-[1.25rem] md:rounded-[1.5rem] border border-purple-medium/40 transition-shadow duration-300 flex flex-col md:flex-row md:items-center gap-[1.25rem] md:gap-[1.5rem] p-[1.25rem] md:p-[1.5rem] ${accent.glow}`}
-    >
-      <div className="shrink-0 overflow-hidden rounded-[0.9375rem] aspect-square mx-auto md:mx-0 w-[15rem] md:w-[19rem] lg:w-[21rem]">
-        <img
-          src={img}
-          alt={alt || `${name} headshot`}
-          className={`w-full h-full object-cover ${imgProperties || "object-center"}`}
-        />
-      </div>
-
-      <div className="hidden md:block w-px self-stretch bg-[rgb(239_195_245_/_0.45)]" aria-hidden="true" />
-
-      <div className="flex-1 flex flex-col gap-[0.5rem] items-center md:items-start text-center md:text-left">
-        <div className="flex items-center gap-[1.5rem]">
-          <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.25rem] md:text-[1.5rem]">{name}</h3>
-          <LinkedInBadge href={linkedin} accent={accent} />
-        </div>
-        <RolePill role={role} accent={accent} />
-        <p className="font-quicksand text-pink-light text-[0.9rem] md:text-[1rem] leading-relaxed text-left mt-[0.25rem]">
-          {blurb}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// One team member tile — square photo up top, name/role/bio below, glows
-// with whichever accent color this column was assigned.
-function TeamMemberCard({ img, imgProperties, alt, name, role, blurb, linkedin, accentKey, className = "" }) {
+// Every card is the same size now — Sydney included — she's just picked out
+// with the yellow accent instead of getting a bigger, separate layout.
+function TeamMemberCard({ img, imgProperties, alt, name, role, blurb, linkedin, accentKey }) {
   const accent = ACCENTS[accentKey] ?? ACCENTS.purpleDeep;
   const paragraphs = (blurb ?? "").split("\n\n");
 
   return (
     <div
-      className={`rounded-[1.25rem] border border-purple-medium/40 p-[1.25rem] transition-shadow duration-300 flex flex-col gap-[0.75rem] ${accent.glow} ${className}`}
+      className={`rounded-[1.25rem] border border-purple-medium/40 p-[1.25rem] transition-shadow duration-300 flex flex-col gap-[0.75rem] ${accent.glow}`}
     >
       <div className="w-full aspect-square overflow-hidden rounded-[0.9375rem]">
         <img
@@ -119,7 +102,7 @@ function TeamMemberCard({ img, imgProperties, alt, name, role, blurb, linkedin, 
       </div>
 
       <div className="flex flex-col gap-[0.4rem]">
-        <div className="flex items-center gap-[1.3rem]">
+        <div className="flex items-center gap-[0.9rem]">
           <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.1rem]">{name}</h3>
           <LinkedInBadge href={linkedin} accent={accent} />
         </div>
@@ -138,16 +121,29 @@ function TeamMemberCard({ img, imgProperties, alt, name, role, blurb, linkedin, 
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
-function OurTeam() {
-  // Cycle the 3 accent colors by column (left to right), across the whole
-  // roster in reading order — not reset per row.
-  const withAccent = organizers.map((member, i) => ({ ...member, accentKey: ACCENT_CYCLE[i % 3] }));
+// Requested layout (reading order, 3 per row):
+// sydney aeris sanya / serena aniyah malaika / an jennifer alexis /
+// sanika manjari tanveen / laraib sahaj sherry
+const LAYOUT_ORDER = [
+  "sydney", "aeris", "sanya",
+  "serena", "aniyah", "malaika",
+  "an", "jennifer", "alexis",
+  "sanika", "manjari", "tanveen",
+  "laraib", "sahaj", "sherry",
+];
 
-  // Center the last, incomplete row instead of letting it hang left with a
-  // visible gap (see the mockup we worked out for this earlier).
-  const fullRowCount = Math.floor(withAccent.length / 3) * 3;
-  const fullRows = withAccent.slice(0, fullRowCount);
-  const lastRow = withAccent.slice(fullRowCount);
+function OurTeam() {
+  const byFirstName = new Map(
+    [chair, ...organizers].map((person) => [person.name.split(" ")[0].toLowerCase(), person])
+  );
+
+  const team = LAYOUT_ORDER.map((firstName, i) => {
+    const person = byFirstName.get(firstName);
+    // Sydney (always index 0) is the only one who gets yellow; everyone else
+    // is colored by column.
+    const accentKey = i === 0 ? "yellow" : COLUMN_ACCENTS[i % 3];
+    return { ...person, accentKey };
+  });
 
   return (
     <div className="relative bg-navy overflow-hidden -mx-[5.5556%]">
@@ -169,21 +165,11 @@ function OurTeam() {
             students, faculty and staff. Meet the team behind this year's event!
           </p>
 
-          <ChairCard {...chair} />
-
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1.5rem] mt-[0.5rem]">
-            {fullRows.map((member, i) => (
+            {team.map((member, i) => (
               <TeamMemberCard key={i} {...member} />
             ))}
           </div>
-
-          {lastRow.length > 0 && (
-            <div className="w-full flex flex-wrap justify-center gap-[1.5rem]">
-              {lastRow.map((member, i) => (
-                <TeamMemberCard key={i} {...member} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" />
-              ))}
-            </div>
-          )}
         </div>
       </section>
     </div>

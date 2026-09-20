@@ -25,7 +25,7 @@ export const chair = {
   role: "Chair",
   linkedin: "https://www.linkedin.com/in/sydney-komanac-9982a0354/",
   blurb:
-    "Hey everyone! I'm Sydney, a 3rd year Computing Science and Biochemistry student at SFU, and the lead of Try/CATCH 2026. I got involved with WiCS for the very first time as a Try/CATCH volunteer line-leading and serving food, so it feels very special to be back as the main lead this year. I first got into programming back in high school and love everything this event stands for: support, inspiration, and connection for young students! Outside of school you can find me drawing, trying new restaurants, or spending time with my two cats :D \n\n Looking forward to meeting you all at another great Try/CATCH!",
+    "Hey everyone! I'm Sydney, a 3rd year Computing Science and Biochemistry student at SFU and the lead of Try/CATCH 2026. I got into programming back in high school and love everything this event stands for: support, inspiration, and connection for young students! Outside of school you can find me drawing, trying new eats, or spending time with my cats :D \n\nLooking forward to meeting you all at another great Try/CATCH!",
 };
 
 // Ordered to roughly cluster by team

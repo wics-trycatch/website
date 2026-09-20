@@ -234,8 +234,8 @@ function Home() {
         <div className="relative hidden xl:block">
           <img src={heroArc} alt="" aria-hidden="true" className="block w-full h-auto pointer-events-none" />
 
-          <div className={`absolute left-1/2 -translate-x-1/2 bottom-[8%] ${styles.heroGrid}`}>
-            <img src={logoTiny} alt="try/CATCH" className={`${styles.heroLogo} w-[24rem]`} />
+          <div className={`absolute left-1/2 -translate-x-1/2 bottom-[12%] ${styles.heroGrid}`}>
+            <img src={logoTiny} alt="try/CATCH" className={`${styles.heroLogo} w-[28rem]`} />
 
             <div className={`${styles.heroDesc} flex flex-col items-center text-center gap-[1.5rem] max-w-[24rem]`}>
               <p className="font-quicksand font-bold text-pink-light text-[1.6rem] leading-snug">
