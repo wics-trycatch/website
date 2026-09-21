@@ -293,13 +293,18 @@ export default function SnakesAndLadders({ onClose }) {
       }
 
       const top = board.ladders[square];
-      await doSquare(square, top ? { ladderTo: top } : undefined);
       if (top) {
+        // Ladders: climb immediately, no task on the base square and no die
+        // roll in between — whatever's waiting at the top square fires the
+        // instant you arrive there.
         setToast(`Up the ladder to square ${top}!`);
         await sleep(450);
         await move(top, 'slide');
-        if (top === board.last) setWon(true);
+        if (top === board.last) { setWon(true); return; }
+        return land(top);
       }
+
+      await doSquare(square);
     };
 
     try {
