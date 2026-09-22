@@ -146,7 +146,7 @@ export const organizers = [
     alt: "Sherry Lu headshot",
     name: "Sherry Lu",
     role: "Sponsorships",
-    linkedin: PLACEHOLDER_LINKEDIN,
+    linkedin: "https://www.linkedin.com/in/phung-lu-223682367/",
     blurb:
       "Hi! My name is Sherry. I'm currently a third-year student in Computing Science major. In my leisure time, I love grocery hauls and the joy of restocking food. Try/CATCH event has generated a new experience to me by first time working with many people, who have backgrounds similar to mine.",
   },
