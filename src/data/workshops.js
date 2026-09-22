@@ -69,10 +69,6 @@ const victoria = {
   bio: "Hey there! My name's Victoria and I'm a 5th year SIAT student at SFU. I'm someone who is super passionate about user experience (UX) and human-centered design. What I love the most about my work is becoming almost like a detective — digging deeper into how people experience and interact with technology, digital systems, and the world around them. When not working, I love going to cute cafes, experimenting with my camera, or spending a whole weekend afternoon doing arts and crafts. I'm super excited to share some of the experiences that I've gained and hopefully spark new inspiration, curiosity, and passion for design too!",
 };
 
-const GENERIC_SUMMARY = "Details for this workshop are still being finalized — check back soon to learn what you'll be building!";
-const GENERIC_DESCRIPTION =
-  "We're putting the finishing touches on this workshop's activities, so the full write-up is coming soon. In the meantime, come ready to learn something new, get hands-on, and have fun with our wonderful hosts!";
-
 export const workshopsMeta = {
   eyebrow: "Learn by building",
   intro:
@@ -85,40 +81,50 @@ export const workshops = [
     title: "Cybersecurity Workshop",
     icon: "shield",
     accent: "pink",
-    summary: GENERIC_SUMMARY,
-    description: GENERIC_DESCRIPTION,
+    summary:
+      "Discover the fundamentals of cybersecurity through hands-on puzzles, learning how cryptography, online privacy, and defense strategies keep our digital world safe.",
+    description:
+      "Curious about how hackers think and how we protect our digital world? In this workshop led by executives from SFU's Cybersecurity Club, you'll explore the basics of cybersecurity, encryption, and digital safety. Through fun, interactive challenges and code-breaking puzzles, you'll learn how security analysts detect vulnerabilities and defend systems against cyber threats. No previous coding or security experience required!",
     hosts: [belinda, yujin],
   },
   {
     title: "Figma Workshop",
     icon: "figma",
     accent: "indigo",
-    summary: GENERIC_SUMMARY,
-    description: GENERIC_DESCRIPTION,
+    summary:
+      "Dive into user interface (UI) and user experience (UX) design with Figma, learning how to design and prototype your very own mobile app screens.",
+    description:
+      "Ever wonder how the apps we use every day are designed before they're ever coded? In this hands-on workshop, you'll learn the fundamentals of UI/UX design using Figma, the industry-standard design platform. You'll create and customize a multi-screen mobile app prototype, exploring wireframing, color theory, typography, and clickable interactions to bring your creative ideas to life.",
     hosts: [laraine, victoria],
   },
   {
     title: "Game Development Workshop",
     icon: "gamepad",
     accent: "yellow",
-    summary: GENERIC_SUMMARY,
-    description: GENERIC_DESCRIPTION,
+    summary:
+      "Step into game development and discover how art, sound, and code come together to build your own playable 2D game from scratch.",
+    description:
+      "Ready to build your very own video game? Hosted by leaders from the SFU Game Dev Club, this workshop introduces the core building blocks of game creation. You'll learn how scenes, sprites, mechanics, and physics interact, and how to program gameplay logic to create a fun, interactive game from scratch. Beginners welcome—bring your creativity and imagination!",
     hosts: [howard, peter],
   },
   {
     title: "Robotics Workshop",
     icon: "bot",
     accent: "lavender",
-    summary: GENERIC_SUMMARY,
-    description: GENERIC_DESCRIPTION,
+    summary:
+      "Get hands-on with robotics programming to see how code translates into real-world robot motion, sensor inputs, and interactive challenges.",
+    description:
+      "Bring hardware to life with code! In this workshop, you'll explore the fascinating intersection of software and physical computing. You'll discover how robots perceive their environment through sensors, process instructions, and execute physical tasks. Working through exciting real-world robotics challenges, you'll see your code directly steer robot behaviors and actions.",
     hosts: [puja, stella],
   },
   {
     title: "Web Development Workshop",
     icon: "code",
     accent: "purple",
-    summary: GENERIC_SUMMARY,
-    description: GENERIC_DESCRIPTION,
+    summary:
+      "Learn the core building blocks of the web—HTML, CSS, and JavaScript—to design, style, and code your very own interactive webpage from scratch.",
+    description:
+      "Have you ever wanted to build your own website? In this beginner-friendly workshop, you'll dive into the essentials of front-end web development. You'll use HTML to structure content, CSS to style layouts with colors and fonts, and JavaScript to add fun interactive elements. By the end of the session, you'll have created a live, personalized webpage you can share with friends!",
     hosts: [aniyah, kandisa],
   },
 ];
