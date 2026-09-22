@@ -1,22 +1,13 @@
-// Workshop content for the 2026 event.
-//
-// icon:    "figma" | "shield" | "gamepad" | "bot" | "code"  (the round icon on the card)
-// accent:  "purple" | "pink" | "yellow" | "lavender"        (the card's border and glow color)
-// summary: the short blurb shown on the closed card
-// description: the longer text shown once the card is opened
-// hosts:   one entry per host. Add a photo by importing it at the top of this
-//          file and setting img: myPhoto. Without an img, their initial is shown.
-//          The "Hosted by ..." line on the card is built from the hosts' first names.
-//
-// TODO: none of the workshops have their real write-up yet — every
-// summary/description below is a generic placeholder. Swap each one out
-// once the actual activity plan is ready.
-
 import howardPhoto from "../assets_26/images/hosts/howard.jpg";
 import peterPhoto from "../assets_26/images/hosts/peter.jpg";
 import yujinPhoto from "../assets_26/images/hosts/yujin.jpg";
 import belindaPhoto from "../assets_26/images/hosts/belinda.jpg";
 import kandisaPhoto from "../assets_26/images/hosts/kandisa.jpg";
+import aniyahPhoto from "../assets_26/images/hosts/aniyah.JPG";
+import larainePhoto from "../assets_26/images/hosts/laraine.jpg";
+import pujaPhoto from "../assets_26/images/hosts/puja.jpg";
+import stellaPhoto from "../assets_26/images/hosts/stella.jpg";
+import victoriaPhoto from "../assets_26/images/hosts/victoria.jpg";
 
 const howard = {
   name: "Howard",
@@ -48,6 +39,36 @@ const kandisa = {
   bio: "Hey! I'm Kandisa, a 4th-year Computing Science student at SFU, Software Developer at the SFU Robot Soccer Club, and a Business Analyst Co-op at Fraser Health. I enjoy solving real-life challenges through technology. I love exploring new sports, cooking, reading, traveling, dancing, and listening to music. I'm so excited to share my experiences and hopefully pass on some of the skills I've learned along the way!",
 };
 
+const aniyah = {
+  name: "Aniyah",
+  img: aniyahPhoto,
+  bio: "Hi everyone, my name is Aniyah! I’m a 5th year Computer Science and Mathematics Major at SFU and a Software Developer at SFU Surge. I love to create and solve problems with technology. In my free time I enjoy pilates and cuddling with my pets ♡ I’m so excited to share my passion for tech and meet you all at Try/CATCH 2026!",
+};
+
+const laraine = {
+  name: "Laraine",
+  img: larainePhoto,
+  bio: "Hi everyone! My name is Laraine, and I’m a third-year Interactive Arts and Technology student at SFU, concentrating in AI and Data Science for Human-Centered Systems and Designing Interactions. I’m passionate about UX/UI design, technology, and finding creative ways to make technology more accessible and engaging. Outside of school, I enjoy reading, watching Star Trek, designing, and exploring new creative projects. I’m excited to be part of Try/Catch 2026 and share what I’ve learned while inspiring others to explore the world of technology!",
+};
+
+const puja = {
+  name: "Puja",
+  img: pujaPhoto,
+  bio: "Hi! I’m Puja, and I’m a final year CS student at SFU. I've spent the last 4 years exploring everything from software dev to machine learning, and somewhere along the way I stumbled across robotics and ended up loving it the most. I’m currently working on getting a robot to understand, break down, and execute natural language instructions, which is both really exciting and challenging! I hope to give you all some exposure to robotics in this workshop and show you how fun it can be 🙂 In my free time I love reading, hiking, baking, and whatever other new hobby I happen to have picked up.",
+};
+
+const stella = {
+  name: "Stella",
+  img: stellaPhoto,
+  bio: "Hi! I’m Stella and I am a 4th year Computing Science student at SFU. I am an undergrad researcher in the Rosie Lab. Outside of academics, I am also a member of the SFU Fencing Team, and enjoy travelling, painting, and reading. I hope our workshop lets you glimpse into what’s possible with the exciting applications of robotics!",
+};
+
+const victoria = {
+  name: "Victoria",
+  img: victoriaPhoto,
+  bio: "Hey there! My name's Victoria and I'm a 5th year SIAT student at SFU. I'm someone who is super passionate about user experience (UX) and human-centered design. What I love the most about my work is becoming almost like a detective — digging deeper into how people experience and interact with technology, digital systems, and the world around them. When not working, I love going to cute cafes, experimenting with my camera, or spending a whole weekend afternoon doing arts and crafts. I'm super excited to share some of the experiences that I've gained and hopefully spark new inspiration, curiosity, and passion for design too!",
+};
+
 const GENERIC_SUMMARY = "Details for this workshop are still being finalized — check back soon to learn what you'll be building!";
 const GENERIC_DESCRIPTION =
   "We're putting the finishing touches on this workshop's activities, so the full write-up is coming soon. In the meantime, come ready to learn something new, get hands-on, and have fun with our wonderful hosts!";
@@ -72,10 +93,9 @@ export const workshops = [
     title: "Figma Workshop",
     icon: "figma",
     accent: "indigo",
-    // TODO: no host confirmed for this one yet
     summary: GENERIC_SUMMARY,
     description: GENERIC_DESCRIPTION,
-    hosts: [],
+    hosts: [laraine, victoria],
   },
   {
     title: "Game Development Workshop",
@@ -89,10 +109,9 @@ export const workshops = [
     title: "Robotics Workshop",
     icon: "bot",
     accent: "lavender",
-    // TODO: no host confirmed for this one yet
     summary: GENERIC_SUMMARY,
     description: GENERIC_DESCRIPTION,
-    hosts: [],
+    hosts: [puja, stella],
   },
   {
     title: "Web Development Workshop",
@@ -100,6 +119,6 @@ export const workshops = [
     accent: "purple",
     summary: GENERIC_SUMMARY,
     description: GENERIC_DESCRIPTION,
-    hosts: [kandisa],
+    hosts: [aniyah, kandisa],
   },
 ];
