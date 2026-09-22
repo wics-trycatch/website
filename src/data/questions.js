@@ -20,8 +20,10 @@
 // everyone gets pushed a little. 'finale' is reserved for the last square
 // only — the grand finish-line task.
 //
-// TODO: the 'bold' and 'finale' tasks below are drafted, not confirmed —
-// swap in whatever you and Tina actually want people doing.
+// NOTE: the 'bold' and 'finale' tasks below were reworked to only assume
+// things that will definitely exist at the event (screens/slides, an
+// organizer, a volunteer, another attendee) rather than props/setups that
+// would need to be arranged in advance. Swap further as needed.
 
 export const POOL = [
   // ---- mcq: normal trivia ----
@@ -45,21 +47,21 @@ export const POOL = [
   { id: 'task-doodle', kind: 'task', tier: 'easy', title: 'Doodle "coding"', detail: 'Doodle what you think "coding" looks like, then photograph your doodle.', proof: 'photo' },
   { id: 'task-dream-job', kind: 'task', tier: 'easy', title: 'Dream job wall', detail: 'Write your dream job on the sticky-note wall, then photograph your sticky note on the wall.', proof: 'photo' },
   { id: 'task-banner-photo', kind: 'task', tier: 'easy', title: 'Photograph the banner', detail: 'Snap a photo of the WiCS banner.', proof: 'photo' },
-  { id: 'task-match-language', kind: 'task', tier: 'easy', title: 'Match the language', detail: "Find the code snippet poster, then photograph it and type which language it's written in.", proof: 'both', inputLabel: 'Which language?' },
+  { id: 'task-match-language', kind: 'task', tier: 'easy', title: 'Spot the language', detail: 'Find any screen or slide showing code at the event, photograph it, and type which language it\'s written in.', proof: 'both', inputLabel: 'Which language?' },
   { id: 'task-match-logo', kind: 'task', tier: 'easy', title: 'Match the logo', detail: 'Find a tech company logo somewhere at the event, photograph it, and type which company it is.', proof: 'both', inputLabel: 'Which company?' },
   { id: 'task-pose-mascot', kind: 'task', tier: 'easy', title: 'Pose with the sign', detail: 'Find the Try/CATCH sign or poster and take a photo of yourself with it.', proof: 'photo' },
 
   // ---- task: social (go talk to someone) ----
-  { id: 'task-meet-exec', kind: 'task', tier: 'social', title: 'Meet a WiCS exec', detail: 'Introduce yourself to a WiCS exec, take a photo together, and say what their favorite course has been.', proof: 'both', inputLabel: "What'd they say?" },
-  { id: 'task-ask-organizer', kind: 'task', tier: 'social', title: 'Ask an organizer', detail: 'Ask an organizer what surprised them most about planning Try/CATCH this year, and snap a photo with them.', proof: 'both', inputLabel: "What'd they say?" },
-  { id: 'task-fist-bump', kind: 'task', tier: 'social', title: 'Fist-bump an organizer', detail: 'Find an organizer or volunteer, give them a fist-bump, and photograph the moment.', proof: 'photo' },
-  { id: 'task-lanyard', kind: 'task', tier: 'social', title: 'Find the lanyard', detail: 'Find the volunteer wearing a specially colored lanyard, say hi, and take a photo with them.', proof: 'both', inputLabel: 'What color was it?' },
-  { id: 'task-handshake', kind: 'task', tier: 'social', title: 'Teach a handshake', detail: 'Teach a friend a handshake, then photograph yourselves mid-handshake.', proof: 'photo' },
+  { id: 'task-meet-exec', kind: 'task', tier: 'social', title: 'Meet a WiCS exec', detail: 'Introduce yourself to a WiCS exec, take a photo together, and ask what their favorite course has been.', proof: 'photo' },
+  { id: 'task-ask-organizer', kind: 'task', tier: 'social', title: 'Ask an organizer', detail: 'Ask an organizer what surprised them most about planning Try/CATCH this year, and snap a photo with them.', proof: 'photo' },
+  { id: 'task-organizer-advice', kind: 'task', tier: 'social', title: 'Get some advice', detail: 'Ask an organizer or volunteer for one piece of advice about getting into tech, then photograph the two of you.', proof: 'both', inputLabel: "What'd they say?" },
+  { id: 'task-volunteer-shirt', kind: 'task', tier: 'social', title: 'Find a volunteer', detail: 'Find someone wearing a volunteer t-shirt, say hi, and take a photo with them.', proof: 'photo' },
+  { id: 'task-swap-tip', kind: 'task', tier: 'social', title: 'Swap a tip', detail: 'Ask another attendee for their best study or coding tip, then photograph the two of you.', proof: 'photo' },
 
-  // ---- task: bold (actually out of your comfort zone — DRAFT, please edit) ----
+  // ---- task: bold (actually out of your comfort zone) ----
   { id: 'task-meet-stranger', kind: 'task', tier: 'bold', title: 'Meet someone new', detail: "Introduce yourself to someone you've never met before, snap a photo together, and share one fun fact you learned.", proof: 'both', inputLabel: "What'd you learn?" },
-  { id: 'task-ask-speaker', kind: 'task', tier: 'bold', title: 'Ask in front of others', detail: 'Go ask a speaker, panelist, or sponsor rep a question — out loud, in front of other people — then photograph the moment.', proof: 'both', inputLabel: "What'd you ask?" },
-  { id: 'task-trivia-station', kind: 'task', tier: 'bold', title: 'Trivia on the mic', detail: 'Head to the trivia station, answer a question in front of the group, then get someone to photograph you up there.', proof: 'both', inputLabel: 'Your answer' },
+  { id: 'task-ask-speaker', kind: 'task', tier: 'bold', title: 'Talk to a speaker', detail: 'After their talk or workshop, go up and ask a speaker or workshop lead one question, then photograph the moment.', proof: 'both', inputLabel: "What'd you ask?" },
+  { id: 'task-workshop-question', kind: 'task', tier: 'bold', title: 'Ask in the room', detail: 'During a talk or workshop, raise your hand and ask a question out loud, then photograph yourself right after.', proof: 'both', inputLabel: 'Your question' },
 
   // ---- task: finale (only ever used on the very last square) ----
   { id: 'task-mystery-object', kind: 'task', tier: 'finale', title: 'Find the mystery object', detail: 'Somewhere at the event, there\'s a hidden "mystery object." Track it down, then photograph it to claim your prize!', proof: 'photo' },
