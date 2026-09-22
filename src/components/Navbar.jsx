@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
 
-import blob from "../assets_26/images/shared/blob_tiny.svg";
+import StarNavLogo from "./StarNavLogo.jsx";
 
 import { ChevronDown, Menu, X } from "lucide-react";
 
@@ -85,8 +85,8 @@ function Navbar() {
         visible ? "translate-y-0" : `-translate-y-full ${styles.navHidden}`
       }`}
     >
-      <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        <img src={blob} alt="try/CATCH home" className="h-[2rem] w-auto" />
+      <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center">
+        <StarNavLogo className="h-[2.4rem] w-auto" />
       </Link>
 
       {/* Desktop nav */}

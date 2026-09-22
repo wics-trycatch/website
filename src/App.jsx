@@ -11,6 +11,7 @@ import OurTeam from './pages/OurTeam.jsx';
 import Speakers from './pages/Speakers.jsx';
 import Workshops from './pages/Workshops.jsx';
 import Sponsors from './pages/Sponsors.jsx';
+import { useFaviconEyeTracking } from './utils/useFaviconEyeTracking.js';
 
 // Component to scroll to top on route change
 function ScrollToTop() {
@@ -24,6 +25,7 @@ function ScrollToTop() {
 }
 
 function App() {
+  useFaviconEyeTracking();
 
   return (
     <div className={`max-w-[128rem] mx-auto px-[5%] py-[2rem]`}>
