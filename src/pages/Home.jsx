@@ -219,12 +219,14 @@ function Home() {
           <p className="font-quicksand font-bold text-pink-light text-[0.95rem] leading-relaxed max-w-[18rem]">
             A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
           </p>
-          <span
-            aria-disabled="true"
-            className="bg-white/20 text-lavender-pale/70 font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem] cursor-not-allowed select-none"
+          <a
+            href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+            target="_blank"
+            rel="noreferrer"
+            className="bg-yellow text-navy font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem] hover:scale-105 transition-transform duration-300 inline-block"
           >
-            Registration Opens Soon
-          </span>
+            Register Now
+          </a>
           <p className="font-quicksand font-bold text-lavender-pale text-[0.8rem] leading-relaxed mt-[0.5rem]">
             Try/CATCH is happening in SFU Burnaby campus on Oct 24th, 2026!
           </p>
@@ -241,12 +243,14 @@ function Home() {
               <p className="font-quicksand font-bold text-pink-light text-[1.6rem] leading-snug">
                 A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
               </p>
-              <span
-                aria-disabled="true"
-                className="border-2 border-white/30 text-white/50 font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] cursor-not-allowed select-none"
+              <a
+                href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+                target="_blank"
+                rel="noreferrer"
+                className="border-2 border-yellow bg-yellow text-navy font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] hover:scale-105 transition-transform duration-300 inline-block"
               >
-                Registration Opens Soon
-              </span>
+                Register Now
+              </a>
             </div>
 
             <p className={`${styles.heroDate} font-quicksand font-bold text-pink-light text-left text-[1.35rem] leading-snug`}>
@@ -530,12 +534,14 @@ function Home() {
           ))}
         </div>
 
-        <span
-          aria-disabled="true"
-          className="bg-white/20 text-lavender-pale/70 font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] cursor-not-allowed select-none"
+        <a
+          href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+          target="_blank"
+          rel="noreferrer"
+          className="bg-yellow text-navy font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] hover:scale-105 transition-transform duration-300 inline-block"
         >
-          Registration Opens Soon
-        </span>
+          Register Now
+        </a>
       </section>
     </div>
   );

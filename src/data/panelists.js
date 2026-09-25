@@ -1,6 +1,7 @@
 import avni from "../assets_26/images/speakers/panelists/Avni (panelist).jpeg";
 import bianca from "../assets_26/images/speakers/panelists/Bianca (panelist).jpg";
 import gahee from "../assets_26/images/speakers/panelists/Gahee (panelist).png";
+import bhakti from "../assets_26/images/speakers/panelists/Bhakti (panelist).jpg";
 import placeholder from "../assets_26/images/wics/placeholder_headshot.png";
 
 // Ascending order by name.
@@ -16,15 +17,14 @@ export const panelists = [
       "Hi! My name is Avni, I am in my final year of studying computing and cognitive science (and last semester!). The only way I'd describe my experiences so far at SFU is - interdisciplinary. Everything from my degree to work experiences, leadership roles have all been in multiple fields and I think there is longevity in that approach. Try/CATCH was the first WiCS event I helped out with in my second year and have since tried with all my might to contribute every year to this wonderful event and look forward to sharing all my learnings with the wonderful attendees.",
   },
   {
-    // TODO: swap in her real photo and bio once we have them
-    img: placeholder,
+    img: bhakti,
     imgProperties: "object-center",
-    alt: "Bhakti Bhanushali headshot placeholder",
+    alt: "Bhakti Bhanushali headshot",
     name: "Bhakti Bhanushali",
     role: "Panelist",
     linkedin: "https://www.linkedin.com/in/bsbhakti/",
     blurb:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Bio coming soon!",
+      "I’m Bhakti, a Computer Science graduate from Simon Fraser University and a Software Engineer at Infoblox. I enjoy solving real-world problems through technology, learning how things work under the hood, and building systems that are secure and reliable. I’m also passionate about making the tech industry more welcoming and equitable, and leaving every space I’m part of a little better than I found it.",
   },
   {
     img: bianca,

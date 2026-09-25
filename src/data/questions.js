@@ -1,28 +1,3 @@
-// Content for the Snakes & Ladders game.
-//
-// Every non-snake square draws from POOL below instead of a fixed 1:1
-// mapping — each new game shuffles a fresh square -> item assignment (see
-// assignSquares in utils/pickGame.js), so replaying feels different and no
-// two players necessarily get the same board.
-//
-// Each item is one of:
-//   kind: 'task' — a real, in-person thing to go do. Honor system: player
-//         does it, optionally types what they saw/wrote/heard (if
-//         `proof`), then marks it done. No right/wrong.
-//   kind: 'mcq'  — a normal multiple-choice question, so not every square
-//         asks someone to go do something. Shown as a quick trivia card;
-//         continuing (and climbing any ladder) doesn't depend on getting
-//         it right, it's just there for fun/immediate feedback.
-//
-// tier on a task is 'easy' (self-contained, low social ask), 'social'
-// (go talk to someone), or 'bold' (actually out of your comfort zone).
-// assignSquares guarantees at least 2 'bold' tasks land on every board, so
-// everyone gets pushed a little. 'finale' is reserved for the last square
-// only — the grand finish-line task.
-//
-// TODO: the 'bold' and 'finale' tasks below are drafted, not confirmed —
-// swap in whatever you and Tina actually want people doing.
-
 export const POOL = [
   // ---- mcq: normal trivia ----
   { id: 'mcq-html', kind: 'mcq', tier: 'easy', q: 'What does HTML stand for?', options: ['Hyper Text Markup Language', 'High Text Machine Language', 'Hyperlink Text Management Language', 'Home Tool Markup Language'], answer: 0 },
@@ -37,11 +12,7 @@ export const POOL = [
   { id: 'mcq-www', kind: 'mcq', tier: 'easy', q: 'What does "www" stand for in a web address?', options: ['World Wide Web', 'Wide World Window', 'Web Wide Works', 'World Web Wire'], answer: 0 },
   { id: 'mcq-array', kind: 'mcq', tier: 'easy', q: 'What is an array used for?', options: ['Storing multiple values', 'Styling text', 'Creating passwords', 'Connecting to Wi-Fi'], answer: 0 },
   { id: 'mcq-lovelace', kind: 'mcq', tier: 'easy', q: 'Who is often called the first computer programmer?', options: ['Ada Lovelace', 'Thomas Edison', 'Marie Curie', 'Isaac Newton'], answer: 0 },
-
-  // ---- task: easy (self-contained, low social ask) ----
-  // proof is false (just "mark done"), 'text' (type what happened), or
-  // 'photo' (actually snap a picture right there — real, checkable proof
-  // instead of a typed claim, for anything that's inherently visual).
+  // ---- task: easy (do something at the event) ----
   { id: 'task-doodle', kind: 'task', tier: 'easy', title: 'Doodle "coding"', detail: 'Doodle what you think "coding" looks like, then photograph your doodle.', proof: 'photo' },
   { id: 'task-dream-job', kind: 'task', tier: 'easy', title: 'Dream job wall', detail: 'Write your dream job on the sticky-note wall, then photograph your sticky note on the wall.', proof: 'photo' },
   { id: 'task-banner-photo', kind: 'task', tier: 'easy', title: 'Photograph the banner', detail: 'Snap a photo of the WiCS banner.', proof: 'photo' },
