@@ -28,7 +28,7 @@ const jeemin = {
   name: "Jeemin Lee",
   img: jeeminPhoto,
   linkedin: "https://www.linkedin.com/in/jeemin-lee-kor/",
-  bio: "Hi everyone! I’m Jeemin and I’m passionate about making games that leave players with something more than just a fun experience. I am especially interested in serious games and how interactivity can be used to tell meaningful stories and create real world impact. I love exploring what makes games such a unique way to connect with people!.",
+  bio: "I’m Jeemin, a graduate student in Educational Technology & Learning Design at Simon Fraser University and a game designer from South Korea. I’m currently a Gameplay Designer Intern at Unexpected Accessories, where I help design engaging educational game experiences. I’m passionate about game-based learning, accessibility, and creating games that are genuinely fun while supporting meaningful learning.",
 };
 
 const yujin = {

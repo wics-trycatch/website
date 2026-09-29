@@ -57,15 +57,34 @@ function defaultMapUrl(location) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`SFU Burnaby ${location}`)}`;
 }
 
+// Same badge used on the Workshops/Speakers pages, for crediting a named
+// speaker on a schedule stop (e.g. the parent info session host).
+function LinkedInBadge({ href }) {
+  if (!href) return null;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="LinkedIn profile"
+      className="inline-flex h-[1.1rem] w-[1.1rem] shrink-0 items-center justify-center rounded-[0.3rem] bg-lavender-pale text-navy transition-all duration-300 hover:bg-purple-medium hover:text-white"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[0.65rem] w-[0.65rem]" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z" />
+      </svg>
+    </a>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* One timeline stop                                                   */
 /* ------------------------------------------------------------------ */
 
 function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circleRef, itemRef }) {
   const panelId = useId();
-  const { time, title, location, description, color } = item;
+  const { time, title, location, locations, description, color, speaker } = item;
 
-  const mapUrl = item.mapUrl === undefined ? defaultMapUrl(location) : item.mapUrl;
+  const mapUrl = location && item.mapUrl === undefined ? defaultMapUrl(location) : item.mapUrl;
   const canExpand = Boolean(description);
 
   const locationClasses = `underline decoration-pink-light/60 underline-offset-4 transition-colors hover:text-yellow hover:decoration-yellow ${focusRing}`;
@@ -114,19 +133,33 @@ function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circ
           <h3 className="mt-0.5 font-special-gothic text-[1.125rem] font-bold leading-6 [word-spacing:0.12em] text-lavender-pale">{title}</h3>
         )}
 
-        {location && (
-          <div className="mt-2 flex items-center gap-2 font-quicksand text-[0.95rem] font-bold text-pink-light">
+        {locations ? (
+          <div className="mt-2 flex flex-wrap items-center gap-x-1 gap-y-1 font-quicksand text-[0.95rem] font-bold text-pink-light">
             <PinIcon />
-            {mapUrl ? (
-              <a href={mapUrl} target="_blank" rel="noopener noreferrer" className={locationClasses}>
-                {location}
-              </a>
-            ) : (
-              <button type="button" onClick={onToggle} disabled={!canExpand} className={`${locationClasses} text-left`}>
-                {location}
-              </button>
-            )}
+            {locations.map((loc, i) => (
+              <span key={loc.label} className="flex items-center">
+                {i > 0 && <span className="mr-1">,</span>}
+                <a href={loc.url} target="_blank" rel="noopener noreferrer" className={locationClasses}>
+                  {loc.label}
+                </a>
+              </span>
+            ))}
           </div>
+        ) : (
+          location && (
+            <div className="mt-2 flex items-center gap-2 font-quicksand text-[0.95rem] font-bold text-pink-light">
+              <PinIcon />
+              {mapUrl ? (
+                <a href={mapUrl} target="_blank" rel="noopener noreferrer" className={locationClasses}>
+                  {location}
+                </a>
+              ) : (
+                <button type="button" onClick={onToggle} disabled={!canExpand} className={`${locationClasses} text-left`}>
+                  {location}
+                </button>
+              )}
+            </div>
+          )
         )}
 
         {canExpand && (
@@ -140,6 +173,12 @@ function ScheduleItem({ item, hasLine, hideLineOnDesktop, isOpen, onToggle, circ
               <p className="max-w-[23rem] pt-3 font-quicksand text-[0.95rem] font-medium leading-6 text-lavender-pale/90">
                 {description}
               </p>
+              {speaker && (
+                <div className="mt-2 flex items-center gap-[0.4rem] font-quicksand text-[0.85rem] font-bold text-pink-light">
+                  <span>Hosted by {speaker.name}</span>
+                  <LinkedInBadge href={speaker.linkedin} />
+                </div>
+              )}
             </div>
           </div>
         )}
