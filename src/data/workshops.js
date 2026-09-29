@@ -38,10 +38,11 @@ const yujin = {
   bio: "Hi everyone, my name is Yujin! I'm a 4th-year Computing Science student at SFU. I'm also the co-founder and president of the SFU Cybersecurity Club. I started the club because I wanted to explore the field more deeply and learn about security with other students. I'm really excited to be part of Try/CATCH. I hope this workshop helps more people experience cybersecurity. Outside of school and tech, I love going to concerts!",
 };
 
+//belinda's linkedin didnt have a lot of content so she didnt want to include it. added a direct link to linkedin homepage instead for consistency
 const belinda = {
   name: "Belinda Zhu",
   img: belindaPhoto,
-  linkedin: "https://www.linkedin.com/in/belinda-zhuuuuuuu/",
+  linkedin: "https://www.linkedin.com/feed/foryou/",
   bio: "Hi! My name is Belinda and I am a fourth-year Computing Science student at SFU and an executive of SFU's Cybersecurity Club. I enjoy cooking, reading and gaming in my free time and recently started long-boarding! I'm looking forward to sharing more knowledge on cybersecurity at Try/Catch 2026!",
 };
 
@@ -81,9 +82,9 @@ const stella = {
 };
 
 const victoria = {
-  name: "Victoria Lo",
+  name: "Victoria Xi",
   img: victoriaPhoto,
-  linkedin: "https://www.linkedin.com/in/vvictorialo/",
+  linkedin: "https://www.linkedin.com/in/yue-xi-192035225/",
   bio: "Hey there! My name's Victoria and I'm a 5th year SIAT student at SFU. I'm someone who is super passionate about user experience (UX) and human-centered design. What I love the most about my work is becoming almost like a detective — digging deeper into how people experience and interact with technology, digital systems, and the world around them. When not working, I love going to cute cafes, experimenting with my camera, or spending a whole weekend afternoon doing arts and crafts. I'm super excited to share some of the experiences that I've gained and hopefully spark new inspiration, curiosity, and passion for design too!",
 };
 
@@ -110,7 +111,7 @@ export const workshops = [
     icon: "figma",
     accent: "indigo",
     summary:
-      "Dive into user interface (UI) and user experience (UX) design with Figma, the industry-standard design platform.",
+      "An introduction to design fundamentals by creating your own book cover or music album cover in Figma.",
     description:
       "Ever wonder how the apps we use every day are designed before they're ever coded? In this hands-on workshop, you'll learn the fundamentals of UI/UX design using Figma, the industry-standard design platform.",
     hosts: [laraine, victoria],
