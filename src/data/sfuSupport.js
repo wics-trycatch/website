@@ -17,6 +17,6 @@ export const sfuSupport = [
     tier: "SFU Support",
     website: "https://www.sfu.ca/computing.html",
     blurb:
-      "SFU's School of Computing Science is a hub for research and education in computing. As one of Try/CATCH's key supporters, it helps bring hands-on tech experiences to high school students every year.",
+      "SFU's School of Computing Science is a hub for research and education in computing. As one of Try/CATCH's key funders, it helps bring hands-on tech experiences to high school students every year.",
   },
 ];

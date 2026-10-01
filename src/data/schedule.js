@@ -13,6 +13,7 @@ export const scheduleData = [
     start: "08:30",
     title: "Registration & Refreshments",
     location: "ASB Atrium",
+    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=asb970",
     color: "deep",
     description:
       "Check in at the registration desk, grab some breakfast snacks, and meet fellow attendees. This is a great time to explore the venue and connect with other participants before the day begins.",
@@ -42,6 +43,7 @@ export const scheduleData = [
     start: "11:35",
     title: "Lunch & Sponsor Booths",
     location: "ASB Atrium",
+    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=asb970",
     color: "yellow",
     description:
       "Enjoy a complimentary lunch while connecting with other attendees, speakers, mentors, and sponsors. This is your chance to ask questions, make new friends, and discuss what you've learned so far.",
@@ -61,6 +63,7 @@ export const scheduleData = [
     start: "14:10",
     title: "Snacks",
     location: "ASB Atrium",
+    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=asb970",
     color: "yellow",
     description:
       "Take a break and enjoy some refreshments. This is a great time to recharge before the final sessions of the day.",
@@ -81,7 +84,7 @@ export const scheduleData = [
     title: "Panel Session & Parent Info Session",
     locations: [
       { label: "SSCB 9200", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209200" },
-      { label: "SSCC 9001", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=SSCC%209001" },
+      { label: "SSCB 9201", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209201" },
     ],
     color: "deep",
     description:

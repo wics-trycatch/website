@@ -107,16 +107,6 @@ export const workshops = [
     hosts: [howard, jeemin, peter],
   },
   {
-    title: "Figma Workshop",
-    icon: "figma",
-    accent: "indigo",
-    summary:
-      "An introduction to design fundamentals by creating your own book cover or music album cover in Figma.",
-    description:
-      "Ever wonder how the apps we use every day are designed before they're ever coded? In this hands-on workshop, you'll learn the fundamentals of UI/UX design using Figma, the industry-standard design platform.",
-    hosts: [laraine, victoria],
-  },
-  {
     title: "Hack the Basics: An Introduction to Cybersecurity",
     icon: "shield",
     accent: "pink",
@@ -135,6 +125,16 @@ export const workshops = [
     description:
       "Get hands-on programming a robot to navigate an obstacle course using a real 3D simulator! Learn about the frontiers of robotics from student researchers who work in university robotics labs.",
     hosts: [puja, stella],
+  },
+  {
+    title: 'Un-"Covering" Figma: An Introduction to Design Fundamentals',
+    icon: "figma",
+    accent: "indigo",
+    summary:
+      "An introduction to design fundamentals by creating your own book cover or music album cover in Figma.",
+    description:
+      "An introduction to design fundamentals by creating your own book covers or music album covers in Figma! In this workshop, students will get to explore how to work with basic typography, colour, and layout, resulting with a simple design composition unique to students' own creative style!",
+    hosts: [laraine, victoria],
   },
   {
     title: "Web Development Workshop",
