@@ -46,7 +46,7 @@ export const organizers = [
     alt: "Sanya Sharma headshot",
     name: "Sanya Sharma",
     role: "Finances, Communications",
-    linkedin: PLACEHOLDER_LINKEDIN,
+    linkedin: " https://www.linkedin.com/in/sanya-sharma-808603436/?isSelfProfile=true",
     blurb:
       "Hi! I'm Sanya, and I'm in my third year of computing science. I am a part of the finance and communications team for Try/Catch 2026. In my free time, I like reading romance and fantasy. I can't wait to meet everyone and have a great time at Try/Catch! :D",
   },
