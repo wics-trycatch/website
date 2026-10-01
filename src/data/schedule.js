@@ -22,8 +22,8 @@ export const scheduleData = [
     time: "9:30 - 10:00",
     start: "09:30",
     title: "Opening Ceremony & Keynote Speaker",
-    location: "SSCB 9200",
-    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209200",
+    location: "SSCB 9201",
+    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209201",
     color: "medium",
     description:
       "Join us for an energetic start to Try/CATCH! We'll welcome you to the event, introduce the day's schedule, and share what makes this conference special.",
@@ -84,7 +84,6 @@ export const scheduleData = [
     title: "Panel Session & Parent Info Session",
     locations: [
       { label: "SSCB 9200", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209200" },
-      { label: "SSCB 9201", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209201" },
     ],
     color: "deep",
     description:
@@ -95,8 +94,8 @@ export const scheduleData = [
     time: "5:00 - 5:30",
     start: "17:00",
     title: "Closing Ceremony & Prizes",
-    location: "SSCB 9200",
-    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209200",
+    location: "SSCB 9201",
+    mapUrl: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=sscb%209201",
     color: "medium",
     description:
       "We'll wrap up the day with closing remarks and a prize draw. Stay until the end for your chance to win door prizes!",
