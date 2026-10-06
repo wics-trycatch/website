@@ -148,11 +148,18 @@ function Navbar() {
           <Link to="/sponsors">Sponsors</Link>
         </li>
 
-        {/* Reserved slot for the Snakes & Ladders game link — not wired up
-            yet, just holding its place in the nav. Rename the text below
-            once we settle on what to call it. */}
+        {/* Game temporarily disabled — flip disabled to false (and restore
+            the onClick) to turn it back on. */}
         <li role="none">
-          <button type="button" role="menuitem" className="cursor-pointer" onClick={() => setPlaying(true)}>Play</button>
+          <button
+            type="button"
+            role="menuitem"
+            aria-disabled="true"
+            className="cursor-not-allowed opacity-50 select-none"
+            onClick={(e) => e.preventDefault()}
+          >
+            Play
+          </button>
         </li>
 
         <li role="menuitem" tabIndex="0">
@@ -214,7 +221,9 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
-              <button type="button" className="cursor-pointer" onClick={() => { closeMenu(); setPlaying(true); }}>Play</button>
+              <button type="button" aria-disabled="true" className="cursor-not-allowed opacity-50 select-none" onClick={(e) => e.preventDefault()}>
+                Play
+              </button>
             </li>
             <li>
               <SectionLink

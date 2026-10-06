@@ -1,6 +1,7 @@
 import styles from "./Home.module.css";
 import frameBg from "../assets_26/images/shared/frame_bg.svg";
 import { sponsors } from "../data/sponsors";
+import { sfuSupport } from "../data/sfuSupport";
 
 function ExternalLinkIcon() {
   return (
@@ -48,6 +49,7 @@ const TIER_STYLES = {
   "Silver Sponsor": { label: "text-lavender-pale", logoH: "h-[7rem] md:h-[8rem]" },
   "Bronze Sponsor": { label: "text-pink-light", logoH: "h-[6rem]" },
   Supporter: { label: "text-pink-light", logoH: "h-[6rem]" },
+  "SFU Support": { label: "text-pink-light", logoH: "h-[7rem] md:h-[8rem]" },
 };
 
 function SponsorCard({ name, logo, tier, website, blurb }) {
@@ -145,6 +147,22 @@ function Sponsors() {
               {supporters.map((sponsor, i) => (
                 <SponsorCard key={i} {...sponsor} />
               ))}
+            </div>
+          )}
+
+          {sfuSupport.length > 0 && (
+            <div className="w-full mt-[1rem] md:mt-[1.5rem]">
+              <h2 className="font-special-gothic font-bold text-lavender-pale text-[1.6rem] md:text-[1.9rem]">
+                SFU Support
+              </h2>
+              <p className="mt-[0.5rem] font-quicksand font-bold text-pink-light text-[0.9rem] md:text-[1rem] leading-relaxed">
+                We're also grateful for funding support from SFU itself.
+              </p>
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-[1.5rem] mt-[1rem]">
+                {sfuSupport.map((org, i) => (
+                  <SponsorCard key={i} {...org} />
+                ))}
+              </div>
             </div>
           )}
         </div>

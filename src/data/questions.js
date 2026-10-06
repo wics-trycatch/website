@@ -25,6 +25,7 @@
 // organizer, a volunteer, another attendee) rather than props/setups that
 // would need to be arranged in advance. Swap further as needed.
 
+
 export const POOL = [
   // ---- mcq: normal trivia ----
   { id: 'mcq-html', kind: 'mcq', tier: 'easy', q: 'What does HTML stand for?', options: ['Hyper Text Markup Language', 'High Text Machine Language', 'Hyperlink Text Management Language', 'Home Tool Markup Language'], answer: 0 },
@@ -39,11 +40,7 @@ export const POOL = [
   { id: 'mcq-www', kind: 'mcq', tier: 'easy', q: 'What does "www" stand for in a web address?', options: ['World Wide Web', 'Wide World Window', 'Web Wide Works', 'World Web Wire'], answer: 0 },
   { id: 'mcq-array', kind: 'mcq', tier: 'easy', q: 'What is an array used for?', options: ['Storing multiple values', 'Styling text', 'Creating passwords', 'Connecting to Wi-Fi'], answer: 0 },
   { id: 'mcq-lovelace', kind: 'mcq', tier: 'easy', q: 'Who is often called the first computer programmer?', options: ['Ada Lovelace', 'Thomas Edison', 'Marie Curie', 'Isaac Newton'], answer: 0 },
-
-  // ---- task: easy (self-contained, low social ask) ----
-  // proof is false (just "mark done"), 'text' (type what happened), or
-  // 'photo' (actually snap a picture right there — real, checkable proof
-  // instead of a typed claim, for anything that's inherently visual).
+  // ---- task: easy (do something at the event) ----
   { id: 'task-doodle', kind: 'task', tier: 'easy', title: 'Doodle "coding"', detail: 'Doodle what you think "coding" looks like, then photograph your doodle.', proof: 'photo' },
   { id: 'task-dream-job', kind: 'task', tier: 'easy', title: 'Dream job wall', detail: 'Write your dream job on the sticky-note wall, then photograph your sticky note on the wall.', proof: 'photo' },
   { id: 'task-banner-photo', kind: 'task', tier: 'easy', title: 'Photograph the banner', detail: 'Snap a photo of the WiCS banner.', proof: 'photo' },

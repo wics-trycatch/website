@@ -38,6 +38,25 @@ const ACCENTS = {
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow";
 
+// Matches the badge used on the Speakers page, just sized down slightly for
+// this card's smaller host names.
+function LinkedInBadge({ href }) {
+  if (!href) return null;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="LinkedIn profile"
+      className="inline-flex h-[1.25rem] w-[1.25rem] shrink-0 items-center justify-center rounded-[0.35rem] bg-lavender-pale text-navy transition-all duration-300 hover:bg-purple-medium hover:text-white"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[0.75rem] w-[0.75rem]" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.114 20.452H3.558V9h3.556v11.452z" />
+      </svg>
+    </a>
+  );
+}
+
 /* A host's photo, or their initial when no photo has been added yet. */
 function Avatar({ host, alt = "", className }) {
   if (host.img) {
@@ -192,7 +211,10 @@ function WorkshopCard({ workshop, isOpen, onToggle, order, registerTitle, titleH
                     className="h-[5rem] w-[5rem] shrink-0 rounded-[1.1rem] text-[1.75rem] md:h-[5.5rem] md:w-[5.5rem]"
                   />
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-quicksand text-[0.9rem] font-bold text-lavender-pale">{host.name}</h3>
+                    <div className="flex items-center gap-[0.4rem]">
+                      <h3 className="font-quicksand text-[0.9rem] font-bold text-lavender-pale">{host.name}</h3>
+                      <LinkedInBadge href={host.linkedin} />
+                    </div>
                     <p className="mt-1 font-quicksand text-[0.8rem] font-medium leading-[1.35rem] text-lavender-pale/85">
                       {host.bio}
                     </p>

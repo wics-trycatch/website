@@ -3,8 +3,6 @@ import ouldooz from "../assets_26/images/speakers/keynote/Dr. Ouldooz (keynote s
 export const keynote = [
   {
     img: ouldooz,
-    // her photo was getting cropped at the top with a plain center crop —
-    // pin it to the top instead so her head isn't cut off
     imgProperties: "object-top",
     alt: "Dr. Ouldooz Baghban Karimi headshot",
     name: "Dr. Ouldooz Baghban Karimi",
