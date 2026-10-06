@@ -110,6 +110,8 @@ export default function SnakesAndLadders({ onClose }) {
   const root = useRef(null);
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = onClose; });
+  const modalRef = useRef(null);
+  useEffect(() => { modalRef.current = modal; });
 
   useEffect(() => {
     alive.current = true;
@@ -117,7 +119,10 @@ export default function SnakesAndLadders({ onClose }) {
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     root.current?.focus();
-    const onKey = (e) => e.key === 'Escape' && closeRef.current?.();
+    // Escape shouldn't be a way to duck out of the task/question that's
+    // currently up — modalRef is checked at call time (not captured here)
+    // so a card open when the page mounted still blocks it.
+    const onKey = (e) => e.key === 'Escape' && !modalRef.current && closeRef.current?.();
     document.addEventListener('keydown', onKey);
     const app = document.getElementById('root');
     app?.setAttribute('inert', ''); // the page behind can't be tabbed into or clicked
@@ -391,10 +396,24 @@ export default function SnakesAndLadders({ onClose }) {
         <span className="sl-chip">Square <b>{pos}</b> / {board.last}</span>
         <span className="sl-chip">Rolls <b>{rolls}</b></span>
         <span className="sl-spacer" />
-        <button type="button" className="sl-icon" onClick={restart} aria-label="Restart game" title="Restart">
+        <button
+          type="button"
+          className="sl-icon"
+          onClick={restart}
+          disabled={!!modal}
+          aria-label="Restart game"
+          title={modal ? 'Finish the current square first' : 'Restart'}
+        >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
         </button>
-        <button type="button" className="sl-icon" onClick={onClose} aria-label="Close game" title="Close">
+        <button
+          type="button"
+          className="sl-icon"
+          onClick={onClose}
+          disabled={!!modal}
+          aria-label="Close game"
+          title={modal ? 'Finish the current square first' : 'Close'}
+        >
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
         </button>
       </div>
