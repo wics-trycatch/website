@@ -84,6 +84,7 @@ export const scheduleData = [
     title: "Panel Session & Parent Info Session",
     locations: [
       { label: "AQ 3181", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=AQ%203181" },
+      { label: "AQ 3182", url: "https://roomfinder.sfu.ca/apps/sfuroomfinder_web/?q=AQ%203182" },
     ],
     color: "deep",
     description:
