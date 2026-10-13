@@ -2,6 +2,7 @@ import styles from "./Home.module.css";
 import frameBg from "../assets_26/images/shared/frame_bg.svg";
 import { sponsors } from "../data/sponsors";
 import { sfuSupport } from "../data/sfuSupport";
+import { inKindSponsors } from "../data/inKindSponsors";
 
 function ExternalLinkIcon() {
   return (
@@ -50,39 +51,51 @@ const TIER_STYLES = {
   "Bronze Sponsor": { label: "text-pink-light", logoH: "h-[6rem]" },
   Supporter: { label: "text-pink-light", logoH: "h-[6rem]" },
   "SFU Support": { label: "text-pink-light", logoH: "h-[7rem] md:h-[8rem]" },
+  "In-Kind Sponsor": { label: "text-pink-light", logoH: "h-[6rem] md:h-[7rem]" },
 };
 
 function SponsorCard({ name, logo, tier, website, blurb }) {
-  const { label: labelColor, logoH } = TIER_STYLES[tier] ?? TIER_STYLES["Bronze Sponsor"];
-  const paragraphs = (blurb ?? "").split("\n\n");
+  const { label: labelColor, logoH, logoBg = "bg-lavender-pale", iconCls = "text-navy/50 group-hover:text-purple-medium" } = TIER_STYLES[tier] ?? TIER_STYLES["Bronze Sponsor"];
+  const paragraphs = blurb ? blurb.split("\n\n") : [];
+
+  // The logo box: a link when there's a website, a plain box otherwise. With
+  // no logo yet, the sponsor's name stands in as a text wordmark.
+  const Box = website ? "a" : "div";
+  const boxProps = website ? { href: website, target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
     <div className="rounded-[1.25rem] md:rounded-[1.5rem] border border-purple-medium/40 p-[1.25rem] md:p-[1.5rem] transition-shadow duration-300 hover:shadow-[0_0_16px_2px_rgb(236_227_255/0.35)]">
-      <a
-        href={website}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`group relative flex items-center justify-center w-full rounded-[1rem] bg-lavender-pale ${logoH}`}
+      <Box
+        {...boxProps}
+        className={`group relative flex items-center justify-center w-full rounded-[1rem] ${logoBg} ${logoH}`}
       >
-        <img src={logo} alt={`${name} logo`} className="max-w-[78%] max-h-[68%] w-auto h-auto object-contain" />
+        {logo ? (
+          <img src={logo} alt={`${name} logo`} className="max-w-[78%] max-h-[68%] w-auto h-auto object-contain" />
+        ) : (
+          <span className="px-[1rem] text-center font-special-gothic font-bold text-purple-deep text-[1.25rem] md:text-[1.5rem] leading-tight">
+            {name}
+          </span>
+        )}
         {website && (
-          <span className="absolute top-[0.75rem] right-[0.75rem] text-navy/50 group-hover:text-purple-medium transition-colors duration-300">
+          <span className={`absolute top-[0.75rem] right-[0.75rem] ${iconCls} transition-colors duration-300`}>
             <ExternalLinkIcon />
           </span>
         )}
-      </a>
+      </Box>
 
       <div className="mt-[1.25rem]">
-        <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.25rem] md:text-[1.5rem]">{name}</h3>
+        <h3 className="font-special-gothic font-bold text-lavender-pale text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] leading-tight">{name}</h3>
         <p className={`font-quicksand font-bold text-[0.75rem] tracking-[0.1em] uppercase ${labelColor}`}>{tier}</p>
 
-        <div className="mt-[0.75rem] flex flex-col gap-[0.75rem]">
-          {paragraphs.map((para, i) => (
-            <p key={i} className="font-quicksand text-pink-light text-[0.9rem] leading-relaxed">
-              {linkifyText(para)}
-            </p>
-          ))}
-        </div>
+        {paragraphs.length > 0 && (
+          <div className="mt-[0.75rem] flex flex-col gap-[0.75rem]">
+            {paragraphs.map((para, i) => (
+              <p key={i} className="font-quicksand text-pink-light text-[0.9rem] leading-relaxed">
+                {linkifyText(para)}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -150,9 +163,25 @@ function Sponsors() {
             </div>
           )}
 
+          {inKindSponsors.length > 0 && (
+            <div className="w-full mt-[1rem] md:mt-[1.5rem]">
+              <h2 className="font-special-gothic font-bold text-lavender-pale text-[1.35rem] sm:text-[1.6rem] md:text-[1.9rem] leading-tight">
+                In-Kind Sponsors
+              </h2>
+              <p className="mt-[0.5rem] font-quicksand font-bold text-pink-light text-[0.9rem] md:text-[1rem] leading-relaxed">
+                Thank you to these businesses for donating the food that keeps our attendees fueled all day.
+              </p>
+              <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1.5rem] mt-[1rem]">
+                {inKindSponsors.map((org, i) => (
+                  <SponsorCard key={i} {...org} />
+                ))}
+              </div>
+            </div>
+          )}
+
           {sfuSupport.length > 0 && (
             <div className="w-full mt-[1rem] md:mt-[1.5rem]">
-              <h2 className="font-special-gothic font-bold text-lavender-pale text-[1.6rem] md:text-[1.9rem]">
+              <h2 className="font-special-gothic font-bold text-lavender-pale text-[1.35rem] sm:text-[1.6rem] md:text-[1.9rem] leading-tight">
                 SFU Support
               </h2>
               <p className="mt-[0.5rem] font-quicksand font-bold text-pink-light text-[0.9rem] md:text-[1rem] leading-relaxed">
