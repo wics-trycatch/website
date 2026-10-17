@@ -137,7 +137,7 @@ export const workshops = [
     hosts: [laraine, victoria],
   },
   {
-    title: "Web Development Workshop",
+    title: "Build Your Own Site: Intro to Web Development",
     icon: "code",
     accent: "purple",
     summary:
