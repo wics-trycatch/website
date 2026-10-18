@@ -38,8 +38,21 @@ function Navbar() {
   const [openDropdown, setOpenDropdown] = useState(null); // "about" | "event" | null
   const [playing, setPlaying] = useState(false);
   const lastScrollY = useRef(0);
-  const { pathname } = useLocation();
+  const { pathname, search, hash } = useLocation();
   const closeMenu = () => setHamburgerOpen(false);
+
+  // Allow testing without enabling the public navbar button:
+  // Navigate to /?play or /#play, or run window.openGame() in devtools console
+  useEffect(() => {
+    if (new URLSearchParams(search).has('play') || hash === '#play') {
+      setPlaying(true);
+    }
+  }, [search, hash]);
+
+  useEffect(() => {
+    window.openGame = () => setPlaying(true);
+    return () => { delete window.openGame; };
+  }, []);
 
   // Only one desktop dropdown open at a time. onBlur only closes if focus
   // actually left the li (not just moved to a link inside its own menu) —

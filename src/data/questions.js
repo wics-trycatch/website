@@ -9,8 +9,8 @@
 //   kind: 'task' — a real, in-person thing to go do. Honor system: player
 //         does it, optionally types what they saw/wrote/heard (if
 //         `proof`), then marks it done. No right/wrong.
-//   kind: 'mcq'  — a normal multiple-choice question, so not every square
-//         asks someone to go do something. Shown as a quick trivia card;
+//   kind: 'mcq'  — a normal multiple-choice trivia question about SFU WiCS,
+//         Try/CATCH, networking, or women in tech. Shown as a quick trivia card;
 //         continuing (and climbing any ladder) doesn't depend on getting
 //         it right, it's just there for fun/immediate feedback.
 //
@@ -19,82 +19,523 @@
 // assignSquares guarantees at least 2 'bold' tasks land on every board, so
 // everyone gets pushed a little. 'finale' is reserved for the last square
 // only — the grand finish-line task.
-//
-// NOTE: the 'bold' and 'finale' tasks below were reworked to only assume
-// things that will definitely exist at the event (screens/slides, an
-// organizer, a volunteer, another attendee) rather than props/setups that
-// would need to be arranged in advance. Swap further as needed.
-
 
 export const POOL = [
-  // ---- mcq: normal trivia ----
-  { id: 'mcq-html', kind: 'mcq', tier: 'easy', q: 'What does HTML stand for?', options: ['Hyper Text Markup Language', 'High Text Machine Language', 'Hyperlink Text Management Language', 'Home Tool Markup Language'], answer: 0 },
-  { id: 'mcq-comment', kind: 'mcq', tier: 'easy', q: 'Which symbol is used for a single-line comment in JavaScript?', options: ['`<!-- -->`', '`//`', '`##`', '`**`'], answer: 1 },
-  { id: 'mcq-let', kind: 'mcq', tier: 'easy', q: 'Which keyword creates a variable that can be reassigned in JavaScript?', options: ['`const`', '`let`', '`fixed`', '`varies`'], answer: 1 },
-  { id: 'mcq-css', kind: 'mcq', tier: 'easy', q: 'What does CSS mainly control?', options: ['Database storage', 'Website appearance', 'Server hardware', 'User passwords'], answer: 1 },
-  { id: 'mcq-boolean', kind: 'mcq', tier: 'easy', q: "Which data type represents `true` or `false`?", options: ['String', 'Number', 'Boolean', 'Array'], answer: 2 },
-  { id: 'mcq-console', kind: 'mcq', tier: 'easy', q: 'Which method prints something to the browser console?', options: ['`console.log()`', '`print.console()`', '`log.console()`', '`browser.print()`'], answer: 0 },
-  { id: 'mcq-browser', kind: 'mcq', tier: 'easy', q: 'Which of these is a web browser?', options: ['Chrome', 'Spreadsheet', 'Keyboard', 'Router'], answer: 0 },
-  { id: 'mcq-button', kind: 'mcq', tier: 'easy', q: 'Which HTML tag is used to create a button?', options: ['`<click>`', '`<button>`', '`<btn>`', '`<input-button>`'], answer: 1 },
-  { id: 'mcq-loop', kind: 'mcq', tier: 'easy', q: 'What does a loop do?', options: ['Stores an image', 'Repeats code', 'Deletes a variable', 'Creates a website'], answer: 1 },
-  { id: 'mcq-www', kind: 'mcq', tier: 'easy', q: 'What does "www" stand for in a web address?', options: ['World Wide Web', 'Wide World Window', 'Web Wide Works', 'World Web Wire'], answer: 0 },
-  { id: 'mcq-array', kind: 'mcq', tier: 'easy', q: 'What is an array used for?', options: ['Storing multiple values', 'Styling text', 'Creating passwords', 'Connecting to Wi-Fi'], answer: 0 },
-  { id: 'mcq-lovelace', kind: 'mcq', tier: 'easy', q: 'Who is often called the first computer programmer?', options: ['Ada Lovelace', 'Thomas Edison', 'Marie Curie', 'Isaac Newton'], answer: 0 },
-  // ---- task: easy (do something at the event) ----
-  { id: 'task-doodle', kind: 'task', tier: 'easy', title: 'Doodle "coding"', detail: 'Doodle what you think "coding" looks like, then photograph your doodle.', proof: 'photo' },
-  { id: 'task-dream-job', kind: 'task', tier: 'easy', title: 'Dream job wall', detail: 'Write your dream job on the sticky-note wall, then photograph your sticky note on the wall.', proof: 'photo' },
-  { id: 'task-banner-photo', kind: 'task', tier: 'easy', title: 'Photograph the banner', detail: 'Snap a photo of the WiCS banner.', proof: 'photo' },
-  { id: 'task-match-language', kind: 'task', tier: 'easy', title: 'Spot the language', detail: 'Find any screen or slide showing code at the event, photograph it, and type which language it\'s written in.', proof: 'both', inputLabel: 'Which language?' },
-  { id: 'task-match-logo', kind: 'task', tier: 'easy', title: 'Match the logo', detail: 'Find a tech company logo somewhere at the event, photograph it, and type which company it is.', proof: 'both', inputLabel: 'Which company?' },
-  { id: 'task-pose-mascot', kind: 'task', tier: 'easy', title: 'Pose with the sign', detail: 'Find the Try/CATCH sign or poster and take a photo of yourself with it.', proof: 'photo' },
+  // ---- mcq: SFU WiCS, Try/CATCH & Women in Tech trivia ----
+  {
+    id: 'mcq-mascot',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What is the official mascot of SFU WiCS?',
+    options: ['Cosmos', 'Byte', 'Sparky', 'Archie'],
+    answer: 0,
+  },
+  {
+    id: 'mcq-founded',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'In what year was SFU WiCS founded?',
+    options: ['2002', '1998', '2010', '2015'],
+    answer: 0,
+  },
+  {
+    id: 'mcq-wics-meaning',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What does the acronym "WiCS" stand for at Simon Fraser University?',
+    options: [
+      'Women in Computing Science',
+      'Women in Computer Software',
+      'World in Computing Systems',
+      'Women in Creative Sciences',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-trycatch-meaning',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What does "Try/CATCH" stand for in the context of this conference?',
+    options: [
+      'Computing and Technology Conference for Her',
+      'Career and Technology Community Hub',
+      'Computer Algorithms and Tech Challenge for Her',
+      'Creative Applied Technology Camp for High-schoolers',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-why-trycatch',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Why does SFU WiCS organize the Try/CATCH conference every year?',
+    options: [
+      'To inspire & empower high school girls to explore computing and tech',
+      'To hold a timed university math competition',
+      'To sell computer hardware subscriptions',
+      'To test advanced software engineering theory',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-faculty',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Which faculty at SFU does the School of Computing Science belong to?',
+    options: [
+      'Faculty of Applied Sciences (FAS)',
+      'Faculty of Science',
+      'Faculty of Arts and Social Sciences',
+      'Beedie School of Business',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-wics-values',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Which four pillars represent the core mission of SFU WiCS?',
+    options: [
+      'Promote, Support, Challenge, Build',
+      'Code, Test, Debug, Deploy',
+      'Compete, Win, Conquer, Repeat',
+      'Study, Memorize, Repeat, Rest',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-door-prizes',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What fun surprise awaits attendees during the Try/CATCH closing ceremony?',
+    options: [
+      'Exciting door prizes, raffles, and celebrating everyone\'s day!',
+      'A surprise written calculus exam',
+      'A mandatory homework packet',
+      'A timed speed-typing test',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-workshops-count',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'How many hands-on workshops are featured at Try/CATCH 2026?',
+    options: ['5 workshops', '2 workshops', '8 workshops', '12 workshops'],
+    answer: 0,
+  },
+  {
+    id: 'mcq-lovelace',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Who wrote the first computer algorithm in 1843 and is celebrated as the world\'s first computer programmer?',
+    options: ['Ada Lovelace', 'Thomas Edison', 'Marie Curie', 'Isaac Newton'],
+    answer: 0,
+  },
+  {
+    id: 'mcq-grace-hopper',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Which computer science pioneer popularized the term "debugging" after finding a real moth in a computer relay?',
+    options: ['Grace Hopper', 'Ada Lovelace', 'Katherine Johnson', 'Hedy Lamarr'],
+    answer: 0,
+  },
+  {
+    id: 'mcq-like-cs',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What do students and developers love most about Computer Science?',
+    options: [
+      'Using creativity and logic to build projects that help people',
+      'Sitting in complete silence with zero interaction',
+      'Memorizing computer hardware serial numbers',
+      'Never having to think creatively or collaborate',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-parent-session',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'What special program does Try/CATCH host in the afternoon for family members?',
+    options: [
+      'Parent Info Session with SFU FAS advisors',
+      'Family Coding Tournament',
+      'Parent High School Exam',
+      'Silent Auction',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'mcq-who-can-join',
+    kind: 'mcq',
+    tier: 'easy',
+    q: 'Who is welcome to join and get involved in SFU WiCS events and community?',
+    options: [
+      'All students supporting women & diversity in tech',
+      'Only fourth-year graduating seniors',
+      'Only students with 5+ years of programming experience',
+      'Only faculty members',
+    ],
+    answer: 0,
+  },
 
-  // ---- task: social (go talk to someone) ----
-  { id: 'task-meet-exec', kind: 'task', tier: 'social', title: 'Meet a WiCS exec', detail: 'Introduce yourself to a WiCS exec, take a photo together, and ask what their favorite course has been.', proof: 'photo' },
-  { id: 'task-ask-organizer', kind: 'task', tier: 'social', title: 'Ask an organizer', detail: 'Ask an organizer what surprised them most about planning Try/CATCH this year, and snap a photo with them.', proof: 'photo' },
-  { id: 'task-organizer-advice', kind: 'task', tier: 'social', title: 'Get some advice', detail: 'Ask an organizer or volunteer for one piece of advice about getting into tech, then photograph the two of you.', proof: 'both', inputLabel: "What'd they say?" },
-  { id: 'task-volunteer-shirt', kind: 'task', tier: 'social', title: 'Find a volunteer', detail: 'Find someone wearing a volunteer t-shirt, say hi, and take a photo with them.', proof: 'photo' },
-  { id: 'task-swap-tip', kind: 'task', tier: 'social', title: 'Swap a tip', detail: 'Ask another attendee for their best study or coding tip, then photograph the two of you.', proof: 'photo' },
+  // ---- task: easy (interactive & event tasks) ----
+  {
+    id: 'task-first-workshop',
+    kind: 'task',
+    tier: 'easy',
+    title: 'First workshop attended',
+    detail: 'What was the first workshop you attended at Try/CATCH today? Snap a photo inside the room or type its title!',
+    proof: 'both',
+    inputLabel: 'Which workshop did you attend first?',
+  },
+  {
+    id: 'task-fav-merch',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Favorite merch',
+    detail: 'What was your favorite piece of Try/CATCH merch or swag today (stickers, tote bag, t-shirt, pins)? Photograph it or tell us what you got!',
+    proof: 'both',
+    inputLabel: 'Your favorite merch item',
+  },
+  {
+    id: 'task-doodle-mascot',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Doodle Cosmos',
+    detail: 'Doodle Cosmos (the SFU WiCS alien astronaut mascot) or your favorite part of today, then snap a photo of your drawing!',
+    proof: 'photo',
+  },
+  {
+    id: 'task-dream-job',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Dream job wall',
+    detail: 'Write your dream job on the sticky-note wall, then photograph your sticky note on the wall.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-banner-photo',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Photograph the banner',
+    detail: 'Snap a photo of the WiCS banner or Try/CATCH event signage.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-spot-sponsor',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Spot a sponsor',
+    detail: 'Find a sponsor booth, banner, or logo at the event (e.g. Teck, Orbis, Old Spaghetti Factory, SFU CS), photograph it, and type which one it is!',
+    proof: 'both',
+    inputLabel: 'Which sponsor?',
+  },
+  {
+    id: 'task-pose-mascot',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Pose with the sign or mascot',
+    detail: 'Find the Try/CATCH backdrop, sign, or Cosmos mascot artwork and take a photo of yourself with it!',
+    proof: 'photo',
+  },
+  {
+    id: 'task-sticker-badge',
+    kind: 'task',
+    tier: 'easy',
+    title: 'Show your badge or sticker',
+    detail: 'Snap a photo of your event name badge or a cool sticker you collected today at Try/CATCH!',
+    proof: 'photo',
+  },
+  {
+    id: 'task-like-cs',
+    kind: 'task',
+    tier: 'easy',
+    title: 'What you like about CS',
+    detail: 'What do you like most about Computer Science and tech (e.g. creating games, solving puzzles, building apps, creativity)? Type your answer or snap a photo!',
+    proof: 'both',
+    inputLabel: 'What do you like about computer science?',
+  },
 
-  // ---- task: bold (actually out of your comfort zone) ----
-  { id: 'task-meet-stranger', kind: 'task', tier: 'bold', title: 'Meet someone new', detail: "Introduce yourself to someone you've never met before, snap a photo together, and share one fun fact you learned.", proof: 'both', inputLabel: "What'd you learn?" },
-  { id: 'task-ask-speaker', kind: 'task', tier: 'bold', title: 'Talk to a speaker', detail: 'After their talk or workshop, go up and ask a speaker or workshop lead one question, then photograph the moment.', proof: 'both', inputLabel: "What'd you ask?" },
-  { id: 'task-workshop-question', kind: 'task', tier: 'bold', title: 'Ask in the room', detail: 'During a talk or workshop, raise your hand and ask a question out loud, then photograph yourself right after.', proof: 'both', inputLabel: 'Your question' },
+  // ---- task: social (networking & talking to someone) ----
+  {
+    id: 'task-meet-exec',
+    kind: 'task',
+    tier: 'social',
+    title: 'Meet a WiCS exec',
+    detail: 'Introduce yourself to a WiCS exec, take a photo together, and ask what their favorite thing about WiCS has been.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-ask-organizer',
+    kind: 'task',
+    tier: 'social',
+    title: 'Ask an organizer',
+    detail: 'Ask an organizer what surprised them most about planning Try/CATCH this year, and snap a photo with them.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-organizer-advice',
+    kind: 'task',
+    tier: 'social',
+    title: 'Get some advice',
+    detail: 'Ask an organizer or volunteer for one piece of advice about university or exploring tech, then photograph the two of you.',
+    proof: 'both',
+    inputLabel: "What'd they say?",
+  },
+  {
+    id: 'task-volunteer-shirt',
+    kind: 'task',
+    tier: 'social',
+    title: 'Find a volunteer',
+    detail: 'Find someone wearing a volunteer t-shirt, say hi, and take a photo with them.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-swap-tip',
+    kind: 'task',
+    tier: 'social',
+    title: 'Swap a tip',
+    detail: 'Ask another attendee for their best high school or study tip, then photograph the two of you.',
+    proof: 'photo',
+  },
+  {
+    id: 'task-new-friend',
+    kind: 'task',
+    tier: 'social',
+    title: 'Make a new connection',
+    detail: 'Meet someone from another school, ask what brought them to Try/CATCH, and snap a selfie together!',
+    proof: 'both',
+    inputLabel: 'Who did you meet and why are they here?',
+  },
+  {
+    id: 'task-favorite-moment',
+    kind: 'task',
+    tier: 'social',
+    title: 'Compare favorite moments',
+    detail: 'Ask another attendee what the coolest thing they saw or made today was, and take a quick photo together!',
+    proof: 'both',
+    inputLabel: 'What was their favorite moment?',
+  },
+
+  // ---- task: bold (comfort zone stretch) ----
+  {
+    id: 'task-meet-stranger',
+    kind: 'task',
+    tier: 'bold',
+    title: 'Meet someone new',
+    detail: "Introduce yourself to someone you've never met before, snap a photo together, and share one fun fact you learned.",
+    proof: 'both',
+    inputLabel: "What'd you learn?",
+  },
+  {
+    id: 'task-ask-speaker',
+    kind: 'task',
+    tier: 'bold',
+    title: 'Talk to a speaker',
+    detail: 'After their talk or workshop, go up and ask a speaker or workshop lead one question, then photograph the moment.',
+    proof: 'both',
+    inputLabel: "What'd you ask?",
+  },
+  {
+    id: 'task-workshop-question',
+    kind: 'task',
+    tier: 'bold',
+    title: 'Ask in the room',
+    detail: 'During a talk or workshop, raise your hand and ask a question out loud, then photograph yourself right after.',
+    proof: 'both',
+    inputLabel: 'Your question',
+  },
 
   // ---- task: finale (only ever used on the very last square) ----
-  { id: 'task-mystery-object', kind: 'task', tier: 'finale', title: 'Find the mystery object', detail: 'Somewhere at the event, there\'s a hidden "mystery object." Track it down, then photograph it to claim your prize!', proof: 'photo' },
-  { id: 'task-group-photo', kind: 'task', tier: 'finale', title: 'Group photo finish', detail: 'Take a group photo with 3 people you met today to claim your prize!', proof: 'photo' },
+  {
+    id: 'task-group-photo',
+    kind: 'task',
+    tier: 'finale',
+    title: 'Group photo finish',
+    detail: 'Take a group photo with 3 people you met today to claim your prize!',
+    proof: 'photo',
+  },
+  {
+    id: 'task-finish-selfie',
+    kind: 'task',
+    tier: 'finale',
+    title: 'Victory finish line photo',
+    detail: 'Snap a celebratory victory photo with your badge or Try/CATCH swag to claim your prize!',
+    proof: 'photo',
+  },
 ];
 
 export const POOL_BY_ID = new Map(POOL.map((item) => [item.id, item]));
 
-// Snake bite puzzles. Each is tagged with a "flavor" matching the message
-// shown when the snake bites: an infinite loop, a syntax error, or a bug in
-// the code. One is picked at random from the matching flavor's pool.
+// Snake encounter trivia challenges. When the player lands on a snake square,
+// answering correctly lets them escape and stay put instead of sliding down.
 export const SNAKE_FLAVORS = {
-  loop: { emoji: '♾️', label: 'Infinite loop!' },
-  syntax: { emoji: '⚠️', label: 'Syntax error!' },
-  bug: { emoji: '🐛', label: 'Bug in your code!' },
+  wics: { emoji: '💜', label: 'SFU WiCS Trivia!' },
+  event: { emoji: '✨', label: 'Try/CATCH Trivia!' },
+  history: { emoji: '🌟', label: 'Tech & Community!' },
 };
 
 export const CODE_CHALLENGES = [
-  { id: 'infinite-loop', flavor: 'loop', prompt: 'This loop runs forever. Which block stops it?', code: 'while (true) {\n    console.log("🐍");\n    ______\n}', options: ['break;', 'continue;', 'restart;', 'stopLoop;'], answer: 0 },
-  { id: 'roll-six', flavor: 'loop', prompt: 'The player rolled a 6. Which condition checks that?', code: 'let roll = 6;\n\nif (______) {\n    console.log("You climbed!");\n}', options: ['roll = 6', 'roll == 6', 'roll => 6', 'roll equals 6'], answer: 1 },
-  { id: 'for-loop', flavor: 'loop', prompt: 'What goes in the blank so the loop counts up?', code: 'for (let i = 0; i < 5; ______) {\n    console.log(i);\n}', options: ['i--', 'i++', 'i = 0', 'i + 5'], answer: 1 },
-  { id: 'win-check', flavor: 'loop', prompt: 'Which operator checks the position is exactly 100?', code: 'let position = 100;\n\nif (position ______ 100) {\n    console.log("You win!");\n}', options: ['=', '==', '=>', 'equals'], answer: 1 },
-  { id: 'even', flavor: 'loop', prompt: 'Which condition checks that `roll` is even?', code: 'let roll = 4;\n\nif (______) {\n    console.log("Even!");\n}', options: ['roll / 2 == 0', 'roll % 2 == 0', 'roll % 2 == 1', 'roll / 2 == 1'], answer: 1 },
+  // ---- flavor: wics ----
+  {
+    id: 'snake-mascot',
+    flavor: 'wics',
+    prompt: 'SFU WiCS has a beloved mascot. What is their name?',
+    options: ['Cosmos', 'Byte', 'Sparky', 'Archie'],
+    answer: 0,
+  },
+  {
+    id: 'snake-founded',
+    flavor: 'wics',
+    prompt: 'In what year was the SFU Women in Computing Science (WiCS) organization established?',
+    options: ['2002', '1998', '2010', '2016'],
+    answer: 0,
+  },
+  {
+    id: 'snake-acronym',
+    flavor: 'wics',
+    prompt: 'What does "WiCS" stand for at Simon Fraser University?',
+    options: [
+      'Women in Computing Science',
+      'Women in Computer Software',
+      'World in Computing Systems',
+      'Women in Creative Sciences',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-faculty',
+    flavor: 'wics',
+    prompt: 'Which faculty at SFU is Computing Science a part of?',
+    options: [
+      'Faculty of Applied Sciences (FAS)',
+      'Faculty of Science',
+      'Faculty of Environment',
+      'Faculty of Education',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-values',
+    flavor: 'wics',
+    prompt: 'Which of the following represents one of SFU WiCS\'s four core values?',
+    options: [
+      'Promote & support women in tech',
+      'Code all night without breaks',
+      'Never share your notes',
+      'Study completely alone',
+    ],
+    answer: 0,
+  },
 
-  { id: 'lives', flavor: 'syntax', prompt: 'Which block changes `lives` to 2?', code: 'let lives = 3;\n______\nconsole.log(lives);', options: ['lives == 2;', 'lives = 2;', 'lives === 2;', 'change lives to 2;'], answer: 1 },
-  { id: 'score', flavor: 'syntax', prompt: 'Which block increases the score by 1?', code: 'let score = 10;\n______', options: ['score =+ 1;', 'score + 1;', 'score += 1;', 'score ==+ 1;'], answer: 2 },
-  { id: 'call-function', flavor: 'syntax', prompt: 'Which block runs the function?', code: 'function climbLadder() {\n    console.log("Up!");\n}\n\n______', options: ['run climbLadder;', 'climbLadder();', 'function.climbLadder();', 'call = climbLadder;'], answer: 1 },
-  { id: 'click', flavor: 'syntax', prompt: 'Which one runs `movePlayer` when the button is clicked?', code: 'button.addEventListener("click", ______);', options: ['movePlayer()', 'movePlayer', '"movePlayer"', 'call movePlayer'], answer: 1 },
-  { id: 'return', flavor: 'syntax', prompt: 'Which block makes this print 8?', code: 'function double(x) {\n    ______\n}\n\nconsole.log(double(4));', options: ['x * 2;', 'return x * 2;', 'give x * 2;', 'console x * 2;'], answer: 1 },
+  // ---- flavor: event ----
+  {
+    id: 'snake-trycatch-acronym',
+    flavor: 'event',
+    prompt: 'What does the conference name Try/CATCH stand for?',
+    options: [
+      'Computing and Technology Conference for Her',
+      'Career and Tech Community Hub',
+      'Computer Algorithms & Tech Challenge',
+      'Creative Applied Tech Camp for High-schoolers',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-why-trycatch',
+    flavor: 'event',
+    prompt: 'Why does SFU WiCS host Try/CATCH every year?',
+    options: [
+      'To inspire and empower high school girls to explore tech and computing',
+      'To hold a timed speed-typing contest',
+      'To test students on advanced physics',
+      'To sell computer hardware',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-door-prizes',
+    flavor: 'event',
+    prompt: 'What fun surprise awaits attendees during the Try/CATCH closing ceremony?',
+    options: [
+      'Exciting door prizes, raffles, and celebrating everyone\'s day!',
+      'A surprise written calculus exam',
+      'A mandatory homework packet',
+      'A timed speed-typing test',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-godot',
+    flavor: 'event',
+    prompt: 'Which beginner-friendly game engine is featured in the 2026 Game Dev workshop?',
+    options: ['Godot', 'Unreal Engine 5', 'Roblox Studio', 'CryEngine'],
+    answer: 0,
+  },
+  {
+    id: 'snake-figma',
+    flavor: 'event',
+    prompt: 'Which design tool is used in the Try/CATCH 2026 design workshop to create covers?',
+    options: ['Figma', 'Microsoft Paint', 'Notepad', 'Excel'],
+    answer: 0,
+  },
 
-  { id: 'first-player', flavor: 'bug', prompt: 'How do you get the first player?', code: 'let players = ["A", "B", "C"];\nconsole.log(______);', options: ['players[1]', 'players(0)', 'players[0]', 'players.first'], answer: 2 },
-  { id: 'dice', flavor: 'bug', prompt: 'Which gives a random whole number from 1 to 6?', code: 'let roll = ______;', options: ['Math.random(1, 6)', 'Math.floor(Math.random() * 6) + 1', 'random(6)', 'Math.random() + 6'], answer: 1 },
-  { id: 'inner-text', flavor: 'bug', prompt: 'Which property changes the text on the page?', code: 'document.getElementById("message").______ = "You won!";', options: ['text', 'innerText', 'changeText', 'valueText'], answer: 1 },
-  { id: 'lose-life', flavor: 'bug', prompt: 'Which block removes one life?', code: 'let lives = 3;\n______', options: ['lives--;', 'lives =- 1;', 'lives - 1;', 'remove(lives);'], answer: 0 },
-  { id: 'snake-lookup', flavor: 'bug', prompt: 'Which value checks if the current square has a snake?', code: 'let position = 14;\n\nif (snakes[______]) {\n    console.log("Snake!");\n}', options: ['position', '"position"', 'snake', '14 + snake'], answer: 0 },
+  // ---- flavor: history ----
+  {
+    id: 'snake-lovelace',
+    flavor: 'history',
+    prompt: 'Who is celebrated as the world\'s very first computer programmer for publishing the first algorithm?',
+    options: ['Ada Lovelace', 'Grace Hopper', 'Katherine Johnson', 'Hedy Lamarr'],
+    answer: 0,
+  },
+  {
+    id: 'snake-grace-hopper',
+    flavor: 'history',
+    prompt: 'Who popularized the term "debugging" after an actual moth caused a computer glitch?',
+    options: ['Grace Hopper', 'Ada Lovelace', 'Margaret Hamilton', 'Joan Clarke'],
+    answer: 0,
+  },
+  {
+    id: 'snake-like-cs',
+    flavor: 'history',
+    prompt: 'What is one of the most exciting things about Computer Science?',
+    options: [
+      'Creativity, problem-solving, and building things that make an impact!',
+      'Staring at loading screens all day',
+      'Never being allowed to collaborate with friends',
+      'Memorizing binary numbers by heart',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-wics-community',
+    flavor: 'history',
+    prompt: 'What kind of community does SFU WiCS strive to create for students?',
+    options: [
+      'A welcoming, supportive, and inclusive community for everyone in tech',
+      'A cutthroat competition where students never help each other',
+      'A silent study hall where asking questions is discouraged',
+      'An exclusive club only for expert programmers',
+    ],
+    answer: 0,
+  },
+  {
+    id: 'snake-get-started',
+    flavor: 'history',
+    prompt: 'What is the best way to get started with coding and technology?',
+    options: [
+      'Curiosity, hands-on workshops, and building fun projects with friends!',
+      'Waiting until you know everything before writing a single line of code',
+      'Reading an entire dictionary of computer terms alone',
+      'Only practicing if you get 100% on math tests',
+    ],
+    answer: 0,
+  },
 ];
+
+export const SNAKE_CHALLENGES = CODE_CHALLENGES;
 
 export const shuffle = (list) => {
   const a = [...list];

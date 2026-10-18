@@ -3,7 +3,7 @@ import { POOL, shuffle } from '../data/questions';
 const MAX_MCQ = 2; // keep trivia as the minority — most squares should be real in-person tasks
 
 // Builds a fresh square -> item assignment for a board: every square gets
-// something from POOL except snake squares (those get a code challenge
+// something from POOL except snake squares (those get a snake trivia challenge
 // instead), ladder base squares (climbed straight through — no time to do
 // anything there, so the item goes to the square at the top instead), and
 // the last square (always a 'finale' task). At least 2 'bold' tasks are
