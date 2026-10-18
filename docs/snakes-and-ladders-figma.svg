@@ -1,0 +1,732 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2800 2000" width="2800" height="2000" style="background:#0C1821; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7353BA"/>
+      <stop offset="100%" stop-color="#492A8D"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD203"/>
+      <stop offset="100%" stop-color="#FF9F1C"/>
+    </linearGradient>
+    <linearGradient id="ladderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ECC71"/>
+      <stop offset="100%" stop-color="#27AE60"/>
+    </linearGradient>
+    <linearGradient id="snakeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E74C3C"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1B1B3F"/>
+      <stop offset="100%" stop-color="#151532"/>
+    </linearGradient>
+    <linearGradient id="sheetsHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#492A8D"/>
+      <stop offset="100%" stop-color="#5B36B0"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="glowGold" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#FFD203" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#2ECC71" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#E74C3C" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Markers -->
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#7353BA"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#2ECC71"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#E74C3C"/>
+    </marker>
+    <marker id="arrowGold" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#FFD203"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M1,1 L7,4 L1,7 Z" fill="#3498DB"/>
+    </marker>
+  </defs>
+
+  <!-- ============================================================== -->
+  <!-- MASTER TITLE & BRAND HEADER -->
+  <!-- ============================================================== -->
+  <g id="Master_Header">
+    <rect x="80" y="40" width="2640" height="80" rx="16" fill="url(#headerGrad)" filter="url(#cardShadow)"/>
+    <text x="120" y="90" fill="#FFFFFF" font-size="28" font-weight="800" letter-spacing="0.5">TRY/CATCH 2026 — SNAKES &amp; LADDERS GAME ARCHITECTURE</text>
+    <text x="120" y="110" fill="#ECE3FF" font-size="14" font-weight="500" opacity="0.85">Complete Interactive State Machine, Board Paths, Dice Probability &amp; Google Sheets Data Pipeline</text>
+    <rect x="2380" y="60" width="150" height="38" rx="19" fill="#1B1B3F" stroke="#FFD203" stroke-width="1.5"/>
+    <text x="2455" y="84" fill="#FFD203" font-size="13" font-weight="700" text-anchor="middle">Figma Architecture</text>
+    <rect x="2545" y="60" width="145" height="38" rx="19" fill="#2ECC71"/>
+    <text x="2617" y="84" fill="#0C1821" font-size="13" font-weight="800" text-anchor="middle">v2.0 Verified</text>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- FRAME 1: GAME LIFECYCLE & STATE MACHINE (TOP LEFT) -->
+  <!-- ============================================================== -->
+  <g id="Frame_1_Lifecycle" transform="translate(80, 150)">
+    <!-- Frame Box -->
+    <rect width="1280" height="850" rx="20" fill="url(#cardGrad)" stroke="#492A8D" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="24" y="20" width="1232" height="44" rx="10" fill="#151532"/>
+    <text x="44" y="48" fill="#ECE3FF" font-size="18" font-weight="700">1. PLAYER LIFECYCLE &amp; GAME STATE MACHINE</text>
+    <text x="1100" y="48" fill="#FFC27B" font-size="12" font-weight="600">Client: React + localStorage</text>
+
+    <!-- Node 1: Entry / NameGate -->
+    <g id="Node_NameGate" transform="translate(50, 90)">
+      <rect width="340" height="150" rx="14" fill="#20204E" stroke="#7353BA" stroke-width="1.5"/>
+      <rect x="16" y="16" width="36" height="36" rx="8" fill="#7353BA"/>
+      <text x="34" y="40" fill="#FFFFFF" font-size="16" font-weight="700" text-anchor="middle">1</text>
+      <text x="64" y="34" fill="#FFFFFF" font-size="16" font-weight="700">NameGate Modal</text>
+      <text x="64" y="50" fill="#EFC3F5" font-size="12">SnakesAndLadders.jsx</text>
+      <text x="16" y="80" fill="#ECE3FF" font-size="12" opacity="0.9">• Prompts: First Name &amp; Last Name</text>
+      <text x="16" y="100" fill="#ECE3FF" font-size="12" opacity="0.9">• Normalizes: lowercase, trimmed, collapsed whitespace</text>
+      <text x="16" y="120" fill="#FFC27B" font-size="12">• Stored in sessionStorage['sl-player-name']</text>
+    </g>
+
+    <!-- Arrow 1 -> 2 -->
+    <path d="M 390 165 L 470 165" stroke="#7353BA" stroke-width="2" marker-end="url(#arrowPurple)"/>
+
+    <!-- Node 2: LocalStorage Check -->
+    <g id="Node_ProgressCheck" transform="translate(470, 90)">
+      <rect width="360" height="150" rx="14" fill="#20204E" stroke="#7353BA" stroke-width="1.5"/>
+      <rect x="16" y="16" width="36" height="36" rx="8" fill="#7353BA"/>
+      <text x="34" y="40" fill="#FFFFFF" font-size="16" font-weight="700" text-anchor="middle">2</text>
+      <text x="64" y="34" fill="#FFFFFF" font-size="16" font-weight="700">Check Saved Progress</text>
+      <text x="64" y="50" fill="#EFC3F5" font-size="12">gameProgress.js (localStorage)</text>
+      <text x="16" y="80" fill="#2ECC71" font-size="12" font-weight="600">✓ If Found: Resumes { pos, rolls, contentIds }</text>
+      <text x="16" y="100" fill="#3498DB" font-size="12" font-weight="600">✗ If New: Calls assignSquares(board)</text>
+      <text x="16" y="120" fill="#ECE3FF" font-size="12" opacity="0.85">• Guarantees: 2 'bold' tasks, max 2 MCQ, 1 finale</text>
+    </g>
+
+    <!-- Arrow 2 -> 3 -->
+    <path d="M 830 165 L 900 165" stroke="#7353BA" stroke-width="2" marker-end="url(#arrowPurple)"/>
+
+    <!-- Node 3: Square 1 Warm-up -->
+    <g id="Node_Warmup" transform="translate(900, 90)">
+      <rect width="330" height="150" rx="14" fill="#20204E" stroke="#FFC27B" stroke-width="1.5"/>
+      <rect x="16" y="16" width="36" height="36" rx="8" fill="#FFC27B"/>
+      <text x="34" y="40" fill="#0C1821" font-size="16" font-weight="800" text-anchor="middle">3</text>
+      <text x="64" y="34" fill="#FFFFFF" font-size="16" font-weight="700">Square 1: Warm-up</text>
+      <text x="64" y="50" fill="#FFC27B" font-size="12">Instant Opening Challenge</text>
+      <text x="16" y="80" fill="#ECE3FF" font-size="12">• Launches immediately on start</text>
+      <text x="16" y="100" fill="#ECE3FF" font-size="12">• Player completes task or trivia</text>
+      <text x="16" y="120" fill="#2ECC71" font-size="12" font-weight="600">➔ submitEntry(square: 1, result: 'done')</text>
+    </g>
+
+    <!-- Branching Downward Arrow from Warmup to Turn Loop -->
+    <path d="M 1065 240 L 1065 310 L 660 310 L 660 350" stroke="#7353BA" stroke-width="2" marker-end="url(#arrowPurple)"/>
+
+    <!-- Node 4: The Turn Loop (Center Frame) -->
+    <g id="Node_TurnLoop" transform="translate(180, 350)">
+      <rect width="920" height="280" rx="16" fill="#17173B" stroke="#7353BA" stroke-width="2"/>
+      <rect x="20" y="16" width="880" height="36" rx="8" fill="#222254"/>
+      <text x="40" y="40" fill="#FFD203" font-size="16" font-weight="800">4. CORE GAME TURN LOOP (Click Die to Roll)</text>
+
+      <!-- Substep 4A: Die Roll -->
+      <g transform="translate(30, 68)">
+        <rect width="260" height="180" rx="10" fill="#20204E" stroke="#492A8D" stroke-width="1"/>
+        <text x="16" y="28" fill="#FFC27B" font-size="14" font-weight="700">A. Roll The Die</text>
+        <text x="16" y="50" fill="#ECE3FF" font-size="12">• DICE_FACES = 2 (Rolls 1 or 2)</text>
+        <text x="16" y="70" fill="#ECE3FF" font-size="12">• 7 rapid roll frames (630ms)</text>
+        <text x="16" y="90" fill="#ECE3FF" font-size="12">• Rolls count incremented (+1)</text>
+        <text x="16" y="115" fill="#EFC3F5" font-size="12">Why only 1 or 2?</text>
+        <text x="16" y="135" fill="#ECE3FF" font-size="11" opacity="0.8">Prevents finishing 15 squares</text>
+        <text x="16" y="152" fill="#ECE3FF" font-size="11" opacity="0.8">in just a couple rolls.</text>
+      </g>
+
+      <!-- Substep 4B: Hop Animation -->
+      <g transform="translate(320, 68)">
+        <rect width="270" height="180" rx="10" fill="#20204E" stroke="#492A8D" stroke-width="1"/>
+        <text x="16" y="28" fill="#FFC27B" font-size="14" font-weight="700">B. Token Hop Animation</text>
+        <text x="16" y="50" fill="#ECE3FF" font-size="12">• HOP_MS = 320ms per square</text>
+        <text x="16" y="70" fill="#ECE3FF" font-size="12">• Rocket token hops square by square</text>
+        <text x="16" y="90" fill="#ECE3FF" font-size="12">• target = min(pos + roll, 15)</text>
+        <text x="16" y="115" fill="#2ECC71" font-size="12" font-weight="600">Save State on Every Move:</text>
+        <text x="16" y="135" fill="#ECE3FF" font-size="11" opacity="0.8">localStorage updated with current</text>
+        <text x="16" y="152" fill="#ECE3FF" font-size="11" opacity="0.8">pos, rolls, and board assignments.</text>
+      </g>
+
+      <!-- Substep 4C: Tile Resolution -->
+      <g transform="translate(620, 68)">
+        <rect width="270" height="180" rx="10" fill="#20204E" stroke="#492A8D" stroke-width="1"/>
+        <text x="16" y="28" fill="#FFC27B" font-size="14" font-weight="700">C. Tile Resolution: land(square)</text>
+        <text x="16" y="50" fill="#2ECC71" font-size="12" font-weight="700">1. Ladder (5 or 10):</text>
+        <text x="26" y="68" fill="#ECE3FF" font-size="11">Climbs to 7 / 12 (SLIDE_MS=900ms)</text>
+        <text x="16" y="90" fill="#E74C3C" font-size="12" font-weight="700">2. Snake (8 or 14):</text>
+        <text x="26" y="108" fill="#ECE3FF" font-size="11">Code Challenge: Pass / Fail branch</text>
+        <text x="16" y="130" fill="#7353BA" font-size="12" font-weight="700">3. Regular Square:</text>
+        <text x="26" y="148" fill="#ECE3FF" font-size="11">Triggers assigned MCQ or Task</text>
+        <text x="16" y="168" fill="#FFD203" font-size="12" font-weight="700">4. Square 15 ➔ FINALE!</text>
+      </g>
+    </g>
+
+    <!-- Node 5: Victory & Submission -->
+    <g id="Node_Victory" transform="translate(320, 680)">
+      <rect width="640" height="130" rx="14" fill="#20204E" stroke="#FFD203" stroke-width="2" filter="url(#glowGold)"/>
+      <rect x="20" y="16" width="36" height="36" rx="8" fill="#FFD203"/>
+      <text x="38" y="40" fill="#0C1821" font-size="16" font-weight="900" text-anchor="middle">5</text>
+      <text x="68" y="34" fill="#FFFFFF" font-size="17" font-weight="800">FINALE REACHED: Square 15 (Winner! 🏆)</text>
+      <text x="68" y="52" fill="#FFD203" font-size="12">Final Photo Proof &amp; Trophy Screen</text>
+      <text x="20" y="80" fill="#ECE3FF" font-size="12">• Player completes finale challenge (e.g., Mystery Object or Group Photo)</text>
+      <text x="20" y="100" fill="#2ECC71" font-size="12" font-weight="700">• Submits result: 'WINNER' ➔ Sheets marks status: 'WINNER 🏆' in bold green</text>
+      <text x="20" y="120" fill="#FFC27B" font-size="12">• clearProgress(name) clears localStorage so next session is a clean replay</text>
+    </g>
+
+    <!-- Arrow TurnLoop to Victory -->
+    <path d="M 640 630 L 640 680" stroke="#FFD203" stroke-width="2.5" marker-end="url(#arrowGold)"/>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- FRAME 2: ALL 15 SQUARES & EVERY POSSIBLE PATH (BOTTOM LEFT) -->
+  <!-- ============================================================== -->
+  <g id="Frame_2_BoardPaths" transform="translate(80, 1030)">
+    <rect width="1280" height="910" rx="20" fill="url(#cardGrad)" stroke="#492A8D" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="24" y="20" width="1232" height="44" rx="10" fill="#151532"/>
+    <text x="44" y="48" fill="#ECE3FF" font-size="18" font-weight="700">2. ALL 15 SQUARES &amp; EVERY POSSIBLE BRANCHING PATH</text>
+    <text x="1000" y="48" fill="#2ECC71" font-size="12" font-weight="600">Deterministic Board Topology</text>
+
+    <!-- Top Track (Squares 1 to 5) -->
+    <!-- Sq 1 -->
+    <g transform="translate(50, 100)">
+      <circle cx="45" cy="45" r="38" fill="#7353BA" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">1</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="700" text-anchor="middle">START</text>
+      <text x="45" y="120" fill="#FFC27B" font-size="10" text-anchor="middle">Warmup Task</text>
+    </g>
+    <path d="M 95 145 L 155 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 2 -->
+    <g transform="translate(170, 100)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">2</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+    </g>
+    <path d="M 215 145 L 275 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 3 -->
+    <g transform="translate(290, 100)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">3</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+    </g>
+    <path d="M 335 145 L 395 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 4 -->
+    <g transform="translate(410, 100)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">4</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+      <text x="45" y="120" fill="#E74C3C" font-size="10" font-weight="700" text-anchor="middle">Snake 8 Tail</text>
+    </g>
+    <path d="M 455 145 L 515 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 5 (Ladder Start) -->
+    <g transform="translate(530, 100)">
+      <circle cx="45" cy="45" r="38" fill="#1B4D3E" stroke="#2ECC71" stroke-width="2.5" filter="url(#glowGreen)"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="900" text-anchor="middle">5</text>
+      <text x="45" y="105" fill="#2ECC71" font-size="12" font-weight="800" text-anchor="middle">LADDER 1</text>
+      <text x="45" y="120" fill="#ECE3FF" font-size="10" text-anchor="middle">Climbs to 7</text>
+    </g>
+
+    <!-- Ladder Arc 5 -> 7 -->
+    <path d="M 605 130 C 660 70, 750 70, 805 130" fill="none" stroke="#2ECC71" stroke-width="3.5" marker-end="url(#arrowGreen)"/>
+    <text x="705" y="80" fill="#2ECC71" font-size="12" font-weight="800" text-anchor="middle">CLIMBS TO 7 🪜</text>
+
+    <!-- Sq 6 -->
+    <g transform="translate(650, 100)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">6</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+      <text x="45" y="120" fill="#E74C3C" font-size="10" font-weight="700" text-anchor="middle">Snake 14 Tail</text>
+    </g>
+    <path d="M 695 145 L 755 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 7 (Ladder Destination) -->
+    <g transform="translate(770, 100)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#2ECC71" stroke-width="2.5"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">7</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="700" text-anchor="middle">Ladder Exit</text>
+      <text x="45" y="120" fill="#FFC27B" font-size="10" text-anchor="middle">Do Task on 7</text>
+    </g>
+    <path d="M 815 145 L 875 145" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 8 (Snake 1 Head) -->
+    <g transform="translate(890, 100)">
+      <circle cx="45" cy="45" r="38" fill="#4D1B1B" stroke="#E74C3C" stroke-width="2.5" filter="url(#glowRed)"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="900" text-anchor="middle">8</text>
+      <text x="45" y="105" fill="#E74C3C" font-size="12" font-weight="800" text-anchor="middle">SNAKE 1 🐍</text>
+      <text x="45" y="120" fill="#ECE3FF" font-size="10" text-anchor="middle">Challenge!</text>
+    </g>
+
+    <!-- Snake 1 Slide Back to 4 -->
+    <path d="M 915 155 C 800 240, 560 240, 475 155" fill="none" stroke="#E74C3C" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrowRed)"/>
+    <text x="690" y="245" fill="#E74C3C" font-size="12" font-weight="700" text-anchor="middle">WRONG ANSWER: Slides Down to 4 ⚠️</text>
+
+    <!-- Next Row (Squares 9 to 15) -->
+    <!-- Sq 9 -->
+    <g transform="translate(50, 310)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">9</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+    </g>
+    <path d="M 95 355 L 155 355" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 10 (Ladder 2 Start) -->
+    <g transform="translate(170, 310)">
+      <circle cx="45" cy="45" r="38" fill="#1B4D3E" stroke="#2ECC71" stroke-width="2.5" filter="url(#glowGreen)"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="900" text-anchor="middle">10</text>
+      <text x="45" y="105" fill="#2ECC71" font-size="12" font-weight="800" text-anchor="middle">LADDER 2</text>
+      <text x="45" y="120" fill="#ECE3FF" font-size="10" text-anchor="middle">Climbs to 12</text>
+    </g>
+
+    <!-- Ladder Arc 10 -> 12 -->
+    <path d="M 245 340 C 300 280, 390 280, 445 340" fill="none" stroke="#2ECC71" stroke-width="3.5" marker-end="url(#arrowGreen)"/>
+    <text x="345" y="290" fill="#2ECC71" font-size="12" font-weight="800" text-anchor="middle">CLIMBS TO 12 🪜</text>
+
+    <!-- Sq 11 -->
+    <g transform="translate(290, 310)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">11</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+    </g>
+    <path d="M 335 355 L 395 355" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 12 (Ladder Exit) -->
+    <g transform="translate(410, 310)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#2ECC71" stroke-width="2.5"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">12</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="700" text-anchor="middle">Ladder Exit</text>
+      <text x="45" y="120" fill="#FFC27B" font-size="10" text-anchor="middle">Do Task on 12</text>
+    </g>
+    <path d="M 455 355 L 515 355" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 13 -->
+    <g transform="translate(530, 310)">
+      <circle cx="45" cy="45" r="38" fill="#20204E" stroke="#7353BA" stroke-width="2"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="800" text-anchor="middle">13</text>
+      <text x="45" y="105" fill="#ECE3FF" font-size="12" font-weight="600" text-anchor="middle">Regular</text>
+    </g>
+    <path d="M 575 355 L 635 355" stroke="#ECE3FF" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowPurple)"/>
+
+    <!-- Sq 14 (Snake 2 Head) -->
+    <g transform="translate(650, 310)">
+      <circle cx="45" cy="45" r="38" fill="#4D1B1B" stroke="#E74C3C" stroke-width="2.5" filter="url(#glowRed)"/>
+      <text x="45" y="52" fill="#FFFFFF" font-size="20" font-weight="900" text-anchor="middle">14</text>
+      <text x="45" y="105" fill="#E74C3C" font-size="12" font-weight="800" text-anchor="middle">SNAKE 2 🐍</text>
+      <text x="45" y="120" fill="#ECE3FF" font-size="10" text-anchor="middle">Challenge!</text>
+    </g>
+
+    <!-- Snake 2 Slide Back to 6 -->
+    <path d="M 680 375 C 670 450, 680 470, 715 470 C 740 470, 760 380, 715 160" fill="none" stroke="#E74C3C" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrowRed)"/>
+    <text x="760" y="450" fill="#E74C3C" font-size="12" font-weight="700">WRONG: Slides to 6 ⚠️</text>
+
+    <!-- Sq 15 (Finale) -->
+    <g transform="translate(800, 300)">
+      <circle cx="55" cy="55" r="48" fill="#5A3A00" stroke="#FFD203" stroke-width="3" filter="url(#glowGold)"/>
+      <text x="55" y="63" fill="#FFD203" font-size="26" font-weight="900" text-anchor="middle">15</text>
+      <text x="55" y="122" fill="#FFD203" font-size="14" font-weight="800" text-anchor="middle">FINALE 🏆</text>
+      <text x="55" y="138" fill="#ECE3FF" font-size="11" text-anchor="middle">Grand Prize Task</text>
+    </g>
+
+    <!-- Detailed Branching Table in Bottom Left Frame -->
+    <g transform="translate(40, 510)">
+      <rect width="1200" height="370" rx="14" fill="#16163A" stroke="#7353BA" stroke-width="1"/>
+      <text x="24" y="32" fill="#FFD203" font-size="15" font-weight="700">COMPLETE STEP-BY-STEP TRANSITION MATRIX (DICE ROLLS: +1 or +2)</text>
+
+      <!-- Table Header -->
+      <rect x="20" y="45" width="1160" height="30" fill="#20204E"/>
+      <text x="35" y="65" fill="#ECE3FF" font-size="11" font-weight="700">CURRENT</text>
+      <text x="120" y="65" fill="#ECE3FF" font-size="11" font-weight="700">ROLL 1 TARGET</text>
+      <text x="320" y="65" fill="#ECE3FF" font-size="11" font-weight="700">ROLL 2 TARGET</text>
+      <text x="540" y="65" fill="#ECE3FF" font-size="11" font-weight="700">SPECIAL MECHANICS / LADDERS / SNAKES</text>
+      <text x="960" y="65" fill="#ECE3FF" font-size="11" font-weight="700">GOOGLE SHEETS LOG</text>
+
+      <!-- Rows -->
+      <g transform="translate(0, 80)" font-size="11" fill="#ECE3FF">
+        <text x="35" y="20" font-weight="700">Sq 1 (Warmup)</text>
+        <text x="120" y="20">Sq 2 (Regular task/mcq)</text>
+        <text x="320" y="20">Sq 3 (Regular task/mcq)</text>
+        <text x="540" y="20" fill="#EFC3F5">Warmup fires upon start, submits Sq 1 answer.</text>
+        <text x="960" y="20" fill="#2ECC71">Col 4: Sq 1 logged</text>
+
+        <text x="35" y="44" font-weight="700">Sq 4</text>
+        <text x="120" y="44" fill="#2ECC71">Sq 5 ➔ Climbs to 7!</text>
+        <text x="320" y="44">Sq 6 (Regular task/mcq)</text>
+        <text x="540" y="44" fill="#2ECC71">Ladder 1 bypasses square 5; task triggers on Sq 7.</text>
+        <text x="960" y="44">Col 7 or Col 9/10</text>
+
+        <text x="35" y="68" font-weight="700">Sq 6</text>
+        <text x="120" y="68">Sq 7 (Regular task/mcq)</text>
+        <text x="320" y="68" fill="#E74C3C">Sq 8 ➔ Snake 1 Bite!</text>
+        <text x="540" y="68" fill="#E74C3C">Snake Challenge: Pass = stays on 8 | Fail = slides to 4.</text>
+        <text x="960" y="68">Escape or Slide log</text>
+
+        <text x="35" y="92" font-weight="700">Sq 7</text>
+        <text x="120" y="92" fill="#E74C3C">Sq 8 ➔ Snake 1 Bite!</text>
+        <text x="320" y="92">Sq 9 (Regular task/mcq)</text>
+        <text x="540" y="92">If player slides to 4, they immediately do Sq 4 task.</text>
+        <text x="960" y="92">Logged as Sq 4</text>
+
+        <text x="35" y="116" font-weight="700">Sq 9</text>
+        <text x="120" y="116" fill="#2ECC71">Sq 10 ➔ Climbs to 12!</text>
+        <text x="320" y="116">Sq 11 (Regular task/mcq)</text>
+        <text x="540" y="116" fill="#2ECC71">Ladder 2 bypasses square 10; task triggers on Sq 12.</text>
+        <text x="960" y="116">Col 12 / Col 14</text>
+
+        <text x="35" y="140" font-weight="700">Sq 12</text>
+        <text x="120" y="140">Sq 13 (Regular task/mcq)</text>
+        <text x="320" y="140" fill="#E74C3C">Sq 14 ➔ Snake 2 Bite!</text>
+        <text x="540" y="140" fill="#E74C3C">Snake Challenge: Pass = stays on 14 | Fail = slides to 6.</text>
+        <text x="960" y="140">Escape or Slide log</text>
+
+        <text x="35" y="164" font-weight="700">Sq 13</text>
+        <text x="120" y="164" fill="#E74C3C">Sq 14 ➔ Snake 2 Bite!</text>
+        <text x="320" y="164" fill="#FFD203">Sq 15 ➔ FINALE / WIN!</text>
+        <text x="540" y="164" fill="#FFD203">Reaching or overshooting 15 completes the game.</text>
+        <text x="960" y="164" fill="#FFD203">Col 16 (Finale)</text>
+
+        <text x="35" y="188" font-weight="700">Sq 14</text>
+        <text x="120" y="188" fill="#FFD203">Sq 15 ➔ FINALE / WIN!</text>
+        <text x="320" y="188" fill="#FFD203">Sq 15 ➔ FINALE / WIN!</text>
+        <text x="540" y="188" fill="#FFD203">Either roll (1 or 2) reaches the Finale square!</text>
+        <text x="960" y="188" fill="#FFD203">Status = WINNER 🏆</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- FRAME 3: DATA PIPELINE & GOOGLE APPS SCRIPT (TOP RIGHT) -->
+  <!-- ============================================================== -->
+  <g id="Frame_3_Pipeline" transform="translate(1400, 150)">
+    <rect width="1320" height="850" rx="20" fill="url(#cardGrad)" stroke="#492A8D" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="24" y="20" width="1272" height="44" rx="10" fill="#151532"/>
+    <text x="44" y="48" fill="#ECE3FF" font-size="18" font-weight="700">3. DATA PIPELINE &amp; GOOGLE APPS SCRIPT ENGINE</text>
+    <text x="1050" y="48" fill="#3498DB" font-size="12" font-weight="600">POST /exec Protocol</text>
+
+    <!-- Client POST Box -->
+    <g transform="translate(40, 85)">
+      <rect width="360" height="240" rx="12" fill="#20204E" stroke="#3498DB" stroke-width="1.5"/>
+      <text x="20" y="32" fill="#3498DB" font-size="15" font-weight="700">A. Client: submitEntry.js</text>
+      <text x="20" y="55" fill="#ECE3FF" font-size="12">Fire-and-forget fetch to Google WebApp:</text>
+      <rect x="16" y="68" width="328" height="150" rx="8" fill="#0C1821"/>
+      <text x="28" y="90" fill="#FFC27B" font-size="11" font-family="monospace">fetch(WEBAPP_URL, {</text>
+      <text x="40" y="110" fill="#ECE3FF" font-size="11" font-family="monospace">method: 'POST',</text>
+      <text x="40" y="130" fill="#ECE3FF" font-size="11" font-family="monospace">mode: 'no-cors',</text>
+      <text x="40" y="150" fill="#ECE3FF" font-size="11" font-family="monospace">headers: { 'Content-Type':</text>
+      <text x="56" y="168" fill="#ECE3FF" font-size="11" font-family="monospace">'text/plain' },</text>
+      <text x="40" y="188" fill="#2ECC71" font-size="11" font-family="monospace">body: JSON.stringify(data)</text>
+      <text x="28" y="206" fill="#FFC27B" font-size="11" font-family="monospace">})</text>
+    </g>
+
+    <!-- Payload Schema Box -->
+    <g transform="translate(430, 85)">
+      <rect width="390" height="240" rx="12" fill="#20204E" stroke="#7353BA" stroke-width="1.5"/>
+      <text x="20" y="32" fill="#EFC3F5" font-size="15" font-weight="700">B. Payload Schema (JSON Data)</text>
+      <rect x="16" y="48" width="358" height="175" rx="8" fill="#0C1821"/>
+      <text x="28" y="70" fill="#ECE3FF" font-size="11" font-family="monospace">{</text>
+      <text x="40" y="90" fill="#FFC27B" font-size="11" font-family="monospace">name: <tspan fill="#FFFFFF">"Jane Doe"</tspan>,</text>
+      <text x="40" y="110" fill="#FFC27B" font-size="11" font-family="monospace">square: <tspan fill="#FFFFFF">4</tspan>,</text>
+      <text x="40" y="130" fill="#FFC27B" font-size="11" font-family="monospace">activity: <tspan fill="#FFFFFF">"Doodle coding"</tspan>,</text>
+      <text x="40" y="150" fill="#FFC27B" font-size="11" font-family="monospace">answer: <tspan fill="#FFFFFF">"Handwritten code"</tspan>,</text>
+      <text x="40" y="170" fill="#FFC27B" font-size="11" font-family="monospace">photoDataUrl: <tspan fill="#FFFFFF">"data:image/jpeg;..."</tspan>,</text>
+      <text x="40" y="190" fill="#FFC27B" font-size="11" font-family="monospace">result: <tspan fill="#2ECC71">"done" | "WINNER"</tspan></text>
+      <text x="28" y="210" fill="#ECE3FF" font-size="11" font-family="monospace">}</text>
+    </g>
+
+    <!-- Apps Script Server Processing Box -->
+    <g transform="translate(850, 85)">
+      <rect width="430" height="240" rx="12" fill="#20204E" stroke="#2ECC71" stroke-width="1.5"/>
+      <text x="20" y="32" fill="#2ECC71" font-size="15" font-weight="700">C. Apps Script Engine (doPost)</text>
+      <text x="20" y="55" fill="#ECE3FF" font-size="12">snakes-and-ladders-apps-script.gs:</text>
+      <text x="20" y="80" fill="#ECE3FF" font-size="12">• <tspan font-weight="700">findRowForName(sheet, name):</tspan></text>
+      <text x="32" y="100" fill="#ECE3FF" font-size="11" opacity="0.85">Matches normalized name or appends row</text>
+      <text x="20" y="125" fill="#ECE3FF" font-size="12">• <tspan font-weight="700">Status Check:</tspan></text>
+      <text x="32" y="145" fill="#2ECC71" font-size="11">result === 'WINNER' ? 'WINNER 🏆' : 'In progress'</text>
+      <text x="20" y="170" fill="#ECE3FF" font-size="12">• <tspan font-weight="700">Cell Formatting:</tspan></text>
+      <text x="32" y="190" fill="#ECE3FF" font-size="11">cellText = `${activity} — ${answer}`</text>
+      <text x="20" y="215" fill="#EFC3F5" font-size="12">• Maps square number to target column</text>
+    </g>
+
+    <!-- Arrows connecting A -> B -> C -->
+    <path d="M 400 205 L 430 205" stroke="#3498DB" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    <path d="M 820 205 L 850 205" stroke="#7353BA" stroke-width="2" marker-end="url(#arrowPurple)"/>
+
+    <!-- Drive & Error Handling Sub-Panel -->
+    <g transform="translate(40, 360)">
+      <rect width="1240" height="450" rx="14" fill="#17173B" stroke="#7353BA" stroke-width="1"/>
+      <rect x="20" y="16" width="1200" height="36" rx="8" fill="#222254"/>
+      <text x="40" y="40" fill="#FFC27B" font-size="16" font-weight="700">PHOTO UPLOAD &amp; ISOLATED ERROR HANDLING ARCHITECTURE</text>
+
+      <!-- Google Drive Photo Pipeline -->
+      <g transform="translate(30, 70)">
+        <rect width="570" height="350" rx="10" fill="#20204E" stroke="#FFC27B" stroke-width="1"/>
+        <text x="20" y="32" fill="#FFC27B" font-size="15" font-weight="700">Google Drive: savePhoto(photoDataUrl, name, sq)</text>
+
+        <g transform="translate(20, 55)" font-size="12" fill="#ECE3FF">
+          <text x="0" y="20" font-weight="700">1. Base64 Decode &amp; Extraction:</text>
+          <text x="16" y="38" opacity="0.85">Extracts MIME (image/jpeg) and decodes base64 buffer</text>
+
+          <text x="0" y="70" font-weight="700">2. Destination Drive Folder:</text>
+          <text x="16" y="88" opacity="0.85">Auto-finds or creates folder: "Snakes and Ladders Photos"</text>
+
+          <text x="0" y="120" font-weight="700">3. Deterministic File Naming:</text>
+          <text x="16" y="138" font-family="monospace" fill="#FFC27B">${safeName}-square${square}-${Date.now()}.jpg</text>
+
+          <text x="0" y="170" font-weight="700">4. Sharing Permissions:</text>
+          <text x="16" y="188" fill="#2ECC71">file.setSharing(ANYONE_WITH_LINK, VIEW)</text>
+
+          <text x="0" y="220" font-weight="700">5. RichText Multi-Link Accumulation:</text>
+          <text x="16" y="238" opacity="0.85">Appends clickable "Sq${sq}" link into Column 17 (Photos cell)</text>
+          <text x="16" y="256" opacity="0.85">Multiple photo tasks accumulate cleanly in the SAME cell!</text>
+        </g>
+      </g>
+
+      <!-- Error Handling Engine -->
+      <g transform="translate(630, 70)">
+        <rect width="570" height="350" rx="10" fill="#20204E" stroke="#E74C3C" stroke-width="1"/>
+        <text x="20" y="32" fill="#E74C3C" font-size="15" font-weight="700">Fault-Tolerant Error Isolation: logError()</text>
+
+        <g transform="translate(20, 55)" font-size="12" fill="#ECE3FF">
+          <text x="0" y="20" font-weight="700" fill="#E74C3C">Never Fails Silently / Never Crashes Submission:</text>
+          <text x="16" y="38" opacity="0.85">Top-level try/catch wraps doPost() so network never hangs.</text>
+
+          <text x="0" y="70" font-weight="700">Dedicated "Errors" Tab in Spreadsheet:</text>
+          <text x="16" y="88" opacity="0.85">If any error happens, it appends a row to 'Errors' sheet:</text>
+          <rect x="16" y="98" width="510" height="50" rx="6" fill="#0C1821"/>
+          <text x="28" y="120" fill="#FFC27B" font-size="11" font-family="monospace">[Timestamp, Where, Message, Stack, Raw Body]</text>
+          <text x="28" y="138" fill="#ECE3FF" font-size="10" opacity="0.75">No need to inspect Apps Script execution logs.</text>
+
+          <text x="0" y="180" font-weight="700">Photo Failure Fallback:</text>
+          <text x="16" y="198" opacity="0.85">If Drive quota or auth fails, writes error badge directly into cell:</text>
+          <text x="16" y="216" fill="#E74C3C" font-family="monospace">"Sq${sq} ⚠️ ${err.message}"</text>
+
+          <text x="0" y="250" font-weight="700" fill="#2ECC71">Event Review Benefit:</text>
+          <text x="16" y="268" opacity="0.85">Zero live volunteer intervention required during conference.</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============================================================== -->
+  <!-- FRAME 4: GOOGLE SHEETS LIVE SCHEMA & STORAGE (BOTTOM RIGHT) -->
+  <!-- ============================================================== -->
+  <g id="Frame_4_SheetsSchema" transform="translate(1400, 1030)">
+    <rect width="1320" height="910" rx="20" fill="url(#cardGrad)" stroke="#492A8D" stroke-width="1.5" filter="url(#cardShadow)"/>
+    <rect x="24" y="20" width="1272" height="44" rx="10" fill="#151532"/>
+    <text x="44" y="48" fill="#ECE3FF" font-size="18" font-weight="700">4. GOOGLE SHEETS LIVE SPREADSHEET SCHEMA &amp; COLUMNS</text>
+    <text x="1050" y="48" fill="#2ECC71" font-size="12" font-weight="600">Spreadsheet: 'Responses'</text>
+
+    <!-- Spreadsheet Mock Table -->
+    <g transform="translate(30, 80)">
+      <rect width="1260" height="420" rx="10" fill="#FFFFFF" stroke="#492A8D" stroke-width="2" filter="url(#cardShadow)"/>
+
+      <!-- Table Header (Brand Purple #492A8D) -->
+      <rect x="0" y="0" width="1260" height="45" rx="10" fill="url(#sheetsHeaderGrad)"/>
+      <g font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+        <!-- Col 1 -->
+        <text x="60" y="28">Name (A)</text>
+        <!-- Col 2 -->
+        <text x="150" y="28">Status (B)</text>
+        <!-- Col 3 -->
+        <text x="240" y="28">Updated (C)</text>
+        <!-- Square Columns -->
+        <text x="320" y="28">Sq 1</text>
+        <text x="390" y="28">Sq 2</text>
+        <text x="460" y="28">Sq 3</text>
+        <text x="530" y="28">Sq 4</text>
+        <text x="600" y="28">Sq 5</text>
+        <text x="670" y="28">Sq 6</text>
+        <text x="740" y="28">Sq 7</text>
+        <text x="810" y="28">Sq 9</text>
+        <text x="880" y="28">Sq 10</text>
+        <text x="950" y="28">Sq 11</text>
+        <text x="1020" y="28">Sq 12</text>
+        <text x="1090" y="28">Sq 13</text>
+        <text x="1160" y="28">Sq 15 (Finale)</text>
+        <text x="1225" y="28">Photos</text>
+      </g>
+
+      <!-- Row 1: Active Player -->
+      <g transform="translate(0, 45)">
+        <rect width="1260" height="60" fill="#F8F9FA"/>
+        <line x1="0" y1="60" x2="1260" y2="60" stroke="#E0E0E0"/>
+        <text x="15" y="35" font-size="12" font-weight="700" fill="#0C1821">Sarah Chen</text>
+
+        <!-- Status Badge: In Progress -->
+        <rect x="110" y="18" width="80" height="25" rx="12" fill="#F4F0FF"/>
+        <text x="150" y="34" font-size="10" font-weight="700" fill="#492A8D" text-anchor="middle">In progress</text>
+
+        <text x="205" y="35" font-size="10" fill="#666666">Oct 24, 11:20 am</text>
+        <text x="300" y="35" font-size="10" fill="#333333">HTML — Markup</text>
+        <text x="370" y="35" font-size="10" fill="#333333">Doodle — [Photo]</text>
+        <text x="440" y="35" font-size="10" fill="#333333">Meet Exec</text>
+        <text x="510" y="35" font-size="10" fill="#888888">—</text>
+        <text x="580" y="35" font-size="10" fill="#888888">—</text>
+        <text x="650" y="35" font-size="10" fill="#888888">—</text>
+        <text x="720" y="35" font-size="10" fill="#888888">—</text>
+        <text x="790" y="35" font-size="10" fill="#888888">—</text>
+        <text x="860" y="35" font-size="10" fill="#888888">—</text>
+        <text x="930" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1000" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1070" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1140" y="35" font-size="10" fill="#888888">—</text>
+
+        <!-- Photos Clickable Link -->
+        <rect x="1205" y="20" width="40" height="20" rx="4" fill="#ECE3FF"/>
+        <text x="1225" y="34" font-size="10" font-weight="800" fill="#492A8D" text-anchor="middle">Sq2 🔗</text>
+      </g>
+
+      <!-- Row 2: Winner Player -->
+      <g transform="translate(0, 105)">
+        <rect width="1260" height="60" fill="#FFFFFF"/>
+        <line x1="0" y1="60" x2="1260" y2="60" stroke="#E0E0E0"/>
+        <text x="15" y="35" font-size="12" font-weight="700" fill="#0C1821">Maya Lin</text>
+
+        <!-- Status Badge: WINNER -->
+        <rect x="105" y="18" width="90" height="25" rx="12" fill="#C6F0D5"/>
+        <text x="150" y="34" font-size="10" font-weight="800" fill="#0C1821" text-anchor="middle">WINNER 🏆</text>
+
+        <text x="205" y="35" font-size="10" fill="#666666">Oct 24, 3:45 pm</text>
+        <text x="300" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="370" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="440" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="510" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="580" y="35" font-size="10" fill="#2ECC71">Climbed 7</text>
+        <text x="650" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="720" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="790" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="860" y="35" font-size="10" fill="#2ECC71">Climbed 12</text>
+        <text x="930" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="1000" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="1070" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="1135" y="35" font-size="10" font-weight="700" fill="#FF9F1C">Mystery Found!</text>
+
+        <!-- Photos Multi-Links -->
+        <g transform="translate(1195, 12)">
+          <rect x="0" y="0" width="28" height="16" rx="4" fill="#ECE3FF"/>
+          <text x="14" y="12" font-size="9" font-weight="700" fill="#492A8D" text-anchor="middle">Sq2</text>
+          <rect x="32" y="0" width="28" height="16" rx="4" fill="#ECE3FF"/>
+          <text x="46" y="12" font-size="9" font-weight="700" fill="#492A8D" text-anchor="middle">Sq7</text>
+          <rect x="0" y="20" width="28" height="16" rx="4" fill="#FFD203"/>
+          <text x="14" y="32" font-size="9" font-weight="800" fill="#0C1821" text-anchor="middle">Sq15</text>
+        </g>
+      </g>
+
+      <!-- Row 3: Player with Snake Bite -->
+      <g transform="translate(0, 165)">
+        <rect width="1260" height="60" fill="#F8F9FA"/>
+        <line x1="0" y1="60" x2="1260" y2="60" stroke="#E0E0E0"/>
+        <text x="15" y="35" font-size="12" font-weight="700" fill="#0C1821">Aisha Khan</text>
+
+        <!-- Status Badge: In Progress -->
+        <rect x="110" y="18" width="80" height="25" rx="12" fill="#F4F0FF"/>
+        <text x="150" y="34" font-size="10" font-weight="700" fill="#492A8D" text-anchor="middle">In progress</text>
+
+        <text x="205" y="35" font-size="10" fill="#666666">Oct 24, 1:10 pm</text>
+        <text x="300" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="370" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="440" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="510" y="35" font-size="10" fill="#E74C3C">Bit by Snake 8</text>
+        <text x="580" y="35" font-size="10" fill="#888888">—</text>
+        <text x="650" y="35" font-size="10" fill="#888888">—</text>
+        <text x="720" y="35" font-size="10" fill="#888888">—</text>
+        <text x="790" y="35" font-size="10" fill="#888888">—</text>
+        <text x="860" y="35" font-size="10" fill="#888888">—</text>
+        <text x="930" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1000" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1070" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1140" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1215" y="35" font-size="10" fill="#888888">—</text>
+      </g>
+
+      <!-- Row 4: Error Handling Row -->
+      <g transform="translate(0, 225)">
+        <rect width="1260" height="60" fill="#FFFFFF"/>
+        <line x1="0" y1="60" x2="1260" y2="60" stroke="#E0E0E0"/>
+        <text x="15" y="35" font-size="12" font-weight="700" fill="#0C1821">Taylor Swift</text>
+
+        <!-- Status Badge: In Progress -->
+        <rect x="110" y="18" width="80" height="25" rx="12" fill="#F4F0FF"/>
+        <text x="150" y="34" font-size="10" font-weight="700" fill="#492A8D" text-anchor="middle">In progress</text>
+
+        <text x="205" y="35" font-size="10" fill="#666666">Oct 24, 2:05 pm</text>
+        <text x="300" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="370" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="440" y="35" font-size="10" fill="#333333">Done</text>
+        <text x="510" y="35" font-size="10" fill="#888888">—</text>
+        <text x="580" y="35" font-size="10" fill="#888888">—</text>
+        <text x="650" y="35" font-size="10" fill="#888888">—</text>
+        <text x="720" y="35" font-size="10" fill="#888888">—</text>
+        <text x="790" y="35" font-size="10" fill="#888888">—</text>
+        <text x="860" y="35" font-size="10" fill="#888888">—</text>
+        <text x="930" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1000" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1070" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1140" y="35" font-size="10" fill="#888888">—</text>
+        <text x="1200" y="35" font-size="9" fill="#E74C3C" font-weight="700">Sq3 ⚠️ Drive Err</text>
+      </g>
+
+      <!-- Explanatory Legend Below Table -->
+      <g transform="translate(20, 300)" font-size="11" fill="#444444">
+        <text x="0" y="20">• <tspan font-weight="700">Frozen Columns:</tspan> Col A (Name) and Row 1 (Headers) are permanently frozen for comfortable scanning.</text>
+        <text x="0" y="40">• <tspan font-weight="700">Conditional Formatting:</tspan> Green (#C6F0D5) for WINNER 🏆, Purple (#F4F0FF) for In progress.</text>
+        <text x="0" y="60">• <tspan font-weight="700">Auto-Banding:</tspan> Alternating zebra striping pre-formatted across 300 rows.</text>
+        <text x="0" y="80">• <tspan font-weight="700">Drive Links:</tspan> Column 17 stores rich-text hyperlinks directly linking to photos stored in Google Drive.</text>
+        <text x="0" y="100">• <tspan font-weight="700">Errors Sheet:</tspan> Separate 'Errors' tab tracks any exceptions with exact timestamp and stack trace.</text>
+      </g>
+    </g>
+
+    <!-- Technical Specs Box (Bottom Right) -->
+    <g transform="translate(30, 520)">
+      <rect width="1260" height="350" rx="14" fill="#17173B" stroke="#7353BA" stroke-width="1"/>
+      <rect x="20" y="16" width="1220" height="36" rx="8" fill="#222254"/>
+      <text x="40" y="40" fill="#FFC27B" font-size="16" font-weight="700">FIGMA DESIGN SYSTEM SPECS &amp; COMPONENT ARCHITECTURE</text>
+
+      <g transform="translate(30, 70)" font-size="12" fill="#ECE3FF">
+        <rect width="370" height="250" rx="8" fill="#20204E"/>
+        <text x="20" y="30" fill="#FFD203" font-size="14" font-weight="700">🎨 Brand Design Tokens</text>
+        <text x="20" y="60">• Background Navy: #0C1821</text>
+        <text x="20" y="85">• Surface Card: #1B1B3F</text>
+        <text x="20" y="110">• Primary Purple: #492A8D / #7353BA</text>
+        <text x="20" y="135">• Accent Yellow: #FFC27B / #FFD203</text>
+        <text x="20" y="160">• Success Green: #2ECC71</text>
+        <text x="20" y="185">• Danger Coral: #E74C3C</text>
+        <text x="20" y="210">• Lavender Pale: #ECE3FF</text>
+      </g>
+
+      <g transform="translate(430, 70)" font-size="12" fill="#ECE3FF">
+        <rect width="370" height="250" rx="8" fill="#20204E"/>
+        <text x="20" y="30" fill="#FFD203" font-size="14" font-weight="700">🧩 Reusable UI Components</text>
+        <text x="20" y="60">• &lt;NameGate /&gt; — Entrance barrier</text>
+        <text x="20" y="85">• &lt;ActivityCard /&gt; — Task with camera</text>
+        <text x="20" y="110">• &lt;McqCard /&gt; — Trivia question with 4 options</text>
+        <text x="20" y="135">• &lt;CodeChallenge /&gt; — Snake bite problem</text>
+        <text x="20" y="160">• &lt;Toast /&gt; — Slide / Climb feedback</text>
+        <text x="20" y="185">• &lt;Die /&gt; — Animated SVG 3D rolling die</text>
+        <text x="20" y="210">• &lt;Rocket /&gt; — Player position avatar</text>
+      </g>
+
+      <g transform="translate(830, 70)" font-size="12" fill="#ECE3FF">
+        <rect width="390" height="250" rx="8" fill="#20204E"/>
+        <text x="20" y="30" fill="#FFD203" font-size="14" font-weight="700">📦 Cloud &amp; Persistence Storage</text>
+        <text x="20" y="60">• localStorage: Key 'sl-progress'</text>
+        <text x="20" y="85">• sessionStorage: Key 'sl-player-name'</text>
+        <text x="20" y="110">• Google Sheet: 'Responses' Tab</text>
+        <text x="20" y="135">• Google Drive: 'Snakes and Ladders Photos'</text>
+        <text x="20" y="160">• Exception Catch: 'Errors' Tab</text>
+        <text x="20" y="185">• WebApp Deployment: Execute as 'Me'</text>
+        <text x="20" y="210">• Access: 'Anyone' (no Google login needed)</text>
+      </g>
+    </g>
+  </g>
+</svg>

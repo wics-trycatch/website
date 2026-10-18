@@ -268,9 +268,9 @@ export default function SnakesAndLadders({ onClose }) {
     const land = async (square) => {
       const tail = board.snakes[square];
       if (tail) {
-        // Snake: tiny coding problem. Right = stay and still do that square's
+        // Snake: trivia challenge. Right = stay and still do that square's
         // item. Wrong = slide to the tail and land there instead.
-        const flavor = ['loop', 'syntax', 'bug'][Math.floor(Math.random() * 3)];
+        const flavor = ['wics', 'event', 'history'][Math.floor(Math.random() * 3)];
         const challenge = nextChallenge(flavor);
         const ok = await ask({ type: 'code', square, tail, challenge });
         submitEntry({

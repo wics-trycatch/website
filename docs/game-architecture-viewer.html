@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Try/CATCH Snakes & Ladders — Game Architecture & Data Flow</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0c1821;
+      color: #ece3ff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(90deg, #1b1b3f, #151532);
+      border-bottom: 1px solid #492a8d;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .badge {
+      background: #ffd203;
+      color: #0c1821;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #c4b5fd;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    button {
+      background: #20204e;
+      color: #ece3ff;
+      border: 1px solid #7353ba;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    button:hover {
+      background: #7353ba;
+      color: #ffffff;
+      border-color: #ffd203;
+    }
+    button:active {
+      transform: scale(0.96);
+    }
+    .jump-btn {
+      background: rgba(115, 83, 186, 0.2);
+      border-color: rgba(115, 83, 186, 0.5);
+      font-size: 12px;
+    }
+    .jump-btn:hover {
+      background: #7353ba;
+    }
+    .download-btn {
+      background: #2ecc71;
+      color: #0c1821;
+      border: none;
+      font-weight: 700;
+    }
+    .download-btn:hover {
+      background: #27ae60;
+      color: #ffffff;
+    }
+    #viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      background: radial-gradient(circle at 50% 50%, #151532 0%, #0c1821 100%);
+    }
+    #viewport.dragging {
+      cursor: grabbing;
+    }
+    #diagram-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+    #diagram-container img {
+      width: 2800px;
+      height: 2000px;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .help-drawer {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(27, 27, 63, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid #492a8d;
+      border-radius: 12px;
+      padding: 14px 18px;
+      max-width: 480px;
+      font-size: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      z-index: 5;
+    }
+    .help-drawer h4 {
+      color: #ffd203;
+      margin-bottom: 6px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .help-drawer ol {
+      margin-left: 18px;
+      color: #c4b5fd;
+      line-height: 1.5;
+    }
+    .help-drawer ol li {
+      margin-bottom: 4px;
+    }
+    .help-drawer strong {
+      color: #ffffff;
+    }
+    .hud {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(21, 21, 50, 0.9);
+      border: 1px solid #492a8d;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #ffd203;
+      font-weight: 700;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="badge">Figma SVG Ready</span>
+      <div>
+        <h1>Try/CATCH Snakes &amp; Ladders — Complete Architecture Diagram</h1>
+        <div class="subtitle">15 Squares &bull; Dice Mechanics &bull; Branching Transitions &bull; Google Sheets Schema</div>
+      </div>
+    </div>
+    <div class="controls">
+      <span style="font-size:12px; color:#c4b5fd; margin-right:4px;">Jump to:</span>
+      <button class="jump-btn" onclick="jumpTo(80, 150, 0.65)">1. State Machine</button>
+      <button class="jump-btn" onclick="jumpTo(1440, 150, 0.65)">2. Board Paths</button>
+      <button class="jump-btn" onclick="jumpTo(80, 1040, 0.65)">3. Data Pipeline</button>
+      <button class="jump-btn" onclick="jumpTo(1440, 1040, 0.65)">4. Google Sheets</button>
+      <div style="width:1px; height:22px; background:#492a8d; margin:0 4px;"></div>
+      <button onclick="zoomStep(1.2)">+ Zoom In</button>
+      <button onclick="zoomStep(0.8)">&minus; Zoom Out</button>
+      <button onclick="resetZoom()">Fit View</button>
+      <a href="snakes-and-ladders-figma.svg" download="snakes-and-ladders-figma.svg" style="text-decoration:none;">
+        <button class="download-btn">&#x21E9; Download SVG</button>
+      </a>
+    </div>
+  </header>
+
+  <div id="viewport">
+    <div id="diagram-container">
+      <img src="snakes-and-ladders-figma.svg" alt="Snakes and Ladders Architecture Diagram" id="svg-image" />
+    </div>
+
+    <div class="help-drawer">
+      <h4>🎨 How to import into Figma or FigJam:</h4>
+      <ol>
+        <li>Open your Figma or FigJam project.</li>
+        <li>Drag &amp; drop <strong><code>docs/snakes-and-ladders-figma.svg</code></strong> directly onto the canvas.</li>
+        <li>Figma automatically converts all elements into <strong>4 editable Frames</strong> with proper vectors, text layers, colors, and gradients!</li>
+      </ol>
+    </div>
+
+    <div class="hud" id="zoom-hud">Zoom: 100%</div>
+  </div>
+
+  <script>
+    const viewport = document.getElementById('viewport');
+    const container = document.getElementById('diagram-container');
+    const zoomHud = document.getElementById('zoom-hud');
+
+    let scale = 0.5;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function updateTransform() {
+      container.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomHud.textContent = `Zoom: ${Math.round(scale * 100)}%`;
+    }
+
+    function resetZoom() {
+      const vRect = viewport.getBoundingClientRect();
+      const scaleX = vRect.width / 2840;
+      const scaleY = vRect.height / 2040;
+      scale = Math.min(scaleX, scaleY, 0.7);
+      translateX = (vRect.width - 2800 * scale) / 2;
+      translateY = (vRect.height - 2000 * scale) / 2;
+      updateTransform();
+    }
+
+    function zoomStep(factor) {
+      const vRect = viewport.getBoundingClientRect();
+      const cx = vRect.width / 2;
+      const cy = vRect.height / 2;
+      const newScale = Math.min(Math.max(0.15, scale * factor), 3.0);
+      translateX = cx - (cx - translateX) * (newScale / scale);
+      translateY = cy - (cy - translateY) * (newScale / scale);
+      scale = newScale;
+      updateTransform();
+    }
+
+    function jumpTo(svgX, svgY, targetScale = 0.75) {
+      const vRect = viewport.getBoundingClientRect();
+      scale = targetScale;
+      translateX = vRect.width / 2 - (svgX + 640) * scale;
+      translateY = vRect.height / 2 - (svgY + 425) * scale;
+      updateTransform();
+    }
+
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+      const rect = viewport.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const newScale = Math.min(Math.max(0.15, scale * zoomFactor), 3.0);
+      translateX = mouseX - (mouseX - translateX) * (newScale / scale);
+      translateY = mouseY - (mouseY - translateY) * (newScale / scale);
+      scale = newScale;
+      updateTransform();
+    }, { passive: false });
+
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      viewport.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      viewport.classList.remove('dragging');
+    });
+
+    window.addEventListener('resize', resetZoom);
+    window.addEventListener('load', resetZoom);
+    resetZoom();
+  </script>
+</body>
+</html>
