@@ -4,29 +4,45 @@ import { Users, Wrench, Award, ChevronDown } from "lucide-react";
 import styles from "./Home.module.css";
 import { scrollToSection } from "../utils/scrollToSection";
 
-// Registration closes at midnight on Oct 21, 2026 (i.e. the very end of
-// Oct 21 / start of Oct 22) — the CTA countdown below targets this date.
-const REGISTRATION_DEADLINE = new Date("2026-10-22T00:00:00");
+// Tickets are sold out; the waitlist closes at the end of Oct 19, 2026
+// (midnight, local time). The countdown below targets this moment.
+const WAITLIST_DEADLINE = new Date("2026-10-20T00:00:00");
 
 function useCountdown(target) {
   const getRemaining = () => {
     const diff = target - new Date();
-    if (diff <= 0) return { days: 0, hours: 0, mins: 0 };
+    if (diff <= 0) return { closed: true, hours: 0, mins: 0, secs: 0 };
     return {
-      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      closed: false,
+      hours: Math.floor(diff / (1000 * 60 * 60)),
       mins: Math.floor((diff / (1000 * 60)) % 60),
+      secs: Math.floor((diff / 1000) % 60),
     };
   };
 
   const [remaining, setRemaining] = useState(getRemaining);
 
   useEffect(() => {
-    const id = setInterval(() => setRemaining(getRemaining()), 1000 * 30);
+    const id = setInterval(() => setRemaining(getRemaining()), 1000);
     return () => clearInterval(id);
   }, [target]);
 
   return remaining;
+}
+
+// "Sold out · waitlist closes today" pill with a pulsing dot
+function SoldOutBadge({ closed, className = "" }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-[0.6rem] rounded-full border border-yellow/60 bg-yellow/10 px-[1rem] py-[0.4rem] font-special-gothic font-bold text-yellow tracking-[0.15em] uppercase ${className}`}
+    >
+      <span className="relative flex h-[0.55rem] w-[0.55rem]">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow opacity-70" />
+        <span className="relative inline-flex h-[0.55rem] w-[0.55rem] rounded-full bg-yellow" />
+      </span>
+      {closed ? "Sold out · Waitlist closed" : "Sold out · Waitlist closes today"}
+    </span>
+  );
 }
 
 // Shared 2026 brand assets
@@ -190,7 +206,7 @@ function GalleryGrid({ scale, connectorRem, gapXRem }) {
 }
 
 function Home() {
-  const { days, hours, mins } = useCountdown(REGISTRATION_DEADLINE);
+  const { closed, hours, mins, secs } = useCountdown(WAITLIST_DEADLINE);
 
   // Arriving from another page via a navbar link: scroll to the requested section.
   // (Tried twice because images further up the page can shift the layout as they load.)
@@ -219,14 +235,17 @@ function Home() {
           <p className="font-quicksand font-bold text-pink-light text-[0.95rem] leading-relaxed max-w-[18rem]">
             A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
           </p>
-          <a
-            href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
-            target="_blank"
-            rel="noreferrer"
-            className="bg-yellow text-navy font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem] hover:scale-105 transition-transform duration-300 inline-block"
-          >
-            Register Now
-          </a>
+          <SoldOutBadge closed={closed} className="text-[0.7rem]" />
+          {!closed && (
+            <a
+              href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+              target="_blank"
+              rel="noreferrer"
+              className="bg-yellow text-navy font-quicksand font-bold text-[1rem] rounded-full px-[2rem] py-[0.75rem] hover:scale-105 transition-transform duration-300 inline-block"
+            >
+              Join the Waitlist
+            </a>
+          )}
           <p className="font-quicksand font-bold text-lavender-pale text-[0.8rem] leading-relaxed mt-[0.5rem]">
             Try/CATCH is happening in SFU Burnaby campus on Oct 24th, 2026!
           </p>
@@ -243,14 +262,17 @@ function Home() {
               <p className="font-quicksand font-bold text-pink-light text-[1.6rem] leading-snug">
                 A tech conference for high school girls and non-binary students to learn, connect, and get inspired.
               </p>
-              <a
-                href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
-                target="_blank"
-                rel="noreferrer"
-                className="border-2 border-yellow bg-yellow text-navy font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] hover:scale-105 transition-transform duration-300 inline-block"
-              >
-                Register Now
-              </a>
+              <SoldOutBadge closed={closed} className="text-[0.8rem]" />
+              {!closed && (
+                <a
+                  href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border-2 border-yellow bg-yellow text-navy font-quicksand font-bold text-[1.1rem] rounded-full px-[2.5rem] py-[0.85rem] hover:scale-105 transition-transform duration-300 inline-block"
+                >
+                  Join the Waitlist
+                </a>
+              )}
             </div>
 
             <p className={`${styles.heroDate} font-quicksand font-bold text-pink-light text-left text-[1.35rem] leading-snug`}>
@@ -511,37 +533,43 @@ function Home() {
       {/* COUNTDOWN / REGISTER CTA */}
       <section id="register" className="relative scroll-mt-20 px-[6%] py-[3rem] md:py-[4rem] border-t border-purple-medium/40 flex flex-col items-center text-center gap-[0.75rem]">
         <p className="font-special-gothic font-bold text-yellow text-[1rem] md:text-[1.25rem] tracking-[0.15em] uppercase">
-          Secure your spot
+          Registration is sold out
         </p>
-        <p className="font-quicksand font-bold text-pink-light text-[0.95rem] md:text-[1.1rem]">
-          Registration closes in
+        <p className="font-quicksand font-bold text-pink-light text-[0.95rem] md:text-[1.1rem] max-w-[32rem]">
+          {closed
+            ? "The waitlist is now closed. Thank you for your interest, and we hope to see you next year!"
+            : "All tickets have been claimed, but you can still join the waitlist. It closes in"}
         </p>
 
-        <div className="flex items-start gap-[2rem] md:gap-[3.5rem] mt-[1.5rem] mb-[2rem]">
-          {[
-            { value: days, label: "Days" },
-            { value: hours, label: "Hrs" },
-            { value: mins, label: "Mins" },
-          ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col items-center gap-[0.25rem]">
-              <span className="font-special-gothic font-bold text-lavender-pale text-[2.75rem] md:text-[4rem] leading-none">
-                {String(value).padStart(2, "0")}
-              </span>
-              <span className="font-quicksand font-bold text-yellow text-[0.75rem] md:text-[0.85rem] tracking-[0.1em] uppercase">
-                {label}
-              </span>
-            </div>
-          ))}
-        </div>
+        {!closed && (
+          <div className="flex items-start gap-[1.5rem] md:gap-[3rem] mt-[1.5rem] mb-[2rem]">
+            {[
+              { value: hours, label: "Hrs" },
+              { value: mins, label: "Mins" },
+              { value: secs, label: "Secs" },
+            ].map(({ value, label }) => (
+              <div key={label} className="flex flex-col items-center gap-[0.25rem]">
+                <span className="font-special-gothic font-bold text-lavender-pale text-[2.75rem] md:text-[4rem] leading-none tabular-nums">
+                  {String(value).padStart(2, "0")}
+                </span>
+                <span className="font-quicksand font-bold text-yellow text-[0.75rem] md:text-[0.85rem] tracking-[0.1em] uppercase">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
-        <a
-          href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
-          target="_blank"
-          rel="noreferrer"
-          className="bg-yellow text-navy font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] hover:scale-105 transition-transform duration-300 inline-block"
-        >
-          Register Now
-        </a>
+        {!closed && (
+          <a
+            href="https://www.eventbrite.ca/e/trycatch-2026-tickets-2002098832503?aff=oddtdtcreator"
+            target="_blank"
+            rel="noreferrer"
+            className="bg-yellow text-navy font-quicksand font-bold text-[1.1rem] md:text-[1.25rem] rounded-[0.75rem] px-[2.5rem] py-[0.9rem] hover:scale-105 transition-transform duration-300 inline-block"
+          >
+            Join the Waitlist
+          </a>
+        )}
       </section>
     </div>
   );
