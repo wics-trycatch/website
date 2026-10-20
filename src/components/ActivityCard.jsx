@@ -39,6 +39,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
   const needsText = activity.proof === 'text' || activity.proof === 'both';
   const needsPhoto = activity.proof === 'photo' || activity.proof === 'both';
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => (needsText ? inputRef.current : card.current)?.focus(), []);
 
   const tag = final
@@ -71,6 +72,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
     onDone({
       text: needsText ? answer : '[see photo]',
       photoDataUrl: needsPhoto ? photo : null,
+      ok: true,
     });
   };
 
@@ -122,7 +124,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
 
             <div className="sl-actions">
               <button type="submit" className="sl-btn sl-btn-primary" disabled={!canSubmit}>
-                {final ? 'I found it! 🏆' : 'Mark as done ✅'}
+                {final ? 'Finished! 🏆' : 'Mark as done ✅'}
               </button>
             </div>
           </form>
@@ -137,7 +139,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
                 : 'Onward.'}
             </p>
             <button type="button" className="sl-btn sl-btn-primary" autoFocus onClick={finish}>
-              Continue
+              {final ? 'Finished!' : 'Continue'}
             </button>
           </div>
         )}

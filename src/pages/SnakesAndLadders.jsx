@@ -6,7 +6,7 @@ import { parseBoard } from '../utils/parseBoard';
 import { submitEntry } from '../utils/submitEntry';
 import { assignSquares } from '../utils/pickGame';
 import { loadProgress, saveProgress, clearProgress } from '../utils/gameProgress';
-import { POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
+import { POOL, POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
 import ActivityCard from '../components/ActivityCard';
 import McqCard from '../components/McqCard';
 import CodeChallenge from '../components/CodeChallenge';
@@ -107,6 +107,10 @@ export default function SnakesAndLadders({ onClose }) {
   const asks = useRef(0);
   const turning = useRef(false); // synchronous guard: state updates can lag behind a fast double tap
   const seen = useRef([]); // snake challenges already shown this game
+  const usedItemIds = useRef(new Set()); // items already asked/completed this game to prevent repetition
+  const contentRef = useRef(null);
+  useEffect(() => { contentRef.current = content; }, [content]);
+
   const root = useRef(null);
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = onClose; });
@@ -136,13 +140,66 @@ export default function SnakesAndLadders({ onClose }) {
   }, []);
 
   const itemFor = (square) => {
-    const id = content?.[square];
+    let id = (contentRef.current || content)?.[square];
+    if (id === 'task-workshop-question') id = 'task-dream-project';
     return id ? POOL_BY_ID.get(id) : null;
+  };
+
+  const persist = (overridePos, overrideRolls, overrideContent) => {
+    if (!name || won) return;
+    saveProgress(name, {
+      pos: overridePos ?? pos,
+      rolls: overrideRolls ?? rolls,
+      contentIds: overrideContent ?? contentRef.current ?? content,
+      usedItemIds: Array.from(usedItemIds.current),
+    });
+  };
+
+  const pickFreshItem = (kind) => {
+    const usedIds = new Set([
+      ...usedItemIds.current,
+      ...Object.values(contentRef.current || content || {}),
+    ]);
+    // 1. Same kind, completely unused across usedItemIds and current board
+    let candidates = POOL.filter(
+      (item) => item.kind === kind && !usedIds.has(item.id) && item.tier !== 'finale'
+    );
+    if (candidates.length) {
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+    // 2. Same kind, not yet in usedItemIds
+    candidates = POOL.filter(
+      (item) => item.kind === kind && !usedItemIds.current.has(item.id) && item.tier !== 'finale'
+    );
+    if (candidates.length) {
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+    // 3. Any item not yet in usedItemIds
+    candidates = POOL.filter(
+      (item) => !usedItemIds.current.has(item.id) && item.tier !== 'finale'
+    );
+    if (candidates.length) {
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+    // 4. Fallback: any item of same kind (except finale)
+    candidates = POOL.filter((item) => item.kind === kind && item.tier !== 'finale');
+    return candidates[Math.floor(Math.random() * candidates.length)] || null;
+  };
+
+  const replaceSquareItem = (square, kind) => {
+    const newItem = pickFreshItem(kind);
+    if (!newItem) return;
+    const nextContent = { ...(contentRef.current || content), [square]: newItem.id };
+    contentRef.current = nextContent;
+    setContent(nextContent);
+    persist(pos, rolls, nextContent);
   };
 
   const warmUp = () => {
     const item = itemFor(1);
     if (!item) return;
+    usedItemIds.current.add(item.id);
+    persist();
     setModal({
       type: item.kind,
       square: 1,
@@ -164,10 +221,16 @@ export default function SnakesAndLadders({ onClose }) {
     const saved = loadProgress(name);
     if (saved?.contentIds) {
       setContent(saved.contentIds);
+      contentRef.current = saved.contentIds;
       setPos(saved.pos ?? 1);
       setRolls(saved.rolls ?? 0);
+      if (saved.usedItemIds) {
+        usedItemIds.current = new Set(saved.usedItemIds);
+      }
     } else {
-      setContent(assignSquares(board));
+      const initial = assignSquares(board);
+      setContent(initial);
+      contentRef.current = initial;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
@@ -182,7 +245,8 @@ export default function SnakesAndLadders({ onClose }) {
   // Keep progress saved as the game goes, so leaving and coming back resumes.
   useEffect(() => {
     if (!name || !content || won) return;
-    saveProgress(name, { pos, rolls, contentIds: content });
+    persist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, content, pos, rolls, won]);
 
   const submitName = (n) => {
@@ -216,6 +280,7 @@ export default function SnakesAndLadders({ onClose }) {
     run.current += 1;
     turning.current = false;
     seen.current = [];
+    usedItemIds.current = new Set();
     setTravel((t) => ({ mode: 'slide', n: t.n + 1 }));
     setPos(1);
     setRolls(0);
@@ -224,7 +289,9 @@ export default function SnakesAndLadders({ onClose }) {
     setBusy(false);
     setToast('');
     setModal(null);
-    setContent(assignSquares(board)); // triggers the warm-up via the effect above
+    const fresh = assignSquares(board);
+    contentRef.current = fresh;
+    setContent(fresh); // triggers the warm-up via the effect above
   };
 
   const takeTurn = async () => {
@@ -240,6 +307,7 @@ export default function SnakesAndLadders({ onClose }) {
       }).then((value) => { live(); return value; });
 
     let at = pos;
+
     const move = async (to, mode) => {
       at = to;
       setTravel((t) => ({ mode, n: t.n + 1 }));
@@ -248,28 +316,39 @@ export default function SnakesAndLadders({ onClose }) {
     };
 
     const doSquare = async (square, extra) => {
-      const item = itemFor(square);
-      if (!item) return;
+      let item = itemFor(square);
+      if (!item) return null;
+      // If this item was already used elsewhere this game, substitute a fresh uncompleted one
+      if (usedItemIds.current.has(item.id)) {
+        const fresh = pickFreshItem(item.kind);
+        if (fresh) {
+          item = fresh;
+          replaceSquareItem(square, item.kind);
+        }
+      }
+      usedItemIds.current.add(item.id);
+      persist();
+
       const raw = await ask({ type: item.kind, square, item, activity: item, ...extra });
-      // ActivityCard (kind: 'task') hands back { text, photoDataUrl }; McqCard hands back a plain string.
-      const { text: answer, photoDataUrl } = typeof raw === 'object' && raw !== null ? raw : { text: raw, photoDataUrl: null };
+      // ActivityCard hands back { text, photoDataUrl, ok: true }; McqCard hands back { text, ok }.
+      const { text: answer, photoDataUrl, ok = true } =
+        typeof raw === 'object' && raw !== null ? raw : { text: raw, photoDataUrl: null, ok: true };
       submitEntry({
         name,
         square,
         activity: item.title ?? item.q,
         answer,
         photoDataUrl,
-        result: extra?.final ? 'WINNER' : 'done',
+        result: extra?.final ? 'WINNER' : ok ? 'done' : `incorrect - returned to square ${extra?.fromSquare ?? 'start'}`,
       });
-      return answer;
+      return { answer, ok, item };
     };
 
     // What happens when the rocket lands on `square`
     const land = async (square) => {
       const tail = board.snakes[square];
       if (tail) {
-        // Snake: trivia challenge. Right = stay and still do that square's
-        // item. Wrong = slide to the tail and land there instead.
+        // Snake: trivia challenge. Right = stay. Wrong = slide to the tail.
         const flavor = ['wics', 'event', 'history'][Math.floor(Math.random() * 3)];
         const challenge = nextChallenge(flavor);
         const ok = await ask({ type: 'code', square, tail, challenge });
@@ -281,13 +360,14 @@ export default function SnakesAndLadders({ onClose }) {
           result: ok ? 'escaped snake' : `bit by snake - slid to ${tail}`,
         });
         if (ok) {
-          setToast(`The snake lets go. You stay on square ${square}.`);
-          await doSquare(square);
+          setToast(`The snake lets go! You stay on square ${square}.`);
           return;
         }
         setToast(`Sliding down to square ${tail}…`);
         await sleep(500);
         await move(tail, 'slide');
+        setToast(`Slid down to square ${tail}!`);
+        // Ask a question for the number landed on after sliding down
         return land(tail);
       }
 
@@ -305,11 +385,31 @@ export default function SnakesAndLadders({ onClose }) {
         setToast(`Up the ladder to square ${top}!`);
         await sleep(450);
         await move(top, 'slide');
-        if (top === board.last) { setWon(true); return; }
+        if (top === board.last) {
+          await doSquare(top, { final: true });
+          if (name) clearProgress(name);
+          setWon(true);
+          return;
+        }
         return land(top);
       }
 
-      await doSquare(square);
+      const backSquare = Math.max(1, square - 1);
+      const res = await doSquare(square, { fromSquare: backSquare });
+      if (!res) return;
+
+      if (res.ok) {
+        setToast(`Square ${square} completed!`);
+      } else {
+        // Player got the question wrong!
+        // Replace this square's question with a fresh unused question from POOL
+        replaceSquareItem(square, res.item.kind);
+        // Move back ONE square no matter whatever was rolled
+        setToast(`Not quite! Moving back to square ${backSquare}…`);
+        await sleep(600);
+        await move(backSquare, 'slide');
+        setToast(`Back on square ${backSquare}. Tap the dice to roll again!`);
+      }
     };
 
     try {
