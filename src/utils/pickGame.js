@@ -3,7 +3,7 @@ import { POOL, shuffle } from '../data/questions';
 const MAX_MCQ = 2; // keep trivia as the minority — most squares should be real in-person tasks
 
 // Builds a fresh square -> item assignment for a board: every square gets
-// something from POOL except snake squares (those get a snake trivia challenge
+// a unique item from POOL except snake squares (those get a snake trivia challenge
 // instead), ladder base squares (climbed straight through — no time to do
 // anything there, so the item goes to the square at the top instead), and
 // the last square (always a 'finale' task). At least 2 'bold' tasks are
@@ -26,14 +26,11 @@ export function assignSquares(board) {
   const cappedMcq = mcq.slice(0, Math.min(MAX_MCQ, remainingAfterBold));
   const remainingAfterMcq = remainingAfterBold - cappedMcq.length;
 
-  // If there are more slots left than distinct easy/social tasks, repeat
-  // from a re-shuffled copy rather than reusing the same handful in the
-  // same order every time.
-  let taskFiller = [];
-  while (taskFiller.length < remainingAfterMcq) {
-    taskFiller = taskFiller.concat(shuffle(tasks));
+  let taskFiller = tasks.slice(0, remainingAfterMcq);
+  if (taskFiller.length < remainingAfterMcq) {
+    const fallback = shuffle(POOL.filter((item) => item.tier !== 'finale' && !guaranteedBold.includes(item) && !cappedMcq.includes(item)));
+    taskFiller = fallback.slice(0, remainingAfterMcq);
   }
-  taskFiller = taskFiller.slice(0, remainingAfterMcq);
 
   const chosen = shuffle([...guaranteedBold, ...cappedMcq, ...taskFiller]);
 
