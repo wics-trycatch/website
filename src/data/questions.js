@@ -350,12 +350,17 @@ export const CODE_CHALLENGES = [
     options: ['Hack the Basics', 'Pottery Studio', 'Cooking Class', 'Yoga Flow'],
     answer: 0,
   },
-  {
-    id: 'snake-sponsor',
-    topic: 'sponsor',
+    {
+    id: 'snake-catch-meaning',
+    topic: 'catch-acronym',
     flavor: 'event',
-    prompt: 'Which of these companies is a Try/CATCH 2026 sponsor?',
-    options: ['Teck', 'Netflix', 'Spotify', 'Nintendo'],
+    prompt: 'In Try/CATCH, what does the "CATCH" acronym stand for?',
+    options: [
+      'Computing and Technology Conference for Her',
+      'Coding and Tech Club Hub',
+      'Computer Algorithms Training Centre for High-schoolers',
+      'Creative Applied Tech and Computing Hackathon',
+    ],
     answer: 0,
   },
 ];
