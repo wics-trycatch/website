@@ -1,6 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
-
-const SnakesAndLadders = lazy(() => import("../pages/SnakesAndLadders.jsx"));
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
@@ -36,23 +34,9 @@ function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [openDropdown, setOpenDropdown] = useState(null); // "about" | "event" | null
-  const [playing, setPlaying] = useState(false);
   const lastScrollY = useRef(0);
-  const { pathname, search, hash } = useLocation();
+  const { pathname } = useLocation();
   const closeMenu = () => setHamburgerOpen(false);
-
-  // Allow testing without enabling the public navbar button:
-  // Navigate to /?play or /#play, or run window.openGame() in devtools console
-  useEffect(() => {
-    if (new URLSearchParams(search).has('play') || hash === '#play') {
-      setPlaying(true);
-    }
-  }, [search, hash]);
-
-  useEffect(() => {
-    window.openGame = () => setPlaying(true);
-    return () => { delete window.openGame; };
-  }, []);
 
   // Only one desktop dropdown open at a time. onBlur only closes if focus
   // actually left the li (not just moved to a link inside its own menu) —
@@ -161,10 +145,8 @@ function Navbar() {
           <Link to="/sponsors">Sponsors</Link>
         </li>
 
-        <li role="none">
-          <button type="button" role="menuitem" onClick={() => setPlaying(true)}>
-            Play
-          </button>
+        <li role="menuitem" tabIndex="0">
+          <Link to="/play">Play</Link>
         </li>
 
         <li role="menuitem" tabIndex="0">
@@ -226,9 +208,7 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
-              <button type="button" onClick={() => { setHamburgerOpen(false); setPlaying(true); }}>
-                Play
-              </button>
+              <Link to="/play" onClick={() => setHamburgerOpen(false)}>Play</Link>
             </li>
             <li>
               <SectionLink
@@ -242,11 +222,6 @@ function Navbar() {
             </li>
           </ul>
         </div>
-      )}
-      {playing && (
-        <Suspense fallback={null}>
-          <SnakesAndLadders onClose={() => setPlaying(false)} />
-        </Suspense>
       )}
     </nav>
   );

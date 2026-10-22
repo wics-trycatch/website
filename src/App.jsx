@@ -1,5 +1,5 @@
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
 
 import NavbarWrapper from "./components/NavbarWrapper.jsx";
 import Footer from './components/Footer.jsx';
@@ -11,6 +11,7 @@ import OurTeam from './pages/OurTeam.jsx';
 import Speakers from './pages/Speakers.jsx';
 import Workshops from './pages/Workshops.jsx';
 import Sponsors from './pages/Sponsors.jsx';
+const SnakesAndLadders = lazy(() => import('./pages/SnakesAndLadders.jsx'));
 import { useFaviconEyeTracking } from './utils/useFaviconEyeTracking.js';
 
 // Component to scroll to top on route change
@@ -22,6 +23,17 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
+}
+
+// The game lives at its own URL (/#/play) so it can be linked to directly.
+// It renders as a full-screen overlay; closing it goes back to the home page.
+function PlayPage() {
+  const navigate = useNavigate();
+  return (
+    <Suspense fallback={null}>
+      <SnakesAndLadders onClose={() => navigate('/')} />
+    </Suspense>
+  );
 }
 
 function App() {
@@ -41,6 +53,7 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/sponsors" element={<Sponsors />} />
+          <Route path="/play" element={<PlayPage />} />
         </Routes>
         <Footer />
     </div>
