@@ -5,7 +5,7 @@ import mobileSvg from '../assets_26/images/shared/snakes-and-ladders-mobile.svg?
 import { parseBoard } from '../utils/parseBoard';
 import { submitEntry } from '../utils/submitEntry';
 import { assignSquares } from '../utils/pickGame';
-import { loadProgress, saveProgress, clearProgress } from '../utils/gameProgress';
+import { loadProgress, saveProgress, clearProgress, fetchRemoteProgress } from '../utils/gameProgress';
 import { POOL, POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
 import ActivityCard from '../components/ActivityCard';
 import McqCard from '../components/McqCard';
@@ -107,6 +107,8 @@ export default function SnakesAndLadders({ onClose }) {
   const asks = useRef(0);
   const turning = useRef(false); // synchronous guard: state updates can lag behind a fast double tap
   const seen = useRef([]); // snake challenges already shown this game
+  const pending = useRef(null); // square whose card is up but not finished yet (so closing the game can't skip it)
+  const resumeSquare = useRef(null); // set when a saved game had an unfinished card to re-show
   const usedItemIds = useRef(new Set()); // items already asked/completed this game to prevent repetition
   const contentRef = useRef(null);
   useEffect(() => { contentRef.current = content; }, [content]);
@@ -152,47 +154,57 @@ export default function SnakesAndLadders({ onClose }) {
       rolls: overrideRolls ?? rolls,
       contentIds: overrideContent ?? contentRef.current ?? content,
       usedItemIds: Array.from(usedItemIds.current),
+      seenSnakeIds: seen.current,
+      pending: pending.current,
     });
   };
 
+  // Topics (the fact a question is about) already asked, or sitting on the
+  // board waiting to be asked. Used so the regular and snake pools never show
+  // two questions about the same thing in one game.
+  const blockedTopics = () => {
+    const topics = new Set();
+    const addItem = (id) => { const t = POOL_BY_ID.get(id)?.topic; if (t) topics.add(t); };
+    usedItemIds.current.forEach(addItem);
+    Object.values(contentRef.current || content || {}).forEach(addItem);
+    seen.current.forEach((id) => { const t = CODE_CHALLENGES.find((c) => c.id === id)?.topic; if (t) topics.add(t); });
+    return topics;
+  };
+
+  // A fresh item of `kind` that hasn't been asked or assigned yet and doesn't
+  // repeat a topic already covered. If the pool for that kind runs dry it
+  // falls back to other unused items (e.g. a task instead of a 6th MCQ) before
+  // ever repeating anything.
   const pickFreshItem = (kind) => {
     const usedIds = new Set([
       ...usedItemIds.current,
       ...Object.values(contentRef.current || content || {}),
     ]);
-    // 1. Same kind, completely unused across usedItemIds and current board
-    let candidates = POOL.filter(
-      (item) => item.kind === kind && !usedIds.has(item.id) && item.tier !== 'finale'
+    const blocked = blockedTopics();
+    const topicOk = (item) => !(item.topic && blocked.has(item.topic));
+    const pickFrom = (list) => (list.length ? list[Math.floor(Math.random() * list.length)] : null);
+    const regular = POOL.filter((item) => item.tier !== 'finale');
+
+    return (
+      pickFrom(regular.filter((i) => i.kind === kind && !usedIds.has(i.id) && topicOk(i))) ||
+      pickFrom(regular.filter((i) => i.kind === kind && !usedItemIds.current.has(i.id) && topicOk(i))) ||
+      pickFrom(regular.filter((i) => !usedIds.has(i.id) && topicOk(i))) ||
+      pickFrom(regular.filter((i) => !usedItemIds.current.has(i.id) && topicOk(i))) ||
+      pickFrom(regular.filter((i) => i.kind === kind && !usedItemIds.current.has(i.id))) ||
+      pickFrom(regular.filter((i) => i.kind === kind))
     );
-    if (candidates.length) {
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    }
-    // 2. Same kind, not yet in usedItemIds
-    candidates = POOL.filter(
-      (item) => item.kind === kind && !usedItemIds.current.has(item.id) && item.tier !== 'finale'
-    );
-    if (candidates.length) {
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    }
-    // 3. Any item not yet in usedItemIds
-    candidates = POOL.filter(
-      (item) => !usedItemIds.current.has(item.id) && item.tier !== 'finale'
-    );
-    if (candidates.length) {
-      return candidates[Math.floor(Math.random() * candidates.length)];
-    }
-    // 4. Fallback: any item of same kind (except finale)
-    candidates = POOL.filter((item) => item.kind === kind && item.tier !== 'finale');
-    return candidates[Math.floor(Math.random() * candidates.length)] || null;
+  };
+
+  const setSquareItem = (square, item) => {
+    const nextContent = { ...(contentRef.current || content), [square]: item.id };
+    contentRef.current = nextContent;
+    setContent(nextContent);
+    persist(pos, rolls, nextContent);
   };
 
   const replaceSquareItem = (square, kind) => {
     const newItem = pickFreshItem(kind);
-    if (!newItem) return;
-    const nextContent = { ...(contentRef.current || content), [square]: newItem.id };
-    contentRef.current = nextContent;
-    setContent(nextContent);
-    persist(pos, rolls, nextContent);
+    if (newItem) setSquareItem(square, newItem);
   };
 
   const warmUp = () => {
@@ -218,26 +230,57 @@ export default function SnakesAndLadders({ onClose }) {
   // any, otherwise start a fresh game (new random square assignment).
   useEffect(() => {
     if (!name || content) return;
-    const saved = loadProgress(name);
-    if (saved?.contentIds) {
-      setContent(saved.contentIds);
-      contentRef.current = saved.contentIds;
-      setPos(saved.pos ?? 1);
-      setRolls(saved.rolls ?? 0);
-      if (saved.usedItemIds) {
-        usedItemIds.current = new Set(saved.usedItemIds);
+    let cancelled = false;
+
+    // A saved game is only usable if it was built from the current question
+    // set and fits this board (the phone and desktop boards can differ).
+    const usable = (s) =>
+      s?.contentIds &&
+      Object.values(s.contentIds).every((id) => POOL_BY_ID.has(id)) &&
+      Object.keys(s.contentIds).every((sq) => Number(sq) <= board.last) &&
+      s.contentIds[board.last] &&
+      (s.pos ?? 1) <= board.last;
+
+    (async () => {
+      // Check this device AND the server (so typing your name on another
+      // phone/browser picks up where you left off); newest save wins.
+      setToast('Looking for your saved game…');
+      const local = loadProgress(name);
+      const remote = await fetchRemoteProgress(name);
+      if (cancelled) return;
+      setToast('');
+      const candidates = [local, remote].filter(usable);
+      const saved = candidates.sort((a, b) => (b.savedAt ?? 0) - (a.savedAt ?? 0))[0];
+
+      if (saved) {
+        setContent(saved.contentIds);
+        contentRef.current = saved.contentIds;
+        setPos(saved.pos ?? 1);
+        setRolls(saved.rolls ?? 0);
+        if (saved.usedItemIds) usedItemIds.current = new Set(saved.usedItemIds);
+        seen.current = Array.isArray(saved.seenSnakeIds) ? saved.seenSnakeIds : [];
+        // They closed the game while a card was up: show that same card again
+        resumeSquare.current = Number.isInteger(saved.pending) && saved.pending > 1 ? saved.pending : null;
+      } else {
+        const initial = assignSquares(board);
+        setContent(initial);
+        contentRef.current = initial;
       }
-    } else {
-      const initial = assignSquares(board);
-      setContent(initial);
-      contentRef.current = initial;
-    }
+    })();
+
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name]);
 
   // Whenever a game's square assignment is (re)computed — fresh game, resumed
   // game, or restart — show the square-1 warm-up if they haven't moved yet.
   useEffect(() => {
+    if (resumeSquare.current && name && content && !modal && !won) {
+      const sq = resumeSquare.current;
+      resumeSquare.current = null;
+      takeTurn(sq);
+      return;
+    }
     if (name && content && !modal && pos === 1 && rolls === 0 && !won) warmUp();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
@@ -265,13 +308,24 @@ export default function SnakesAndLadders({ onClose }) {
     return () => clearTimeout(t);
   }, [toast]);
 
+  // Picks a snake question: unseen, in the requested theme if possible, and
+  // about a topic that hasn't come up yet (including MCQs on the board).
+  // Only if everything is exhausted does it start repeating.
   const nextChallenge = (flavor) => {
-    let pool = CODE_CHALLENGES.filter((c) => c.flavor === flavor && !seen.current.includes(c.id));
-    if (!pool.length) {
-      seen.current = seen.current.filter((id) => !CODE_CHALLENGES.some((c) => c.id === id && c.flavor === flavor));
-      pool = CODE_CHALLENGES.filter((c) => c.flavor === flavor);
+    const blocked = blockedTopics();
+    const fresh = (c) => !seen.current.includes(c.id);
+    const topicOk = (c) => !(c.topic && blocked.has(c.topic));
+    const pickFrom = (list) => (list.length ? list[Math.floor(Math.random() * list.length)] : null);
+
+    let pick =
+      pickFrom(CODE_CHALLENGES.filter((c) => c.flavor === flavor && fresh(c) && topicOk(c))) ||
+      pickFrom(CODE_CHALLENGES.filter((c) => fresh(c) && topicOk(c))) ||
+      pickFrom(CODE_CHALLENGES.filter((c) => c.flavor === flavor && fresh(c))) ||
+      pickFrom(CODE_CHALLENGES.filter(fresh));
+    if (!pick) {
+      seen.current = [];
+      pick = pickFrom(CODE_CHALLENGES);
     }
-    const pick = pool[Math.floor(Math.random() * pool.length)];
     seen.current.push(pick.id);
     return pick;
   };
@@ -280,6 +334,8 @@ export default function SnakesAndLadders({ onClose }) {
     run.current += 1;
     turning.current = false;
     seen.current = [];
+    pending.current = null;
+    resumeSquare.current = null;
     usedItemIds.current = new Set();
     setTravel((t) => ({ mode: 'slide', n: t.n + 1 }));
     setPos(1);
@@ -294,7 +350,8 @@ export default function SnakesAndLadders({ onClose }) {
     setContent(fresh); // triggers the warm-up via the effect above
   };
 
-  const takeTurn = async () => {
+  // `resumeAt` (a square number) re-opens an unfinished card instead of rolling.
+  const takeTurn = async (resumeAt) => {
     if (busy || won || modal || turning.current || !content) return;
     turning.current = true;
     const id = run.current;
@@ -306,7 +363,9 @@ export default function SnakesAndLadders({ onClose }) {
         setModal({ ...props, id: ++asks.current, onDone: (value) => { setModal(null); resolve(value); } });
       }).then((value) => { live(); return value; });
 
-    let at = pos;
+    const resuming = Number.isInteger(resumeAt);
+    let at = resuming ? resumeAt : pos;
+    let reuseAt = resuming ? resumeAt : null; // the unfinished card should come back as the SAME item
 
     const move = async (to, mode) => {
       at = to;
@@ -319,11 +378,13 @@ export default function SnakesAndLadders({ onClose }) {
       let item = itemFor(square);
       if (!item) return null;
       // If this item was already used elsewhere this game, substitute a fresh uncompleted one
-      if (usedItemIds.current.has(item.id)) {
+      const reusing = reuseAt === square;
+      reuseAt = null;
+      if (usedItemIds.current.has(item.id) && !reusing) {
         const fresh = pickFreshItem(item.kind);
         if (fresh) {
           item = fresh;
-          replaceSquareItem(square, item.kind);
+          setSquareItem(square, fresh);
         }
       }
       usedItemIds.current.add(item.id);
@@ -349,9 +410,12 @@ export default function SnakesAndLadders({ onClose }) {
       const tail = board.snakes[square];
       if (tail) {
         // Snake: trivia challenge. Right = stay. Wrong = slide to the tail.
-        const flavor = ['wics', 'event', 'history'][Math.floor(Math.random() * 3)];
+        const flavor = ['wics', 'event'][Math.floor(Math.random() * 2)];
         const challenge = nextChallenge(flavor);
+        pending.current = square; // if they close the game now, this snake is re-shown on return
+        persist();
         const ok = await ask({ type: 'code', square, tail, challenge });
+        pending.current = null;
         submitEntry({
           name,
           square,
@@ -372,7 +436,9 @@ export default function SnakesAndLadders({ onClose }) {
       }
 
       if (square === board.last) {
+        pending.current = square;
         await doSquare(square, { final: true });
+        pending.current = null;
         if (name) clearProgress(name); // they're done — a re-open should start fresh, not "resume" a finished game
         return setWon(true);
       }
@@ -386,7 +452,9 @@ export default function SnakesAndLadders({ onClose }) {
         await sleep(450);
         await move(top, 'slide');
         if (top === board.last) {
+          pending.current = top;
           await doSquare(top, { final: true });
+          pending.current = null;
           if (name) clearProgress(name);
           setWon(true);
           return;
@@ -395,7 +463,9 @@ export default function SnakesAndLadders({ onClose }) {
       }
 
       const backSquare = Math.max(1, square - 1);
+      pending.current = square;
       const res = await doSquare(square, { fromSquare: backSquare });
+      pending.current = null;
       if (!res) return;
 
       if (res.ok) {
@@ -415,6 +485,11 @@ export default function SnakesAndLadders({ onClose }) {
     try {
       setBusy(true);
       setToast('');
+      if (resuming) {
+        setToast('Welcome back! Finish this one to keep going.');
+        await land(at);
+        return;
+      }
       setRolls((n) => n + 1);
 
       let value = 1;

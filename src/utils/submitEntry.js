@@ -11,7 +11,7 @@
 // Until then, entries are just logged to the console so nothing breaks —
 // the game still plays fine without it.
 
-const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbz9-ICkpgUd_lp6UK2zYA6w7QnTXYU8jEeo_rwQA9b8IGKB6Ulllfel5I9-pq9SSS_EQg/exec';
+export const WEBAPP_URL ='https://script.google.com/macros/s/AKfycbz9-ICkpgUd_lp6UK2zYA6w7QnTXYU8jEeo_rwQA9b8IGKB6Ulllfel5I9-pq9SSS_EQg/exec';
 
 export function submitEntry({ name, square, activity, answer, photoDataUrl, result }) {
   // eslint-disable-next-line no-console

@@ -161,16 +161,8 @@ function Navbar() {
           <Link to="/sponsors">Sponsors</Link>
         </li>
 
-        {/* Game temporarily disabled — flip disabled to false (and restore
-            the onClick) to turn it back on. */}
         <li role="none">
-          <button
-            type="button"
-            role="menuitem"
-            aria-disabled="true"
-            className="cursor-not-allowed opacity-50 select-none"
-            onClick={(e) => e.preventDefault()}
-          >
+          <button type="button" role="menuitem" onClick={() => setPlaying(true)}>
             Play
           </button>
         </li>
@@ -234,7 +226,7 @@ function Navbar() {
               <Link to="/sponsors" onClick={() => setHamburgerOpen(false)}>Sponsors</Link>
             </li>
             <li>
-              <button type="button" aria-disabled="true" className="cursor-not-allowed opacity-50 select-none" onClick={(e) => e.preventDefault()}>
+              <button type="button" onClick={() => { setHamburgerOpen(false); setPlaying(true); }}>
                 Play
               </button>
             </li>

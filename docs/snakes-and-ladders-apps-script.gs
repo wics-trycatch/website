@@ -148,8 +148,79 @@ function logError(where, err, e) {
   }
 }
 
+// ---- Cross-device resume --------------------------------------------------
+// The game saves each player's board progress (a small JSON blob) in a "State"
+// tab keyed by normalized name (trimmed, lowercased, collapsed whitespace), so
+// typing the same name on any device picks the game back up.
+const STATE_SHEET_NAME = 'State';
+
+function getStateSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(STATE_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(STATE_SHEET_NAME);
+    sheet.appendRow(['Name (normalized)', 'State JSON', 'Updated']);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function findStateRow(sheet, key) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return -1;
+  const keys = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+  for (let i = 0; i < keys.length; i++) {
+    if (normalizeName(keys[i][0]) === key) return i + 2;
+  }
+  return -1;
+}
+
+// GET ?action=load&name=... -> { ok, state } (state is null if none saved)
+function doGet(e) {
+  let state = null;
+  try {
+    const key = normalizeName(e && e.parameter && e.parameter.name);
+    if (e && e.parameter && e.parameter.action === 'load' && key) {
+      const sheet = getStateSheet();
+      const row = findStateRow(sheet, key);
+      if (row !== -1) {
+        const raw = sheet.getRange(row, 2).getValue();
+        if (raw) state = JSON.parse(raw);
+      }
+    }
+  } catch (err) {
+    logError('doGet', err, e);
+  }
+  return ContentService.createTextOutput(JSON.stringify({ ok: true, state: state })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function saveState(data) {
+  const key = normalizeName(data.name);
+  if (!key) return;
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = getStateSheet();
+    let row = findStateRow(sheet, key);
+    if (row === -1) {
+      sheet.appendRow([key, '', '']);
+      row = sheet.getLastRow();
+    }
+    // state === null means "game finished / cleared"
+    sheet.getRange(row, 2).setValue(data.state ? JSON.stringify(data.state) : '');
+    sheet.getRange(row, 3).setValue(new Date());
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function handleSubmission(e) {
   const data = JSON.parse(e.postData.contents);
+  if (data.type === 'saveState') {
+    saveState(data);
+    return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
+  }
+
   const sheet = getSheet();
   const name = String(data.name || '').trim();
   if (!name) {
@@ -164,9 +235,15 @@ function handleSubmission(e) {
     row = sheet.getLastRow();
   }
 
+  // Once someone is marked WINNER, never downgrade the status or bump the
+  // timestamp (winners are decided by finish time, and a finished player who
+  // re-enters their name shouldn't change it).
   const isWinner = data.result === 'WINNER';
-  sheet.getRange(row, STATUS_COL).setValue(isWinner ? 'WINNER 🏆' : 'In progress');
-  sheet.getRange(row, UPDATED_COL).setValue(new Date());
+  const alreadyWinner = String(sheet.getRange(row, STATUS_COL).getValue()).indexOf('WINNER') !== -1;
+  if (!alreadyWinner) {
+    sheet.getRange(row, STATUS_COL).setValue(isWinner ? 'WINNER 🏆' : 'In progress');
+    sheet.getRange(row, UPDATED_COL).setValue(new Date());
+  }
 
   const cellText = data.activity ? `${data.activity}${data.answer ? ' — ' + data.answer : ''}` : (data.answer || '');
   const colIndex = squareColumnIndex(data.square);
