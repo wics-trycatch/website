@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Check, X } from 'lucide-react';
 import { shuffle, SNAKE_FLAVORS } from '../data/questions';
 import { Inline } from './QuestionCard';
 
@@ -8,7 +9,7 @@ export default function CodeChallenge({ challenge, square, tail, onDone }) {
   const card = useRef(null);
   useEffect(() => card.current?.focus(), []);
 
-  const flavor = SNAKE_FLAVORS[challenge.flavor] ?? { emoji: '🐍', label: 'Snake Encounter!' };
+  const flavor = SNAKE_FLAVORS[challenge.flavor] ?? { label: 'Snake Encounter!' };
   const answered = picked !== null;
   const ok = answered && options[picked].ok;
   const right = options.find((o) => o.ok).text;
@@ -32,7 +33,7 @@ export default function CodeChallenge({ challenge, square, tail, onDone }) {
         aria-label={`Snake challenge on square ${square}`}
       >
         <div className="sl-tag sl-tag-snake">
-          {flavor.emoji} {flavor.label} · Answer correctly to stay put!
+          {flavor.label} · Answer correctly to stay put!
         </div>
         <h2 className="sl-q"><Inline text={challenge.prompt} /></h2>
 
@@ -58,9 +59,9 @@ export default function CodeChallenge({ challenge, square, tail, onDone }) {
           <div className={`sl-feedback ${ok ? 'good' : 'bad'}`} role="status">
             <p>
               {ok ? (
-                <><strong>✓ Escaped!</strong> The snake lets you pass and you stay on square {square}.</>
+                <><strong><Check size={16} aria-hidden="true" /> Escaped!</strong> The snake lets you pass and you stay on square {square}.</>
               ) : (
-                <><strong>✗ Caught!</strong> The correct answer was <Inline text={right} />. You slide down to square {tail}.</>
+                <><strong><X size={16} aria-hidden="true" /> Caught!</strong> The correct answer was <Inline text={right} />. You slide down to square {tail}.</>
               )}
             </p>
             <button

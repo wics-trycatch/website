@@ -6,6 +6,7 @@ import { parseBoard } from '../utils/parseBoard';
 import { submitEntry } from '../utils/submitEntry';
 import { assignSquares } from '../utils/pickGame';
 import { loadProgress, saveProgress, clearProgress, fetchRemoteProgress } from '../utils/gameProgress';
+import { Heart, Rocket } from 'lucide-react';
 import { POOL, POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
 import ActivityCard from '../components/ActivityCard';
 import McqCard from '../components/McqCard';
@@ -50,8 +51,9 @@ function NameGate({ onSubmit }) {
       <div className="sl-card sl-start" role="group" aria-label="Enter your name to play">
         <h2 className="sl-q">What's your name?</h2>
         <p>
-          We'll use this to know who to give the prize to if you reach the end — and if you leave and come back,
-          entering the same name picks up right where you left off. 🏁
+          We'll use this to know who to give the prize to if you reach the end. If you leave and come back,
+          entering the same name picks up right where you left off.{' '}
+          <Heart size={14} aria-hidden="true" style={{ display: 'inline', verticalAlign: '-2px' }} />
         </p>
         <form onSubmit={submit}>
           <div className="sl-name-fields">
@@ -77,7 +79,7 @@ function NameGate({ onSubmit }) {
           </div>
           <div className="sl-actions">
             <button type="submit" className="sl-btn sl-btn-primary" disabled={!ready}>
-              Let's play 🚀
+              Let's play <Rocket size={16} aria-hidden="true" />
             </button>
           </div>
         </form>
@@ -603,7 +605,7 @@ export default function SnakesAndLadders({ onClose }) {
       {won && (
         <div className="sl-scrim">
           <div className="sl-card sl-win" role="alertdialog" aria-label="You won">
-            <div className="sl-win-emoji" aria-hidden="true">🚀</div>
+            <div className="sl-win-emoji" aria-hidden="true"><Rocket size={48} strokeWidth={1.75} /></div>
             <h2 className="sl-q">You reached square {board.last}, {name}!</h2>
             <p>Finished in {rolls} {rolls === 1 ? 'roll' : 'rolls'}. You're all set — the team will review entries after the event and reach out about your prize!</p>
             <div className="sl-actions">

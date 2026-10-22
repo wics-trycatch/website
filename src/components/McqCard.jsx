@@ -30,7 +30,7 @@ export default function McqCard({ square, item, final, fromSquare, onDone }) {
     if (options[i]) pick(i);
   };
 
-  const tag = final ? '🏁 Final question' : 'Quick question';
+  const tag = final ? 'Final question' : 'Quick question';
 
   return (
     <div className="sl-scrim">

@@ -297,8 +297,8 @@ export const POOL_BY_ID = new Map(POOL.map((item) => [item.id, item]));
 // Snake encounter trivia challenges. When the player lands on a snake square,
 // answering correctly lets them escape and stay put instead of sliding down.
 export const SNAKE_FLAVORS = {
-  wics: { emoji: '💜', label: 'SFU WiCS Trivia!' },
-  event: { emoji: '✨', label: 'Try/CATCH Trivia!' },
+  wics: { label: 'SFU WiCS Trivia!' },
+  event: { label: 'Try/CATCH Trivia!' },
 };
 
 export const CODE_CHALLENGES = [

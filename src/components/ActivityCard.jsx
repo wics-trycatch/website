@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Camera, Check, Trophy } from 'lucide-react';
 
 const MAX_PHOTO_DIM = 1280; // resized before upload so it's fast on event wifi
 
@@ -43,9 +44,9 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
   useEffect(() => (needsText ? inputRef.current : card.current)?.focus(), []);
 
   const tag = final
-    ? '🏁 Final challenge'
+    ? 'Final challenge'
     : ladderTo
-    ? `🪜 Bonus! Do this and climb to square ${ladderTo}`
+    ? `Bonus! Do this and climb to square ${ladderTo}`
     : 'Go do this!';
 
   const onFile = async (e) => {
@@ -109,7 +110,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
                 />
                 {!photo ? (
                   <button type="button" className="sl-btn" onClick={() => fileRef.current?.click()} disabled={uploading}>
-                    {uploading ? 'Processing…' : '📷 Take a photo'}
+                    {uploading ? 'Processing…' : <><Camera size={16} aria-hidden="true" /> Take a photo</>}
                   </button>
                 ) : (
                   <div className="sl-photo-preview">
@@ -124,7 +125,7 @@ export default function ActivityCard({ square, activity, ladderTo, final, onDone
 
             <div className="sl-actions">
               <button type="submit" className="sl-btn sl-btn-primary" disabled={!canSubmit}>
-                {final ? 'Finished! 🏆' : 'Mark as done ✅'}
+                {final ? <>Finished! <Trophy size={16} aria-hidden="true" /></> : <>Mark as done <Check size={16} aria-hidden="true" /></>}
               </button>
             </div>
           </form>
