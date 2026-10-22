@@ -6,7 +6,7 @@ import { parseBoard } from '../utils/parseBoard';
 import { submitEntry } from '../utils/submitEntry';
 import { assignSquares } from '../utils/pickGame';
 import { loadProgress, saveProgress, clearProgress, fetchRemoteProgress } from '../utils/gameProgress';
-import { Heart, Rocket } from 'lucide-react';
+import { Heart, Rocket, X } from 'lucide-react';
 import { POOL, POOL_BY_ID, CODE_CHALLENGES } from '../data/questions';
 import ActivityCard from '../components/ActivityCard';
 import McqCard from '../components/McqCard';
@@ -32,7 +32,7 @@ const usePortrait = () => useSyncExternalStore(subscribe, () => window.matchMedi
 // Ask for the player's name before the board is playable — this is what
 // lets a finished game be tied back to a real person for the prize table,
 // and lets them come back later under the same name to resume.
-function NameGate({ onSubmit }) {
+function NameGate({ onSubmit, onClose }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const inputRef = useRef(null);
@@ -48,7 +48,10 @@ function NameGate({ onSubmit }) {
 
   return (
     <div className="sl-scrim">
-      <div className="sl-card sl-start" role="group" aria-label="Enter your name to play">
+      <div className="sl-card sl-start" role="group" aria-label="Enter your name to play" style={{ position: 'relative' }}>
+        <button type="button" className="sl-card-close" onClick={onClose} aria-label="Close game">
+          <X size={18} aria-hidden="true" />
+        </button>
         <h2 className="sl-q">What's your name?</h2>
         <p>
           We'll use this to know who to give the prize to if you reach the end. If you leave and come back,
@@ -597,7 +600,7 @@ export default function SnakesAndLadders({ onClose }) {
 
       {(toast || ready) && <div className="sl-toast" role="status">{toast || 'Tap the dice to roll'}</div>}
 
-      {!name && <NameGate onSubmit={submitName} />}
+      {!name && <NameGate onSubmit={submitName} onClose={() => closeRef.current?.()} />}
       {modal?.type === 'task' && <ActivityCard key={modal.id} {...modal} />}
       {modal?.type === 'mcq' && <McqCard key={modal.id} {...modal} />}
       {modal?.type === 'code' && <CodeChallenge key={modal.id} {...modal} />}
